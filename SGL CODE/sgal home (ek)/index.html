@@ -24,7 +24,7 @@
           <img class="cardLeft__rectangle--gray" src="../img/L1.png" alt="" />
           <img class="cardLeft__rectangle" src="../img/L2.png" alt="" />
         </div>
-<!-- ACTUALIZAR -->
+
         <div>
           <img class="cardLeft__rectangle" src="../img/L3.png" alt="" />
         </div>
@@ -94,6 +94,22 @@
         >
       </footer>
     </main>
-    <script src=""></script>
-  </body> 
+
+
+    <script>
+      fetch("/SGL CODE/Estandarizacion/config.json")
+        .then(result => result.json())
+        .then(data => {
+          // Crea un elemento script
+          const script = document.createElement("script")
+          // Asignamos la ruta del script
+          script.src = data.login; // ⬅️ cambiar nombre del json aqui
+          // Indica que el script solo se ejecuta cuando el HTML se haya cargado
+          script.defer = true;
+          // Ponemos el script en el head para que se ejecute
+          document.head.appendChild(script);
+        })
+        .catch(error => console.log('Error al cargar script'))
+    </script>
+  </body>
 </html>
