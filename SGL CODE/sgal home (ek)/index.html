@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <!-- meta descripcion de la aplicacion  -->
+    <meta name="Aplicacion SGAL" content="Sistema Gestion Agricola " />
+    <!-- palabras clave -->
+    <meta nmae="Keywords" content="gestion, agricola, sena, adso" />
+    <!-- Enlace a archivo css -->
+    <link rel="stylesheet" href="styles.css" />
+    <meta name="Author" content="Grupo 8 ADSO" />
+  </head>
+  <body>
+    <!-- TITULO EN POS ABSOLUTED -->
+    <header class="cardMain__tittle"><span>SENA SEDE LEMBO</span></header>
+  
+    <aside class="cardLeft">
+
+      <!-- CONTENIDO IMAGENES SENA -->
+      <section class="cardLeft__container">
+        <div>
+          <img class="cardLeft__rectangle--gray" src="../img/L1.png" alt="" />
+          <img class="cardLeft__rectangle" src="../img/L2.png" alt="" />
+        </div>
+
+        <div>
+          <img class="cardLeft__rectangle" src="../img/L3.png" alt="" />
+        </div>
+
+        <div>
+          <img class="cardLeft__rectangle" src="../img/L4.png" alt="" />
+          <img class="cardLeft__rectangle--gray" src="../img/L5.png" alt="" />
+        </div>
+      </section>
+
+      <!-- FOOTER CON LOS LOGOS 1 2 3 -->
+      <footer class="cardLeft__footer">
+         <div>  <!--  cardLeft__logsimg  -->
+          <img class="cardLeft__vector1 src=" alt="" />
+        </div>
+
+        <div>
+          <img class="cardLeft__vector2" src="" alt="" />
+        </div>
+        <div>
+          <img class="cardLeft__vector3" src="" alt="" />
+        </div>
+      </footer>
+    </aside>
+    <!-- fin box1 -->
+
+    <main class="cardRigth">
+      <fieldset class="cardRigth__login">
+        <h3>LOGIN USUARIO SGAL</h3>
+        <form class="cardRigth__form">
+          <img
+            class="cardRigth__formlogoCircular"
+            alt="SENA logo"
+            height="100"
+            src="/SGL CODE/img/LOGOS SENA/LOGOS SENA/logo-sena-verde-svg-2022.svg"
+            width="100"
+          />
+          <div>
+            <label class="cardRigth__formlabel" for="Correo Electronico">Correo Electronico</label>
+            <input class="userName" placeholder="Correo electrónico" type="email" />
+          </div>
+          <div>
+            <label class="cardRigth__formlabel" for="Contraseña">Contraseña</label>
+            <input class="userPasword" placeholder="Ingrese su contraseña" type="password" />
+          </div>
+          <div>
+            <button type="submit" class="cardRigth__button">
+              ACEPTAR
+            </button>
+          </div>
+        </form>
+        <div class="cardRigth__baseform">
+          <a href="./olvidocontraseña.html"> OLVIDO SU CONTRASEÑA </a>  <!-- href="#" es por si se rompe -->
+        </div>
+      </fieldset>
+      <!-- fin de form -->
+      <footer>
+        
+        <p>
+          Los Terminos y Condiciones generales que a continuacion se establecen,
+          regulan el uso de las plataforma de gestion del SENA y el adecuado
+          trantamento y manejo de la informacion que los usuarios registraron en
+          dichos sistemas.
+        </p>
+        <a class="cardRigth__foot" href="#"
+          >Click en enlace para mas información</a
+        >
+      </footer>
+    </main>
+
+
+    <script>
+      fetch("/SGL CODE/Estandarizacion/config.json")
+        .then(result => result.json())
+        .then(data => {
+          // Crea un elemento script
+          const script = document.createElement("script")
+          // Asignamos la ruta del script
+          script.src = data.login; // ⬅️ cambiar nombre del json aqui
+          // Indica que el script solo se ejecuta cuando el HTML se haya cargado
+          script.defer = true;
+          // Ponemos el script en el head para que se ejecute
+          document.head.appendChild(script);
+        })
+        .catch(error => console.log('Error al cargar script'))
+    </script>
+  </body>
+</html>
