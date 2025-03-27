@@ -1,0 +1,116 @@
+html {
+    font-size: 62.5%; 
+  }
+  
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .sidebar {
+    width: 25rem;
+    background-color: #ffffff;
+    padding: 2rem;
+    height: 100vh;
+    box-shadow: 0.2rem 0 0.5rem rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .profile img {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    border: 0.2rem solid #ccc;
+  }
+  
+  .profile p {
+    margin: 0.5rem 0;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .menu {
+    margin-top: 1rem;
+  }
+  
+  .menu-section h3 {
+    margin: 1.5rem 0 0.5rem;
+    font-size: 1.4rem;
+    color: #004680;
+    text-transform: uppercase;
+  }
+  
+  .menu-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .menu-section ul li {
+    margin: 0.5rem 0;
+  }
+  
+  .menu-section ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.4rem;
+  }
+  
+  .menu-section ul li a:hover {
+    color: #004680;
+    font-weight: bold;
+  }
+  
+  .menu-section h3 a {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .menu-section h3 a:hover {
+    color: #004680;
+  }
+  
+  .contenedor_principal {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  
+  /* Estilos de Usuario */
+  .contenedor_usuario {
+    display: flex;
+    align-items: center;
+    background-color: var(--secundary-50);
+    border: 0.2rem solid var(--secundary-500);
+    border-radius: 1rem;
+    padding: 1rem;
+    box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.2);
+    width: 50%;
+  }
+  
+  .texto_usuario {
+    margin-right: 1rem;
+  }
+  
+  .texto_usuario a {
+    text-decoration: none;
+    color: var(--black);
+  }
+  
+  .texto {
+    font-size: 1.2rem;
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  .foto_perfil {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  

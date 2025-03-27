@@ -1,0 +1,675 @@
+:root {
+  /* color primario */
+  /* colores principales */
+  --primary-950: #39a900;
+  --primary-400: #303030;
+  --white: #fff;
+  --black: #000;
+
+  /* colores gris */
+  --gray-950: #101010;
+  --gray-900: #262626;
+  --gray-850: #3b3b3b;
+  --gray-700: #515151;
+  --gray-600: #676767;
+  --gray-500: #7d7d7d;
+  --gray-400: #929292;
+  --gray-300: #a8a8a8;
+  --gray-200: #bebebe;
+  --gray-100: #d4d4d4;
+  --gray-050: #e9e9e9;
+
+  /* colores ajustados en ia */
+
+  /* Color primario */
+  --primary-50: #edf7e8;
+  --primary-100: #dbefb9;
+  --primary-200: #c9e8b9;
+  --primary-300: #b7e0a2;
+  --primary-400: #a5d88b;
+  --primary-500: #93d074;
+  --primary-600: #81c85d;
+  --primary-700: #6fc046;
+  --primary-800: #5dd12e;
+  --primary-900: #4bbd17;
+  --primary-950: #39a900;
+
+  /* Colores secundarios */
+  /* Secundario 1 */
+  --secundary-1-50: #e8ecef;
+  --secundary-1-100: #d1dbdf;
+  --secundary-1-200: #b9c7ce;
+  --secundary-1-300: #a2b4be;
+  --secundary-1-400: #8b9dd6;
+  --secundary-1-500: #748e9e;
+  --secundary-1-600: #5d7b8e;
+  --secundary-1-700: #46687e;
+  --secundary-1-800: #2e566d;
+  --secundary-1-900: #17435d;
+  --secundary-1-950: #00304d;
+
+  /* Secundario 2 */
+  --secundary-2-50: #f2ebf3;
+  --secundary-2-100: #e5d8e7;
+  --secundary-2-200: #d8c4db;
+  --secundary-2-300: #cbb0cd;
+  --secundary-2-400: #be9dc3;
+  --secundary-2-500: #b289b6;
+  --secundary-2-600: #a576aa;
+  --secundary-2-700: #98629e;
+  --secundary-2-800: #8b4e92;
+  --secundary-2-900: #7e3b86;
+  --secundary-2-950: #71277a;
+
+  /* Secundario 3 */
+  --secundary-3-50: #effdfe;
+  --secundary-3-100: #dffafe;
+  --secundary-3-200: #cfd0fd;
+  --secundary-3-300: #bffafd;
+  --secundary-3-400: #aff3fc;
+  --secundary-3-500: #a0f1fc;
+  --secundary-3-600: #90eef7;
+  --secundary-3-700: #80eecf;
+  --secundary-3-800: #70eafa;
+  --secundary-3-900: #60e7fa;
+  --secundary-3-950: #50e5f9;
+
+  /* Secundario 4 */
+  --secundary-4-50: #fff6e8;
+  --secundary-4-100: #fff4d1;
+  --secundary-4-200: #feefb9;
+  --secundary-4-300: #fee9a2;
+  --secundary-4-400: #fee48b;
+  --secundary-4-500: #fede74;
+  --secundary-4-600: #fedb5d;
+  --secundary-4-700: #fed346;
+  --secundary-4-800: #fdce2e;
+  --secundary-4-900: #fdc817;
+  --secundary-4-950: #fdc300;
+
+  /* Colores neutros */
+  --blanco: #ffffff;
+  --negro: #000000;
+  --gray-950: #313131;
+  --gray-750: #626262;
+  --gray-550: #949494;
+  --gray-350: #c5c5c5;
+  --gray-150: #f6f6f6;
+
+  /* fuentes  */
+  --font--main: Helvetica, Arial, sans-serif;
+  /* TEXTOS Y CONTENIDO*/
+  --font--logo: Helvetica, Arial, sans-serif;
+  /* LOGOS Y ARTES */
+
+  /* ********************************* */
+  /* Botones primarios */
+
+  /* Botones secundarios */
+}
+
+html {
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+*,
+*:before,
+*,
+::after {
+  box-sizing: inherit;
+}
+
+/* ******************** */
+/* ******************** */
+/* codigo de pagina web */
+/* ******************** */
+/* ******************** */
+
+body {
+  font-size: 1.8rem;
+  font-family: var(--font--main);
+  background-color: var(--white);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: flex;
+  margin: 0 auto;
+}
+
+/* ****************  Titulo principal  ****************   */
+
+.ciclo__tittle {
+  position: absolute;
+  top: 2%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-family: var(--font--main);
+  font-weight: bold;
+  font-size: 3.2rem;
+  color: var(--primary-800);
+  text-shadow: 0 0 2px #00ff00, 0 0 20px #00ff00;
+}
+
+.ciclo__ico {
+  color: var(--blanco);
+  margin-left: 2rem;
+}
+
+/* *******************   MEDIA QUERY TITULO PRINCIPAL ****************** */
+
+@media (min-width: 380px) {
+  .ciclo__tittle {
+    position: absolute;
+    top: 4%;
+    left: 50%;
+  }
+}
+
+@media (min-width: 768px) {
+  .ciclo__tittle {
+    position: absolute;
+    top: 6%;
+    left: 60%;
+  }
+}
+
+@media (min-width: 1280px) {
+  .ciclo__tittle {
+    position: absolute;
+    top: 8%;
+    left: 60%;
+  }
+}
+
+/* BEM */
+/* ***************** ASIDE IZQUIDERO ***************** */
+
+.cicloLeft {
+  width: 20%;
+  height: 100vh;
+  background: linear-gradient(to bottom,
+      var(--secundary-1-600),
+      var(--gray-100));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cardLeft__container,
+.cicloLeft__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  gap: 2rem;
+}
+
+.cardLeft__logoSena,
+.cicloLeft__logoSena {
+  width: 10rem;
+}
+
+.cardLeft__imageMovil,
+.cicloLeft__logoMovil {
+  width: 20rem;
+  height: auto;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.cardLeft__logoSgal,
+.ciclo__logosgal {
+  width: 10rem;
+}
+
+/* *****************  MEDIA QUERY LEFT****************** */
+
+@media (min-width: 380px) {
+
+  .cardLeft,
+  .cicloLeft {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+
+  .cardLeft,
+  .cicloLeft {
+    display: flex;
+    flex-direction: column;
+    min-width: 20%;
+    height: auto;
+  }
+
+  .cardLeft__container,
+  .cicloLeft__container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .cardLeft__imageMovil,
+  .cicloLeft__imageMovil {
+    display: none;
+  }
+
+  .cardLeft__logoSena,
+  .cicloLeft__logoSena {
+    height: 7rem;
+    width: 7rem;
+    margin-bottom: 70rem;
+    /*  para separarlo por que no hay imagen de celular */
+  }
+
+  .cardLeft__logoSgal,
+  .cicloLeft__logoSgal {
+    height: 8rem;
+    width: 8rem;
+    margin-bottom: 2rem;
+    /*  para separarlo por que no hay imagen de celular */
+  }
+}
+
+@media (min-width: 1280px) {
+
+  .cardLeft,
+  .cicloLeft {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    height: auto;
+  }
+
+  .cardLeft__container,
+  .cicloLeft__container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .cardLeft__imageMovil,
+  .cicloLeft__imageMovil {
+    display: flex;
+    width: 22rem;
+    height: auto;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .cardLeft__logoSena,
+  .cicloLeft__logoSena {
+    height: 9rem;
+    width: 9rem;
+    margin: 0rem;
+  }
+
+  .cardLeft__logoSgal,
+  .cicloLeft__logoSgal {
+    height: 9rem;
+    width: 9rem;
+
+  }
+}
+
+@media (min-width: 1920px) {
+
+  .cardLeft__container,
+  .cicloLeft__container {
+    gap: 5rem;
+  }
+
+  .cardLeft__imageMovil,
+  .cicloLeft__imageMovil {
+    display: flex;
+    width: 30rem;
+    height: auto;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .cardLeft__logoSena,
+  .cicloLeft__logoSena {
+    height: 10rem;
+    width: 10rem;
+  }
+
+  .cardLeft__logoSgal,
+  .cicloLeft__logoSgal {
+    height: 10rem;
+    width: 10rem;
+
+  }
+}
+
+@media (min-width: 2560px) {
+
+  .cardLeft__container,
+  .cicloLeft__container {
+    gap: 4rem;
+  }
+}
+
+/* BEM */
+/* ***************** MAIN RIGHT ***************** */
+
+.cicloRight {
+  /* colores */
+  background-color: var(--secundary-1-950);
+  width: 80%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+}
+
+.cicloRight__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--white);
+  border-radius: 1rem;
+  /* tamaños */
+  width: 40rem;
+  height: auto;
+  /* centrado */
+  text-align: center;
+  box-shadow: 0 4px 8px var(--black);
+  /* posicion */
+  position: fixed;
+  top: 5%;
+  margin-top: 1rem;
+  padding: 0;
+}
+
+.cicloRight__container h3 {
+  /* posicion */
+  display: flex;
+  margin: 0 auto;
+  /* centrado */
+  justify-content: center;
+  align-items: center;
+  /* colores */
+  background-color: var(--gray-100);
+  /* tamaños */
+  border-radius: 1rem 1rem 0rem 0rem;
+  /* bordes en sentido reloj. */
+  height: 5rem;
+  width: 100%;
+  /* texto */
+  color: var(--secundary-1-950);
+  font-weight: bolder;
+}
+
+.cicloRight__form {
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cicloRight__container img {
+  width: 16rem;
+  height: 12rem;
+  margin: 0.1rem;
+  border-radius: 10rem;
+}
+
+.cicloRight__form label {
+  display: flex;
+  font-size: 1.6rem;
+  font-weight: 200;
+  color: var(--black);
+}
+
+.cicloRight__container input, 
+.cicloRight__container input[type="text"],
+.cicloRight__container input[type="password"],
+.cicloRight__container input[type="email"],
+.cicloRight__container input[type="number"],
+.cicloRight__container input[type="tel"],
+.cicloRight__container input[type="url"],
+.cicloRight__container input[type="search"],
+.cicloRight__container input[type="date"],
+.cicloRight__container input[type="file"],
+.cicloRight__container input[type="submit"],
+.cicloRight__container input[type="button"] {
+  font-size: 1.6rem;
+  color: var(--gray-700);
+  width: 32rem;
+  padding: 1.6rem 2.4rem;
+  margin: 0em;
+  border: 0.1rem solid var(--blanco);
+  border-radius: 5rem;
+  /* campo circular */
+  box-sizing: border-box;
+  background-color: var(--gray-050);
+}
+
+/* ****************************************************************** */
+/* INICIO DE ACCION PARA QUE EL BOTON CAMBIE DE COLOR Y SE QUEDE EN EL COLOR SEGUN ESTADO */
+.cicloRight__inputbox[type="checkbox"] {
+  display: none;
+}
+
+.cicloRight__labelChange {
+  display: inline-block;
+  width: 15rem;
+  height: 1.8rem;
+  padding: 16px 24px;
+  background-color: var(--black);
+  color: var(--white);
+  border-radius: 25rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: center;
+  margin: 1rem 20rem 0rem 20rem;
+}
+
+/* Cambia el estilo cuando está "oprimido" */
+.cicloRight__inputbox[type="checkbox"]:checked+label {
+  background-color: var(--secundary-4-950);
+}
+
+/* FIN DE ESTADO DE ACCION  */
+
+.cicloRight__label {
+  margin: 0 auto;
+  padding: 0rem 2.4rem;
+  ;
+}
+
+.ciclo__data-general {
+  /* outline: none;
+  display: flex;
+  flex-direction: column;
+  justify-items: start; */
+
+}
+
+.cicloRight__button {
+  outline: none; /* Eliminar el borde exterior */
+  background-color: var(--secundary-1-800);
+  width: 22rem;
+  color: var(--white);
+  padding: 1.8rem 2.4rem;
+  border: none;
+  border-radius: 3.2rem;
+  cursor: pointer;
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin: 1.2rem;
+  text-align: center;
+  
+}
+
+.cicloRight__button a {
+  color: inherit; /* Heredar el color del botón */
+  text-decoration: none; /* Eliminar el subrayado del enlace */
+  display: block; /* Asegura que el enlace ocupe todo el espacio del botón */
+}
+
+
+
+.cicloRight__container a {
+  color: var(--white);
+  text-decoration: none;
+  display: block;
+  margin-top: 0;
+  text-decoration: none;
+}
+
+.cicloRight__footform {
+  position: relative;
+  bottom: 0%;
+  width: 100%;
+  display: flex;
+  background-color: var(--gray-100);
+  display: flex; /* Activar Flexbox */
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; 
+  font-weight: bolder;
+}
+
+/* *****************  MEDIA QUERY RIGHT****************** */
+
+@media (min-width: 380px) {
+
+  .cicloRight {
+    min-width: 100%;
+    max-height: 100vh;
+    display: flex;
+    overflow-y: auto;
+    white-space: nowrap;
+  }
+
+  .cicloRight__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 80%;
+    height: auto;
+    /* posicion */
+    position: fixed;
+    top: 15%;
+    gap: 1rem;
+  }
+
+  .cicloRight__form {
+    gap: 0.1rem;
+    /* funciona para el espacio entre inputs para media query 380  SOLO CON 8 INPUTS SI HAY MAS SE SALE DE LA PANTALLA */
+  }
+}
+
+@media (min-width: 768px) {
+
+  .cicloRight {
+    display: flex;
+    flex-direction: column;
+    min-width: 80%;
+    height: auto;
+  }
+
+  .cicloRight__container {
+    display: flex;
+    flex-direction: column;
+    min-width: 70%;
+    max-height: auto;
+    /* posicion */
+    position: fixed;
+    top: 13%;
+    gap: 1rem;
+  }
+
+  .cicloRight__dato {
+    /*PENDIENTE BEM */
+    padding: 0.2rem;
+    margin: 0.2rem;
+  }
+
+}
+
+@media (min-width: 1280px) {
+  .cicloRight {
+    min-width: 80%;
+  }
+
+  .cicloRight__container {
+    min-width: 60%;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    /* posicion */
+    position: fixed;
+    top: 20%;
+    gap: 1rem;
+  }
+
+  .cicloRight__labelChange {
+    margin: 1rem 30rem 0rem 30rem;
+  }
+
+}
+
+@media (min-width: 1920px) {
+
+  .cicloRight__container {
+    min-width: 40%;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    /* posicion */
+    position: fixed;
+    top: 28%;
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 2560px) {
+
+  .cicloRight__container {
+    min-width: 30%;
+    min-height: 20rem;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    /* posicion */
+    position: fixed;
+    top: 25%;
+    gap: 1rem;
+
+  }
+}
+
+
+
+/* js */
+.error {
+  background-color: rgb(197, 65, 65);
+  text-align: center;
+  padding: 1rem;
+  color: var(--blanco);
+  text-transform: uppercase;
+  border-radius: 10px;
+  } 
+  
+  .correcto {
+  background-color: rgb(74, 185, 0);
+  text-align: center;
+  padding: 1rem;
+  color: var(--blanco);
+  text-transform: uppercase;
+  }

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listar ciclos de cultivos</title>
+  <link rel="stylesheet" href="/SGL CODE/sgal ciclo cultivo/Css/5-listar-ciclo.css">
+</head>
+<body>
+  <main class="ciclo__container ciclo__container--blue"><!-- contenedor-azul -->
+    <div class="ciclo__sidebar"><!-- sidebar -->
+      <div class="ciclo__user"><!-- contenedor_usuario -->
+        <div class="ciclo__user-info"><!-- texto_usuario -->
+          <a href=""><p class="ciclo__user-name">Santiago <br> Admin</p></a>
+        </div><!-- ciclo__user-info -->
+        <a href=""><img src="/SGL CODE/img/imagen_foto_perfil_github.jpg" alt="Foto de perfil" class="ciclo__user-photo"></a>
+      </div><!-- ciclo__user -->
+      <nav class="ciclo__menu">
+        <div class="ciclo__menu-section">
+          <h3>Sensores</h3>
+          <ul class="ciclo__menu-list">
+            <li class="ciclo__menu-item"><a href="#">Crear</a></li>
+            <li class="ciclo__menu-item"><a href="#">Listar</a></li>
+            <li class="ciclo__menu-item"><a href="#">Actualizar</a></li>
+            <li class="ciclo__menu-item"><a href="#">Visualizar</a></li>
+          </ul>
+        </div>
+        <div class="ciclo__menu-section">
+          <h3>Insumos</h3>
+          <ul class="ciclo__menu-list">
+            <li class="ciclo__menu-item"><a href="#">Crear</a></li>
+            <li class="ciclo__menu-item"><a href="#">Listar</a></li>
+            <li class="ciclo__menu-item"><a href="#">Actualizar</a></li>
+            <li class="ciclo__menu-item"><a href="#">Visualizar</a></li>
+          </ul>
+        </div>
+        <div class="ciclo__menu-section">
+          <h3>Usuarios</h3>
+          <ul class="ciclo__menu-list">
+            <li class="ciclo__menu-item"><a href="#">Crear</a></li>
+            <li class="ciclo__menu-item"><a href="#">Listar</a></li>
+            <li class="ciclo__menu-item"><a href="#">Actualizar</a></li>
+            <li class="ciclo__menu-item"><a href="#">Visualizar</a></li>
+          </ul>
+        </div>
+        <div class="ciclo__menu-section">
+          <h3>Configuración</h3>
+          <ul class="ciclo__menu-list">
+            <li class="ciclo__menu-item"><a href="#">Datos Usuario</a></li>
+            <li class="ciclo__menu-item"><a href="#">Control Cuenta</a></li>
+          </ul>
+        </div>
+        <div class="ciclo__menu-section">
+          <h3><a href="#">Reportes</a></h3>
+        </div>
+        <div class="ciclo__menu-section">
+          <h3><a href="#">Cerrar Sesión</a></h3>
+        </div>
+      </nav>
+    </div>
+
+    <div class="ciclo__content"><!-- contenedor-gris -->
+      <div class="ciclo__table-container"><!-- contenedor-blanco -->
+        <header class="ciclo__toolbar"><!-- elementos -->
+          <section class="ciclo__toolbar-section"><!-- encabezados -->
+            <div class="ciclo__action">
+              <a href="#">Añadir</a>
+            </div>
+            <div class="ciclo__action">
+              <a href="#">Borrar</a>
+            </div>
+            <div class="ciclo__action">
+              <a href="#">Modificar</a>
+            </div>
+            <div class="ciclo__action ciclo__action--with-icon">
+              <a href="#">Listar</a>
+              <div class="ciclo__action-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00304d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-printer">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                  <path d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2" />
+                  <path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4" />
+                  <path d="M7 13m0 2a2 2 0 0 1 2 -2h6a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-6a2 2 0 0 1 -2 -2z" />
+                </svg>
+              </div>
+            </div>
+          </section>
+
+          <section class="ciclo__toolbar-section"><!-- encabezados -->
+            <div class="ciclo__action">
+              <label>
+                <a href="#">Ordenar</a>
+                <select>
+                  <option value=""></option>
+                </select>
+              </label>
+            </div>
+            <button class="ciclo__search-button"><a href="#">Buscar</a></button>
+            <input type="text" name="text" id="text" placeholder="Texto">
+          </section>
+        </header>
+
+        <table class="ciclo__table"><!-- tabla-de-contenido -->
+          <thead><!-- cabezal-de-la-tabla -->
+            <tr><!-- titulos-de-la-tabla -->
+              <td class="ciclo__table-cell ciclo__table-cell--icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-square">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                  <path d="M3 3m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
+                </svg>
+              </td>
+              <td class="ciclo__table-header">ID</td>
+              <td class="ciclo__table-header">Tipo de Cultivo</td>
+              <td class="ciclo__table-header">Nombre de Cultivo</td>
+              <td class="ciclo__table-header">Descripción</td>
+              <td class="ciclo__table-header">Estado</td>
+            </tr>
+          </thead>
+
+          <tbody><!-- cuerpo-de-la-tabla -->
+            <tr><!-- datos-del-cuerpo -->
+              <td class="ciclo__table-cell ciclo__table-cell--icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-square">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                  <path d="M3 3m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
+                </svg>
+              </td>
+              <td class="ciclo__table-data ciclo__table-data--secondary">Fila Datos</td>
+              <td class="ciclo__table-data ciclo__table-data--secondary">Fila Datos</td>
+              <td class="ciclo__table-data ciclo__table-data--secondary">Fila Datos</td>
+              <td class="ciclo__table-data ciclo__table-data--secondary">Fila Datos</td>
+              <td class="ciclo__table-data ciclo__table-data--secondary">Fila Datos</td>
+            </tr>
+          </tbody>
+          <tbody><!-- cuerpo-de-la-tabla -->
+            <tr><!-- datos-del-cuerpo -->
+              <td class="ciclo__table-cell ciclo__table-cell--icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-square">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                  <path d="M3 3m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
+                </svg>
+              </td>
+              <td class="ciclo__table-data ciclo__table-data--secondary">Fila Datos</td>
+              <td class="ciclo__table-data ciclo__table-data--secondary">Fila Datos</td>
+              <td class="ciclo__table-data ciclo__table-data--secondary">Fila Datos</td>
+              <td class="ciclo__table-data ciclo__table-data--secondary">Fila Datos</td>
+              <td class="ciclo__table-data ciclo__table-data--secondary">Fila Datos</td>
+            </tr>
+          </tbody>
+          <tbody><!-- cuerpo-de-la-tabla -->
+            <tr><!-- datos-del-cuerpo -->
+              <td class="ciclo__table-cell ciclo__table-cell--icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-square">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                  <path d="M3 3m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
+                </svg>
+              </td>
+              <td class="ciclo__table-data ciclo__table-data--secondary">Fila Datos</td>
+              <td class="ciclo__table-data ciclo__table-data--secondary">Fila Datos</td>
+              <td class="ciclo__table-data ciclo__table-data--secondary">Fila Datos</td>
+              <td class="ciclo__table-data ciclo__table-data--secondary">Fila Datos</td>
+              <td class="ciclo__table-data ciclo__table-data--secondary">Fila Datos</td>
+            </tr>
+          </tbody>
+          <tbody><!-- cuerpo-de-la-tabla -->
+            <tr><!-- datos-del-cuerpo -->
+              <td class="ciclo__table-cell ciclo__table-cell--icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-square">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                  <path d="M3 3m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
+                </svg>
+              </td>
+              <td class="ciclo__table-data ciclo__table-data--secondary">Fila Datos</td>
+              <td class="ciclo__table-data ciclo__table-data--secondary">Fila Datos</td>
+              <td class="ciclo__table-data ciclo__table-data--secondary">Fila Datos</td>
+              <td class="ciclo__table-data ciclo__table-data--secondary">Fila Datos</td>
+              <td class="ciclo__table-data ciclo__table-data--secondary">Fila Datos</td>
+            </tr>
+          </tbody>
+          <tbody><!-- cuerpo-de-la-tabla -->
+            <tr><!-- datos-del-cuerpo -->
+              <td class="ciclo__table-cell ciclo__table-cell--last">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-square">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                  <path d="M3 3m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
+                </svg>
+              </td>
+              <td class="ciclo__table-data">Fila Datos</td>
+              <td class="ciclo__table-data">Fila Datos</td>
+              <td class="ciclo__table-data">Fila Datos</td>
+              <td class="ciclo__table-data">Fila Datos</td>
+              <td class="ciclo__table-data">Fila Datos</td>
+            </tr>
+          </tbody>
+        </table>
+      </div><!-- ciclo__table-container -->
+    </div><!-- ciclo__content -->
+  </main>
+</body>
+</html>

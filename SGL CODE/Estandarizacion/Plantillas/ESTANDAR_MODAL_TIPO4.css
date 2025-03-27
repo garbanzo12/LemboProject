@@ -1,0 +1,103 @@
+/* ESTANDAR_MODAL_TIPO4.css */
+html{
+    size: 62.5%;
+}
+body {
+    font-family: Arial, sans-serif;
+    font-size: 1.6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50rem;
+    margin: 0;
+
+}
+
+.contenedor {
+    width: 40rem;
+    background-color: var(--white);
+    border-radius: 0.8rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+}
+
+header {
+    background-color: var(--secundary-100);
+    color:var(--black);
+    padding: 1rem 0;
+}
+
+header h1 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+main {
+    padding: 6rem;
+
+}
+
+.contenido h2 {
+    font-size: 1.2rem;
+    color: #333333;
+    margin-bottom: 0.8rem;
+    text-align: left;
+}
+
+.input {
+    width: 32rem;
+    padding: 1.2rem;
+    font-size: 1rem;
+    background-color: var(--gray-50);
+    border: 1px solid #ced4da;
+    border: none;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.input::placeholder {
+    color: #adb5bd;
+}
+
+.botton {
+    display: inline-block;
+    background-color: var(--secundary-900); 
+    color: var(--white);
+    border: none;
+    border-radius: 2rem;
+    padding: 1rem 3.5rem;
+    font-size: 1rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /*Delay para que se demore en cambiar de color*/
+    margin-bottom: 3%;
+}
+
+.botton:hover {
+    background-color: #084298; 
+}
+
+footer {
+    height: 1rem; 
+}
+
+footer{
+    height: 3rem;
+    width: 100%;
+    background-color: var(--secundary-100);
+}
+
+@media (max-width: 468px){
+    main {
+        padding: 4rem;   
+    }
+    .input {
+        width: 100%;
+        padding: 1.2rem;
+        
+    }
+}
