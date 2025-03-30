@@ -17,9 +17,9 @@
     />
     <meta http-equiv="Content-Language" content="es" />
 
-    <link rel="stylesheet" href="../Css/1-crear-cultivo.css">
-
-    <title>Registro de Cultivos</title>
+    <link rel="stylesheet" href="../Css/3-visualizar-cultivo.css">
+    <script src="/frontend/js/validar_crops.js"></script>
+    <title>Actualización de Cultivos</title>
   </head>
   <body>
     <!-- ******************  Titulo principal  ****************  -->
@@ -63,35 +63,35 @@
 
     <main class="cicloRight">
       <fieldset class="cardRight__container">
-        <h3>REGISTRO CULTIVO</h3>
+        <h3>ACTUALIZAR CULTIVO</h3>
 
-        <form class="cicloRight__form">
+        <form class="cicloRight__form form">
           <div class="ciclo__data-general">
             <label class="label" for="">Id del Cultivo</label>
-            <input class="ciclo__nameUser" placeholder="Id del Cultivo" type="text" />
+            <input class="ciclo__nameUser input" placeholder="Id del Cultivo" type="text" />
           </div>
-        <form class="cicloRight__form">
+
           <div class="ciclo__data-general">
             <label class="label" for="">Nombre Del Cultivo</label>
-            <input class="ciclo__nameUser" placeholder="Nombre del Cultivo" type="text" />
+            <input class="ciclo__nameUser input" placeholder="Nombre del Cultivo" type="text" />
           </div>
 
           <div class="ciclo__data-general">
             <label class="label" for="">Tipo de Cultivo</label>
-            <input class="ciclo__email" placeholder="Tipo del Cultivo" type="email" />
+            <input class="ciclo__email input" placeholder="Tipo del Cultivo" type="email" />
           </div>
 
           <div class="ciclo__data-general">
             <label class="label" for="">Ubicaciòn</label>
-            <input class="ciclo__cellPhone" placeholder="Ubicación del Cultivo" type="tel" />
+            <input class="ciclo__cellPhone input" placeholder="Ubicación del Cultivo" type="tel" />
           </div>
           <div class="ciclo__data-general">
             <label class="label" for="">Descripción</label>
-            <input class="ciclo__cellPhone" placeholder="Descripción del Cultivo" type="tel" />
+            <input class="ciclo__cellPhone input" placeholder="Descripción del Cultivo" type="tel" />
           </div>
           <div class="ciclo__data-general">
             <label class="label" for="">Tamaño en m²</label>
-            <input class="ciclo__cellPhone" placeholder="Tamaño en m² del cultivo " type="tel" />
+            <input class="ciclo__cellPhone input" placeholder="Tamaño en m² del cultivo " type="tel" />
           </div>
           
           <div class="ciclo__data-general">
@@ -113,19 +113,24 @@
                     <path d="M15 7l-6.5 6.5a1.5 1.5 0 0 0 3 3l6.5 -6.5a3 3 0 0 0 -6 -6l-6.5 6.5a4.5 4.5 0 0 0 9 9l6.5 -6.5" />
                 </svg></div>
             </div><!--icon-box-->
-         <!-- ESPACIO PARA MAS INPUTS  -->
           </div>
+
+            <!-- BOTON INDICADOR CAMBIO DE COLOR ESTADO  -->
+            <div class="ciclo__data-general">
+              <h2 class="insumo__toggle-title">Habilitado/Deshabilitado:</h2>
+              <input class="insumo__estado input" type="checkbox" id="boton" />
+              <label class="insumo__labelChange" for="boton"></label>
+            </div>
+              <!-- ESPACIO PARA MAS INPUTS  -->
+            </div>
             <div class="botones">
               <button class="button" type="submit" >
-                Crear
+                Actualizar
               </button>
             <!-- <button class="button"><a href="">CANCELAR</a></button> -->
             </div>
 
         </form>
-
-       
-
         <div class="baseform">
           <a href="#"> </a>
         </div>

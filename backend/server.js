@@ -30,24 +30,3 @@ db.connect(err => {
 });
 
 
-
-app.post('/user', (req, res) => {
-    const {name, email, address, phone} = req.body;
-
-    db.query(
-        'INSERT INTO user (name, email, addres, phone) VALUES (?, ?, ?, ?)',
-        [name, email, address, phone],
-        (err, result) => {
-            if (err){
-                console.log(`Error insertando usuario: ${err}`);
-                res.status(500).json({error : 'Error al registrar al usuario'});
-            }else{
-                res.status(201).json({ id: result.insertId, name, email, address, phone});
-            }
-        }
-    );
-});
-
-app.listen(3000, () =>{
-    console.log('Servidor corriendo en : http://localhost:3000/user');
-})
