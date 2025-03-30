@@ -1,0 +1,8 @@
+#Ignora archivos de entorno
+.env
+
+#Ignora dependencias nodejs
+node_modules/
+
+
+
