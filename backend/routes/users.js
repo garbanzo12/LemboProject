@@ -19,18 +19,21 @@ const conexion = mysql.createConnection({
 app.post("/users", (req, res) => {
     console.log("Datos recibidos en POST /users:", req.body); 
 
-    const { ciclo__user,ciclo__document, ciclo__nameUser, ciclo__email, ciclo__cellPhone } = req.body;
+    const { type_user,type_ID, name_user, email, contact } = req.body;
 
-    if (!ciclo__user || !ciclo__document || !ciclo__nameUser || !ciclo__email || !ciclo__cellPhone) {
+    if (!type_user || !type_ID || !name_user || !email || !contact) {
         return res.status(400).json({ error: "Todos los campos son obligatorios" });
     }
 
-    let sql = "INSERT INTO crops (ciclo__user,ciclo__document, ciclo__nameUser, ciclo__email, ciclo__cellPhone) VALUES (?, ?, ?, ?, ?)";
-    conexion.query(sql, [ciclo__user,ciclo__document, ciclo__nameUser, ciclo__email, ciclo__cellPhone], (error, resultado) => {
+    let sql = "INSERT INTO users (type_user,type_ID, name_user, email, contact) VALUES (?, ?, ?, ?, ?)";
+    conexion.query(sql, [type_user, type_ID, name_user, email, contact], (error, resultado) => {
         if (error) {
-            return res.status(500).json({ error: "Error al insertar datos" });
+            console.error("Error SQL:", error.sqlMessage);
+            return res.status(500).json({ error: error.sqlMessage });
         }
         res.json({ mensaje: "Datos guardados correctamente" });
+  
+    
     });
 });
 

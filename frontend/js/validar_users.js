@@ -1,4 +1,4 @@
-console.log("olahol");
+console.log("hola");
 
 function inicializarValidaciones() {
     const forms = document.querySelectorAll(".form");
@@ -6,13 +6,26 @@ function inicializarValidaciones() {
     forms.forEach((form) => {
         form.addEventListener("submit", async function (event) {
             event.preventDefault();
-            const ciclo__user = document.querySelector('.ciclo__user');
-            const ciclo__document = document.querySelector('.ciclo__document');
+            const select_typeUser = document.querySelector('.ciclo__user');
+            const select_typeID = document.querySelector('.ciclo__document');
             const ciclo__nameUser = document.querySelector('.ciclo__nameUser');
             const ciclo__email = document.querySelector('.ciclo__email');
             const ciclo__cellPhone = document.querySelector('.ciclo__cellPhone');
             let validarCampo = true;
             const inputs = form.querySelectorAll("input");
+
+           
+        
+           
+
+            let textoSeleccionado_user = select_typeUser.options[select_typeUser.selectedIndex].text;
+            let textoSeleccionado_typeID = select_typeID.options[select_typeID.selectedIndex].text;
+           
+
+          
+            console.log(textoSeleccionado_user)
+            console.log(textoSeleccionado_typeID)
+
 
 
             inputs.forEach((input) => {
@@ -36,11 +49,11 @@ function inicializarValidaciones() {
 
             });
             let datos = {
-                ciclo__user: ciclo__user ? ciclo__user.value : '',
-                ciclo__document: ciclo__document ? ciclo__document.value : '',
-                ciclo__nameUser: ciclo__nameUser ? ciclo__nameUser.value : '',
-                ciclo__email: ciclo__email ? ciclo__email.value : '',
-                ciclo__cellPhone: ciclo__cellPhone ? ciclo__cellPhone.value : ''
+                type_user: textoSeleccionado_user ,
+                type_ID: textoSeleccionado_typeID,
+                name_user: ciclo__nameUser ? ciclo__nameUser.value : '',
+                email: ciclo__email ? ciclo__email.value : '',
+                contact: ciclo__cellPhone ? ciclo__cellPhone.value : ''
             }; // Objeto para almacenar los valores del formulario
             if (validarCampo) {
                 try {
