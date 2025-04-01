@@ -157,12 +157,12 @@
       justify-content: center; /* Centra el contenido horizontalmente */
       transition: background-color 0.5s ease;
     /* ESTE CONETENEDOR ESTA EN MEDIO DE LA PANTALLA EN LA PARTE SUPERIOR SE ENCESITA QUE SE PEGUE A LA PARTE SUPERIOR CUANDO SE HACE SCROLL */
-      /* position: fixed;  */
-      left: 35%;
+      /* position: sticky;  */
+      /* left: 35%; */
     }
     
     .BarTop:hover {
-      background-color: var(--gray-400);
+      background-color: var(--white);
     }
     
     .Bar__List {
@@ -175,7 +175,12 @@
     
     .BarTop:hover .Bar__List {
       gap: 10rem;
-    
+      
+      background-image: url("../img/SEDE-AGRUPECUARIA-SENA-LEMBO.gif"); /* Ruta de la imagen */
+      background-size: cover; /* Ajusta la imagen para cubrir el área del elemento */
+      background-repeat: no-repeat; /* Evita que la imagen se repita */
+      background-position: center; /* Centra la imagen */
+
     }
     
     .Bar__Item {
@@ -187,10 +192,14 @@
       width: auto;
       border-radius: 0.4rem;
     }
+
+    .Bar__Item:hover {
+    opacity: 0.5;
+    }
     
     .BarTop__Image {
-      width: 5rem;
-      height: 5rem;
+      width: 6rem;
+      height: 6rem;
     }
     
     p {
@@ -218,6 +227,15 @@
       color: var(--black);
       border: 0.2rem solid var(--primary-950);
       cursor: pointer; /* Indicador visual interactivo */
+      z-index: 10;
+      transition: background-color 3s ease;
+    }
+
+    .BarGeneral__side:hover { 
+      opacity: 1;
+      background-color: var(--secundary-1-950);
+      color: white;
+      transition: background-color 3s ease;
     }
     
     .BarGeneral__nombreUser {
@@ -241,14 +259,16 @@
       border: 0.1rem solid var(--primary-950);
       border-radius: 0.5rem;
       position: fixed;
-      top: 12rem;
+      top: 11rem;
       left: 2rem;
       width: 20rem;
       transition: background-color 1s ease;
       /* transform: gap 1s ease; */
       color: var(--black);
       font-weight: 400;
-    
+      z-index: 9;
+      opacity: 1;
+      pointer-events:all ;
     }
     
     .BarLinksmodulos a{
@@ -258,6 +278,7 @@
     
     .BarGeneral__check {
       display: none;
+    pointer-events: none;
     }
     
     /* Cuando el checkbox está marcado */
@@ -266,6 +287,68 @@
       
     }
     
+/* ******************************************************************** */
+/* EFECTO PARA CONTROLAR LAS CARDS SE ADAPTO Y MEJORO PARA EL PROYECTO */
+
+/* From Uiverse.io by eslam-hany */ 
+.sectionContainers__card {
+  position: relative;
+  width: 100%;
+  height: 100;
+  background: mediumturquoise;
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  /* font-size: 25px; */
+  /* font-weight: bold; */
+  border-radius: 2rem;
+  cursor: pointer;
+  z-index: 0;
+}
+
+.sectionContainers__card::before,
+.sectionContainers__card::after {
+  position: absolute;
+  content: "SENA";
+  width: 20%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50rem;
+  font-weight: bold;
+  background-color: var(--secundary-1-950);
+  transition: all 0.5s;
+  opacity: 0.1;
+  overflow: hidden;
+}
+
+.sectionContainers__card::before {
+  top: 0;
+  right: 0;
+  border-radius: 0 2rem 0 100%;
+}
+
+.sectionContainers__card::after {
+  bottom: 0;
+  left: 0;
+  border-radius: 0 100%  0 2rem;
+}
+
+.sectionContainers__card:hover::before,
+.sectionContainers__card:hover:after {
+  width: 100%;
+  height: 100%;
+  border-radius: 2rem;
+  transition: all 0.5s;
+}
+
+.sectionContainers__card:hover:after {
+  content: "";
+}
+
+
+
     /* *******************     MENU DE MODULOS     ***************** */
     
     .sectionContainers {
