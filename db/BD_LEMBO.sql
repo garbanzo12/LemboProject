@@ -11,10 +11,12 @@ DROP TABLE user;
 
 
 CREATE TABLE users(	
+    type_user ENUM('Administrador', 'Personal de Apoyo', 'Visitante'),
+    type_ID ENUM('Administrador', 'Personal de Apoyo', 'Visitante'),
 	id INT AUTO_INCREMENT PRIMARY KEY,
-	password VARCHAR(255) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     rol VARCHAR(20),
+    password VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     );

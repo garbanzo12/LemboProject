@@ -11,6 +11,7 @@ function inicializarValidaciones() {
             const ciclo__nameUser = document.querySelector('.ciclo__nameUser');
             const ciclo__email = document.querySelector('.ciclo__email');
             const ciclo__cellPhone = document.querySelector('.ciclo__cellPhone');
+            const password = document.querySelector('.password');
             let validarCampo = true;
             const inputs = form.querySelectorAll("input");
 
@@ -53,7 +54,8 @@ function inicializarValidaciones() {
                 type_ID: textoSeleccionado_typeID,
                 name_user: ciclo__nameUser ? ciclo__nameUser.value : '',
                 email: ciclo__email ? ciclo__email.value : '',
-                contact: ciclo__cellPhone ? ciclo__cellPhone.value : ''
+                contact: ciclo__cellPhone ? ciclo__cellPhone.value : '',
+                password: password ? password.value : ''
             }; // Objeto para almacenar los valores del formulario
             if (validarCampo) {
                 try {
