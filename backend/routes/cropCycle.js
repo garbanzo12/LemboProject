@@ -1,4 +1,3 @@
-// Inyeccion sql a la table sensors
 //La conexion con la bd
 const express = require("express");
 const mysql = require("mysql2");
@@ -15,17 +14,17 @@ const conexion = mysql.createConnection({
     password: "123456",
     database: "lembo_sgal_db"
 });
-app.post("/sensors", (req, res) => {
-    console.log("Datos recibidos en POST /sensors:", req.body); 
+app.post("/cropCycle", (req, res) => {
+    console.log("Datos recibidos en POST /cropCycle:", req.body); 
 
-    const { type_sensors,name_sensors, unit_sensors, time_sensors} = req.body;
+    const { name_cropCycle,news, size_cropCycle} = req.body;
 
-    if (!type_sensors || !name_sensors || !unit_sensors || !time_sensors) {
+    if (!name_cropCycle || !news || !size_cropCycle) {
         return res.status(400).json({ error: "Todos los campos son obligatorios" });
     }
 
-    let sql = "INSERT INTO sensors (type_sensors,name_sensors, unit_sensors, time_sensors) VALUES (?, ?, ? ,?)";
-    conexion.query(sql, [type_sensors,name_sensors, unit_sensors,time_sensors], (error, resultado) => {
+    let sql = "INSERT INTO cropCycle (name_cropCycle,news, size_cropCycle) VALUES (?, ?, ?)";
+    conexion.query(sql, [name_cropCycle,news, size_cropCycle], (error, resultado) => {
         if (error) {
             return res.status(500).json({ error: "Error al insertar datos" });
         }

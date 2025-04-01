@@ -18,7 +18,7 @@
     <meta http-equiv="Content-Language" content="es" />
 
     <link rel="stylesheet" href="../Css/1-crear-insumo.css">
-
+    <script src="/frontend/js/validar_consumables.js"></script>
     <title>Registro de Insumos</title>
   </head>
   <body>
@@ -65,45 +65,41 @@
       <fieldset class="cardRight__container">
         <h3>REGISTRO INSUMO</h3>
 
-        <form class="cicloRight__form">
-          <div class="ciclo__data-general">
-            <label class="label" for="">Id Insumo</label>
-            <input class="ciclo__nameUser" placeholder="ID del Insumo" type="number" />
-          </div>
+        <form class="cicloRight__form form">
 
           <div class="ciclo__data-general">
             <label class="label" for="">Tipo de Insumo</label>
-            <input class="ciclo__nameUser" placeholder="Tipo de Insumo" type="text" />
+            <input class="ciclo__nameUser type_consumables input" placeholder="Tipo de Insumo" type="text" />
           </div>
 
           <div class="ciclo__data-general">
             <label class="label" for="">Nombre del Insumo</label>
-            <input class="ciclo__email" placeholder="Nombre del Insumo" type="text" />
+            <input class="ciclo__email name_consumables input" placeholder="Nombre del Insumo" type="text" />
           </div>
           
           <div class="ciclo__data-general">
             <label class="label" for="">Cantidad</label>
-            <input class="ciclo__cellPhone" placeholder="Cantidad del Insumo" type="number" />
+            <input class="ciclo__cellPhone quantity_consumables input" placeholder="Cantidad del Insumo" type="number" />
           </div>
 
           <div class="ciclo__data-general">
             <label class="label" for="">Unidad de Medida</label>
-            <input class="ciclo__nameUser" placeholder="Unidad de Medida" type="number" />
+            <input class="ciclo__nameUser unit_consumables input" placeholder="Unidad de Medida" type="number" />
           </div>
 
           <div class="ciclo__data-general">
             <label class="label" for="">Valor Unitario</label>
-            <input class="ciclo__nameUser" placeholder="Valor Unitario" type="number" />
+            <input class="ciclo__nameUser unitary_value input" placeholder="Valor Unitario" type="number" />
           </div>
 
           <div class="ciclo__data-general">
             <label class="label" for="">Valor Total</label>
-            <input class="ciclo__nameUser" placeholder="Valor Total" type="number" />
+            <input class="ciclo__nameUser total_value input" placeholder="Valor Total" type="number" />
           </div>
 
           <div class="ciclo__data-general">
             <label class="label" for="">Descripción</label>
-            <input class="ciclo__nameUser" placeholder="Descrición del Insumo" type="text" />
+            <input class="ciclo__nameUser description_consumables input" placeholder="Descrición del Insumo" type="text" />
           </div>
 
           <div class="botones">
@@ -139,20 +135,6 @@
       </svg>
     </main>
 
-    <script>
-      fetch("/SGL CODE/Estandarizacion/config.json")
-          .then(result => result.json())
-          .then(data =>{
-              // Crea un elemento script
-              const script = document.createElement("script")
-              // Asignamos la ruta del script
-              script.src = data.validar11;
-              // Indica que el script solo se ejecuta cuando el HTML se haya cargado
-              script.defer = true;
-              // Ponemos el script en el head para que entienda donde va
-              document.head.appendChild(script);
-          })
-          .catch(error => console.log('Error al cargar script'))
-    </script>
+   
   </body>
  </html>  

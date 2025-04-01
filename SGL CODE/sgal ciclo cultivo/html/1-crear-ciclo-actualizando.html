@@ -18,6 +18,7 @@
     <meta http-equiv="Content-Language" content="es" />
 
     <link rel="stylesheet" href="../css/1-crear-ciclo-actualizando.css" />
+    <script src="/frontend/js/validar_CropCycle.js"></script>
 
     <title>Crear o Registar  Ciclo de Cultivos</title>
   </head>
@@ -76,36 +77,31 @@
       <fieldset class="cicloRight__container">
         <h3>REGISTRO CICLOS</h3>
 
-        <form class="cicloRight__form">
-          <div class="ciclo__data-general">
-            <label class="cicloRight__label" for="">ID Ciclo Cultivo</label>
-            <!-- Se añade nueva clase: nuevo-idCiclo -->
-            <input class="nuevo-idCiclo" placeholder="Ingrese Dato" type="number" />
-          </div>
+        <form class="cicloRight__form form">
 
           <div class="ciclo__data-general">
             <label class="cicloRight__label" for="">Nombre del Ciclo Cultivo</label>
             <!-- Se añade nueva clase: nuevo-nombreCiclo -->
-            <input class="nuevo-nombreCiclo" placeholder="Ingrese Dato" type="password" />
+            <input class="nuevo-nombreCiclo input" placeholder="Ingrese Dato" type="text" />
           </div>
 
           <div class="ciclo__data-general">
             <label class="cicloRight__label" for="">Novedad</label>
             <!-- Se añade nueva clase: nuevo-novedad -->
-            <input class="nuevo-novedad" placeholder="Ingrese Dato" type="text" />
+            <input class="nuevo-novedad input" placeholder="Ingrese Dato" type="text" />
           </div>
 
           <div class="ciclo__data-general">
             <label class="cicloRight__label" for="">Ingrese Tamaño m2</label>
             <!-- Se añade nueva clase: nuevo-tamanoM2 -->
-            <input class="nuevo-tamanoM2" placeholder="Ingrese Dato" type="number" />
+            <input class="nuevo-tamanoM2 input" placeholder="Ingrese Dato" type="number" />
           </div>
 
           <h2 class="ciclo__toggle-title">Habilitado/Deshabilitadi:</h2>
 
           <!-- BOTON INDICADOR CAMBIO DE COLOR ESTADO  -->
           <div class="ciclo__data-general">
-            <input class="cicloRight__inputbox" type="checkbox" id="boton" />
+            <input class="cicloRight__inputbox input" type="checkbox" id="boton" />
             <label class="cicloRight__labelChange" for="boton"></label>
           </div>
 
@@ -127,20 +123,5 @@
     </main>
     <!-- fin box 2 -->
 
-    <script>
-      fetch("/SGL CODE/Estandarizacion/config.json")
-          .then(result => result.json())
-          .then(data =>{
-              // Crea un elemento script
-              const script = document.createElement("script")
-              // Asignamos la ruta del script
-              script.src = data.validar6;
-              // Indica que el script solo se ejecuta cuando el HTML se haya cargado
-              script.defer = true;
-              // Ponemos el script en el head para que entienda donde va
-              document.head.appendChild(script);
-          })
-          .catch(error => console.log('Error al cargar script'))
-    </script>
   </body>
 </html>
