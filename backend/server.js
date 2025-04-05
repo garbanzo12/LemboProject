@@ -1,32 +1,36 @@
-require('dotenv').config(); //Esta es la forma para llamar una variable de entorno
-//⬆ Para que el dotenv funcionehay que instalar por medio de npm install dotenv
-const express = require('express');
-const mysql = require('mysql2');
-//CORS(Comparticion entre origenes cruzados)
-//Para proteger la seguridad del usuario
-const cors = require('cors');
-
-const PORT = process.env.PORT //Aqui se creo una variable donde se almaceno la variable del puerto
-
+const express = require("express");
 const app = express();
-app.use(express.json());
+const cors = require("cors");
+
+// Habilita CORS si frontend y backend están en puertos distintos
 app.use(cors());
 
-const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '123456',
-    database: 'lembo_sga_db',
-    port : PORT // Aqui se esta usando la variable de env en routes
+// Servir archivos estáticos (como index.html, etc.)
+app.use(express.static("public"));
+
+// Ruta para enviar todos los cultivos (simulando una BD)
+const cultivos = [
+  { id: "001", nombre: "Papa", ubicacion: "Cundinamarca" },
+  { id: "002", nombre: "Yuca", ubicacion: "Meta" },
+  { id: "003", nombre: "Maíz", ubicacion: "Tolima" },
+];
+
+// Endpoint para obtener todos los cultivos
+app.get("/crops", (req, res) => {
+  res.json(cultivos);
 });
 
-
-db.connect(err => {
-    if(err){
-        console.log(`Error conectando la DB: ${err}`);
-        return;
-    }
-    console.log(`Conectando con la DB - Full`);
+// También podrías hacer búsqueda directa por ID:
+app.get("/crops/:id", (req, res) => {
+  const cultivo = cultivos.find(c => c.id === req.params.id);
+  if (cultivo) {
+    res.json(cultivo);
+  } else {
+    res.status(404).json({ error: "Cultivo no encontrado" });
+  }
 });
 
-
+const PORT = 5501;
+app.listen(PORT, () => {
+  console.log(`Servidor escuchando en http://localhost:${PORT}`);
+});
