@@ -24,52 +24,39 @@
   <body>
     <!-- ******************  Titulo principal  ****************  -->
 
-    <header class="ciclo_tittle">
+    <header class="main__tittle">
       <spam>SENA SEDE LEMBO</spam>
-      <a href="/SGL CODE/sgal main (sanchez)/index_main.html">
-        <svg  xmlns="http://www.w3.org/2000/svg"  width="32"  height="32"  viewBox="0 0 24 24"  fill="none"  
-        stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  
-        class="icon-tabler-home"><path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-        <path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-        <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
+      <a href="../index_main.html">
+        <img class="main__tittle__icon" src="../../public/img_/svg/home.svg" alt="">
       </a>
     
     </header>
 
     <!-- ******************  inicio cicloLeft ****************  -->
 
-    <aside class="cicloLeft">
-      <section class="cardLeft__container">
-        <img
-          class="cicloLeft__logoSena"
-          src="/SGL CODE/img/LOGOS SENA/LOGOS SENA/logo-sena-verde-complementario-svg-2022.svg"
-          alt="Imagen de Logo Sena"
-        />
-
-        <img
-          class="cicloLeft__imageMovil"
-          src="/SGL CODE/img/movil01.png"
-          alt="Imagen de celular  cuadros"
-        />
-
-        <img
-          class="cicloLeft__logoSgal"
-          src="/SGL CODE/img/LogoSgal.png"
-          alt="Imagen de Logo Sgal"
-        />
+    <aside class="card__left">
+      <section class="card__left__container">
+          <img class="card__left__logo" src="../../public/img_/svg_sena/logo-sena-verde-complementario-svg-2022.svg"
+           alt="Imagen de Logo Sena"/>
+  
+          <img class="card__left__image__movil" src="../../public/img_/left_side/movil01.png"
+            alt="Imagen de celular  cuadros"/>
+  
+          <img class="card__left__logo" src="../../public/img_/left_side/LogoSgal.png"
+            alt="Imagen de Logo Sgal"/>
       </section>
-    </aside>
+  </aside>
     <!-- ******************  fin cicloLeft ****************  -->
 
-    <main class="cicloRight">
-      <fieldset class="cardRight__container">
-        <h3>REGISTRO USUARIO</h3>
+    <main class="card__right">
+      <fieldset class="card__right__container">
+        <p class="card__right__subtittle" >REGISTRO USUARIO</p>
 
-        <form class="cicloRight__form form">
+        <form class="card__right__form form">
 
-          <div class="ciclo__data-general">
-            <label class="label" for="">Tipo de Usuario</label>
-            <select class="ciclo__user" name="" id="" required>
+          <div class="card__right__data__general">
+            <label class="card__right__label label" for="">Tipo de Usuario</label>
+            <select class="card__right__select card__right__select--type" name="" id="" required>
                 <option value="">Ninguna</option>
                 <option value="Administrador">Administrador</option>
                 <option value="Personal de Apoyo">Personal de Apoyo</option>
@@ -77,92 +64,67 @@
               </select>
           </div>
 
-          <div class="ciclo__data-general">
-            <label class="label" for="">Tipo de Documento</label>
-            <select class="ciclo__document" name="" id="" required>
-                <option value="">Ninguna</option>
-                <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
-                <option value="Cedula">Cedula</option>
-              </select>
-            </div>
-
-          <div class="ciclo__data-general">
-            <label class="label" for="">Nombre Del Usuario</label>
-            <input class="ciclo__nameUser" placeholder="Nombre Completo" type="text" />
+          <div class="card__right__data__general">
+            <label class="card__right__label label" for="">Tipo de Documento</label>
+            <select class="card__right__select card__right__select--type" name="" id="" required>
+              <option value="">Ninguna</option>
+              <option value="">Cédula de Ciudadanía</option>
+              <option value="">Tarjeta de Identidad</option>
+              <option value="">Cédula de Extranjería</option>
+              <option value="">PEP</option>
+              <option value="">Permiso Por Proteccíon Temporal</option>
+            </select>
           </div>
 
-          <div class="ciclo__data-general">
-            <label class="label" for="">Correo Electrónico</label>
-            <input class="ciclo__email" placeholder="Correo Electrónico" type="email" />
+          <div class="card__right__data__general">
+            <label class="card__right__label label" for="">Nombre Del Usuario</label>
+            <input class="card__right__input card__right__input--name" placeholder="Nombre Completo" type="text" />
           </div>
 
-          <div class="ciclo__data-general">
-            <label class="label" for="">Número De Contacto</label>
-            <input class="ciclo__cellPhone" placeholder="Número de Celular" type="tel" />
+          <div class="card__right__data__general">
+            <label class="card__right__label label" for="">Correo Electrónico</label>
+            <input class="card__right__input card__right__input--email" placeholder="Correo Electrónico" type="email" />
           </div>
 
-          <div class="ciclo__data-general">
-            <label class="label" for="">Contraseña</label>
-            <input class="ciclo__cellPhone password" placeholder="Contraseña" type="password" />
+          <div class="card__right__data__general">
+            <label class="card__right__label label" for="">Número De Contacto</label>
+            <input class="card__right__input card__right__input--phone" placeholder="Número de Celular" type="tel" />
           </div>
 
+          <div class="card__right__data__general">
+            <label class="card__right__label label" for="">Contraseña</label>
+            <input class="card__right__input card__right__input--password password" placeholder="Contraseña" type="password" />
+          </div>
 
-          <div class="ciclo__data-general">
-            <h2 class="text-avatar">Imagen Avatar</h2>
-            <div class="icon"><svg  xmlns="http://www.w3.org/2000/svg"  width="32"  height="32"  viewBox="0 0 24 24"  
-                fill="none"  stroke="#BEBEBE"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  
-                class="icon icon-tabler icons-tabler-outline icon-tabler-photo-down"><path stroke="none" 
-                d="M0 0h24v24H0z" fill="none"/><path d="M15 8h.01" />
-                <path d="M12.5 21h-6.5a3 3 0 0 1 -3 -3v-12a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v6.5" />
-                <path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l4 4" />
-                <path d="M14 14l1 -1c.653 -.629 1.413 -.815 2.13 -.559" /><path d="M19 16v6" />
-                <path d="M22 19l-3 3l-3 -3" /></svg></div>
-
-            <div class="icon-box"><!--icon-box-->
-                <p class="datos-image">Resoluciòn maxima 200 x 200 px</p>
-                <div class="icon-clip"><svg  xmlns="http://www.w3.org/2000/svg"  width="18"  height="18"  
-                    viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  
-                    stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M15 7l-6.5 6.5a1.5 1.5 0 0 0 3 3l6.5 -6.5a3 3 0 0 0 -6 -6l-6.5 6.5a4.5 4.5 0 0 0 9 9l6.5 -6.5" />
-                </svg></div>
-            </div><!--icon-box-->
+          <div class="card__right__data__general">
+            <p class="card__right__title--mid">Avatar</p>
+              <div class="card__right__data__general--2">
+                  <img class="card__right__content__imagen" src="" alt="">
+                  <label class="card__right__label label">Resolución max 150*150 px</label>
+                  <input class="card__right__input card__right__input--file" placeholder="" type="file" />
+              </div>
+          </div>
 
          <!-- ESPACIO PARA MAS INPUTS  -->
-          </div>
-          <div class="botones">
-            <button class="button" type="submit" >
-              Crear
-            </button>
-        </form>
 
-       
-          <!-- <button class="button"><a href="">CANCELAR</a></button> -->
+         
+        <div class="card__right__boton">
+          <button class="card__right__boton--primary" type="submit">CREAR</button>
+  
+          <button class="card__right__boton--second" type="submit"><a href="">CANCELAR</a></button>
         </div>
-
-        <div class="baseform">
-          <a href="#"> </a>
+  
+        <div class="card__right__footform">
+            <p> CAPTURA DE ERRORES</p>
         </div>
-      </fieldset>
-      <!-- fin de form -->
+  
+    </form>
+      <!-- FIN DE FORM -->
+  
+      <a href="../index_main.html">
+        <img class="card__right__control__back control__back" src="../../public/img_/svg/control_back.svg" alt="">
+      </a>
 
-      <svg
-        class="CardRight__svg"
-        width="48"
-        height="48"
-        viewBox="0 0 26 38"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M23 34.7746L11 18.9694L23 3.16406M3 3.16406V34.7746"
-          stroke="#00304D"
-          stroke-width="5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
-    </main>
-    <link rel="stylesheet" href="">
-    
+          
   </body>
  </html>  

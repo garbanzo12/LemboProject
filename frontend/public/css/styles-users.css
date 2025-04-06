@@ -141,7 +141,7 @@ body {
 
 /* ****************  Titulo principal  ****************   */
 
- .ciclo_tittle {
+ .main__tittle {
   position: absolute;
   top: 2%;
   left: 50%;
@@ -155,7 +155,7 @@ body {
   color: var(--primary-800);
   text-shadow: 0 0 2px #00ff00, 0 0 20px #00ff00;
 }
-.icon-tabler-home{
+.main__tittle__icon{
   color: var(--blanco);
   margin-left: 2rem;
 }
@@ -163,7 +163,7 @@ body {
 /* *******************   MEDIA QUERY TITULO PRINCIPAL ****************** */
 
 @media (min-width: 380px) {
-  .header, .ciclo_tittle {
+  .header, .main__tittle {
     position: absolute;
     top: 4%;
     left: 50%;
@@ -171,7 +171,7 @@ body {
 }
 
 @media (min-width: 768px) {
-  .header, .ciclo_tittle {
+  .header, .main__tittle {
     position: absolute;
     top: 6%;
     left: 60%;
@@ -179,7 +179,7 @@ body {
 }
 
 @media (min-width: 1280px) {
-  .header, .ciclo_tittle {
+  .header, .main__tittle {
     position: absolute;
     top: 8%;
     left: 60%;
@@ -189,7 +189,7 @@ body {
 /* BEM */
 /* ***************** ASIDE IZQUIDERO ***************** */
 
-.cicloLeft {
+.card__left {
   width: 20%;
   height: 100vh;
   background: linear-gradient(to bottom,
@@ -200,7 +200,7 @@ body {
   align-items: center;
 }
 
-.cardLeft__container, .cicloLeft__container {
+.card__left, .card__container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -209,11 +209,11 @@ body {
   gap: 2rem;
 }
 
-.cardLeft__logoSena, .cicloLeft__logoSena {
+.card__left__logo {
   width: 10rem;
 }
 
-.cardLeft__imageMovil, .cicloLeft__logoMovil {
+.card__left__image__movil, .cicloLeft__logoMovil {
   width: 20rem;
   height: auto;
   background-size: cover;
@@ -221,66 +221,66 @@ body {
   background-position: center;
 }
 
-.cardLeft__logoSgal, .ciclo__logosgal {
+/* .cardLeft__logoSgal, .ciclo__logosgal {
   width: 10rem;
-}
+} */
 
 /* *****************  MEDIA QUERY LEFT****************** */
 
 @media (min-width: 380px) {
-  .cardLeft, .cicloLeft {
+  .card__left {
     display: none;
   }
 }
 
 @media (min-width: 768px) {
-  .cardLeft, .cicloLeft {
+  .card__left, .cicloLeft {
     display: flex;
     flex-direction: column;
     min-width: 20%;
     height: auto;
   }
 
-  .cardLeft__container, .cicloLeft__container {
+  .card__left__container, .cicloLeft__container {
     display: flex;
     flex-direction: column;
     gap: 2rem;
   }
 
-  .cardLeft__imageMovil, .cicloLeft__imageMovil {
+  .card__left__image__movil {
     display: none;
   }
 
-  .cardLeft__logoSena, .cicloLeft__logoSena {
+  .card__left__logo {
     height: 7rem;
     width: 7rem;
     margin-bottom: 70rem;
     /*  para separarlo por que no hay imagen de celular */
   }
 
-  .cardLeft__logoSgal, .cicloLeft__logoSgal {
+  /* .cardLeft__logoSgal, .cicloLeft__logoSgal {
     height: 8rem;
     width: 8rem;
-    margin-bottom: 2rem;
+    margin-bottom: 2rem; */
     /*  para separarlo por que no hay imagen de celular */
-  }
+  /* } */
 }
 
 @media (min-width: 1280px) {
-  .cardLeft, .cicloLeft {
+  .card__left, .cicloLeft {
     display: flex;
     flex-direction: column;
     width: 20%;
     height: auto;
   }
 
-  .cardLeft__container, .cicloLeft__container {
+  .card__left__container, .cicloLeft__container {
     display: flex;
     flex-direction: column;
     gap: 1rem;
   }
 
-  .cardLeft__imageMovil, .cicloLeft__imageMovil {
+  .card__left__image__movil, .cicloLeft__imageMovil {
     display: flex;
     width: 22rem;
     height: auto;
@@ -289,25 +289,25 @@ body {
     background-position: center;
   }
 
-  .cardLeft__logoSena, .cicloLeft__logoSena {
+  .card__left__logo, .cicloLeft__logoSena {
     height: 9rem;
     width: 9rem;
     margin: 0rem;
   }
 
-  .cardLeft__logoSgal, .cicloLeft__logoSgal {
+  /* .cardLeft__logoSgal, .cicloLeft__logoSgal {
     height: 9rem;
     width: 9rem;
 
-  }
+  } */
 }
 
 @media (min-width: 1920px) {
-  .cardLeft__container, .cicloLeft__container {
+  .card__left__container, .cicloLeft__container {
     gap: 5rem;
   }
 
-  .cardLeft__imageMovil, .cicloLeft__imageMovil {
+  .card__left__image__movil, .cicloLeft__imageMovil {
     display: flex;
     width: 30rem;
     height: auto;
@@ -316,20 +316,20 @@ body {
     background-position: center;
   }
 
-  .cardLeft__logoSena, .cicloLeft__logoSena {
+  .card__left__logo, .cicloLeft__logoSena {
     height: 10rem;
     width: 10rem;
   }
-
+/* 
   .cardLeft__logoSgal, .cicloLeft__logoSgal {
     height: 10rem;
     width: 10rem;
 
-  }
+  } */
 }
 
 @media (min-width: 2560px) {
-  .cardLeft__container, .cicloLeft__container {
+  .card__left__container, .cicloLeft__container {
     gap: 4rem;
   }
 }
@@ -337,7 +337,7 @@ body {
 /* BEM */
 /* ***************** MAIN RIGHT ***************** */
 
-.cicloRight {
+.card__right {
   /* colores */
   background-color: var(--secundary-1-950);
   width: 80%;
@@ -349,7 +349,7 @@ body {
  
 }
 
-.cardRight__container, .cicloRight__container {
+.card__right__container, .cicloRight__container {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -369,7 +369,7 @@ body {
   padding: 0;
 }
 
-.cardRight__container h3, .cicloRight__container h3 {
+.card__right__subtittle{
   /* posicion */
   display: flex;
   margin: 0 auto;
@@ -388,48 +388,48 @@ body {
   font-weight: bolder;
 }
 
-.cardRight__form, .cicloRight__form {
+.card__right__form, .cicloRight__form {
   padding: 1rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.cardRight__container img, .cicloRight__container img  {
+.card__right__container img, .cicloRight__container img  {
   width: 16rem;
   height: 12rem;
   margin: 0.1rem;
   border-radius: 10rem;
 }
 
-.cardRight__form label, .cicloRight__form label {
+.card__right__label, .cicloRight__form label {
   display: flex;
   font-size: 1.6rem;
   font-weight: 200;
   color: var(--black);
 }
 
-.cardRight__container input, .cicloRight__container input[type="text"],
-.cardRight__container input, .cicloRight__container input [type="password"],
-.cardRight__container input, .cicloRight__container input[type="email"],
-.cardRight__container input, .cicloRight__container input[type="number"],
-.cardRight__container input, .cicloRight__container input[type="tel"],
-.cardRight__container input, .cicloRight__container input[type="url"],
-.cardRight__container input, .cicloRight__container input[type="search"],
-.cardRight__container input, .cicloRight__container input[type="date"],
-/* .cardRight__container input[type="time"], */
-/* .cardRight__container input[type="datetime-local"], */
-/* .cardRight__container input[type="month"], */
-/* .cardRight__container input[type="week"], */
-/* .cardRight__container input[type="color"], */
-.cardRight__container input, .cicloRight__container input[type="file"],
-/* .cardRight__container input[type="checkbox"], */
-/* .cardRight__container input[type="radio"], */
-/* .cardRight__container input[type="range"], */
-.cardRight__container input, .cicloRight__container input[type="submit"],
-/* .cardRight__container input[type="reset"], */
-.cardRight__container input, .cicloRight__container input[type="button"],
-.ciclo__document, .ciclo__user
+.card__right__container input, .cicloRight__container input[type="text"],
+.card__right__container input, .cicloRight__container input [type="password"],
+.card__right__container input, .cicloRight__container input[type="email"],
+.card__right__container input, .cicloRight__container input[type="number"],
+.card__right__container input, .cicloRight__container input[type="tel"],
+.card__right__container input, .cicloRight__container input[type="url"],
+.card__right__container input, .cicloRight__container input[type="search"],
+.card__right__container input, .cicloRight__container input[type="date"],
+/* .card__right__container input[type="time"], */
+/* .card__right__container input[type="datetime-local"], */
+/* .card__right__container input[type="month"], */
+/* .card__right__container input[type="week"], */
+/* .card__right__container input[type="color"], */
+.card__right__container input, .cicloRight__container input[type="file"],
+/* .card__right__container input[type="checkbox"], */
+/* .card__right__container input[type="radio"], */
+/* .card__right__container input[type="range"], */
+.card__right__container input, .cicloRight__container input[type="submit"],
+/* .card__right__container input[type="reset"], */
+.card__right__container input, .cicloRight__container input[type="button"],
+.card__right__select
 {
   font-size: 1.6rem;
   color: var(--gray-700);
@@ -443,12 +443,12 @@ body {
   background-color: var(--gray-050);
 }
 
-label, .cicloRigh__label {
+.card__right__label, .cicloRigh__label {
   margin: 0 auto;
   padding: 0rem 2.4rem;
 }
 
-.button, .cicloRigh__button {
+.card__right__boton--primary, .card__right__boton--second{
   background-color: var(--secundary-1-800);
   width: 15rem;
   color: var(--white);
@@ -462,7 +462,24 @@ label, .cicloRigh__label {
   margin: 1.2rem;
 }
 
-.cardRight__container a, .cicloRight__container a {
+.card__right__footform {
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--gray-100);
+  border-radius:1rem;
+  height: 5rem;
+  width: 100%;
+  color: var(--secundary-1-950);
+  font-weight: bolder
+}
+
+.card__right__content__imagen{
+  border: solid 0.1rem var(--secundary-1-900);
+  border-radius: none;
+}
+.card__right__container a, .cicloRight__container a {
   color: var(--white);
   text-decoration: none;
 }
@@ -524,7 +541,7 @@ label, .cicloRigh__label {
     white-space: nowrap;
   }
 
-  .cardRight__container, .cicloRight__container {
+  .card__right__container, .cicloRight__container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -549,7 +566,7 @@ label, .cicloRigh__label {
     height: auto;
   }
 
-  .cardRight__container, .cicloRight__container {
+  .card__right__container, .cicloRight__container {
     display: flex;
     flex-direction: column;
     min-width: 60%;
@@ -573,7 +590,7 @@ label, .cicloRigh__label {
     min-width: 80%;
   }
 
-  .cardRight__container, .cicloRight__container {
+  .card__right__container, .cicloRight__container {
     min-width: 55%;
     display: flex;
     flex-direction: column;
@@ -587,7 +604,7 @@ label, .cicloRigh__label {
 }
 
 @media (min-width: 1920px) {
-  .cardRight__container, .cicloRight__container {
+  .card__right__container, .cicloRight__container {
     min-width: 40%;
     display: flex;
     flex-direction: column;
@@ -600,7 +617,7 @@ label, .cicloRigh__label {
 }
 
 @media (min-width: 2560px) {
-  .cardRight__container, .cicloRight__container {
+  .card__right__container, .cicloRight__container {
     min-width: 30%;
     min-height: 20rem;
     display: flex;
