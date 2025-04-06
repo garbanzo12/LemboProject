@@ -16,7 +16,7 @@ const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '123456',
-    database: 'lembo_sga_db',
+    database: 'lembo_sgal_db',
     port : PORT // Aqui se esta usando la variable de env en routes
 });
 

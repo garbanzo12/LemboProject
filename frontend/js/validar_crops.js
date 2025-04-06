@@ -1,11 +1,14 @@
 console.log("olahol");
 
+
+// ⬇️ Aqui empieza el Insertar/Crear ⬇️
 function inicializarValidaciones() {
     const forms = document.querySelectorAll(".form");
 
     forms.forEach((form) => {
         form.addEventListener("submit", async function (event) {
             event.preventDefault();
+            
             const name_crop = document.querySelector('.ciclo__name_crop');
             const type_crop = document.querySelector('.ciclo__type_crop');
             const location = document.querySelector('.ciclo__location');
@@ -57,8 +60,43 @@ function inicializarValidaciones() {
 
                     if (respuesta.ok) {
                         form.reset(); // Limpiar formulario tras el envío
-                        mostrarMensaje(form, "✅ Datos guardados correctamente.", "green");
-                    } else {
+                        
+                        const mensaje = `✅ Datos guardados correctamente.\nID del registro: ${resultado.id}`;
+                        console.log("Respuesta completa del servidor:", resultado);
+                    
+                        // Mostrar el mensaje en el cuadro arriba
+                        const cuadro = document.getElementById("cuadro-mensaje");
+                        const texto = document.getElementById("texto-mensaje");
+                        const botonCopiar = document.getElementById("copiar-id");
+                    
+
+                        // Cerrar modal
+                        document.getElementById("cerrar-modal").addEventListener("click", function () {
+                            document.getElementById("cuadro-mensaje").style.display = "none";
+                          });
+                        // Ir a siguiente página
+                        document.getElementById("continuar-btn").addEventListener("click", function () {
+                            window.location.href = "/frontend/views/sgal cultivos/HTML/2-buscar-cultivo.html"; // Cambia esto a la ruta que necesites
+                          });
+                        
+                        texto.textContent = `✅ Datos guardados correctamente.\nID del registro: ${resultado.id}`;
+                        cuadro.style.display = "block";
+                    
+                        botonCopiar.onclick = () => {
+                            navigator.clipboard.writeText(resultado.id)
+                                .then(() => {
+                                    botonCopiar.textContent = "✅ Copiado";
+                                    setTimeout(() => botonCopiar.textContent = "Copiar ID", 2000);
+                                })
+                                .catch(() => alert("Error al copiar el ID"));
+                        };
+                    
+                        // También opcionalmente mostrar debajo del formulario
+                        mostrarMensaje(form, mensaje, "green");
+                    }
+
+                    
+                     else {
                         throw new Error(resultado.error || "Error desconocido.");
                     }
                 } catch (error) {
@@ -89,4 +127,42 @@ function mostrarMensaje(form, mensaje, color) {
 
 setTimeout(() => {
     inicializarValidaciones();
+}, 100);
+
+
+// ⬆️ Aqui Termina el Insertar/Crear ⬆️
+
+
+// ⬇️ Aqui empieza el Buscar ⬇️
+function IniciarBuscar(){
+
+    const buscar = document.querySelectorAll(".buscar");
+    buscar.forEach((busqueda)=>{
+
+
+        busqueda.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const idCultivo = document.querySelector('.ciclo__ID'.value);
+         
+            fetch(`http://localhost:5501/crops/id.${idCultivo}`)
+            .then(res => res.json())
+            .then(data => {
+              console.log("Cultivos recibidos:", data);
+              // Aquí puedes buscar por ID si quieres
+            })
+            .catch(err => {
+              console.error("Error al leer los datos:", err);
+            });
+          });
+          
+
+  
+            })
+    
+    
+
+}
+
+setTimeout(() => {
+    IniciarBuscar();
 }, 100);
