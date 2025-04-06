@@ -498,7 +498,7 @@
 }
 
   
-.baseform a, .cicloRight__footform a {
+.baseform, .cicloRight__footform a {
     display: flex;
   
     /* colores */

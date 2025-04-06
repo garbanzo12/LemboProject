@@ -1,5 +1,7 @@
 console.log("hola");
 
+
+// ✅ codigo comentado en validar_crops.js ✅ 
 function inicializarValidaciones() {
     const forms = document.querySelectorAll(".form");
 
