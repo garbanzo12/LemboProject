@@ -13,10 +13,13 @@
 <body>
   <main class="dashboard__windows">
 
-    <div class="dashboard__container__img">
-      <img class="dashboard__img" src alt>
-
+    
+    <div class="dashboard__img-wrapper">
+      <img id="imagen-mapa" src="../public/img_/main/sedelembo.png" alt="Mapa" />
+      <div id="contenedor"></div>
     </div>
+    <button id="guardar">Guardar selección</button>
+    
 
     <div class="dashboard__menu">
       <button class="dashboard__botton">SERSOR</button>
@@ -193,6 +196,86 @@
     </div>
 
   </main>
+
+
+ 
+  <script>
+    const opcionesValidas = [100, 400, 600, 900];
+    let cantidad = parseInt(prompt("Elige la cantidad de cuadros: 100, 400, 600 o 900", "900"));
+  
+    if (!opcionesValidas.includes(cantidad)) {
+      alert("Opción inválida. Se usará 900 por defecto.");
+      cantidad = 900;
+    }
+  
+    const columnas = Math.ceil(Math.sqrt(cantidad));
+    const filas = Math.ceil(cantidad / columnas);
+    const contenedor = document.getElementById('contenedor');
+  
+    for (let i = 0; i < cantidad; i++) {
+      const fila = Math.floor(i / columnas);
+      const columna = i % columnas;
+  
+      const div = document.createElement('div');
+      const checkboxId = `checkbox-${i}`;
+      const top = (fila / filas) * 100;
+      const left = (columna / columnas) * 100;
+      const ancho = 100 / columnas;
+      const alto = 100 / filas;
+  
+      div.innerHTML = `
+        <input type="checkbox" class="checkbox" id="${checkboxId}" />
+        <label class="celda" for="${checkboxId}" 
+          style="top: ${top}%; left: ${left}%; width: ${ancho}%; height: ${alto}%"></label>
+      `;
+  
+      contenedor.appendChild(div);
+    }
+  
+    const checkboxes = document.querySelectorAll('.checkbox');
+    const labels = document.querySelectorAll('.celda');
+  
+    checkboxes.forEach((checkbox, index) => {
+      // Bloqueos de prueba
+      if (checkbox.id === 'checkbox-2') {
+        checkbox.disabled = true;
+        labels[index].classList.add('bloqueado');
+      }
+      if (checkbox.id === 'checkbox-6' || checkbox.id === 'checkbox-8') {
+        checkbox.disabled = true;
+        labels[index].classList.add('bloqueado-especial');
+      }
+    });
+  
+    // Guardar
+    document.getElementById('guardar').addEventListener('click', () => {
+      const seleccionados = Array.from(document.querySelectorAll('.checkbox:checked'))
+        .map(checkbox => parseInt(checkbox.id.replace('checkbox-', '')));
+  
+      fetch('http://localhost:5501/cuadros_seleccionados', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ seleccionados })
+      })
+      .then(res => res.json())
+      .then(data => {
+        alert("Cuadros guardados correctamente");
+        console.log(data);
+      });
+    });
+  
+    // Cargar seleccionados
+    fetch('http://localhost:5501/cuadros_seleccionados')
+      .then(res => res.json())
+      .then(ids => {
+        ids.forEach(id => {
+          const checkbox = document.getElementById(`checkbox-${id}`);
+          if (checkbox) checkbox.checked = true;
+        });
+      });
+  </script>
+  
+     
 </body>
 
 </html>

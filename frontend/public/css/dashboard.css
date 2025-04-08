@@ -283,7 +283,51 @@ background-color: var(--secundary-1-900);
   color: var(--black);
 }
 
+.dashboard__img-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 100%;       /* No más ancho que el contenedor */
+  overflow: hidden;      /* Previene desbordes */
+}
+
+#imagen-mapa {
+  width: 100%;           /* Llena horizontalmente */
+  height: auto;          /* Mantiene proporciones */
+  display: block;        /* Evita espacios por default */
+  object-fit: contain;   /* Ajusta dentro del espacio disponible */
+}
 
 
+#contenedor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* evita errores de click si no están bien alineados los labels */
+}
 
+.checkbox {
+  display: none;
+}
 
+.celda {
+  position: absolute;
+  border: 2px solid #39a900;
+  cursor: pointer;
+  pointer-events: auto; /* activa el clic solo en los cuadros */
+}
+
+.checkbox:checked + .celda {
+  background-color: #39a900;
+}
+
+.celda.bloqueado {
+  background-color: red;
+  pointer-events: none;
+}
+
+.celda.bloqueado-especial {
+  background-color: blue;
+  pointer-events: none;
+}
