@@ -641,6 +641,52 @@
     text-align: center;
     transition: all 0.3s ease;
   }
+  @media (max-width: 1280px) {
+    #cuadro-mensaje {
+      width: 50%;
+      padding: 6%;
+      top: 40%;
+
+    }
+  
+    #cuadro-mensaje button {
+      font-size: 0.95rem;
+      padding: 0.6rem 1.2rem;
+    }
+  
+    #cerrar-modal {
+      font-size: 1.3rem;
+    }
+  
+    #texto-mensaje {
+      font-size: 1.1rem;
+    }
+  }
+
+
+  @media (min-width: 380px) and (max-width: 760px) {
+    #cuadro-mensaje {
+      width: 80%;
+    
+      padding: 11%;
+      left: 50%;
+    }
+  
+    #cuadro-mensaje button {
+      font-size: 0.85rem;
+      padding: 0.5rem 1rem;
+    }
+  
+    #cerrar-modal {
+      font-size: 1rem;
+      top: 1%;
+      right: 1%;
+    }
+  
+    #texto-mensaje {
+      font-size: 1rem;
+    }
+  }
   
   /* Botones del modal */
   #cuadro-mensaje button {
