@@ -6,60 +6,204 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document</title>
   <link rel="stylesheet" href="../public/css/dashboard.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
 </head>
 
 <body>
   <main class="dashboard__windows">
-    <div class="dashboard__map">
-      <img class="dashboard__img" src="../public/img_/main/sedelembo.png" alt="">
+
+    <div class="dashboard__container__img">
+      <img class="dashboard__img" src alt>
 
     </div>
-
-
-
 
     <div class="dashboard__menu">
-      <button>MAP</button>
-      <button>UNIT</button>
-      <button>HUMANITARIAN</button>
-      <button>SIGNS</button>
-      <button>RETROFIT</button>
-      <button>CUSTOM</button>
-      <button>EDIT</button>
+      <button class="dashboard__botton">SERSOR</button>
+      <button class="dashboard__botton dashboard__botton--dark">UNIT</button>
+      <button class="dashboard__botton">HUMANITARIAN</button>
+      <button class="dashboard__botton dashboard__botton--dark">SIGNS</button>
+      <button class="dashboard__botton">RETROFIT</button>
+      <button class="dashboard__botton dashboard__botton--dark">CUSTOM</button>
     </div>
+
+    <div class="menu__sensors">
+
+      <!-- modulo 1 -->
+      <div class="menu__sensors__container">
+        <p class="menu__sensors__tittle">TEMPERATURA</p>
+        <div class="menu__sensors__temp__media">
+          <p class="menu__sensors__value">26</p>
+          <p class="menu__sensors__unds">°C</p>
+        </div>
+
+        <div class="menu__sensors__temp__min">
+            <p class=" menu__sensors__text">Min</p>
+          <p class="menu__sensors__value--pequeño">26</p>
+          <p class="menu__sensors__unds--pequeño">°C</p>
+        </div>
+
+        <div class="menu__sensors__temp__max">
+            <P class=" menu__sensors__text">Max</P>
+          <p class="menu__sensors__value--pequeño">26</p>
+          <p class="menu__sensors__unds--pequeño">°C</p>
+        </div>
+      </div>
+
+      <!-- modulo 2 -->
+      <div class="menu__sensors__container">
+        <p class="menu__sensors__tittle">HUMEDAD</p>
+        <div class="menu__sensors__temp__media">
+          <p class="menu__sensors__value">66</p>
+          <p class="menu__sensors__unds">%</p>
+        </div>
+
+        <div class="menu__sensors__temp__min">
+            <p class=" menu__sensors__text">Min</p>
+          <p class="menu__sensors__value--pequeño">45</p>
+          <p class="menu__sensors__unds--pequeño">%</p>
+        </div>
+
+        <div class="menu__sensors__temp__max">
+            <P class=" menu__sensors__text">Max</P>
+          <p class="menu__sensors__value--pequeño">79</p>
+          <p class="menu__sensors__unds--pequeño">%</p>
+        </div>
+      </div>
+
+      <!-- modulo 3 -->
+      <div class="menu__sensors__container">
+        <p class="menu__sensors__tittle">RADIACION</p>
+        <div class="menu__sensors__temp__media">
+          <p class="menu__sensors__value">26</p>
+          <p class="menu__sensors__unds">°C</p>
+        </div>
+
+        <div class="menu__sensors__temp__min">
+            <p class=" menu__sensors__text">Min</p>
+          <p class="menu__sensors__value--pequeño">26</p>
+          <p class="menu__sensors__unds--pequeño">°C</p>
+        </div>
+
+        <div class="menu__sensors__temp__max">
+            <P class=" menu__sensors__text">Max</P>
+          <p class="menu__sensors__value--pequeño">26</p>
+          <p class="menu__sensors__unds--pequeño">°C</p>
+        </div>
+      </div>
+
+      <!-- modulo 4 -->
+      <div class="menu__sensors__container">
+        <p class="menu__sensors__tittle">LLUVIA</p>
+        <div class="menu__sensors__temp__media">
+          <p class="menu__sensors__value">10</p>
+          <p class="menu__sensors__unds">mm/dia</p>
+        </div>
+
+        <div class="menu__sensors__temp__min">
+                    <p class=" menu__sensors__text">Min</p>
+          <p class="menu__sensors__value--pequeño">5</p>
+          <p class="menu__sensors__unds--pequeño">mm/dia</p>
+        </div>
+
+        <div class="menu__sensors__temp__max">
+                    <p class=" menu__sensors__text">Max</p>
+          <p class="menu__sensors__value--pequeño">26</p>
+          <p class="menu__sensors__unds--pequeño">mm/dia</p>
+        </div>
+      </div>
+      <!-- modulo 5 -->
+      <div class="menu__sensors__container">
+        <p class="menu__sensors__tittle">PH SUELO</p>
+        <div class="menu__sensors__temp__media">
+          <p class="menu__sensors__value">5.5</p>
+          <p class="menu__sensors__unds">Ph</p>
+        </div>
+
+        <div class="menu__sensors__temp__min">
+            <p class=" menu__sensors__text">Min</p>
+          <p class="menu__sensors__value--pequeño">5</p>
+          <p class="menu__sensors__unds--pequeño">Ph</p>
+        </div>
+
+        <div class="menu__sensors__temp__max">
+            <p class=" menu__sensors__text">Max</P>
+          <p class="menu__sensors__value--pequeño">6</p>
+          <p class="menu__sensors__unds--pequeño">Ph</p>
+        </div>
+      </div>
+      <!-- modulo 6 -->
+      <div class="menu__sensors__container">
+        <p class="menu__sensors__tittle">CONDUCTIVIDAD</p>
+        <div class="menu__sensors__temp__media">
+          <p class="menu__sensors__value">26</p>
+          <p class="menu__sensors__unds">°C</p>
+        </div>
+
+        <div class="menu__sensors__temp__min">
+            <p class=" menu__sensors__text">Min</p>
+          <p class="menu__sensors__value--pequeño">26</p>
+          <p class="menu__sensors__unds--pequeño">°C</p>
+        </div>
+
+        <div class="menu__sensors__temp__max">
+            <p class=" menu__sensors__text">Max</p>
+          <p class="menu__sensors__value--pequeño">26</p>
+          <p class="menu__sensors__unds--pequeño">°C</p>
+        </div>
+      </div>
+
+
+
+
+      <div class="menu__sensors__container">
+        <p class="menu__sensors__tittle">
+          <i class="fas fa-temperature-high"></i> TEMPERATURA
+        </p>
+
+        <div class="menu__lectures">
+        <div class="menu__sensors__temp__media">
+          <p class="menu__sensors__value">26</p>
+          <p class="menu__sensors__unds">°C</p>
+        </div>
+      
+        <div class="menu__sensors__temp__min">
+          <p class="menu__sensors__text">
+            <i class="fas fa-arrow-down"></i> Min
+          </p>
+          <p class="menu__sensors__value--pequeño">26</p>
+          <p class="menu__sensors__unds--pequeño">°C</p>
+        </div>
+      
+        <div class="menu__sensors__temp__max">
+          <p class="menu__sensors__text">
+            <i class="fas fa-arrow-up"></i> Max
+          </p>
+          <p class="menu__sensors__value--pequeño">26</p>
+          <p class="menu__sensors__unds--pequeño">°C</p>
+        </div>
+      </div>
+      </div>
+      
+
+
+
+
+
+    </div>
+
   </main>
 </body>
 
 </html>
 
+<!-- <div class="dash__main     map-container"> -->
+<!-- <img class="dash__board__img      map-background" src="../public/img_/main/sedelembo.png" alt /> -->
 
+<!-- AQUI VA EL CONTENEDOR DE CHECBOX -->
+<!-- <div class="dash__leabel       contenedor"> -->
 
+<!-- </div> -->
+<!-- AQUI VA EL FINAL CONTENEDOR DE CHECBOX -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="dash__main     map-container">
-  <img class="dash__board__img      map-background" src="../public/img_/main/sedelembo.png" alt />
-
-  <!-- AQUI VA EL CONTENEDOR DE CHECBOX -->
-  <div class="dash__leabel       contenedor">
-
-  </div>
-  <!-- AQUI VA EL FINAL CONTENEDOR DE CHECBOX -->
-
-</div>
-
-</body>
-
-</html>
+<!-- </div> -->
