@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="../public/css/dashboard.css" />
+  
+</head>
+
+<body>
+  <div class="map-container">
+    <img class="map-background" src="../public/img_/main/sedelembo.png" alt />
+
+    <div class="contenedor" id="contenedor"></div>
+  </div>
+  <button id="guardar">Guardar selección</button>
+
+  <script>
+    const opcionesValidas = [100, 400, 600, 900];
+    let cantidad = parseInt(prompt("Elige la cantidad de cuadros: 100, 400, 600 o 900", "900"));
+
+    if (!opcionesValidas.includes(cantidad)) {
+      alert("Opción inválida. Se usará 900 por defecto.");
+      cantidad = 900;
+    }
+
+
+//⬇️ Calculamos la cantidad de columnas necesarias para mostrar los cuadros
+//⬇️ Usamos Math.sqrt para obtener la raíz cuadrada de la cantidad total de cuadros (para que el grid sea lo más cuadrado posible)
+//⬇️ Luego usamos Math.ceil para redondear hacia arriba, en caso de que la raíz no sea exacta
+const columnas = Math.ceil(Math.sqrt(cantidad));
+
+//⬇️ Calculamos la cantidad de filas necesarias para completar el grid
+//⬇️ Dividimos la cantidad total de cuadros entre las columnas calculadas anteriormente
+//⬇️ También usamos Math.ceil para asegurarnos de que haya suficientes filas para mostrar todos los cuadros, incluso si no caben exactamente en cada fila
+const filas = Math.ceil(cantidad / columnas);
+
+    const contenedor = document.getElementById('contenedor');
+    contenedor.style.gridTemplateColumns = `repeat(${columnas}, 1fr)`;
+    contenedor.style.gridTemplateRows = `repeat(${filas}, 1fr)`;
+
+    for (let i = 0; i < cantidad; i++) {
+      const div = document.createElement('div');
+      div.innerHTML = `
+        <input type="checkbox" class="checkbox" />
+        <label class="celda"></label>
+      `;
+      contenedor.appendChild(div);
+    }
+
+    const checkboxes = document.querySelectorAll('.checkbox');
+    const labels = document.querySelectorAll('.celda');
+
+    checkboxes.forEach((checkbox, index) => {
+      checkbox.id = `checkbox-${index}`;
+      labels[index].setAttribute('for', checkbox.id);
+
+      if (checkbox.id === 'checkbox-2') {
+        checkbox.disabled = true;
+        labels[index].classList.add('bloqueado');
+      }
+
+      if (checkbox.id === 'checkbox-6' || checkbox.id === 'checkbox-8') {
+        checkbox.disabled = true;
+        labels[index].classList.add('bloqueado-especial');
+      }
+    });
+
+    document.getElementById('guardar').addEventListener('click', () => {
+  const seleccionados = Array.from(document.querySelectorAll('.checkbox:checked'))
+    .map(checkbox => parseInt(checkbox.id.replace('checkbox-', '')));
+
+  fetch('http://localhost:5501/cuadros_seleccionados', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ seleccionados })
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert("Cuadros guardados correctamente");
+    console.log(data);
+  });
+});
+
+
+
+fetch('http://localhost:5501/cuadros_seleccionados')
+  .then(res => res.json())
+  .then(ids => {
+    ids.forEach(id => {
+      const checkbox = document.getElementById(`checkbox-${id}`);
+      if (checkbox) checkbox.checked = true;
+    });
+  });
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+body {
+  background-color: rgb(67, 60, 60);
+}
+
+/* From Uiverse.io by SnyDeTreves */
+/*************/
+/* Variables */
+/*************/
+
+.map-container {
+  --city-radius: 2rem;
+  --city-sign-color-back: #00c080;
+  --city-sign-color-font: #fff;
+  --city-pin-size-font: 1.2rem;
+}
+
+/**********/
+/* Styles */
+/**********/
+
+/* Container */
+.map-container {
+  border-radius: 0.5em;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+  line-height: 1;
+  min-width: 15rem;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  display: grid;
+  grid-template-columns: repeat(1fr 9);
+}
+
+/* Map - Background */
+.map-background {
+  width: 90vw;
+  height: 90vh;
+  border-radius: 1rem;
+  margin: 2rem;
+}
+
+
+
+/* ************CHECK BOX PARA EL MAPA ************ */
+
+.contenedor {
+  position: absolute;
+  opacity: 0.2;
+  display: grid;
+  
+  gap: 0.1em;
+  width: 90vw;
+  height: 90vh;
+  background-color: green;
+  border-radius: 1rem;
+  margin: 2rem;
+}
+
+.checkbox {
+  display: none;
+}
+
+.celda {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  width: 100%;
+  height: 100%;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  border-radius: 0.3em;
+}
+
+.celda:hover {
+
+}
+
+.checkbox:checked+.celda {
+  background-color: #81c784;
+  opacity: 0.2;
+}
+
+/* Estilo para una celda bloqueada */
+.bloqueado {
+  background-color: red !important;
+  cursor: not-allowed;
+}
+
+/* Estilo para celdas bloqueadas con otro color */
+.bloqueado-especial {
+  background-color: blue !important;
+  cursor: not-allowed;
+}
