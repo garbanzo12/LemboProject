@@ -85,15 +85,29 @@ const filas = Math.ceil(cantidad / columnas);
 });
 
 
-
 fetch('http://localhost:5501/cuadros_seleccionados')
   .then(res => res.json())
   .then(ids => {
     ids.forEach(id => {
-      const checkbox = document.getElementById(`checkbox-${id}`);
-      if (checkbox) checkbox.checked = true;
+      const cb = document.getElementById(`checkbox-${id}`);
+      const label = document.querySelector(`label[for="checkbox-${id}"]`);
+
+      if (cb) {
+        cb.checked = true;           // Marcar como seleccionado
+        cb.disabled = true;          // Deshabilitar para que no se pueda desmarcar
+      }
+
+      if (label) {
+  label.classList.remove('celda'); // 🔴 Elimina la clase que puede interferir
+  label.classList.add('bloqueado-especial'); // 🔵 Añade el estilo azul
+  label.style.display = 'flex';              // 🔁 Reaplica los estilos importantes
+  label.style.width = '100%';
+  label.style.height = '100%';
+}
+
     });
   });
+
 
   </script>
 
