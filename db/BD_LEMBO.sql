@@ -70,3 +70,10 @@ CREATE TABLE sensors(
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     );
+
+    CREATE TABLE cuadros_seleccionados (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  cuadro_id INT NOT NULL,
+  usuario_id INT, -- opcional si usas autenticación
+  fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

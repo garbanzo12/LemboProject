@@ -47,8 +47,7 @@ body {
   position: absolute;
   opacity: 0.2;
   display: grid;
-  grid-template-columns: repeat(40, 1fr);
-  grid-template-rows: repeat(20, 1fr);
+  
   gap: 0.1em;
   width: 90vw;
   height: 90vh;
