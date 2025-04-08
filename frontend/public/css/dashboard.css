@@ -283,12 +283,40 @@ background-color: var(--secundary-1-900);
   color: var(--black);
 }
 
+
+
+
+
+
+
+
+
+
+
 .dashboard__img-wrapper {
   position: relative;
   width: 100%;
-  max-width: 100%;       /* No más ancho que el contenedor */
-  overflow: hidden;      /* Previene desbordes */
+  height: 100%; /* o una altura específica como 80vh */
+  overflow: hidden;
 }
+#contenedor {
+  z-index: 10;
+}
+
+.celda {
+  z-index: 11;
+}
+
+
+#contenedor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  overflow: visible;
+}
+
 
 #imagen-mapa {
   width: 100%;           /* Llena horizontalmente */
@@ -298,14 +326,7 @@ background-color: var(--secundary-1-900);
 }
 
 
-#contenedor {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none; /* evita errores de click si no están bien alineados los labels */
-}
+
 
 .checkbox {
   display: none;
@@ -313,7 +334,7 @@ background-color: var(--secundary-1-900);
 
 .celda {
   position: absolute;
-  border: 2px solid #39a900;
+  border: 0.5px solid #24242422;
   cursor: pointer;
   pointer-events: auto; /* activa el clic solo en los cuadros */
 }
@@ -329,5 +350,9 @@ background-color: var(--secundary-1-900);
 
 .celda.bloqueado-especial {
   background-color: blue;
+  pointer-events: none;
+}
+
+input[type="checkbox"]:disabled + label { /*⬅️ para q el cuadro no cambie ni por teclado*/
   pointer-events: none;
 }

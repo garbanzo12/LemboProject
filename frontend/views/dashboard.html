@@ -198,7 +198,6 @@
   </main>
 
 
- 
   <script>
     const opcionesValidas = [100, 400, 600, 900];
     let cantidad = parseInt(prompt("Elige la cantidad de cuadros: 100, 400, 600 o 900", "900"));
@@ -216,36 +215,38 @@
       const fila = Math.floor(i / columnas);
       const columna = i % columnas;
   
-      const div = document.createElement('div');
       const checkboxId = `checkbox-${i}`;
       const top = (fila / filas) * 100;
       const left = (columna / columnas) * 100;
       const ancho = 100 / columnas;
       const alto = 100 / filas;
   
-      div.innerHTML = `
-        <input type="checkbox" class="checkbox" id="${checkboxId}" />
-        <label class="celda" for="${checkboxId}" 
-          style="top: ${top}%; left: ${left}%; width: ${ancho}%; height: ${alto}%"></label>
-      `;
+      const input = document.createElement('input');
+      input.type = 'checkbox';
+      input.className = 'checkbox';
+      input.id = checkboxId;
   
-      contenedor.appendChild(div);
-    }
+      const label = document.createElement('label');
+      label.className = 'celda';
+      label.setAttribute('for', checkboxId);
+      label.style.top = `${top}%`;
+      label.style.left = `${left}%`;
+      label.style.width = `${ancho}%`;
+      label.style.height = `${alto}%`;
   
-    const checkboxes = document.querySelectorAll('.checkbox');
-    const labels = document.querySelectorAll('.celda');
-  
-    checkboxes.forEach((checkbox, index) => {
       // Bloqueos de prueba
-      if (checkbox.id === 'checkbox-2') {
-        checkbox.disabled = true;
-        labels[index].classList.add('bloqueado');
+      if (i === 2) {
+        input.disabled = true;
+        label.classList.add('bloqueado');
       }
-      if (checkbox.id === 'checkbox-6' || checkbox.id === 'checkbox-8') {
-        checkbox.disabled = true;
-        labels[index].classList.add('bloqueado-especial');
+      if (i === 6 || i === 8) {
+        input.disabled = true;
+        label.classList.add('bloqueado-especial');
       }
-    });
+  
+      contenedor.appendChild(input);
+      contenedor.appendChild(label);
+    }
   
     // Guardar
     document.getElementById('guardar').addEventListener('click', () => {
@@ -268,11 +269,25 @@
     fetch('http://localhost:5501/cuadros_seleccionados')
       .then(res => res.json())
       .then(ids => {
+       
+
         ids.forEach(id => {
           const checkbox = document.getElementById(`checkbox-${id}`);
-          if (checkbox) checkbox.checked = true;
+          const label = document.querySelector(`label[for="checkbox-${id}"]`);
+      
+      if (checkbox && label) {
+        checkbox.checked = true;
+        checkbox.disabled = true; // Bloquear para que no se pueda desmarcar
+        label.classList.add('celda'); // Azul + pointer-events: none
+        
+        label.style.display = 'flex';
+        label.style.backgroundColor = 'blue';
+
+      }
         });
-      });
+    
+        });
+      
   </script>
   
      
