@@ -86,7 +86,6 @@
   --secundary-4-800: #fdce2e;
   --secundary-4-900: #fdc817;
   --secundary-4-950: #fdc300;
-
   /* Colores neutros */
   --blanco: #ffffff;
   --negro: #000000;
@@ -437,7 +436,7 @@ body {
   padding: 1.6rem 2.4rem;
   margin: 0em;
   border: 0.1rem solid var(--blanco);
-  border-radius: 5rem;
+  border-radius: 1rem;
   /* campo circular */
   box-sizing: border-box;
   background-color: var(--gray-050);
@@ -617,4 +616,16 @@ label, .cicloRigh__label {
   padding: 1rem;
   color: var(--blanco);
   text-transform: uppercase;
+  }
+  .error-message {
+    display: block; /* ✅ Ahora se ubica debajo */
+    color: var(--secundary-4-951);
+    margin-right: 3.5vw;
+  }
+  
+  @media (max-width: 1105px){
+    .error-message {
+   
+      margin-right: 10vw;
+    }
   }

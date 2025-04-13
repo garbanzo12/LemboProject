@@ -25,7 +25,7 @@ function inicializarValidaciones() {
                 if (!errorSpan || !errorSpan.classList.contains("error-message")) {
                     errorSpan = document.createElement("span");
                     errorSpan.classList.add("error-message");
-                    errorSpan.style.color = "red";
+                    errorSpan.style.color = "#71277a";
                     input.insertAdjacentElement("afterend", errorSpan);
                 }
 
@@ -69,13 +69,14 @@ function inicializarValidaciones() {
                         throw new Error(resultado.error || "Error desconocido.");
                     }
                 } catch (error) {
-                    mostrarMensaje(form, "❌ " + error.message, "red");
+                    mostrarMensaje(form, "❌ " + error.message, "green");
                 }
             
             }
         });
     });
 }
+
 
 // Función para mostrar mensajes debajo del formulario
 function mostrarMensaje(form, mensaje, color) {
@@ -93,7 +94,6 @@ function mostrarMensaje(form, mensaje, color) {
     mensajeSpan.textContent = mensaje;
     mensajeSpan.style.color = color;
 }
-
 setTimeout(() => {
     inicializarValidaciones();
 }, 100);
