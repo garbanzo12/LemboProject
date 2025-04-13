@@ -116,22 +116,5 @@
       <!-- fin de form --> 
     </main>
     <!-- fin box 2 -->
-
-
-    <script>
-      fetch("/SGL CODE/Estandarizacion/config.json")
-          .then(result => result.json())
-          .then(data =>{
-              // Crea un elemento script
-              const script = document.createElement("script")
-              // Asignamos la ruta del script
-              script.src = data.validar7;
-              // Indica que el script solo se ejecuta cuando el HTML se haya cargado
-              script.defer = true;
-              // Ponemos el script en el head para que entienda donde va
-              document.head.appendChild(script);
-          })
-          .catch(error => console.log('Error al cargar script'))
-    </script>
   </body>
 </html>

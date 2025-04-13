@@ -1,4 +1,4 @@
-//La conexion con la bd
+// La conexion con la bd
 const express = require("express");
 const mysql = require("mysql2");
 const cors = require("cors");
@@ -15,8 +15,7 @@ const conexion = mysql.createConnection({
     database: "lembo_sgal_db"
 });
 
-
-
+// Ruta para insertar datos
 app.post("/crops", (req, res) => {
     console.log("Datos recibidos en POST /crops:", req.body); 
 
@@ -33,14 +32,84 @@ app.post("/crops", (req, res) => {
             return res.status(500).json({ error: "Error al insertar datos" });
         }
 
-        console.log("Resultado del INSERT:", resultado); // 👈 Verifica si tiene insertId
-
+        console.log("Resultado del INSERT:", resultado);
         res.json({ 
             mensaje: "Datos guardados correctamente", 
-            id: resultado.insertId  // 👈 Esto es lo que se espera que se envíe
+            id: resultado.insertId
         });
+    });
+});
+
+// 🟡 Ruta para buscar un cultivo por ID
+app.get("/crops/:id", (req, res) => {
+    const cropId = req.params.id;
+
+    let sql = "SELECT * FROM crops WHERE id = ?";
+    conexion.query(sql, [cropId], (error, resultados) => {
+        if (error) {
+            console.error("Error al buscar cultivo:", error);
+            return res.status(500).json({ error: "Error al buscar cultivo" });
+        }
+
+        if (resultados.length === 0) {
+            return res.status(404).json({ mensaje: "Cultivo no encontrado" });
+        }
+
+        res.json(resultados[0]);
     });
 });
 
 // Iniciar servidor
 app.listen(5501, () => console.log("Servidor corriendo en puerto 5501"));
+
+
+
+
+
+
+
+// Ruta para actualizar el cultivo
+app.post('/crops', (req, res) => {
+    const {
+      id_cultivo,
+      nombre_cultivo,
+      tipo_cultivo,
+      ubicacion_cultivo,
+      descripcion_cultivo,
+      tamano_cultivo,
+      estado_cultivo,
+    } = req.body;
+  
+    // Consulta SQL para actualizar los datos del cultivo
+    const query = `
+      UPDATE cultivos 
+      SET 
+        nombre = ?, 
+        tipo = ?, 
+        ubicacion = ?, 
+        descripcion = ?, 
+        tamano = ?, 
+        estado = ?
+      WHERE id = ?
+    `;
+  
+    // Ejecutar la consulta
+    db.query(query, [
+      nombre_cultivo,
+      tipo_cultivo,
+      ubicacion_cultivo,
+      descripcion_cultivo,
+      tamano_cultivo,
+      estado_cultivo ? 1 : 0,  // Convertimos el checkbox a 1 (habilitado) o 0 (deshabilitado)
+      id_cultivo,
+    ], (err, result) => {
+      if (err) {
+        console.error('Error al actualizar el cultivo:', err);
+        return res.status(500).json({ error: 'Hubo un error al actualizar el cultivo.' });
+      }
+  
+      // Responder con éxito
+      res.json({ message: 'Cultivo actualizado exitosamente.' });
+    });
+  });
+  

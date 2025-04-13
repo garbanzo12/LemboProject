@@ -18,7 +18,7 @@
     <meta http-equiv="Content-Language" content="es" />
 
     <link rel="stylesheet" href="../Css/3-visualizar-cultivo.css">
-    <script src="/frontend/js/validar_crops.js"></script>
+    <script src="/frontend/js/actualizar_crop.js"></script>
     <title>Actualización de Cultivos</title>
   </head>
   <body>
@@ -65,34 +65,32 @@
       <fieldset class="cardRight__container">
         <h3>ACTUALIZAR CULTIVO</h3>
 
-        <form class="cicloRight__form form">
-          <div class="ciclo__data-general">
-            <label class="label" for="">Id del Cultivo</label>
-            <input class="ciclo__nameUser input" placeholder="Id del Cultivo" type="text" />
-          </div>
-
-          <div class="ciclo__data-general">
-            <label class="label" for="">Nombre Del Cultivo</label>
-            <input class="ciclo__nameUser input" placeholder="Nombre del Cultivo" type="text" />
-          </div>
-
-          <div class="ciclo__data-general">
-            <label class="label" for="">Tipo de Cultivo</label>
-            <input class="ciclo__email input" placeholder="Tipo del Cultivo" type="email" />
-          </div>
-
-          <div class="ciclo__data-general">
-            <label class="label" for="">Ubicaciòn</label>
-            <input class="ciclo__cellPhone input" placeholder="Ubicación del Cultivo" type="tel" />
-          </div>
-          <div class="ciclo__data-general">
-            <label class="label" for="">Descripción</label>
-            <input class="ciclo__cellPhone input" placeholder="Descripción del Cultivo" type="tel" />
-          </div>
-          <div class="ciclo__data-general">
-            <label class="label" for="">Tamaño en m²</label>
-            <input class="ciclo__cellPhone input" placeholder="Tamaño en m² del cultivo " type="tel" />
-          </div>
+      
+      
+        <div class="ciclo__data-general">
+          <label class="label" for="nombre_cultivo">Nombre Del Cultivo</label>
+          <input id="nombre_cultivo" class="ciclo__nameUser input" name="nombre_cultivo" placeholder="Nombre del Cultivo" type="text" required />
+        </div>
+      
+        <div class="ciclo__data-general">
+          <label class="label" for="tipo_cultivo">Tipo de Cultivo</label>
+          <input id="tipo_cultivo" class="ciclo__email input" name="tipo_cultivo" placeholder="Tipo del Cultivo" type="text" required />
+        </div>
+      
+        <div class="ciclo__data-general">
+          <label class="label" for="ubicacion_cultivo">Ubicación</label>
+          <input id="ubicacion_cultivo" class="ciclo__cellPhone input" name="ubicacion_cultivo" placeholder="Ubicación del Cultivo" type="text" required />
+        </div>
+      
+        <div class="ciclo__data-general">
+          <label class="label" for="descripcion_cultivo">Descripción</label>
+          <input id="descripcion_cultivo" class="ciclo__cellPhone input" name="descripcion_cultivo" placeholder="Descripción del Cultivo" type="text" required />
+        </div>
+      
+        <div class="ciclo__data-general">
+          <label class="label" for="tamano_cultivo">Tamaño en m²</label>
+          <input id="tamano_cultivo" class="ciclo__cellPhone input" name="tamano_cultivo" placeholder="Tamaño en m² del cultivo" type="number" required />
+        </div>
           
           <div class="ciclo__data-general">
             <h2 class="text-avatar">Imagen Cultivo</h2>

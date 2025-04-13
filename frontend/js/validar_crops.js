@@ -130,39 +130,3 @@ setTimeout(() => {
 }, 100);
 
 
-// ⬆️ Aqui Termina el Insertar/Crear ⬆️
-
-
-// ⬇️ Aqui empieza el Buscar ⬇️
-function IniciarBuscar(){
-
-    const buscar = document.querySelectorAll(".buscar");
-    buscar.forEach((busqueda)=>{
-
-
-        busqueda.addEventListener("submit", function (e) {
-            e.preventDefault();
-            const idCultivo = document.querySelector('.ciclo__ID'.value);
-         
-            fetch(`http://localhost:5501/crops/id.${idCultivo}`)
-            .then(res => res.json())
-            .then(data => {
-              console.log("Cultivos recibidos:", data);
-              // Aquí puedes buscar por ID si quieres
-            })
-            .catch(err => {
-              console.error("Error al leer los datos:", err);
-            });
-          });
-          
-
-  
-            })
-    
-    
-
-}
-
-setTimeout(() => {
-    IniciarBuscar();
-}, 100);
