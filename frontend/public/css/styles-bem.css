@@ -246,9 +246,9 @@ body {
 }
 
 .cardright__botton-primary:hover {
-    background-color: var(--secundary-2-700);
+    background-color: var(--secundary-2-400);
     width: 22rem;
-    color: var(--gray-850);
+    color: var(--secundary-2-950);
 }
 
 /* ****************************************************** */
@@ -473,6 +473,10 @@ body {
     border-radius: 1rem 1rem 1rem 1rem;
     overflow-y: auto;
     box-shadow: 0 0.4rem 0.8rem var(--black);
+    opacity: 0.7;
+}
+.cardright__container-input:hover{
+opacity: 1;
 }
 
 .cardright__subtitittle-form {
