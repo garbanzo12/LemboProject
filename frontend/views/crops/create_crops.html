@@ -10,101 +10,109 @@
     content="Aprendiz: Erick Ramirez, Aprendiz Aprendiz:Sanchez Hernandez, Aprendiz:Estefani Acevedo" />
   <meta http-equiv="Content-Language" content="es" />
 
-  <link rel="stylesheet" href="../../public/css/crops/styles_create.css">
+  <link rel="stylesheet" href="../../public/css/styles-bem.css">
 
   <title>Registro de Cultivos</title>
 </head>
 
 <body>
-  <!-- ****************  TITULO PRINCIPAL  ****************  -->
+  <!--   
+  /* ****************************************************** */
+  /* ***************    ELEMENTOS TITTLE    *************** */
+  /* ****************************************************** */ -->
 
-  <header class="main__tittle">
-    <p class="main__tittle__paragraph">SENA SEDE LEMBO</p>
-    <a class="main__tittle__anchor" href="../index_main.html">
-      <img class="main__tittle__ico" src="../../public/img_/svg/home.svg" alt="">
+  <header class="cardtittle">
+    <p class="cardtittle__text">SENA SEDE LEMBO</p>
+    <a class="cardtittle__enlace" href="../index_main.html">
+      <img class="cardtittle__svg-home" src="../../public/img_/svg/home.svg" alt="">
     </a>
 
   </header>
-  <!-- ****************  FIN TITULO PRINCIPAL  ****************  -->
-  <!-- ******************   INICIO DE CARD LEFT ****************  -->
-
-  <aside class="card__left">
-    <section class="card__left__container">
-      <img class="card__left__logo" src="../../public/img_/svg_sena/logo-sena-verde-complementario-svg-2022.svg"
+  <!-- 
+  /* ****************************************************** */
+  /* *************    ELEMENTOS CARD LEFT    ************** */
+  /* ****************************************************** */
+  -->
+  <aside class="cardleft">
+    <section class="cardleft__container">
+      <img class="cardleft__logo-sena" src="../../public/img_/svg_sena/logo-sena-verde-complementario-svg-2022.svg"
         alt="Imagen de Logo Sena" />
 
-      <img class="card__left__image__movil" src="../../public/img_/left_side/movil01.png"
-        alt="Imagen de celular  cuadros" />
+      <img class="cardleft__img" src="../../public/img_/left_side/movil01.png" alt="Imagen de celular  cuadros" />
 
-      <img class="card__left__logo" src="../../public/img_/left_side/LogoSgal.png" alt="Imagen de Logo Sgal" />
+      <img class="cardleft__logo-sgal" src="../../public/img_/left_side/LogoSgal.png" alt="Imagen de Logo Sgal" />
     </section>
   </aside>
-  <!-- ******************  FIN DE CARD LEFT ****************  -->
-  <!-- ******************   INICIO DE CARD LEFT ****************  -->
+  <!-- 
+  /* ******************************************************* */
+  /* ****************    CARD RIGHT BLOQUE   *************** */
+  /* ******************************************************* */ 
+  -->
+  <main class="cardright">
+    <form class="cardright__form cardright__form--top4">
+      <p class="cardright__header-form">REGISTRO CULTIVO</p>
 
-  <main class="card__right">
-    <form class="card__right__container">
-      <p class="card__right__title3">REGISTRO CULTIVO</p>
+      <fieldset class="cardright__body-form">
+        <div class="cardright__container-input">
 
-      <fieldset class="card__right__form">
-        <div class="card__right__data__general">
-          <label class="card__right__label" for="">Id del Cultivo</label>
-          <input class="card__right__input card__right__input--id" placeholder="Id del Cultivo" type="text" />
-        </div>
-
-        <div class="card__right__data__general">
-          <label class="card__right__label" for="">Nombre Del Cultivo</label>
-          <input class="card__right__input card__right__input--name" placeholder="Nombre del Cultivo" type="text" />
-        </div>
-
-        <div class="card__right__data__general">
-          <label class="card__right__label" for="">Tipo de Cultivo</label>
-          <input class="card__right__input card__right__input--type" placeholder="Tipo del Cultivo" type="email" />
-        </div>
-
-        <div class="card__right__data__general">
-          <label class="card__right__label" for="">Ubicaciòn</label>
-          <input class="card__right__input card__right__input--location" placeholder="Ubicación del Cultivo"
-            type="tel" />
-        </div>
-
-        <div class="card__right__data__general">
-          <label class="card__right__label" for="">Descripción</label>
-          <input class="card__right__input card__right__input--info" placeholder="Descripción del Cultivo" type="tel" />
-        </div>
-
-        <div class="card__right__data__general">
-          <label class="card__right__label" for="">Tamaño en m²</label>
-          <input class="card__right__input card__right__input--size" placeholder="Tamaño en m² del cultivo "
-            type="tel" />
-        </div>
-
-        <p class="card__right__title--mid">Imagen Cultivo</p>
-        <div class="card__right__data__general">
-
-
-          <div class="card__right__data__general--2">
-            <img class="card__right__content__imagen" src="" alt="">
-            <label class="card__right__label">Resolución max 150*150 px</label>
-            <input class="card__right__input card__right__input card__right__input--file" placeholder="" type="file" />
+          <div class="cardright__subcontainer-input">
+            <label class="cardright__label-form cardright__input-form--id-cultivo" for="">Id del Cultivo</label>
+            <input class="cardright__input-form card__right__input--id" placeholder="Id del Cultivo" type="text" />
           </div>
 
+          <div class="cardright__subcontainer-input">
+            <label class="cardright__label-form  cardright__input-form--nombre-cultivo" for="">Nombre Del Cultivo</label>
+            <input class="cardright__input-form card__right__input--name" placeholder="Nombre del Cultivo"
+              type="text" />
+          </div>
+
+          <div class="cardright__subcontainer-input">
+            <label class="cardright__label-form" for="">Tipo de Cultivo</label>
+            <input class="cardright__input-form card__right__input--type" placeholder="Tipo del Cultivo" type="text" />
+          </div>
+
+          <div class="cardright__subcontainer-input">
+            <label class="cardright__label-form" for="">Ubicaciòn</label>
+            <input class="cardright__input-form card__right__input--location" placeholder="Ubicación del Cultivo"
+              type="text" />
+          </div>
+
+          <div class="cardright__subcontainer-input">
+            <label class="cardright__label-form" for="">Descripción</label>
+            <input class="cardright__input-form card__right__input--info" placeholder="Descripción del Cultivo"
+              type="text" />
+          </div>
+
+          <div class="cardright__subcontainer-input">
+            <label class="cardright__label-form" for="">Tamaño en m²</label>
+            <input class="cardright__input-form card__right__input--size" placeholder="Tamaño en m² del cultivo "
+              type="text" />
+          </div>
+
+          <!-- subtitulo si es necesario -->
+          <p class="cardright__subtitittle-form">Imagen Cultivo</p>
+
+          <div class="cardright__subcontainer-input">
+              <label class="cardright__label-form">Resolución max 150*150 px</label>
+              <input class="cardright__input-form cardright__input-form--file" placeholder="" type="file" />
+          </div>
+          <button class="cardright__botton-primary" type="submit">CREAR</button>
         </div>
       </fieldset>
-      <div class="card__right__boton">
-        <button class="card__right__boton--primary" type="submit">CREAR</button>
+      <div class="">
+        
 
-        <button class="card__right__boton--second" type="submit"><a href="">CANCELAR</a></button>
+        <button class="cardright__botton-secundary" type="submit"><a href="">CANCELAR</a></button>
       </div>
 
-      <div class="card__right__footform">
-    <p> CAPTURA DE ERRORES</p>
-  </div>
+      <div class="cardright__foot-form">
+        <p> CAPTURA DE ERRORES</p>
+      </div>
 
     </form>
     <!-- fin de form -->
 
-    <a href="../index_main.html">
+    <a class="cardright__footer" href="../index_main.html">
       <img class="card__right_controlBack" src="../../public/img_/svg/control_back.svg" alt="">
     </a>
 
