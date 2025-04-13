@@ -561,14 +561,14 @@ DOMINGO ESTE ES DONDE SE VEN EL MAPA CON LOS DATOS DE LOS SENSORES*/
 /* **************************************************************/
 
 /* USUARIOS */
-.cardright__input-form-roll{}
-.cardright__input-form-tpdoc{}
-.cardright__input-form-numero{}
-.cardright__input-form-nombre{}
-.cardright__input-form-correo{}
-.cardright__input-form-telefono{}
-.cardright__input-form-estado{}
-.cardright__input-form-contraseña{}
+.cardright__input-form--roll{}
+.cardright__input-form--tpdoc{}
+.cardright__input-form--numero{}
+.cardright__input-form--nombre{}
+.cardright__input-form--correo{}
+.cardright__input-form--telefono{}
+.cardright__input-form--estado{}
+.cardright__input-form--contraseña{}
 
 
 /* CULTIVOS */
