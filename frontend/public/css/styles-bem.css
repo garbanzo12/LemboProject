@@ -321,19 +321,19 @@ body {
 .cardleft__logo-sena {
     width: 10rem;
     filter: drop-shadow(2rem 2rem 2rem var(--negro));
-    margin: 2rem;
+
 }
 
 .cardleft__img {
-    width: 15vw;
+    width: 14vw;
     filter: drop-shadow(0 0 1rem var(--primary-800));
-    margin: 0rem;
+    margin: 1rem;
 }
 
 .cardleft__logo-sgal {
     width: 10rem;
     filter: drop-shadow(2rem 2rem 2rem var(--negro));
-    margin: 2rem;
+
 }
 
 /* LOGIN */
@@ -397,8 +397,8 @@ body {
     border-radius: 1rem;
     width: 70%;
     text-align: center;
-    box-shadow: 0 4px 8px var(--black);
-    margin: 2rem 0;
+    box-shadow: 0 0.4rem 0.8rem var(--black);
+    margin: 2.5rem 0;
     padding: 0;
     gap: 1rem;
     border-radius: 1rem 1rem 1rem 1rem;
@@ -406,7 +406,7 @@ body {
 }
 
 /* MODIFICADOR posicion arriba el top   */
-.cardright__form--top4 {
+.cardright__form--top3 {
     position: relative;
     top: 3%;
 }
@@ -513,7 +513,7 @@ opacity: 1;
     font-family: var(--main-font);
     font-size: var(--fs-xs);
     width: 32rem;
-    margin: 1rem 1rem 1rem 1rem;
+    margin: 0.2rem 0.2rem 0.2rem 0.2rem;
     padding: 0.5rem;
 }
 
@@ -525,13 +525,22 @@ opacity: 1;
     padding: 0 2.4rem;
     margin: 0 0 0.2rem 0;
 }
+/* modificador del label para el chechbox COLOR Y FORMA*/
+.cardright__label-form--color{
+    background-color: var(--gray-050);
+    width: 100%;
+    padding: 1.2rem 1.6rem;
+    /* margin: 0 0 1.2rem 0; */
+    border: 0.1rem solid var(--blanco);
+    border-radius: 5rem;
+}
 
 .cardright__input-form {
     font-size: var(--fs-xs);
     color: var(--gray-700);
     width: 100%;
     padding: 1.6rem 2.4rem;
-    margin: 0 0 1.2rem 0;
+    margin: 0 0 0 0;
     border: 0.1rem solid var(--blanco);
     border-radius: 5rem;
     /* campo circular */
@@ -563,6 +572,8 @@ opacity: 1;
     width: 4rem;
     height: 4rem;
     margin: 1.5rem;
+    bottom: 2%;
+
 }
 
 .cardright__svg-footer {
@@ -750,7 +761,7 @@ DOMINGO ESTE ES DONDE SE VEN EL MAPA CON LOS DATOS DE LOS SENSORES*/
         height: 100vh;
     }
 
-    .cardright__form--top4 {
+    .cardright__form--top3 {
         position: relative;
         top: 5%;
     }
@@ -776,7 +787,7 @@ DOMINGO ESTE ES DONDE SE VEN EL MAPA CON LOS DATOS DE LOS SENSORES*/
         left: 0%;
     }
 
-    .cardright__form--top4 {
+    .cardright__form--top3 {
         position: relative;
         top: 4%;
     }
