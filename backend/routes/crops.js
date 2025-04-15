@@ -39,30 +39,40 @@ app.post("/crops", (req, res) => {
         });
     });
 });
-
 // 🟡 Ruta para buscar un cultivo por ID
 app.get("/crops/:id", (req, res) => {
-    const cropId = req.params.id;
+  const cropId = req.params.id;
 
-    let sql = "SELECT * FROM crops WHERE id = ?";
-    conexion.query(sql, [cropId], (error, resultados) => {
-        if (error) {
-            console.error("Error al buscar cultivo:", error);
-            return res.status(500).json({ error: "Error al buscar cultivo" });
-        }
+  let sql = "SELECT * FROM crops WHERE id = ?";
+  conexion.query(sql, [cropId], (error, resultados) => {
+      if (error) {
+          console.error("Error al buscar cultivo:", error);
+          return res.status(500).json({ error: "Error al buscar cultivo" });
+      }
 
-        if (resultados.length === 0) {
-            return res.status(404).json({ mensaje: "Cultivo no encontrado" });
-        }
+      if (resultados.length === 0) {
+          return res.status(404).json({ mensaje: "Cultivo no encontrado" });
+      }
 
-        res.json(resultados[0]);
-    });
+      res.json(resultados[0]);
+  });
 });
 
-// Iniciar servidor
+// ✅ NUEVA RUTA: Obtener todos los cultivos
+app.get("/crops", (req, res) => {
+  const sql = "SELECT id, name_crop FROM crops";
+  conexion.query(sql, (error, resultados) => {
+      if (error) {
+          console.error("Error al obtener cultivos:", error);
+          return res.status(500).json({ error: "Error al obtener cultivos" });
+      }
+
+      res.json(resultados);
+  });
+});
+
+// 🟢 Iniciar servidor
 app.listen(5501, () => console.log("Servidor corriendo en puerto 5501"));
-
-
 
 
 
