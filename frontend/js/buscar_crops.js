@@ -1,38 +1,37 @@
 console.log('Script cargado');
 
-async function obtenerIdsCultivos() { // ⬅️ Hacemos una funcion obtenerIdsCultivos
+async function obtenerIdsCultivos() {
   try {
-    const res = await fetch('http://localhost:5501/crops'); // ⬅️ Nos ocnectamos con la bd por medio de un fetch
-    if (!res.ok) throw new Error('No se pudieron obtener los cultivos');// ⬅️ Mensaje de error si no se puede conectar
-    const data = await res.json(); // ⬅️ Mandamos la informacion en JSON 
-    return data.map(cultivo => cultivo.id); // ⬅️ Tomamos la propiedad ID de cada cultivo
+    const res = await fetch('http://localhost:5501/crops');
+    if (!res.ok) throw new Error('No se pudieron obtener los cultivos');
+    const data = await res.json();
+    return data.map(cultivo => cultivo.id);
   } catch (err) {
-    console.error('Error al obtener los IDs:', err.message);// ⬅️ Mensaje de error 
+    console.error('Error al obtener los IDs:', err.message);
     return [];
   }
 }
 
-async function inicializarBuscar() {// ⬅️ Hacemos una funcion inicializarBuscar
-  const formBuscar = document.querySelector('.cicloRight__form'); // ⬅️ Tomamaos del DOM al form
-  const selectId = document.querySelector('.selectId');// ⬅️ Tomamaos del DOM al select
+async function inicializarBuscar() {
+  const formBuscar = document.querySelector('.cicloRight__form');
+  const selectId = document.querySelector('.selectId');
 
-  
-  const ids = await obtenerIdsCultivos(); // ⬅️ Llenamos el <select> con los IDs disponibles
-  selectId.innerHTML = ''; // ⬅️ Limpiamos las opciones anteriores
+  const ids = await obtenerIdsCultivos();
+  selectId.innerHTML = '';
 
-  if (ids.length === 0) { // ⬅️ En caso de que no existan IDS
+  if (ids.length === 0) {
     const option = document.createElement('option');
     option.textContent = 'No hay cultivos disponibles';
     option.disabled = true;
     selectId.appendChild(option);
   } else {
-    const defaultOption = document.createElement('option'); // ⬅️ Creamos un option para contener cada ID
+    const defaultOption = document.createElement('option');
     defaultOption.textContent = 'Selecciona un ID';
     defaultOption.disabled = true;
     defaultOption.selected = true;
     selectId.appendChild(defaultOption);
 
-    ids.forEach(id => { // ⬅️ por medio de un forEach traemos los IDS de la bd y los mostramos en el DOM
+    ids.forEach(id => {
       const option = document.createElement('option');
       option.value = id;
       option.textContent = `ID: ${id}`;
@@ -40,8 +39,12 @@ async function inicializarBuscar() {// ⬅️ Hacemos una funcion inicializarBus
     });
   }
 
-  
-  formBuscar.addEventListener('submit', async (e) => {// ⬅️ Nos encargamos de Manejar el evento de envío del formulario
+  // ✅ Inicializar Choices después de llenar las opciones
+  new Choices(selectId, {
+    renderChoiceLimit: 5,  // Limita cuántos se ven en pantalla
+  });
+
+  formBuscar.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const id = selectId.value;
@@ -64,6 +67,6 @@ async function inicializarBuscar() {// ⬅️ Hacemos una funcion inicializarBus
   });
 }
 
-setTimeout(() => {
-  inicializarBuscar();
-}, 100);
+document.addEventListener('DOMContentLoaded', () => {
+  inicializarBuscar(); // 👈 Ya no necesitas el setTimeout
+});
