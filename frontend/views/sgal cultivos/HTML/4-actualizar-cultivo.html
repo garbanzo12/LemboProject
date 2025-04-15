@@ -16,7 +16,11 @@
       content="Aprendiz: Erick Ramirez, Aprendiz Aprendiz:Sanchez Hernandez, Aprendiz:Estefani Acevedo"
     />
     <meta http-equiv="Content-Language" content="es" />
+<!-- CSS de Choices -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
 
+<!-- JS de Choices -->
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
     <link rel="stylesheet" href="../Css/3-visualizar-cultivo.css">
     <script src="/frontend/js/actualizar_crop.js"></script>
     <title>Actualización de Cultivos</title>
@@ -64,9 +68,18 @@
     <main class="cicloRight">
       <fieldset class="cardRight__container">
         <h3>ACTUALIZAR CULTIVO</h3>
+      
+      <form class="cicloRight__form">
 
-      
-      
+        <div class="ciclo__data-general">
+          <label class="label">Id del Cultivo</label>
+          <select  class="ciclo__nameUser select-choices" required>
+            <option value="">Seleccione un ID de cultivo</option>
+            <!-- Opciones se agregarán dinámicamente -->
+          </select>
+                  </div>
+        
+
         <div class="ciclo__data-general">
           <label class="label" for="nombre_cultivo">Nombre Del Cultivo</label>
           <input id="nombre_cultivo" class="ciclo__nameUser input" name="nombre_cultivo" placeholder="Nombre del Cultivo" type="text" required />

@@ -79,39 +79,37 @@ app.listen(5501, () => console.log("Servidor corriendo en puerto 5501"));
 
 
 // Ruta para actualizar el cultivo
-app.post('/crops', (req, res) => {
+app.post('/crops/:id', (req, res) => {
+  
     const {
-      id_cultivo,
+      id,
       nombre_cultivo,
       tipo_cultivo,
       ubicacion_cultivo,
       descripcion_cultivo,
       tamano_cultivo,
-      estado_cultivo,
     } = req.body;
   
     // Consulta SQL para actualizar los datos del cultivo
     const query = `
-      UPDATE cultivos 
+      UPDATE crops 
       SET 
-        nombre = ?, 
-        tipo = ?, 
-        ubicacion = ?, 
-        descripcion = ?, 
-        tamano = ?, 
-        estado = ?
+        name_crop = ?, 
+        type_crop = ?, 
+        location = ?, 
+        description_crop = ?, 
+        size_m2 = ?
       WHERE id = ?
     `;
   
     // Ejecutar la consulta
-    db.query(query, [
+    conexion.query(query, [
       nombre_cultivo,
       tipo_cultivo,
       ubicacion_cultivo,
       descripcion_cultivo,
-      tamano_cultivo,
-      estado_cultivo ? 1 : 0,  // Convertimos el checkbox a 1 (habilitado) o 0 (deshabilitado)
-      id_cultivo,
+      tamano_cultivo, 
+      id
     ], (err, result) => {
       if (err) {
         console.error('Error al actualizar el cultivo:', err);
