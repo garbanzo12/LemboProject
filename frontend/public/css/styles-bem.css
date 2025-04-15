@@ -515,6 +515,7 @@ opacity: 1;
     width: 32rem;
     margin: 0.2rem 0.2rem 0.2rem 0.2rem;
     padding: 0.5rem;
+    align-items: center;
 }
 
 .cardright__label-form {
