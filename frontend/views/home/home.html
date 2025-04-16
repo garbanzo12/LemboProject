@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <!-- meta descripcion de la aplicacion  -->
+    <meta name="Aplicacion SGAL" content="Sistema Gestion Agricola " />
+    <!-- palabras clave -->
+    <meta nmae="Keywords" content="gestion, agricola, sena, adso" />
+    <meta name="Author" content="Grupo 8 ADSO" />
+
+    <link rel="stylesheet" href="../../public/css/styles-bem.css">
+
+</head>
+
+<body>
+
+
+    <!--   
+        /* ****************************************************** */
+        /* ***************    ELEMENTOS TITTLE    *************** */
+        /* ****************************************************** */ -->
+
+    <header class="cardtittle cardtittle--center">
+        <p class="cardtittle__text">SENA SEDE LEMBO</p>
+        <a class="cardtittle__enlace" href="../index_main.html">
+            <img class="cardtittle__svg-home" src="../../public/img_/svg/home.svg" alt>
+        </a>
+
+    </header>
+    <!-- 
+        /* ****************************************************** */
+        /* *************    ELEMENTOS CARD LEFT    ************** */
+        /* ****************************************************** */
+        -->
+    <aside class="cardleft cardleft--mitad">
+
+
+        <div class="cardleft__container-header">
+            <img class="cardleft__header-svg" src="../../public/img_/left_side/logo1.png" alt="" />
+            <img class="cardleft__header-svg" src="../../public/img_/left_side/logo1.png" alt="" />
+            <img class="cardleft__header-svg" src="../../public/img_/left_side/logo1.png" alt="" />
+        </div>
+
+
+
+        <div class="cardleft__body">
+            <div class="cardleft__container-body">
+                <img class="cardleft__body-gift--gray" src="../../public/img_/left_side/L1.png" alt="" />
+                <img class="cardleft__body-gift" src="../../public/img_/left_side/L2.png" alt="" />
+            </div>
+
+            <div class="cardleft__container-body">
+                <img class="cardleft__body-gift" src="../../public/img_/left_side/L3.png" alt="" />
+            </div>
+
+            <div class="cardleft__container-body">
+                <img class="cardleft__body-gift" src="../../public/img_/left_side/L4.png" alt="" />
+                <img class="cardleft__body-gift--gray" src="../../public/img_/left_side/L5.png" alt="" />
+            </div>
+        </div>
+
+
+        <div class="cardleft__container-footer">
+            <img class="cardleft__header-svg" src="../../public/img_/left_side/LogoSgal.png" alt="" />
+            <img class="cardleft__header-svg" src="../../public/img_/left_side/LogoSgal.png" alt="" />
+            <img class="cardleft__header-svg" src="../../public/img_/left_side/LogoSgal.png" alt="" />
+        </div>
+
+
+
+    </aside>
+    <!-- 
+        /* ******************************************************* */
+        /* ****************    CARD RIGHT BLOQUE   *************** */
+        /* ******************************************************* */ 
+        -->
+    <main class="cardright cardright--mitad">
+        <form class="cardright__form cardright__form--top3">
+            <p class="cardright__header-form">LOGIN USUARIO SGAL</p>
+
+            <fieldset class="cardright__body-form">
+
+                <div class="cardright__container-input cardright__container-input--col">
+                    <img class="cardleft__header-svg" src="../../public/img_/svg_sena/logo-sena-verde-svg-2022.svg"
+                        alt="" />
+
+                    <div class="cardright__subcontainer-input">
+                        <label class="cardright__label-form" for="Correo Electronico">Correo Electronico</label>
+                        <input class="cardright__input-form " placeholder="Correo electrónico" type="email" />
+                    </div>
+
+                    <div class="cardright__subcontainer-input">
+                        <label class="cardright__label-form" for="Contraseña">Contraseña</label>
+                        <input class="cardright__input-form " placeholder="Ingrese su contraseña" type="password" />
+                    </div>
+                    <button class="cardright__botton-primary" type="submit">ACEPTAR</button>
+                </div>
+                
+
+            </fieldset>
+            <div class="cardright__foot-form">
+                <p> CAPTURA DE ERRORES</p>
+              </div>
+        </form>
+        </footer class="cardright__footer">
+            <a class="cardright__footer--text" href="./olvidocontraseña.html"> OLVIDO SU CONTRASEÑA </a> <!-- href="#" es por si se rompe -->
+    
+            <p class="cardright__footer--text">
+                Los Terminos y Condiciones generales que a continuacion se establecen,
+                regulan el uso de las plataforma de gestion del SENA y el adecuado
+                trantamento y manejo de la informacion que los usuarios registraron en
+                dichos sistemas.
+            </p>
+            
+        </footer>
+    </main>
+
+    <script>
+        fetch("/SGL CODE/Estandarizacion/config.json")
+            .then(result => result.json())
+            .then(data => {
+                // Crea un elemento script
+                const script = document.createElement("script")
+                // Asignamos la ruta del script
+                script.src = data.login; // ⬅️ cambiar nombre del json aqui
+                // Indica que el script solo se ejecuta cuando el HTML se haya cargado
+                script.defer = true;
+                // Ponemos el script en el head para que se ejecute
+                document.head.appendChild(script);
+            })
+            .catch(error => console.log('Error al cargar script'))
+    </script>
+</body>
+
+</html>

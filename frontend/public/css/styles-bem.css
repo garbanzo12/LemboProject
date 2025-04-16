@@ -304,7 +304,14 @@ body {
 .cardleft--pequeño {}
 
 /* MODIFICARDOR con tamaño de 50% para LOGIN */
-.cardleft--mitad {}
+.cardleft--mitad {
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 /* ****************************************************** */
 /* *************    ELEMENTOS CARD LEFT    ************** */
@@ -338,22 +345,49 @@ body {
 
 /* LOGIN */
 
-/* Aqui se aplica MODIFICADOR DE TAMAÑO */
-/* .cardleft--mitad {
+.cardleft__container-header {
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 4rem;
+}
 
-} */
+.cardleft__header-svg {
+    width: 10rem;
+    filter: drop-shadow(2rem 2rem 2rem var(--gray-900));
+}
 
-.cardleft__container-header {}
 
-.cardleft__header-svg {}
 
-.cardleft__body {}
+.cardleft__body {
+    display: flex;
+    flex-direction: row
+}
 
-.cardleft__container-body {}
+.cardleft__container-body {
+    display: flex;
+    flex-direction: column;
+    filter: drop-shadow(2rem 2rem 2rem var(--gray-900));
+    height: 52.5rem;
+    justify-content: center;
+    gap: 1rem;
+}
 
 .cardleft__body-gift {}
 
-.cardleft__container-footer {}
+.cardleft__body-gift--gray {}
+
+
+.cardleft__container-footer {
+    padding: 4rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 4rem;
+}
 
 .cardleft__footer-svg {}
 
@@ -383,7 +417,9 @@ body {
 .cardright--grande {}
 
 /* MODIFICARDOR con tamaño de 50% para LOGIN */
-.cardright--mitad {}
+.cardright--mitad {
+    width: 50%;
+}
 
 /* ************************************************************** */
 /* *************    ELEMENTOS GRANDES CARD RIGHT   ************** */
@@ -475,8 +511,18 @@ body {
     box-shadow: 0 0.4rem 0.8rem var(--black);
     opacity: 0.7;
 }
-.cardright__container-input:hover{
-opacity: 1;
+
+.cardright__container-input--col {
+    flex-direction: column;
+    padding: 1rem 1rem;
+    margin: 0rem;
+    box-shadow: 0 0.4rem 0.8rem var(--gray-600);
+}
+
+
+
+.cardright__container-input:hover {
+    opacity: 1;
 }
 
 .cardright__subtitittle-form {
@@ -526,8 +572,9 @@ opacity: 1;
     padding: 0 2.4rem;
     margin: 0 0 0.2rem 0;
 }
+
 /* modificador del label para el chechbox COLOR Y FORMA*/
-.cardright__label-form--color{
+.cardright__label-form--color {
     background-color: var(--gray-050);
     width: 100%;
     padding: 1.2rem 1.6rem;
@@ -570,10 +617,11 @@ opacity: 1;
 
 /**** fuera de formulario es el icono svg volver ****/
 .cardright__footer {
-    width: 4rem;
+    width: auto;
     height: 4rem;
     margin: 1.5rem;
-    bottom: 2%;
+    
+
 
 }
 
@@ -582,11 +630,18 @@ opacity: 1;
     height: 100%;
 }
 
+.cardright__footer--text {
+    display: flex;
+    color: var(--white);
+    width: auto;
+    padding: 1rem 3rem;
+    font-size: var(--fs-xs);
+    text-align: center;
+}
 
 
- 
-  
-  
+
+
 
 /* ************************************************************ */
 /* **********   BLOQUE LISTAR  MODULOS EN GENERAL   *********** */
@@ -741,9 +796,7 @@ DOMINGO ESTE ES DONDE SE VEN EL MAPA CON LOS DATOS DE LOS SENSORES*/
 /* ****************************************************** */
 /* *******************    MEDIA QUERY    **************** */
 /* ****************************************************** */
-@media (max-width: 420px) {
-
-}
+@media (max-width: 420px) {}
 
 
 @media (max-width: 768px) {
@@ -752,6 +805,7 @@ DOMINGO ESTE ES DONDE SE VEN EL MAPA CON LOS DATOS DE LOS SENSORES*/
         top: 1%;
         left: 0%;
     }
+
     .cardleft {
         display: none;
     }
@@ -777,7 +831,8 @@ DOMINGO ESTE ES DONDE SE VEN EL MAPA CON LOS DATOS DE LOS SENSORES*/
         margin: 0.5rem;
         /* padding: 0.5rem; */
     }
-    .cardright__input-form{
+
+    .cardright__input-form {
         margin: 0;
     }
 }
