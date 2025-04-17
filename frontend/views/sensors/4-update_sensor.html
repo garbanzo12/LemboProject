@@ -9,10 +9,9 @@
   <meta name="author"
     content="Aprendiz: Erick Ramirez, Aprendiz Aprendiz:Sanchez Hernandez, Aprendiz:Estefani Acevedo" />
   <meta http-equiv="Content-Language" content="es" />
-  <script src="/frontend/js/actualizar_crop.js"></script>
   <link rel="stylesheet" href="../../public/css/styles-bem.css">
 
-  <title>Actualización de Cultivos</title>
+  <title>Actualizar Sensores</title>
 </head>
 
 <body>
@@ -50,50 +49,55 @@
   -->
   <main class="cardright">
     <form class="cardright__form cardright__form--top3">
-      <p class="cardright__header-form">ACTUALIZAR CULTIVO</p>
+      <p class="cardright__header-form">ACTUALIZAR SENSOR</p>
 
       <fieldset class="cardright__body-form">
         <div class="cardright__container-input">
 
           <div class="cardright__subcontainer-input">
-            <label class="cardright__label-form" for>Nombre Del Cultivo</label>
-            <input class="cardright__input-form" name="nombre_cultivo" placeholder="Nombre del Cultivo" type="text"
-              required />
+            <label class="cardright__label-form" for>Tipo de sensor</label>
+            <input class="cardright__input-form" placeholder="Tipo de sensor" type="text"/>
           </div>
 
           <div class="cardright__subcontainer-input">
-            <label class="cardright__label-form" for="tipo_cultivo">Tipo de Cultivo</label>
-            <input class="cardright__input-form" name="tipo_cultivo" placeholder="Tipo del Cultivo" type="text"
-              required />
+            <label class="cardright__label-form" for>ID sensor</label>
+            <input class="cardright__input-form" placeholder="ID sensor" type="number"/>
           </div>
 
           <div class="cardright__subcontainer-input">
-            <label class="cardright__label-form" for="ubicacion_cultivo">Ubicación</label>
-            <input class="cardright__input-form" name="ubicacion_cultivo" placeholder="Ubicación del Cultivo"
-              type="text" required />
+            <label class="cardright__label-form" for>Nombre del sensor</label>
+            <input class="cardright__input-form" placeholder="Nombre del sensor" type="text"/>
           </div>
 
           <div class="cardright__subcontainer-input">
-            <label class="cardright__label-form" for="descripcion_cultivo">Descripción</label>
-            <input class="cardright__input-form" name="descripcion_cultivo" placeholder="Descripción del Cultivo"
-              type="text" required />
+            <label class="cardright__label-form" for>Unidad de medida</label>
+            <input class="cardright__input-form" placeholder="Unidad de medida" type="text"/>
+          </div>
+          
+          <div class="cardright__subcontainer-input">
+            <label class="cardright__label-form" for>Tiempo escaneo</label>
+            <input class="cardright__input-form" placeholder="Tiempo escaneo" type="text"/>
           </div>
 
           <div class="cardright__subcontainer-input">
-            <label class="cardright__label-form" for="tamano_cultivo">Tamaño en m²</label>
-            <input class="cardright__input-form" name="tamano_cultivo" placeholder="Tamaño en m² del cultivo"
-              type="number" required />
+            <label class="cardright__label-form" for>Descripción</label>
+            <input class="cardright__input-form" placeholder="Descripción del Cultivo" type="text"/>
           </div>
 
           <!-- subtitulo si es necesario -->
-          <p class="cardright__subtitittle-form">Imagen Cultivo</p>
-
+          <p class="cardright__subtitittle-form">Imagen Sensor</p>
 
           <div class="cardright__subcontainer-input">
-            <label class="cardright__label-form">Resolución max 150*150
-              px</label>
-            <input class="cardright__input-form" placeholder type="file" />
+            <label class="cardright__label-form">Resolución max 150*150 px</label>
+            <input class="cardright__input-form cardright__input-form--file" placeholder type="file"/>
           </div>
+          <!-- BOTON INDICADOR CAMBIO DE COLOR ESTADO  -->
+          <div class="cardright__subcontainer-input">
+            <label class="cardright__label-form" for="boton">Habilitado/Deshabilitado:</label>
+            <input class="cardright__input-form--checkbox" type="checkbox" id="toggle-color"/>
+            <label for="toggle-color" class="cardright__label-form--color"></label>              
+          </div>
+
           <button class="cardright__botton-primary" type="submit">GUARDAR</button>
         </div>
       </fieldset>
@@ -114,6 +118,7 @@
     </a>
 
   </main>
+
 </body>
 
 </html>

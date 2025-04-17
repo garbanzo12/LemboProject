@@ -9,10 +9,11 @@
   <meta name="author"
     content="Aprendiz: Erick Ramirez, Aprendiz Aprendiz:Sanchez Hernandez, Aprendiz:Estefani Acevedo" />
   <meta http-equiv="Content-Language" content="es" />
-  <script src="/frontend/js/actualizar_crop.js"></script>
+
   <link rel="stylesheet" href="../../public/css/styles-bem.css">
 
-  <title>Actualización de Cultivos</title>
+  <script src="/frontend/js/validar_users.js"></script>
+  <title>Registro de Usuarios</title>
 </head>
 
 <body>
@@ -50,56 +51,72 @@
   -->
   <main class="cardright">
     <form class="cardright__form cardright__form--top3">
-      <p class="cardright__header-form">ACTUALIZAR CULTIVO</p>
+      <p class="cardright__header-form">REGISTRO USUARIO</p>
 
       <fieldset class="cardright__body-form">
+
         <div class="cardright__container-input">
-
           <div class="cardright__subcontainer-input">
-            <label class="cardright__label-form" for>Nombre Del Cultivo</label>
-            <input class="cardright__input-form" name="nombre_cultivo" placeholder="Nombre del Cultivo" type="text"
-              required />
+            <label class="cardright__label-form" for="">Tipo de Usuario</label>
+            <select class="cardright__input-form" name="" id="" required>
+              <option class="cardright__input-opt" value="">Ninguna</option>
+              <option class="cardright__input-opt" value="Administrador">Super Administrador</option>
+              <option class="cardright__input-opt" value="Administrador">Administrador</option>
+              <option class="cardright__input-opt" value="Personal de Apoyo">Personal de Apoyo</option>
+              <option class="cardright__input-opt" value="Visitante">Visitante</option>
+            </select>
           </div>
 
           <div class="cardright__subcontainer-input">
-            <label class="cardright__label-form" for="tipo_cultivo">Tipo de Cultivo</label>
-            <input class="cardright__input-form" name="tipo_cultivo" placeholder="Tipo del Cultivo" type="text"
-              required />
+            <label class="cardright__label-form" for="">Tipo de Documento</label>
+            <select class="cardright__input-form" name="" id="" required>
+              <option class="cardright__input-opt" value="">Ninguna</option>
+              <option class="cardright__input-opt" value="Tarjeta de Identidad">Tarjeta de Identidad</option>
+              <option class="cardright__input-opt" value="Cedula">Cedula</option>
+              <option class="cardright__input-opt" value="Cedula">Tarjeta de Identidad</option>
+              <option class="cardright__input-opt" value="Cedula">Cedula Extranjería</option>
+              <option class="cardright__input-opt" value="Cedula">PEP</option>
+              <option class="cardright__input-opt" value="Cedula">Permiso Protección Temporal</option>
+            </select>
           </div>
 
           <div class="cardright__subcontainer-input">
-            <label class="cardright__label-form" for="ubicacion_cultivo">Ubicación</label>
-            <input class="cardright__input-form" name="ubicacion_cultivo" placeholder="Ubicación del Cultivo"
-              type="text" required />
+            <label class="cardright__label-form" for="">Nombre Del Usuario</label>
+            <input class="cardright__input-form" placeholder="Nombre Completo" type="text" />
           </div>
 
           <div class="cardright__subcontainer-input">
-            <label class="cardright__label-form" for="descripcion_cultivo">Descripción</label>
-            <input class="cardright__input-form" name="descripcion_cultivo" placeholder="Descripción del Cultivo"
-              type="text" required />
+            <label class="cardright__label-form" for="">Correo Electrónico</label>
+            <input class="cardright__input-form" placeholder="Correo Electrónico" type="email" />
           </div>
 
           <div class="cardright__subcontainer-input">
-            <label class="cardright__label-form" for="tamano_cultivo">Tamaño en m²</label>
-            <input class="cardright__input-form" name="tamano_cultivo" placeholder="Tamaño en m² del cultivo"
-              type="number" required />
+            <label class="cardright__label-form" for="">Número De Contacto</label>
+            <input class="cardright__input-form" placeholder="Número de Celular" type="tel" />
           </div>
-
-          <!-- subtitulo si es necesario -->
-          <p class="cardright__subtitittle-form">Imagen Cultivo</p>
-
 
           <div class="cardright__subcontainer-input">
-            <label class="cardright__label-form">Resolución max 150*150
-              px</label>
-            <input class="cardright__input-form" placeholder type="file" />
+            <label class="cardright__label-form" for="">Contraseña</label>
+            <input class="cardright__input-form" placeholder="Contraseña" type="password" />
           </div>
-          <button class="cardright__botton-primary" type="submit">GUARDAR</button>
+
+          <p class="cardright__subtitittle-form">Imagen Avatar</p>
+
+          <div class="cardright__subcontainer-input">
+            <label class="cardright__label-form">Resolución max 150*150 px</label>
+            <input class="cardright__input-form cardright__input-form--file" placeholder type="file" />
+          </div>
+          <div class="cardright__subcontainer-input">
+            <button class="cardright__botton-primary" type="submit">CREAR</button>
+          </div>
         </div>
+
       </fieldset>
 
       <div class>
         <button class="cardright__botton-secundary" type="submit"><a href>CANCELAR</a></button>
+      </div>
+
       </div>
 
       <div class="cardright__foot-form">
@@ -114,6 +131,7 @@
     </a>
 
   </main>
+
 </body>
 
 </html>
