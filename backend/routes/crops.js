@@ -14,6 +14,10 @@ const conexion = mysql.createConnection({
     password: "123456",
     database: "lembo_sgal_db"
 });
+conexion.connect((err) => {
+  if (err) throw err;
+  console.log('Conectado a MySQL');
+});
 
 // Ruta para insertar datos
 app.post("/crops", (req, res) => {
@@ -60,7 +64,7 @@ app.get("/crops/:id", (req, res) => {
 
 // ✅ NUEVA RUTA: Obtener todos los cultivos
 app.get("/crops", (req, res) => {
-  const sql = "SELECT id, name_crop FROM crops";
+  const sql = "SELECT id, name_crop, type_crop, location, size_m2, description_crop FROM crops";
   conexion.query(sql, (error, resultados) => {
       if (error) {
           console.error("Error al obtener cultivos:", error);
@@ -121,3 +125,23 @@ app.post('/crops/:id', (req, res) => {
     });
   });
   
+
+// Este ess el bloque de listar
+  const path = require('path');
+
+app.get('/5-listar-cultivos.html', (req, res) => {
+  res.sendFile(path.join(__dirname,'/frontend/views/sgal cultivos/HTML/5-listar-cultivos.html'));
+
+  const query = 'SELECT * FROM crops';
+
+  conexion.query(query, (err, results) => {
+    if (err) {    
+      console.error('Error al obtener cultivos:', err);
+      return res.status(500).send('Error del servidor');
+    }
+    console.log(results[0]); // <-- Esto te muestra los campos disponibles
+
+    res.json(results); // <-- ENVÍA JSON
+  });
+});
+
