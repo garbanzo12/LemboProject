@@ -75,7 +75,7 @@
                     </div>
                     <div class="cardright__subcontainer-input">
                         <label class="cardright__label-form" for="">Unidad de Medida</label>
-                        <input class="cardright__input-form" placeholder="Unidad de Medida" type="number" disabled />
+                        <input class="cardright__input-form" placeholder="Unidad de Medida" type="text" disabled />
                     </div>
                     <div class="cardright__subcontainer-input">
                         <label class="cardright__label-form" for="">Valor Unitario</label>
@@ -94,11 +94,9 @@
                     <!-- BOTON INDICADOR CAMBIO DE COLOR ESTADO  -->
                     <div class="cardright__subcontainer-input">
                         <label class="cardright__label-form" for="boton">Habilitado/Deshabilitado:</label>
-                        <!-- el label contiene el checkbox para drle color -->
-                        <label class="cardright__label-form cardright__label-form--color" for="">
-                            <input class="cardright__input-form" type="checkbox" disabled />
-                        </label>
-                    </div>
+                        <input class="cardright__input-form--checkbox" type="checkbox" id="toggle-color"/>
+                        <label for="toggle-color" class="cardright__label-form--color"></label>              
+                      </div>
 
                     <button class="cardright__botton-primary" type="submit">ACTUALIZAR</button>
                 </div>

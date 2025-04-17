@@ -280,12 +280,24 @@ body {
 /* *************    ELEMENTOS   BOTONES    ************** */
 /* ****************************************************** */
 
+/* MODIFICADORES DE ESTADO PARA INPUT FORM TIPO ARCHIVO CHECKBOX*/
+.cardright__input-form--checkbox[type="checkbox"] {
+    display: none;
+}
 
+.cardright__label-form--color {
+    background-color: var(--primary-950);
+    width: 80%;
+    padding: 1.6rem 1.6rem;
+    margin: 0 0 1.2rem 0;
+    border: 0.1rem solid var(--blanco);
+    border-radius: 5rem;
+}
 
-
-
-
-
+/* ESTE ES EL HOVER DEL LABEL PARA QUE CAMBIE DE COLOR */
+.cardright__input-form--checkbox[type="checkbox"]:checked+.cardright__label-form--color {
+    background-color: var(--gray-950);
+}
 
 /* ******************************************************* */
 /* ***************   BLOQUE   CARD LEFT   **************** */
@@ -403,17 +415,17 @@ body {
     border: 2px solid var(--gray-300);
     transition: 0.5s ease-out;
     overflow: visible;
-   }
-   
-   .cardleft__card-details {
-    color:var(--black);
+}
+
+.cardleft__card-details {
+    color: var(--black);
     height: 100%;
     gap: 1rem;
     display: grid;
     place-content: center;
-   }
-   
-   .cardleft__card-button {
+}
+
+.cardleft__card-button {
     font-size: var(--fs-xl);
     font-weight: bold;
     height: 5rem;
@@ -430,27 +442,28 @@ body {
     bottom: 0;
     opacity: 0;
     transition: 0.7s ease-out;
-   }
-   .cardleft__card-text {
+}
+
+.cardleft__card-text {
     color: var(--gray-750);
-   }
-   
-   /*Text*/
-   .cardleft__card-title {
+}
+
+/*Text*/
+.cardleft__card-title {
     font-size: 1.5rem;
     font-weight: bold;
-   }
-   
-   /*Hover*/
-   .cardleft__card:hover {
+}
+
+/*Hover*/
+.cardleft__card:hover {
     border-color: var(--secundary-1-400);
     box-shadow: 0 0.4rem 2rem 0 var(--gray-950);
-   }
-   
-   .cardleft__card:hover .cardleft__card-button {
+}
+
+.cardleft__card:hover .cardleft__card-button {
     transform: translate(-50%, 50%);
     opacity: 1;
-   }
+}
 
 
 
@@ -580,7 +593,6 @@ body {
 
 
 .cardright__container-input:hover {
-    
     opacity: 1;
 }
 
@@ -591,21 +603,17 @@ body {
     align-items: center;
     background-color: var(--gray-100);
     border-radius: 0rem 0rem 0rem 0rem;
-    /* bordes en sentido reloj. */
     height: 3.2rem;
     width: 100%;
     color: var(--secundary-1-950);
     font-family: var(--main-font);
     font-size: var(--fs-xs);
     font-weight: bold;
-
 }
 
 .cardright__img-form {
     height: 14rem;
     width: auto;
-
-
 }
 
 
@@ -630,17 +638,11 @@ body {
     color: var(--black);
     padding: 0 2.4rem;
     margin: 0 0 0.2rem 0;
+
 }
 
 /* modificador del label para el chechbox COLOR Y FORMA*/
-.cardright__label-form--color {
-    background-color: var(--gray-050);
-    width: 100%;
-    padding: 1.2rem 1.6rem;
-    /* margin: 0 0 1.2rem 0; */
-    border: 0.1rem solid var(--blanco);
-    border-radius: 5rem;
-}
+
 
 .cardright__input-form {
     font-size: var(--fs-xs);
@@ -655,7 +657,8 @@ body {
 }
 
 
-/* MODIFICADOR PARA INPUT FORM TIPO ARCHIVO FILE */
+
+/* MODIFICADOR PARA INPUT FORM TIPO ARCHIVO FILE*/
 .cardright__input-form--file {
     height: 10rem;
     width: 20rem;
@@ -665,6 +668,8 @@ body {
     background-image: url('../../public/img_/svg/uploadImg.svg');
     background-size: contain;
     background-repeat: repeat;
+    display: flex;
+
 }
 
 
@@ -679,7 +684,7 @@ body {
     width: auto;
     height: 4rem;
     margin: 1.5rem;
-    
+
 
 
 }
