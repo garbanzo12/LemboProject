@@ -1,0 +1,177 @@
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Es una pagina con formulario y una ventana de celular" />
+    <meta name="keywords" content="sena, risaralda, lembo, gestion, agricola, campecino, produtos, cultivos," />
+    <meta name="author"
+      content="Aprendiz: Erick Ramirez, Aprendiz Aprendiz:Sanchez Hernandez, Aprendiz:Estefani Acevedo" />
+    <meta http-equiv="Content-Language" content="es" />
+    <link rel="stylesheet" href="../../public/css/styles-bem.css">
+  
+    <title>Modal Insumos Prueba</title>
+  </head>
+
+<!-- components/modal.html -->
+<div id="modal-global" class="modal hidden">
+    <div class="modal__content">
+      <span class="modal__close" onclick="cerrarModal()">&times;</span>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+  
+  <template id="modal-template-registro">
+    <main class="cardright">
+        <form class="cardright__form cardright__form--top3">
+            <p class="cardright__header-form">REGISTRO INSUMO</p>
+
+            <fieldset class="cardright__body-form">
+
+                <div class="cardright__container-input">
+                    <div class="cardright__subcontainer-input">
+                        <label class="cardright__label-form" for="">Tipo de Insumo</label>
+                        <input class="cardright__input-form" placeholder="Tipo de Insumo" type="text" />
+                    </div>
+
+                    <div class="cardright__subcontainer-input">
+                        <label class="cardright__label-form" for="">Nombre del Insumo</label>
+                        <input class="cardright__input-form" placeholder="Nombre del Insumo" type="text" />
+                    </div>
+
+                    <div class="cardright__subcontainer-input">
+                        <label class="cardright__label-form" for="">Cantidad</label>
+                        <input class="cardright__input-form" placeholder="Cantidad del Insumo" type="number" />
+                    </div>
+
+                    <div class="cardright__subcontainer-input">
+                        <label class="cardright__label-form" for="">Unidad de Medida</label>
+                        <input class="cardright__input-form" placeholder="Unidad de Medida" type="number" />
+                    </div>
+
+                    <div class="cardright__subcontainer-input">
+                        <label class="cardright__label-form" for="">Valor Unitario</label>
+                        <input class="cardright__input-form" placeholder="Valor Unitario" type="number" />
+                    </div>
+
+                    <div class="cardright__subcontainer-input">
+                        <label class="cardright__label-form" for="">Valor Total</label>
+                        <input class="cardright__input-form" placeholder="Valor Total" type="number" />
+                    </div>
+
+                    <div class="cardright__subcontainer-input">
+                        <label class="cardright__label-form" for="">Descripción</label>
+                        <input class="cardright__input-form" placeholder="Descrición del Insumo" type="text" />
+                    </div>
+
+                    <button class="cardright__botton-primary" type="submit">CREAR</button>
+
+                </div>
+
+            </fieldset>
+
+            <div class>
+                <button class="cardright__botton-secundary" type="submit"><a href>CANCELAR</a></button>
+            </div>
+
+            <div class="cardright__foot-form">
+                <p> CAPTURA DE ERRORES</p>
+            </div>
+
+        </form>
+        <!-- fin de form -->
+    
+        <a class="cardright__footer" href="../index_main.html">
+          <img class="cardright__svg-footer" src="../../public/img_/svg/control_back.svg" alt>
+        </a>
+    
+      </main>
+  </template>
+  
+  <script>
+    function abrirModal(contenidoHTML) {
+      const modal = document.getElementById('modal-global');
+      const modalBody = document.getElementById('modal-body');
+      modalBody.innerHTML = contenidoHTML;
+      modal.classList.add('show');
+    }
+  
+    function cerrarModal() {
+      const modal = document.getElementById('modal-global');
+      const modalBody = document.getElementById('modal-body');
+      modal.classList.remove('show');
+      modalBody.innerHTML = '';
+    }
+  
+    window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const modalName = params.get('modal');
+      if (modalName) {
+        const template = document.getElementById(`modal-template-${modalName}`);
+        if (template) {
+          abrirModal(template.innerHTML);
+        }
+      }
+    });
+  </script>
+  <script>
+    // Este bloque es para pruebas: abrir automáticamente un modal al cargar
+    window.addEventListener('DOMContentLoaded', () => {
+      // Si ya lo estás haciendo arriba con queryParams, ignora eso aquí:
+      const template = document.getElementById('modal-template-registro');
+      if (template) {
+        abrirModal(template.innerHTML); // Carga el modal de "registro cultivo"
+      }
+    });
+  </script>
+  
+  
+  <style>
+    #modal-body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+    .modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    inset: 0;
+    background-color: rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    }
+
+    .modal.show {
+    display: flex;
+    }
+
+    .modal__content {
+    background: white;
+    padding: 2rem;
+    width: 100%;
+    max-width: 900px; /* MÁS ancho aún */
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    position: relative;
+    }
+
+    @media (max-width: 1024px) {
+    .modal__content {
+        max-width: 95%;
+        padding: 1rem;
+    }
+    }
+
+    .modal__close {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    }
+</style>
+    

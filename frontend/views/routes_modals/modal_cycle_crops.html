@@ -1,0 +1,176 @@
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Es una pagina con formulario y una ventana de celular" />
+    <meta name="keywords" content="sena, risaralda, lembo, gestion, agricola, campecino, produtos, cultivos," />
+    <meta name="author"
+      content="Aprendiz: Erick Ramirez, Aprendiz Aprendiz:Sanchez Hernandez, Aprendiz:Estefani Acevedo" />
+    <meta http-equiv="Content-Language" content="es" />
+    <link rel="stylesheet" href="../../public/css/styles-bem.css">
+  
+    <title>Modal Ciclo de Cultivos Prueba</title>
+  </head>
+
+<!-- components/modal.html -->
+<div id="modal-global" class="modal hidden">
+    <div class="modal__content">
+      <span class="modal__close" onclick="cerrarModal()">&times;</span>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+  
+  <template id="modal-template-registro">
+    <main class="cardright">
+        <form class="cardright__form cardright__form--top3">
+            <p class="cardright__header-form">CREAR CICLO CULTIVO</p>
+
+            <fieldset class="cardright__body-form">
+
+                <div class="cardright__container-input">
+
+                    <div class="cardright__subcontainer-input">
+                        <label class="cardright__label-form" for="">Nombre del Ciclo Cultivo</label>
+                        <!-- Se añade nueva clase: nuevo-nombreCiclo -->
+                        <input class="cardright__input-form" placeholder="Ingrese Dato" type="text" />
+                    </div>
+
+                    <div class="cardright__subcontainer-input">
+                        <label class="cardright__label-form" for="">Novedad</label>
+                        <!-- Se añade nueva clase: nuevo-novedad -->
+                        <input class="cardright__input-form" placeholder="Ingrese Dato" type="text" />
+                    </div>
+
+                    <div class="cardright__subcontainer-input">
+                        <label class="cardright__label-form" for="">Ingrese Tamaño m2</label>
+                        <!-- Se añade nueva clase: nuevo-tamanoM2 -->
+                        <input class="cardright__input-form" placeholder="Ingrese Dato" type="number" />
+                    </div>
+
+                    <div class="cardright__subcontainer-input">
+                        <label class="cardright__label-form" for="boton">Habilitado/Deshabilitado:</label>
+                        <!-- el label contiene el checkbox para drle color -->
+                        <label class="cardright__label-form cardright__label-form--color" for="">
+                            <input class="cardright__input-form" type="checkbox" />
+                        </label>
+                    </div> 
+                </div>
+                <button class="cardright__botton-primary" type="submit">CREAR</button>
+            </fieldset>
+
+            <div class>
+                <button class="cardright__botton-secundary" type="submit"><a href>CANCELAR</a></button>
+            </div>
+
+            <div class="cardright__foot-form">
+                <p> CAPTURA DE ERRORES</p>
+            </div>
+
+        </form>
+        <!-- fin de form -->
+
+        <a class="cardright__footer" href="../index_main.html">
+            <img class="cardright__svg-footer" src="../../public/img_/svg/control_back.svg" alt>
+        </a>
+
+    </main>
+  </template>
+    
+  <template id="modal-template-contacto">
+    <form>
+      <h2>Formulario de Contacto</h2>
+      <input type="text" placeholder="Tu nombre" />
+      <input type="email" placeholder="Tu correo" />
+      <textarea placeholder="Tu mensaje"></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+  </template>
+  
+  <script>
+    function abrirModal(contenidoHTML) {
+      const modal = document.getElementById('modal-global');
+      const modalBody = document.getElementById('modal-body');
+      modalBody.innerHTML = contenidoHTML;
+      modal.classList.add('show');
+    }
+  
+    function cerrarModal() {
+      const modal = document.getElementById('modal-global');
+      const modalBody = document.getElementById('modal-body');
+      modal.classList.remove('show');
+      modalBody.innerHTML = '';
+    }
+  
+    window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const modalName = params.get('modal');
+      if (modalName) {
+        const template = document.getElementById(`modal-template-${modalName}`);
+        if (template) {
+          abrirModal(template.innerHTML);
+        }
+      }
+    });
+  </script>
+  <script>
+    // Este bloque es para pruebas: abrir automáticamente un modal al cargar
+    window.addEventListener('DOMContentLoaded', () => {
+      // Si ya lo estás haciendo arriba con queryParams, ignora eso aquí:
+      const template = document.getElementById('modal-template-registro');
+      if (template) {
+        abrirModal(template.innerHTML); // Carga el modal de "registro cultivo"
+      }
+    });
+  </script>
+  
+  
+  <style>
+    #modal-body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+    .modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    inset: 0;
+    background-color: rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    }
+
+    .modal.show {
+    display: flex;
+    }
+
+    .modal__content {
+    background: white;
+    padding: 2rem;
+    width: 100%;
+    max-width: 900px; /* MÁS ancho aún */
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    position: relative;
+    }
+
+    @media (max-width: 1024px) {
+    .modal__content {
+        max-width: 95%;
+        padding: 1rem;
+    }
+    }
+
+    .modal__close {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    }
+</style>
+    
