@@ -2,13 +2,13 @@
 const express = require("express");
 const mysql = require("mysql2");
 const cors = require("cors");
+// ⬆️ Require para express mysql2 y cors para el correcto funcionamiento del back
+const app = express(); // 👈 Le asignamos a app las propiedades express, para poder crear rutas
+app.use(express.json());// 👈 Para que peuda analizar el cuerpo de las solicitudes (body)
+app.use(cors());// 👈 Para poder hacer las solicitudes de puertos del back y front diferentes
 
-const app = express();
-app.use(express.json());
-app.use(cors());
-
-// Configurar conexión a la BD
-const conexion = mysql.createConnection({
+//⬇️ Configuramos conexión a la BD
+const conexion = mysql.createConnection({ 
     host: "localhost",
     user: "root",
     password: "123456",
@@ -19,7 +19,7 @@ conexion.connect((err) => {
   console.log('Conectado a MySQL');
 });
 
-// Ruta para insertar datos
+//⬇️ Ruta para insertar datos ( modulo crear)
 app.post("/crops", (req, res) => {
     console.log("Datos recibidos en POST /crops:", req.body); 
 
@@ -43,7 +43,9 @@ app.post("/crops", (req, res) => {
         });
     });
 });
-// 🟡 Ruta para buscar un cultivo por ID
+//⬆️ Ruta para insertar datos (modulo crear)
+
+// ⬇️ Ruta para buscar un cultivo por ID (modulo buscar)
 app.get("/crops/:id", (req, res) => {
   const cropId = req.params.id;
 
@@ -61,26 +63,52 @@ app.get("/crops/:id", (req, res) => {
       res.json(resultados[0]);
   });
 });
+// ⬆️ Ruta para buscar un cultivo por ID
 
-// ✅Listar
+// ⬇️ Ruta para Listar (modulo listar)
 // 🟢 Iniciar servidor
 app.listen(5501, () => console.log("Servidor corriendo en puerto 5501"));
-
 app.get('/crops', (req, res) => {
-  const page = parseInt(req.query.page) || 1; // Página actual, por defecto 1
-  const limit = 25;
+  const page = parseInt(req.query.page) || 1;
+  const buscar = req.query.buscar || ''; // 👈 palabra clave para buscar
+  const limit = 20; // 👈 Limito la cantidad de digitos que voy a mostar por pagina
   const offset = (page - 1) * limit;
 
-  const queryData = 'SELECT * FROM crops LIMIT ? OFFSET ?';
-  const queryCount = 'SELECT COUNT(*) AS total FROM crops';
+  // ⬇️ Si hay una búsqueda, usamos WHERE para poder buscarlo (Estamos opteniendo los datos del cultivo)
+  let queryData = `
+    SELECT * FROM crops 
+    WHERE 
+      id LIKE ? OR 
+      name_crop LIKE ? OR 
+      type_crop LIKE ? OR 
+      location LIKE ? OR 
+      description_crop LIKE ?
+    LIMIT ? OFFSET ?
+  `;
+// ⬇️ Iniciamos los parametros correspondientes a id , nombre , tipo , ubicación y descripción
+  let params = [`%${buscar}%`,`%${buscar}%`, `%${buscar}%`, `%${buscar}%`, `%${buscar}%`, limit, offset];
 
-  conexion.query(queryData, [limit, offset], (err, results) => {
+// ⬇️ Si hay una búsqueda, usamos WHERE para poder contar cuantos datos estamos tomando (Estamos opteniendo la cantidad de datos del cultivo)
+  let queryCount = `
+    SELECT COUNT(*) AS total FROM crops 
+    WHERE 
+      id LIKE ? OR 
+      name_crop LIKE ? OR 
+      type_crop LIKE ? OR 
+      location LIKE ? OR 
+      description_crop LIKE ?
+  `;
+  // ⬇️ Iniciamos los parametros correspondientes a id , nombre , tipo , ubicación y descripción
+
+  let countParams = [`%${buscar}%`,`%${buscar}%`, `%${buscar}%`, `%${buscar}%`, `%${buscar}%`];
+
+  conexion.query(queryData, params, (err, results) => {
     if (err) {
       console.error('Error al obtener cultivos:', err);
       return res.status(500).send('Error al obtener cultivos');
     }
 
-    conexion.query(queryCount, (err2, countResult) => {
+    conexion.query(queryCount, countParams, (err2, countResult) => {
       if (err2) {
         console.error('Error al contar cultivos:', err2);
         return res.status(500).send('Error al contar cultivos');
@@ -92,13 +120,14 @@ app.get('/crops', (req, res) => {
   });
 });
 
+// ⬆️ Ruta para Listar (modulo listar)
 
 
 
 // Ruta para actualizar el cultivo
 app.post('/crops/:id', (req, res) => {
   
-    const {
+    const { // 👈 Estamos Inicializando los datos que va a tomar el front
       id,
       nombre_cultivo,
       tipo_cultivo,
@@ -107,7 +136,7 @@ app.post('/crops/:id', (req, res) => {
       tamano_cultivo,
     } = req.body;
   
-    // Consulta SQL para actualizar los datos del cultivo
+    //⬇️Estamos haciendo Consulta SQL para actualizar los datos del cultivo
     const query = `
       UPDATE crops 
       SET 
@@ -138,31 +167,4 @@ app.post('/crops/:id', (req, res) => {
     });
   });
   
-
-// // Este ess el bloque de listar
-// const path = require('path');
-// app.get('/crops', (req, res) => {
-//   const page = parseInt(req.query.page) || 1; // Página actual, por defecto 1
-//   const limit = 25;
-//   const offset = (page - 1) * limit;
-
-//   const sql = 'SELECT * FROM crops LIMIT ? OFFSET ?';
-//   db.query(sql, [limit, offset], (err, results) => {
-//     if (err) {
-//       console.error('Error al obtener cultivos:', err);
-//       res.status(500).send('Error en el servidor');
-//     } else {
-//       // También puedes retornar cuántos cultivos hay en total si quieres calcular el número de páginas
-//       db.query('SELECT COUNT(*) AS total FROM crops', (err2, countResult) => {
-//         if (err2) {
-//           res.status(500).send('Error al contar cultivos');
-//         } else {
-//           const total = countResult[0].total;
-//           res.json({ cultivos: results, total });
-//         }
-//       });
-//     }
-//   });
-// });
-
 

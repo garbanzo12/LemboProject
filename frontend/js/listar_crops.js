@@ -3,17 +3,18 @@ document.addEventListener('DOMContentLoaded', () => { // ⬅️ Esperamos a que 
   const paginacion = document.querySelector('.paginacion');// ⬅️ Esto es para la paginacion
   let paginaActual = 1;// ⬅️ Empezamos en la pagina 1
 
-  async function obtenerCultivos(pagina = 1) { // ⬅️ funciona asincrona para traer por un fetch los datos
+  async function obtenerCultivos(pagina = 1, buscar = '') {
     try {
-      const res = await fetch(`http://localhost:5501/crops?page=${pagina}`);
+      const res = await fetch(`http://localhost:5501/crops?page=${pagina}&buscar=${encodeURIComponent(buscar)}`); // ⬅️ hacemos un fetch con la pagina en la que deseamos mostrar y lo que estamos buscando
       const data = await res.json();
-
-      mostrarCultivos(data.cultivos);
-      mostrarPaginacion(data.total, pagina);
+  
+      mostrarCultivos(data.cultivos); // ⬅️ Llenamos, por medio de esta funcion, la tabla
+      mostrarPaginacion(data.total, pagina, buscar); // ⬅️ Mostramos la pagina actual(por defecto la 1), los datos correspondientes a esta pagina. Si se esta buscando los datos cambian a los que coincidan con la busqueda
     } catch (err) {
-      console.error('Error al obtener cultivos:', err.message);
+      console.error('Error al obtener cultivos:', err.message); // ⬅️ Mensaje de error
     }
   }
+  
 
 
   function mostrarCultivos(cultivos) { // ⬅️ Esta es la funcion para mostrar en una tabla los cultivos
@@ -37,15 +38,15 @@ document.addEventListener('DOMContentLoaded', () => { // ⬅️ Esperamos a que 
     });
   }
     
-  function mostrarPaginacion(totalCultivos, paginaActual) { // ⬅️ Funcion para las paginas
+  function mostrarPaginacion(totalCultivos, paginaActual, buscar = '') { // ⬅️ Funcion para las paginas
     const totalPaginas = Math.ceil(totalCultivos / 25);
     paginacion.innerHTML = '';// ⬅️ para que no sedupliquen los botones al presionar otro
   
-    const crearBoton = (num, texto = null, isActive = false) => { // ⬅️ Creamos los botones dinamicamente
+    const crearBoton = (num, texto = null, isActive = false) => {
       const btn = document.createElement('button');
       btn.textContent = texto || num;
       if (isActive) btn.classList.add('activo');
-      btn.addEventListener('click', () => obtenerCultivos(num));
+      btn.addEventListener('click', () => obtenerCultivos(num, buscar)); // 👈 importante
       paginacion.appendChild(btn);
     };
   
@@ -96,49 +97,29 @@ document.addEventListener('DOMContentLoaded', () => { // ⬅️ Esperamos a que 
   const button = document.querySelector(".usuario__search-button");  // ⬅️ Botón de búsqueda
   const input = document.querySelector(".searchInput");  // ⬅️ Input de búsqueda
 
-  if (button && input) {
-    // Tomamos el evento de click en el input
-    button.addEventListener("click", function() {
-      filtrarTabla(input.value); // Esto es para filtrar,
-    });
 
-    // Evento de presionar Enter en el input
-    input.addEventListener("keydown", function(event) {
+  // Explicacion con manitos
+  if (button && input) { // ⬅️ Si estamos interarctuando con el boton y el input
+    button.addEventListener("click", function () {
+      const filtro = input.value.trim(); // 👈 Tomamos el valor del input y con el metodo trim() quitamos los espacios en blanco
+      obtenerCultivos(1, filtro); // 👈 Llamamos a la funcion, y le damos el parametro filtro
+    });
+  
+    input.addEventListener("keydown", function (event) { // 👈 Si damos enter tambien funciona
       if (event.key === "Enter") {
-        filtrarTabla(input.value);
+        const filtro = input.value.trim();
+        obtenerCultivos(1, filtro);
       }
     });
-
-    // Evento de clic en el input para vaciarlo si tiene valor
-    input.addEventListener("click", function() {
+  
+    input.addEventListener("click", function () { // 👈 Si damos click en el input y este tiene algun valor, se vacia
       if (input.value) {
-        input.value = "";  // Vaciar el campo si tiene algún valor
+        input.value = "";
+        obtenerCultivos(1); // 👈 Al borrar, recarga todo
       }
     });
   } else {
-    console.log("No se encontraron los elementos de búsqueda.");
+    console.log("No se encontraron los elementos de búsqueda."); 
   }
-
-  // Función para filtrar la tabla
-  function filtrarTabla(filtro) {
-    // Limpiar y convertir a minúsculas
-    const palabrasFiltro = filtro.trim().toLowerCase().split(" ");
-    const filas = document.querySelectorAll(".usuario__table tbody tr");
-  
-    filas.forEach((fila) => {
-      const textoFila = Array.from(fila.querySelectorAll("td"))
-        .map((celda) => celda.textContent.toLowerCase())
-        .join(" "); // Unimos todo el contenido de la fila
-  
-      // Revisamos si TODAS las palabras del filtro están en la fila
-      const coincidencia = palabrasFiltro.every((palabra) => textoFila.includes(palabra));
-  
-      fila.style.display = coincidencia ? "" : "none";
-    });
-  }
-  
-
-
-
 });
 
