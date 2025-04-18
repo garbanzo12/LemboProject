@@ -230,8 +230,7 @@
     display: flex;
     flex-direction: row;
   }
-  .usuario__action a,
-  .usuario__search-button a {
+  .usuario__action a{
     text-decoration: none;
     color: var(--secundary-1-950);
     font-size: 1.2rem;
@@ -249,8 +248,10 @@
     border: 0.1rem solid var(--secundary-1-950);
     width: 13vh;
     height: auto;
-    font-size: 1rem;
+    font-size: 1.4rem;
+  
   }
+
   label {
     display: flex;
     flex-direction: row;
@@ -268,6 +269,8 @@
   .usuario__search-button {
     border-top-right-radius: 0%;
     border-bottom-right-radius: 0%;
+    cursor: pointer;  
+
   }
   .usuario__search-input {
     border-top-left-radius: 0%;
@@ -362,4 +365,37 @@
       margin-top: 5%;
     }
   }
+  .paginacion {
+    margin-top: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
   
+  }
+  
+  .paginacion button {
+    padding: 0.4rem 0.8rem;
+    background-color: #f1f1f1;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+  }
+  
+  .paginacion button.activo {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .paginacion button:hover {
+    background-color: #ddd;
+  }
+  
+  .paginacion span {
+    padding: 0.4rem 0.6rem;
+    font-weight: bold;
+    color: #888;
+  }

@@ -62,22 +62,35 @@ app.get("/crops/:id", (req, res) => {
   });
 });
 
-// ✅ NUEVA RUTA: Obtener todos los cultivos
-app.get("/crops", (req, res) => {
-  const sql = "SELECT id, name_crop, type_crop, location, size_m2, description_crop FROM crops";
-  conexion.query(sql, (error, resultados) => {
-      if (error) {
-          console.error("Error al obtener cultivos:", error);
-          return res.status(500).json({ error: "Error al obtener cultivos" });
-      }
-
-      res.json(resultados);
-  });
-});
-
+// ✅Listar
 // 🟢 Iniciar servidor
 app.listen(5501, () => console.log("Servidor corriendo en puerto 5501"));
 
+app.get('/crops', (req, res) => {
+  const page = parseInt(req.query.page) || 1; // Página actual, por defecto 1
+  const limit = 25;
+  const offset = (page - 1) * limit;
+
+  const queryData = 'SELECT * FROM crops LIMIT ? OFFSET ?';
+  const queryCount = 'SELECT COUNT(*) AS total FROM crops';
+
+  conexion.query(queryData, [limit, offset], (err, results) => {
+    if (err) {
+      console.error('Error al obtener cultivos:', err);
+      return res.status(500).send('Error al obtener cultivos');
+    }
+
+    conexion.query(queryCount, (err2, countResult) => {
+      if (err2) {
+        console.error('Error al contar cultivos:', err2);
+        return res.status(500).send('Error al contar cultivos');
+      }
+
+      const total = countResult[0].total;
+      res.json({ cultivos: results, total });
+    });
+  });
+});
 
 
 
@@ -126,22 +139,30 @@ app.post('/crops/:id', (req, res) => {
   });
   
 
-// Este ess el bloque de listar
-  const path = require('path');
+// // Este ess el bloque de listar
+// const path = require('path');
+// app.get('/crops', (req, res) => {
+//   const page = parseInt(req.query.page) || 1; // Página actual, por defecto 1
+//   const limit = 25;
+//   const offset = (page - 1) * limit;
 
-app.get('/5-listar-cultivos.html', (req, res) => {
-  res.sendFile(path.join(__dirname,'/frontend/views/sgal cultivos/HTML/5-listar-cultivos.html'));
+//   const sql = 'SELECT * FROM crops LIMIT ? OFFSET ?';
+//   db.query(sql, [limit, offset], (err, results) => {
+//     if (err) {
+//       console.error('Error al obtener cultivos:', err);
+//       res.status(500).send('Error en el servidor');
+//     } else {
+//       // También puedes retornar cuántos cultivos hay en total si quieres calcular el número de páginas
+//       db.query('SELECT COUNT(*) AS total FROM crops', (err2, countResult) => {
+//         if (err2) {
+//           res.status(500).send('Error al contar cultivos');
+//         } else {
+//           const total = countResult[0].total;
+//           res.json({ cultivos: results, total });
+//         }
+//       });
+//     }
+//   });
+// });
 
-  const query = 'SELECT * FROM crops';
-
-  conexion.query(query, (err, results) => {
-    if (err) {    
-      console.error('Error al obtener cultivos:', err);
-      return res.status(500).send('Error del servidor');
-    }
-    console.log(results[0]); // <-- Esto te muestra los campos disponibles
-
-    res.json(results); // <-- ENVÍA JSON
-  });
-});
 
