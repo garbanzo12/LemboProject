@@ -5,7 +5,7 @@ async function obtenerIdsCultivos() {
     const res = await fetch('http://localhost:5501/crops');
     if (!res.ok) throw new Error('No se pudieron obtener los cultivos');
     const data = await res.json();
-    return data.map(cultivo => cultivo.id);
+    return data.cultivos.map(cultivo => cultivo.id);
   } catch (err) {
     console.error('Error al obtener los IDs:', err.message);
     return [];

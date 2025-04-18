@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(res => res.json()) // ⬅️ Aqui estoy trallendo el paquete json
       .then(ids => {
         choices.setChoices( // ⬅️ Los meto en el choice
-          ids.map(c => ({ value: c.id, label: `ID: ${c.id}` })),
+          ids.cultivos.map(c => ({ value: c.id, label: `ID: ${c.id}` })),
           'value',
           'label',
           true
@@ -71,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
       })
         .then(res => {
           if (!res.ok) throw new Error(`Error HTTP: ${res.status}`);
+          window.location.href = '5-listar-cultivos.html';
           return res.json();
         })
         .then(msg => {

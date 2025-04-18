@@ -166,5 +166,3 @@ app.post('/crops/:id', (req, res) => {
       res.json({ message: 'Cultivo actualizado exitosamente.' });
     });
   });
-  
-
