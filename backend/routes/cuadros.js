@@ -18,7 +18,7 @@ const conexion = mysql.createConnection({
 
 
 // Conexión a la base de datos
-db.connect(err => {
+conexion.connect(err => {
   if (err) {
     console.error('Error de conexión a la BD:', err);
   } else {
@@ -34,7 +34,7 @@ const crearTabla = `
     fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   )
 `;
-db.query(crearTabla);
+conexion.query(crearTabla);
 
 // Ruta para guardar cuadros seleccionados
 app.post('/cuadros_seleccionados', (req, res) => {
@@ -47,7 +47,7 @@ app.post('/cuadros_seleccionados', (req, res) => {
   const values = cuadros.map(id => [id]);
   const sql = 'INSERT INTO cuadros_seleccionados (cuadro_id) VALUES ?';
 
-  db.query(sql, [values], (err, result) => {
+  conexion.query(sql, [values], (err, result) => {
     if (err) {
       console.error(err);
       return res.status(500).json({ mensaje: 'Error al guardar', error: err });
@@ -58,7 +58,7 @@ app.post('/cuadros_seleccionados', (req, res) => {
 
 // Ruta para obtener cuadros guardados
 app.get('/cuadros_seleccionados', (req, res) => {
-  db.query('SELECT cuadro_id FROM cuadros_seleccionados', (err, result) => {
+  conexion.query('SELECT cuadro_id FROM cuadros_seleccionados', (err, result) => {
     if (err) return res.status(500).json({ error: err });
     const ids = result.map(row => row.cuadro_id);
     res.json(ids);

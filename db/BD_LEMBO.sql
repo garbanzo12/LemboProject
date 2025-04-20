@@ -12,10 +12,13 @@ DROP TABLE user;
 
 CREATE TABLE users(	
     type_user ENUM('Administrador', 'Personal de Apoyo', 'Visitante'),
-    type_ID ENUM('Administrador', 'Personal de Apoyo', 'Visitante'),
-	id INT AUTO_INCREMENT PRIMARY KEY,
+    type_ID ENUM('Cedula de Ciudadanía', 'Tarjeta de identidad', 'Cédula de extranjería',' PEP', 'Permiso Por Protección Temporal'),
+    num_document_identity VARCHAR(12)  UNIQUE,
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name_user VARCHAR(100) ,
     email VARCHAR(100) NOT NULL UNIQUE,
-    rol VARCHAR(20),
+    cellphone VARCHAR(20),
+    state ENUM('Activo', 'Inactivo') DEFAULT 'Activo',
     password VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -66,7 +69,7 @@ CREATE TABLE sensors(
     name_sensors VARCHAR(100) NOT NULL,
 	unit_sensors INT NOT NULL,
 	time_sensors INT,
-    description_consumables TEXT,
+    description_sensors TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     );

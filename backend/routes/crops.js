@@ -66,7 +66,7 @@ app.get("/crops/:id", (req, res) => {
       res.json(resultados[0]);
   });
 });
-// ⬆️ Ruta para buscar un cultivo por ID
+// ⬆️ Ruta para buscar un cultivo por ID (modulo buscar)
 
 // ⬇️ Ruta para Listar (modulo listar)
 // 🟢 Iniciar servidor
@@ -127,7 +127,7 @@ app.get('/crops', (req, res) => {
 
 
 
-// Ruta para actualizar el cultivo
+//⬇️ Ruta para actualizar el cultivo (modulo actualizar)
 app.post('/crops/:id', (req, res) => {
   
     const { // 👈 Estamos Inicializando los datos que va a tomar el front
@@ -151,7 +151,7 @@ app.post('/crops/:id', (req, res) => {
       WHERE id = ?
     `;
   
-    // Ejecutar la consulta
+    //⬇️ Ejecutamos la consulta
     conexion.query(query, [
       nombre_cultivo,
       tipo_cultivo,
@@ -165,7 +165,8 @@ app.post('/crops/:id', (req, res) => {
         return res.status(500).json({ error: 'Hubo un error al actualizar el cultivo.' });
       }
   
-      // Responder con éxito
+      //⬇️Entonces éxito
       res.json({ message: 'Cultivo actualizado exitosamente.' });
     });
   });
+  //⬆️ Ruta para actualizar el cultivo (modulo actualizar)
