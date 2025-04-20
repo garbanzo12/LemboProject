@@ -1,18 +1,21 @@
-const express = require('express');
-const mysql = require('mysql2');
-const cors = require('cors');
+// La conexion con la bd
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+// ⬆️ Require para express mysql2 y cors para el correcto funcionamiento del back
+const app = express(); // 👈 Le asignamos a app las propiedades express, para poder crear rutas
+app.use(express.json());// 👈 Para que peuda analizar el cuerpo de las solicitudes (body)
+app.use(cors());// 👈 Para poder hacer las solicitudes de puertos del back y front diferentes
+const mysql = require("mysql2");
 
-const app = express();
-app.use(cors());
-app.use(express.json());
-
-// Configura tus datos de conexión MySQL aquí
-const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '123456', // cambia si tu contraseña es diferente
-  database: 'lembo_sgal_db'
+//⬇️ Configuramos conexión a la BD
+const conexion = mysql.createConnection({ 
+  host: process.env.HOST,
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE
 });
+
 
 // Conexión a la base de datos
 db.connect(err => {

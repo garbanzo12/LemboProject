@@ -27,12 +27,13 @@ document.addEventListener('DOMContentLoaded', () => { // ⬅️ Esperamos a que 
         <td class="usuario__table-data-cell usuario__table-data-cell--icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" ...></svg>
         </td>
-        <td class="usuario__table-data-cell">${cultivo.id}</td> 
+        <td class="usuario__table-data-cell ">${cultivo.id}</td> 
         <td class="usuario__table-data-cell">${cultivo.type_crop}</td>
         <td class="usuario__table-data-cell">${cultivo.name_crop}</td>
         <td class="usuario__table-data-cell">${cultivo.location}</td>
         <td class="usuario__table-data-cell">${cultivo.size_m2}</td>
         <td class="usuario__table-data-cell">${cultivo.description_crop}</td>
+        
       `;
       tbody.appendChild(row);
     });

@@ -1,5 +1,4 @@
 // La conexion con la bd
-const mysql = require("mysql2");
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
@@ -7,10 +6,7 @@ const cors = require("cors");
 const app = express(); // 👈 Le asignamos a app las propiedades express, para poder crear rutas
 app.use(express.json());// 👈 Para que peuda analizar el cuerpo de las solicitudes (body)
 app.use(cors());// 👈 Para poder hacer las solicitudes de puertos del back y front diferentes
-console.log('USER:', process.env.USER); // debería mostrar 'root'
-console.log('HOST:', process.env.HOST); // debería mostrar 'root'
-console.log('PASSWORD:', process.env.PASSWORD); // debería mostrar 'root'
-console.log('DATABASE:', process.env.DATABASE); // debería mostrar 'root'
+const mysql = require("mysql2");
 
 //⬇️ Configuramos conexión a la BD
 const conexion = mysql.createConnection({ 
