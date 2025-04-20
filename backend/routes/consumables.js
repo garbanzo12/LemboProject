@@ -14,6 +14,9 @@ const conexion = mysql.createConnection({
     password: "123456",
     database: "lembo_sgal_db"
 });
+
+
+
 app.post("/consumables", (req, res) => {
     console.log("Datos recibidos en POST /consumables:", req.body); 
 
