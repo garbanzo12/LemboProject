@@ -658,6 +658,10 @@ body {
     align-items: center;
 }
 
+.cardright__subcontainer-input--row{
+    flex-direction: row;
+}
+
 .cardright__label-form {
     display: flex;
     width: 100%;
@@ -682,7 +686,18 @@ body {
     /* campo circular */
     background-color: var(--gray-050);
 }
-
+.cardright__input-form--date{
+    width: 14rem;
+    font-size: var(--fs-xs);
+    color: var(--gray-700);
+    
+    padding: 1.6rem 2.4rem;
+    margin: 0 0 0 0;
+    border: 0.1rem solid var(--blanco);
+    border-radius: 5rem;
+    /* campo circular */
+    background-color: var(--gray-050);
+}
 
 
 /* MODIFICADOR PARA INPUT FORM TIPO ARCHIVO FILE*/
