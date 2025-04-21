@@ -317,7 +317,10 @@ body {
     border-radius: 5rem;
     cursor:pointer;
 }
+.checkbox-checked{
+    background-color: var(--primary-950);
 
+}
 /* ESTE ES EL HOVER DEL LABEL PARA QUE CAMBIE DE COLOR */
 .cardright__input-form--checkbox[type="checkbox"]:checked+.cardright__label-form--color {
     background-color: var(--gray-950);
@@ -688,7 +691,7 @@ body {
     background-color: var(--gray-050);
 }
 .cardright__input-form--date{
-    width: 15rem;
+    width: 14rem;
     font-size: var(--fs-xs);
     color: var(--gray-700);
     

@@ -1,19 +1,18 @@
 console.log("hola");
-
 function inicializarValidaciones() {
     const forms = document.querySelectorAll(".cardright__form--top3");
 
     forms.forEach((form) => {
         form.addEventListener("submit", async function (event) {
             event.preventDefault();
-
+            
 
             const name_cropCycle = document.querySelector('.cardright__input-form--name');
             const description_cycle = document.querySelector('.cardright__input-form--description');
             const period_cycle_start = document.querySelector('.cardright__input-form--date-start');
             const period_cycle_end = document.querySelector('.cardright__input-form--date-end');
             const news_cycle = document.querySelector('.cardright__input-form--news');
-            const state_cycle = document.querySelector('.cardright__input-form--checkbox');
+            const state_cycle = valor;
             let validarCampo = true;
             const inputs = form.querySelectorAll("input");
 
