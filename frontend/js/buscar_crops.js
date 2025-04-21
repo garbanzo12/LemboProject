@@ -2,10 +2,10 @@ console.log('Script cargado');
 
 async function obtenerIdsCultivos() {
   try {
-    const res = await fetch('http://localhost:5501/crops');
+    const res = await fetch('http://localhost:5501/crops/id'); // ✅ Nuevo endpoint
     if (!res.ok) throw new Error('No se pudieron obtener los cultivos');
     const data = await res.json();
-    return data.cultivos.map(cultivo => cultivo.id);
+    return data.cultivos; // ✅ Ya viene como un array de IDs
   } catch (err) {
     console.error('Error al obtener los IDs:', err.message);
     return [];
@@ -13,8 +13,8 @@ async function obtenerIdsCultivos() {
 }
 
 async function inicializarBuscar() {
-  const formBuscar = document.querySelector('.cicloRight__form');
-  const selectId = document.querySelector('.selectId');
+  const formBuscar = document.querySelector('.cardright__form');
+  const selectId = document.querySelector('.cardright__selectId');
 
   const ids = await obtenerIdsCultivos();
   selectId.innerHTML = '';
@@ -34,14 +34,14 @@ async function inicializarBuscar() {
     ids.forEach(id => {
       const option = document.createElement('option');
       option.value = id;
-      option.textContent = `ID: ${id}`;
+      option.textContent = `${id}`;
       selectId.appendChild(option);
     });
   }
 
-  // ✅ Inicializar Choices después de llenar las opciones
+  // Inicializar Choices.js después de llenar las opciones
   new Choices(selectId, {
-    renderChoiceLimit: 5,  // Limita cuántos se ven en pantalla
+    renderChoiceLimit: 5,
   });
 
   formBuscar.addEventListener('submit', async (e) => {
@@ -60,7 +60,7 @@ async function inicializarBuscar() {
       const data = await res.json();
 
       localStorage.setItem('cultivoSeleccionado', JSON.stringify(data));
-      window.location.href = '3-visualizar-cultivo.html';
+      window.location.href = '3-view_crops.html';
     } catch (err) {
       alert('Error: ' + err.message);
     }
@@ -68,5 +68,5 @@ async function inicializarBuscar() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  inicializarBuscar(); // 👈 Ya no necesitas el setTimeout
+  inicializarBuscar();
 });

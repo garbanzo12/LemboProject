@@ -26,14 +26,14 @@ conexion.connect((err) => {
 app.post("/crops", (req, res) => {
     console.log("Datos recibidos en POST /crops:", req.body); 
 
-    const { name_crop, type_crop, location, description_crop, size_m2 } = req.body;
+    const { name_crop, type_crop, location, description_crop, size_m2, image_crop } = req.body;
 
-    if (!name_crop || !type_crop || !location || !description_crop || !size_m2) {
+    if (!name_crop || !type_crop || !location || !description_crop || !size_m2 || !image_crop ) {
         return res.status(400).json({ error: "Todos los campos son obligatorios" });
     }
 
-    let sql = "INSERT INTO crops (name_crop, type_crop, location, description_crop, size_m2) VALUES (?, ?, ?, ?, ?)";
-    conexion.query(sql, [name_crop, type_crop, location, description_crop, size_m2], (error, resultado) => {
+    let sql = "INSERT INTO crops (name_crop, type_crop, location, description_crop, size_m2,image_crop) VALUES (?, ?, ?, ?, ?, ?)";
+    conexion.query(sql, [name_crop, type_crop, location, description_crop, size_m2,image_crop], (error, resultado) => {
         if (error) {
             console.error("Error al insertar datos:", error);
             return res.status(500).json({ error: "Error al insertar datos" });
@@ -48,7 +48,21 @@ app.post("/crops", (req, res) => {
 });
 //⬆️ Ruta para insertar datos (modulo crear)
 
-// ⬇️ Ruta para buscar un cultivo por ID (modulo buscar)
+// // ⬇️ Ruta para buscar un cultivo por ID (modulo buscar)
+
+// ✅ Ruta para obtener solo los IDs de cultivos (sin límite de paginación)
+app.get('/crops/id', (req, res) => {
+  const sql = 'SELECT id FROM crops';
+  conexion.query(sql, (err, results) => {
+    if (err) {
+      console.error('Error al obtener los IDs de cultivos:', err);
+      return res.status(500).json({ error: 'Error al obtener los IDs' });
+    }
+
+    const ids = results.map(row => row.id);
+    res.json({ cultivos: ids });
+  });
+});
 app.get("/crops/:id", (req, res) => {
   const cropId = req.params.id;
 
@@ -66,7 +80,52 @@ app.get("/crops/:id", (req, res) => {
       res.json(resultados[0]);
   });
 });
-// ⬆️ Ruta para buscar un cultivo por ID (modulo buscar)
+// // ⬆️ Ruta para buscar un cultivo por ID (modulo buscar)
+
+
+//⬇️ Ruta para actualizar el cultivo (modulo actualizar)
+app.put('/crops/:id', (req, res) => {
+  const cropId = req.params.id;
+
+  const {
+    nombre_cultivo,
+    tipo_cultivo,
+    ubicacion_cultivo,
+    descripcion_cultivo,
+    tamano_cultivo,
+    imagen_cultivo,
+  } = req.body;
+
+  const query = `
+    UPDATE crops 
+    SET 
+      name_crop = ?, 
+      type_crop = ?, 
+      location = ?, 
+      description_crop = ?, 
+      size_m2 = ?,
+      image_crop = ?
+    WHERE id = ?
+  `;
+
+  conexion.query(query, [
+    nombre_cultivo,
+    tipo_cultivo,
+    ubicacion_cultivo,
+    descripcion_cultivo,
+    tamano_cultivo,
+    imagen_cultivo,
+    cropId
+  ], (err, result) => {
+    if (err) {
+      console.error('Error al actualizar el cultivo:', err);
+      return res.status(500).json({ error: 'Hubo un error al actualizar el cultivo.' });
+    }
+
+    res.json({ message: 'Cultivo actualizado exitosamente.' });
+  });
+});
+  //⬆️ Ruta para actualizar el cultivo (modulo actualizar)
 
 // ⬇️ Ruta para Listar (modulo listar)
 // 🟢 Iniciar servidor
@@ -85,11 +144,12 @@ app.get('/crops', (req, res) => {
       name_crop LIKE ? OR 
       type_crop LIKE ? OR 
       location LIKE ? OR 
-      description_crop LIKE ?
-    LIMIT ? OFFSET ?
+      description_crop LIKE ? OR
+      size_m2 LIKE ? OR
+      image_crop LIKE ?
   `;
 // ⬇️ Iniciamos los parametros correspondientes a id , nombre , tipo , ubicación y descripción
-  let params = [`%${buscar}%`,`%${buscar}%`, `%${buscar}%`, `%${buscar}%`, `%${buscar}%`, limit, offset];
+  let params = [`%${buscar}%`,`%${buscar}%`,`%${buscar}%`, `%${buscar}%`, `%${buscar}%`, `%${buscar}%`, `%${buscar}%`, limit, offset];
 
 // ⬇️ Si hay una búsqueda, usamos WHERE para poder contar cuantos datos estamos tomando (Estamos opteniendo la cantidad de datos del cultivo)
   let queryCount = `
@@ -99,11 +159,13 @@ app.get('/crops', (req, res) => {
       name_crop LIKE ? OR 
       type_crop LIKE ? OR 
       location LIKE ? OR 
-      description_crop LIKE ?
+      description_crop LIKE ? OR
+      size_m2 LIKE ? OR 
+      image_crop LIKE ?
   `;
   // ⬇️ Iniciamos los parametros correspondientes a id , nombre , tipo , ubicación y descripción
 
-  let countParams = [`%${buscar}%`,`%${buscar}%`, `%${buscar}%`, `%${buscar}%`, `%${buscar}%`];
+  let countParams = [`%${buscar}%`,`%${buscar}%`,`%${buscar}%`, `%${buscar}%`, `%${buscar}%`, `%${buscar}%`, `%${buscar}%`];
 
   conexion.query(queryData, params, (err, results) => {
     if (err) {
@@ -124,49 +186,3 @@ app.get('/crops', (req, res) => {
 });
 
 // ⬆️ Ruta para Listar (modulo listar)
-
-
-
-//⬇️ Ruta para actualizar el cultivo (modulo actualizar)
-app.post('/crops/:id', (req, res) => {
-  
-    const { // 👈 Estamos Inicializando los datos que va a tomar el front
-      id,
-      nombre_cultivo,
-      tipo_cultivo,
-      ubicacion_cultivo,
-      descripcion_cultivo,
-      tamano_cultivo,
-    } = req.body;
-  
-    //⬇️Estamos haciendo Consulta SQL para actualizar los datos del cultivo
-    const query = `
-      UPDATE crops 
-      SET 
-        name_crop = ?, 
-        type_crop = ?, 
-        location = ?, 
-        description_crop = ?, 
-        size_m2 = ?
-      WHERE id = ?
-    `;
-  
-    //⬇️ Ejecutamos la consulta
-    conexion.query(query, [
-      nombre_cultivo,
-      tipo_cultivo,
-      ubicacion_cultivo,
-      descripcion_cultivo,
-      tamano_cultivo, 
-      id
-    ], (err, result) => {
-      if (err) {
-        console.error('Error al actualizar el cultivo:', err);
-        return res.status(500).json({ error: 'Hubo un error al actualizar el cultivo.' });
-      }
-  
-      //⬇️Entonces éxito
-      res.json({ message: 'Cultivo actualizado exitosamente.' });
-    });
-  });
-  //⬆️ Ruta para actualizar el cultivo (modulo actualizar)

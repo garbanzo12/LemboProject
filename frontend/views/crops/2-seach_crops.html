@@ -10,8 +10,12 @@
     content="Aprendiz: Erick Ramirez, Aprendiz Aprendiz:Sanchez Hernandez, Aprendiz:Estefani Acevedo" />
   <meta http-equiv="Content-Language" content="es" />
   <link rel="stylesheet" href="../../public/css/styles-bem.css">
+<!-- CSS de Choices -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
 
-  <script src="/frontend/js/buscar_crops.js"></script>
+<!-- JS de Choices -->
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+<script src="/frontend/js/buscar_crops.js"></script>
   <title>Busqueda De Cultivos</title>
 </head>
 
@@ -57,8 +61,10 @@
         <div class="cardright__container-input">
           <div class="cardright__subcontainer-input">
             <label class="cardright__label-form  cardright__label-form--id-cultivo" for="">Id Cultivo</label>
-            <input class="cardright__input-form  cardright__input-form--id-cultivo" placeholder="Id del Cultivo"
-              type="text" />
+             <!-- Esto es de js -->
+             <select class="cardright__selectId"> <!-- Esto es de js -->
+              <option value="">Cargando IDs...</option> <!--Esto es de js  -->
+            </select>
           </div>
 
           <div class="cardright__subcontainer-input">
@@ -69,11 +75,11 @@
       </fieldset>
 
       <div class="">
-        <button class="cardright__botton-secundary" type="submit"><a href="">CANCELAR</a></button>
+        <button class="cardright__botton-secundary" type="submit"><a href="/frontend/views/index_main.html">CANCELAR</a></button>
       </div>
 
       <div class="cardright__foot-form">
-        <p> CAPTURA DE ERRORES</p>
+        <p> .</p>
       </div>
     </form>
     <!-- fin de form -->

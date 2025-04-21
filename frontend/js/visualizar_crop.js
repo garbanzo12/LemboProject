@@ -11,8 +11,9 @@ console.log('holis')
     inputs[3].value = data.location || '';     // ⬅️ Ubicación
     inputs[4].value = data.description_crop || '';  //⬅️  Descripción
     inputs[5].value = data.size_m2 || '';         // ⬅️ Tamaño m2
+    inputs[6].value = data.image_crop || '';         // ⬅️ Imagen
 
   
-    document.getElementById('boton').checked = data.status_crop === 'habilitado'; // ⬅️ esto es para el habilitado
+    document.querySelector('cardright__label-form--color').checked = data.status_crop === 'habilitado'; // ⬅️ esto es para el habilitado
   });
 

@@ -2,18 +2,19 @@ console.log("olahol");
 
 
 // ⬇️ Aqui empieza el Insertar/Crear ⬇️
-function inicializarValidaciones() {
-    const forms = document.querySelectorAll(".form");
+function inicializarValidaciones() { // 
+    const forms = document.querySelectorAll(".cardright__form");
 
     forms.forEach((form) => {
         form.addEventListener("submit", async function (event) {
             event.preventDefault();
             
-            const name_crop = document.querySelector('.ciclo__name_crop');
-            const type_crop = document.querySelector('.ciclo__type_crop');
-            const location = document.querySelector('.ciclo__location');
-            const description_crop = document.querySelector('.ciclo__description_crop');
-            const size_m2 = document.querySelector('.ciclo__size_m2');
+            const name_crop = document.querySelector('.card__right__input--name'); //✅
+            const type_crop = document.querySelector('.card__right__input--type');  //✅
+            const location = document.querySelector('.card__right__input--location'); //✅
+            const description_crop = document.querySelector('.card__right__input--info'); //✅
+            const size_m2 = document.querySelector('.card__right__input--size'); //✅
+            const image_crop = document.querySelector('.cardright__input-form--file'); //✅
             let validarCampo = true;
             const inputs = form.querySelectorAll("input");
 
@@ -43,7 +44,8 @@ function inicializarValidaciones() {
                 type_crop: type_crop ? type_crop.value : '',
                 location: location ? location.value : '',
                 description_crop: description_crop ? description_crop.value : '',
-                size_m2: size_m2 ? size_m2.value : ''
+                size_m2: size_m2 ? size_m2.value : '',
+                image_crop: image_crop ? image_crop.value : '',
             }; // Objeto para almacenar los valores del formulario
             if (validarCampo) {
                 try {
@@ -76,7 +78,7 @@ function inicializarValidaciones() {
                           });
                         // Ir a siguiente página
                         document.getElementById("continuar-btn").addEventListener("click", function () {
-                            window.location.href = "/frontend/views/sgal cultivos/HTML/2-buscar-cultivo.html"; // Cambia esto a la ruta que necesites
+                            window.location.href = "/frontend/views/crops/2-seach_crops.html"; // 👈 Redireccionamiento 
                           });
                         
                         texto.textContent = `✅ Datos guardados correctamente.\nID del registro: ${resultado.id}`;
@@ -110,11 +112,11 @@ function inicializarValidaciones() {
 
 // Función para mostrar mensajes debajo del formulario
 function mostrarMensaje(form, mensaje, color) {
-    let mensajeSpan = form.querySelector(".mensaje-formulario");
+    let mensajeSpan = form.querySelector(".cardright__foot-form");
     
     if (!mensajeSpan) {
         mensajeSpan = document.createElement("span");
-        mensajeSpan.classList.add("mensaje-formulario");
+        mensajeSpan.classList.add("cardright__foot-form");
         mensajeSpan.style.display = "block";
         mensajeSpan.style.marginTop = "10px";
         mensajeSpan.style.fontWeight = "bold";
