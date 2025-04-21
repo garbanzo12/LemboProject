@@ -39,30 +39,28 @@ function inicializarValidaciones() { //
                 }
 
             });
-            let datos = {
-                name_crop: name_crop ? name_crop.value : '',
-                type_crop: type_crop ? type_crop.value : '',
-                location: location ? location.value : '',
-                description_crop: description_crop ? description_crop.value : '',
-                size_m2: size_m2 ? size_m2.value : '',
-                image_crop: image_crop ? image_crop.value : '',
-            }; // Objeto para almacenar los valores del formulario
+            const datos = new FormData();
+            datos.append("name_crop", name_crop.value);
+            datos.append("type_crop", type_crop.value);
+            datos.append("location", location.value);
+            datos.append("description_crop", description_crop.value);
+            datos.append("size_m2", size_m2.value);
+            datos.append("image_crop", image_crop.files[0]); // 👈 importante: image_crop.files[0]
             if (validarCampo) {
                 try {
                     console.log("Datos enviados:", datos); // Agrega esto antes del fetch(
                     let respuesta = await fetch("http://localhost:5501/crops", {
+
                         method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify(datos),
+                        body: (datos),
                     });
 
                     let resultado = await respuesta.json();
 
                     if (respuesta.ok) {
                         form.reset(); // Limpiar formulario tras el envío
-                        
+                        event.preventDefault();
+
                         const mensaje = `✅ Datos guardados correctamente.\nID del registro: ${resultado.id}`;
                         console.log("Respuesta completa del servidor:", resultado);
                     
@@ -78,6 +76,7 @@ function inicializarValidaciones() { //
                           });
                         // Ir a siguiente página
                         document.getElementById("continuar-btn").addEventListener("click", function () {
+                            event.preventDefault();
                             window.location.href = "/frontend/views/crops/2-seach_crops.html"; // 👈 Redireccionamiento 
                           });
                         

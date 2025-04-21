@@ -7,6 +7,26 @@ const app = express(); // 👈 Le asignamos a app las propiedades express, para 
 app.use(express.json());// 👈 Para que peuda analizar el cuerpo de las solicitudes (body)
 app.use(cors());// 👈 Para poder hacer las solicitudes de puertos del back y front diferentes
 const mysql = require("mysql2");
+const multer = require("multer");
+const path = require("path");
+// Middleware para analizar JSON y formularios
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// 🔥 Aquí sirve la carpeta 'uploads' como pública
+app.use('/uploads', express.static('uploads'));
+// Configurar multer
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, "uploads/"); // Carpeta donde se guardan
+    },
+    filename: function (req, file, cb) {
+        // Nombre del archivo único: fecha + nombre original
+        cb(null, Date.now() + path.extname(file.originalname));
+    }
+});
+
+const upload = multer({ storage: storage });
 
 //⬇️ Configuramos conexión a la BD
 const conexion = mysql.createConnection({ 
@@ -23,29 +43,31 @@ conexion.connect((err) => {
 });
 
 //⬇️ Ruta para insertar datos ( modulo crear)
-app.post("/crops", (req, res) => {
-    console.log("Datos recibidos en POST /crops:", req.body); 
+app.post("/crops", upload.single("image_crop"), (req, res) => {
+  console.log("Datos recibidos en POST /crops:", req.body); 
 
-    const { name_crop, type_crop, location, description_crop, size_m2, image_crop } = req.body;
+  const { name_crop, type_crop, location, description_crop, size_m2 } = req.body;
+  const image_crop = req.file ? req.file.filename : null;
 
-    if (!name_crop || !type_crop || !location || !description_crop || !size_m2 || !image_crop ) {
-        return res.status(400).json({ error: "Todos los campos son obligatorios" });
-    }
+  if (!name_crop || !type_crop || !location || !description_crop || !size_m2 || !image_crop) {
+      return res.status(400).json({ error: "Todos los campos son obligatorios" });
+  }
 
-    let sql = "INSERT INTO crops (name_crop, type_crop, location, description_crop, size_m2,image_crop) VALUES (?, ?, ?, ?, ?, ?)";
-    conexion.query(sql, [name_crop, type_crop, location, description_crop, size_m2,image_crop], (error, resultado) => {
-        if (error) {
-            console.error("Error al insertar datos:", error);
-            return res.status(500).json({ error: "Error al insertar datos" });
-        }
+  const sql = "INSERT INTO crops (name_crop, type_crop, location, description_crop, size_m2, image_crop) VALUES (?, ?, ?, ?, ?, ?)";
+  conexion.query(sql, [name_crop, type_crop, location, description_crop, size_m2, image_crop], (error, resultado) => {
+      if (error) {
+          console.error("Error al insertar datos:", error);
+          return res.status(500).json({ error: "Error al insertar datos" });
+      }
 
-        console.log("Resultado del INSERT:", resultado);
-        res.json({ 
-            mensaje: "Datos guardados correctamente", 
-            id: resultado.insertId
-        });
-    });
+      console.log("Resultado del INSERT:", resultado);
+      res.json({ 
+          mensaje: "Datos guardados correctamente", 
+          id: resultado.insertId
+      });
+  });
 });
+
 //⬆️ Ruta para insertar datos (modulo crear)
 
 // // ⬇️ Ruta para buscar un cultivo por ID (modulo buscar)
