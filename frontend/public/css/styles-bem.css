@@ -751,6 +751,7 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
     display: flex;
     flex-direction: column;
     padding: 1rem;
+    width: 95%;
    
 }
 /* aqui esta el container del nombre del modulo cultivo, ciclo, etc...*/
@@ -766,7 +767,8 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
     background-color: var(--gray-200) ;
     display: flex;
     flex-direction: row;
-    border-radius: 1rem 1rem 0 0;
+    /* border-radius: 1rem 1rem 0 0; */
+    justify-content: space-between;
 }
 
 .cardright__botton-a{
@@ -778,36 +780,28 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
 .cardright__container-datos {
     /* background-color: var(--secundary-1-500); */
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     /* padding: 1rem; */
 }
 
 /* ********************** CELDAS*************************** */
 .cardright__table {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr); 
-    width: 100%; 
-    border: 0.1rem solid var(--secundary-1-300); 
+    width: 100%;
+    border-collapse: collapse; /* Mejora visual de las líneas */
 }
 
-.cardright__row {
-    display: contents; 
-    font-size: var(--fs-xxs); /* tamaño del texto para todas las celdas */
+.cardright__row--header .cardright__cell {
+    background-color: var(--secundary-2-950);
+    font-weight: bold;
+    color: var(--white);
 }
 
 .cardright__cell {
-    border: 0.1rem solid var(--secundary-1-300); 
+    border: 0.1rem solid var(--secundary-1-300);
     padding: 1rem;
-    text-align: center; /* Centra el texto */
-    background-color: lightgray; /* Color de fondo */
-}
-
-.cardright__header .cardright__cell {
-    background-color: var(--secundary-2-950); 
-    /* Diferente color para el encabezado */
-    font-weight: bold; 
-    /* Texto en negrita para encabezados */
-    color: var(--white);
+    text-align: center;
+    background-color: var(--gray-100);
+    font-size: var(--fs-sm);
 }
 
 /* ********************** PAGINACION ************************* */
@@ -893,19 +887,24 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
 
 .side-main__name {
     font-size: var(--fs-xxs);
+    margin: 0 auto;
 }
 
 .side-main__roll {
     font-size: var(--fs-xxxs);
+    margin: 0 auto;
 }
 
-.side-main__bar-avatar {
-    height: 4rem;
-    width: 4rem;
-    background-image: url("../img_/left_side/logo1.png");
-    background-size: cover;
-    background-repeat: no-repeat;
+.side-main__container-avatar {
+    height: 5rem;
+    width: 5rem;
     margin: 0.2rem;
+}
+.side-main__bar-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5rem;
+
 }
 
 /* ***************************** */

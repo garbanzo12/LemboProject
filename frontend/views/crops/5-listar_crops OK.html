@@ -12,16 +12,17 @@
     <script src="/frontend/js/actualizar_crop.js"></script>
     <link rel="stylesheet" href="../../public/css/styles-bem.css">
 
-    <title>Listar Cultivos</title>
+    <title>Listar Cultivos Preparando</title>
 </head>
 
 <body>
     <!--   
   /* ****************************************************** */
-  /* ***************    ELEMENTOS TITTLE    *************** */
+  /* ***************    BLOQUE TITTLE    *************** */
   /* ****************************************************** */ -->
 
     <header class="cardtittle">
+        <!-- /* *************    ELEMENTOS TITTLE    ************** */ -->
         <p class="cardtittle__text">SENA SEDE LEMBO</p>
         <a class="cardtittle__enlace" href="../index_main.html">
             <img class="cardtittle__svg-home" src="../../public/img_/svg/home.svg" alt>
@@ -29,10 +30,13 @@
     </header>
     <!-- 
   /* ****************************************************** */
-  /* *************    ELEMENTOS CARD LEFT    ************** */
+  /* *************    BLOQUE CARD LEFT    ************** */
   /* ****************************************************** */
   -->
     <aside class="cardleft cardleft--pequeño">
+
+        <!-- /* *************    ELEMENTOS CARD LEFT    ************** */ -->
+
         <section class="cardleft__container">
             <img class="cardleft__logo-sgal" src="../../public/img_/left_side/LogoSgal.png" alt="Imagen de Logo Sgal" />
 
@@ -46,9 +50,10 @@
         </section>
     </aside>
     <!-- 
-        /* ****************************************************** */
-        /* ****************************************************** */
-         -->
+  /* ****************************************************** */
+  /* *************    ELEMENTOS CARD RIGHT    ************** */
+  /* ****************************************************** */
+  -->
     <label class="side-main">
 
         <input class="inp" checked type="checkbox" />
@@ -56,18 +61,21 @@
         <div class="side-main__bar">
             <div class="side-main__bar-info">
                 <!-- JAVA SCRIPT PARA TOMAR LA MITAD DEL NOBRE -->
-                <div class="side-main__name">ERICK</div>
+                <h3 class="side-main__name">ERICK</h3>
                 <!-- JAVA SCRIPT PARA PONER EL ROLL AQUI  -->
-                <div class="side-main__roll">SADMND</div>
+                <h3 class="side-main__roll">SAD-MND</h3>
             </div>
-            <div class="side-main__bar-avatar"></div>
+            <div class="side-main__container-avatar">
+                <img class="side-main__bar-avatar" src="../../public/img_/main/imagen_foto_perfil_github2.jpg" alt="">
+            </div>
         </div>
+
+        <!-- AQUI INICIA LA BARRA CON ACCESOS DIRECTOS A LOS MODULOS POR LA BARRA -->
 
         <section class="side-main__menu-container menu-container">
             <!-- PRODUCCION -->
 
             <a class="side-main__container-enlace" href="../index_main.html">
-                <!-- LA PAGINA MAIN, DEBE LISTAR LOS PROYECTOS QUE EXISTEN -->
                 <div class="side-main__menu-list">MAIN</div>
             </a>
             <a class="side-main__container-enlace" href="../dashboard.html">
@@ -75,7 +83,8 @@
             </a>
 
             <!-- cultivos -->
-            <div class="side-main__menu-list"><p>CULTIVO</p>
+            <div class="side-main__menu-list">
+                <p>CULTIVO</p>
                 <img class="side-main__menu-svg" src="../../public/img_/svg/agriculture-outline.svg" alt>
             </div>
             <a class="side-main__container-enlace" href="./1-create_crops.html">
@@ -89,7 +98,8 @@
             </a>
 
             <!-- ciclos -->
-            <div class="side-main__menu-list"><p>CICLO</p>
+            <div class="side-main__menu-list">
+                <p>CICLO</p>
                 <img class="side-main__menu-svg" src="../../public/img_/svg//agriculture-ciclo.svg" alt>
             </div>
             <a class="side-main__container-enlace" href="../cycle_crops/1-create_cycle_crops.html">
@@ -103,7 +113,8 @@
             </a>
 
             <!-- iot -->
-            <div class="side-main__menu-list"><p>SENSORES</p>
+            <div class="side-main__menu-list">
+                <p>SENSORES</p>
                 <img class="side-main__menu-svg" src="../../public/img_/svg/agriculture--iot.svg" alt>
             </div>
             <a class="side-main__container-enlace" href="../sensors/1-create_sensor.html">
@@ -117,7 +128,8 @@
             </a>
 
             <!-- insumos -->
-            <div class="side-main__menu-list"><p>INSUMOS</p>
+            <div class="side-main__menu-list">
+                <p>INSUMOS</p>
                 <img class="side-main__menu-svg" src="../../public/img_/svg/agriculture-analytics.svg" alt>
             </div>
             <a class="side-main__container-enlace" href="../insumes/1-create_insumes.html">
@@ -130,7 +142,8 @@
                 <div class="side-main__menu-list">Actualizar</div>
             </a>
             <!-- usuarios -->
-            <div class="side-main__menu-list"><p>USUARIOS</p>
+            <div class="side-main__menu-list">
+                <p>USUARIOS</p>
                 <img class="side-main__menu-svg" src="../../public/img_/svg/agriculture-worker-outline.svg" alt>
             </div>
             <a class="side-main__container-enlace" href="../users/1-create_user.html">
@@ -201,38 +214,34 @@
 
             <div class="cardright__container-datos">
 
-                <div class="cardright__table">
-                    <!-- Encabezado de la tabla -->
-                    <div class="cardright__row cardright__header">
-                        <div class="cardright__cell">ID Cultivo</div>
-                        <div class="cardright__cell">Tipo de Cultivo</div>
-                        <div class="cardright__cell">Nombre de Cultivo</div>
-                        <div class="cardright__cell">Ubicacion</div>
-                        <div class="cardright__cell">Tamaño en m²</div>
-                        <div class="cardright__cell">Descripción</div>
-                    </div>
-                    <!-- Filas de datos -->
-                    <div class="cardright__row">
-                        <div class="cardright__cell">Data 1</div>
-                        <div class="cardright__cell">Data 2</div>
-                        <div class="cardright__cell">Data 3</div>
-                        <div class="cardright__cell">Data 4</div>
-                        <div class="cardright__cell">Data 5</div>
-                        <div class="cardright__cell">Data 6</div>
-                    </div>
 
+                <table class="cardright__table">
+                    <thead>
+                        <tr class="cardright__row cardright__row--header">
+                            <th class="cardright__cell">ID Cultivo</th>
+                            <th class="cardright__cell">Tipo de Cultivo</th>
+                            <th class="cardright__cell">Nombre del Cultivo</th>
+                            <th class="cardright__cell">Ubicación</th>
+                            <th class="cardright__cell">Tamaño en m²</th>
+                            <th class="cardright__cell">Descripción</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        <tr class="cardright__row">
+                            <td>    <!-- sanchezesto es ERA "tr" LO AFECTA O SE CAMBIA? --> 
+                            </td>   <!-- sanchezesto es nuevo pero es para cerrar ,por si no funciona borrar --> 
+                        </tr>       <!-- sanchez esto es nuevo por si no funciona borrar </tr> -->
+                    </tbody>
 
-                </div>
-
+                </table>
+                <!-- sanchez esto tiene clase PAGINACION SUYA, Y LA OTRA BEM -->
+                <div class="cardright__paginacion    paginacion"></div>
             </div>
 
-            <div class="cardright__paginacion">1 de 2</div>
-
-        </div>
-
-        <a class="cardright__footer" href="../index_main.html">
-            <img class="cardright__svg-footer" src="../../public/img_/svg/control_back.svg" alt>
-        </a>
+            <a class="cardright__footer" href="../index_main.html">
+                <img class="cardright__svg-footer" src="../../public/img_/svg/control_back.svg" alt>
+            </a>
 
         </div>
 

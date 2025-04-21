@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Es una pagina con formulario y una ventana de celular" />
+    <meta name="keywords" content="sena, risaralda, lembo, gestion, agricola, campecino, produtos, cultivos," />
+    <meta name="author"
+        content="Aprendiz: Erick Ramirez, Aprendiz Aprendiz:Sanchez Hernandez, Aprendiz:Estefani Acevedo" />
+    <meta http-equiv="Content-Language" content="es" />
+    <script src="/frontend/js/actualizar_crop.js"></script>
+    <link rel="stylesheet" href="../public/css/styles-bem.css">
+
+    <title>Integrador</title>
+</head>
+
+<body>
+    <!--   
+  /* ****************************************************** */
+  /* ***************    ELEMENTOS TITTLE    *************** */
+  /* ****************************************************** */ -->
+
+    <header class="cardtittle">
+        <p class="cardtittle__text">SENA SEDE LEMBO</p>
+        <a class="cardtittle__enlace" href="../index_main.html">
+            <img class="cardtittle__svg-home" src="../public/img_/svg/home.svg" alt>
+        </a>
+    </header>
+    <!-- 
+  /* ****************************************************** */
+  /* *************    ELEMENTOS CARD LEFT    ************** */
+  /* ****************************************************** */
+  -->
+    <aside class="cardleft cardleft--pequeño">
+        <section class="cardleft__container">
+            <img class="cardleft__logo-sgal" src="../public/img_/left_side/LogoSgal.png" alt="Imagen de Logo Sgal" />
+
+
+            <img class="cardleft__img" src="../public/img_/left_side/movil01.png" alt="Imagen de celular  cuadros" />
+
+            <img class="cardleft__logo-sena"
+                src="../public/img_/svg_sena/logo-sena-verde-complementario-svg-2022.svg"
+                alt="Imagen de Logo Sena" />
+
+        </section>
+    </aside>
+    <!-- 
+        /* ****************************************************** */
+        /* ****************************************************** */
+         -->
+    <label class="side-main">
+
+        <input class="inp" checked type="checkbox" />
+
+        <div class="side-main__bar">
+            <div class="side-main__bar-info">
+                <!-- JAVA SCRIPT PARA TOMAR LA MITAD DEL NOBRE -->
+                <div class="side-main__name">ERICK</div>
+                <!-- JAVA SCRIPT PARA PONER EL ROLL AQUI  -->
+                <div class="side-main__roll">SADMND</div>
+            </div>
+            <div class="side-main__container-avatar">
+                <img class="side-main__bar-avatar" src="../public/img_/main/imagen_foto_perfil_github2.jpg" alt="">
+            </div>
+        </div>
+
+        <section class="side-main__menu-container menu-container">
+            <!-- PRODUCCION -->
+
+            <a class="side-main__container-enlace" href="../index_main.html">
+                <!-- LA PAGINA MAIN, DEBE LISTAR LOS PROYECTOS QUE EXISTEN -->
+                <div class="side-main__menu-list">MAIN</div>
+            </a>
+            <!-- <a class="side-main__container-enlace" href="../dashboard.html">
+                <div class="side-main__menu-list">INTEGRADOR</div>
+            </a> -->
+
+            <!-- cultivos -->
+            <div class="side-main__menu-list"><p>CULTIVO</p>
+                <img class="side-main__menu-svg" src="../public/img_/svg/agriculture-outline.svg" alt>
+            </div>
+            <a class="side-main__container-enlace" href="./crops/1-create_crops.html">
+                <div class="side-main__menu-list">Crear</div>
+            </a>
+            <a class="side-main__container-enlace" href="./crops/2-seach_crops.html">
+                <div class="side-main__menu-list">Buscar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./crops/4-update_crops.html">
+                <div class="side-main__menu-list">Actualizar</div>
+            </a>
+
+            <!-- ciclos -->
+            <div class="side-main__menu-list"><p>CICLO</p>
+                <img class="side-main__menu-svg" src="../public/img_/svg//agriculture-ciclo.svg" alt>
+            </div>
+            <a class="side-main__container-enlace" href="./cycle_crops/1-create_cycle_crops.html">
+                <div class="side-main__menu-list">Crear</div>
+            </a>
+            <a class="side-main__container-enlace" href="./cycle_crops/2-search_cycle_crops.html">
+                <div class="side-main__menu-list">Buscar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./cycle_crops/4-update_cycle_crops.html">
+                <div class="side-main__menu-list">Actualizar</div>
+            </a>
+
+            <!-- iot -->
+            <div class="side-main__menu-list"><p>SENSORES</p>
+                <img class="side-main__menu-svg" src="../public/img_/svg/agriculture--iot.svg" alt>
+            </div>
+            <a class="side-main__container-enlace" href="../sensors/1-create_sensor.html">
+                <div class="side-main__menu-list">Crear</div>
+            </a>
+            <a class="side-main__container-enlace" href="./sensors/2-seach_sensor.html">
+                <div class="side-main__menu-list">Buscar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./sensors/4-update_sensor.html">
+                <div class="side-main__menu-list">Actualizar</div>
+            </a>
+
+            <!-- insumos -->
+            <div class="side-main__menu-list"><p>INSUMOS</p>
+                <img class="side-main__menu-svg" src="../public/img_/svg/agriculture-analytics.svg" alt>
+            </div>
+            <a class="side-main__container-enlace" href="./insumes/1-create_insumes.html">
+                <div class="side-main__menu-list">Crear</div>
+            </a>
+            <a class="side-main__container-enlace" href="./insumes/2-search_insume.html">
+                <div class="side-main__menu-list">Buscar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./insumes/4-update_insumes.html">
+                <div class="side-main__menu-list">Actualizar</div>
+            </a>
+            <!-- usuarios -->
+            <div class="side-main__menu-list"><p>USUARIOS</p>
+                <img class="side-main__menu-svg" src="../public/img_/svg/agriculture-worker-outline.svg" alt>
+            </div>
+            <a class="side-main__container-enlace" href="./users/1-create_user.html">
+                <div class="side-main__menu-list">Crear</div>
+            </a>
+            <a class="side-main__container-enlace" href="./users/2-search_user.html">
+                <div class="side-main__menu-list">Buscar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./users/4-update_user.html">
+                <div class="side-main__menu-list">Actualizar</div>
+            </a>
+            <!-- loging out -->
+            <hr>
+            </div>
+            <a class="side-main__container-enlace" href="./home/home.html">
+                <div class="side-main__menu-list">LOGIN OUT</div>
+            </a>
+
+        </section>
+    </label>
+    <!-- 
+  /* ******************************************************* */
+  /* ****************    CARD RIGHT BLOQUE   *************** */
+  /* ******************************************************* */ 
+  -->
+    <main class="cardright cardright--grande">
+
+        <div class="cardright__table-listar">
+            <div class="cardright__tittle-listar">INTEGRADOR</div>
+
+            <!-- este contenedor CONTIENE EL CONTENEDOR DE TABLA SUBTITULOS Y TABLA DATOS  -->
+
+            <div class="cardright__controls-container">
+
+                <!-- añadir -->
+                <div class="cardright__botton-terciary cardright__container-añadir">
+                    <a class="cardright__botton-a" href="#">Añadir</a>
+                </div>
+                <!-- borrar -->
+                <div class="cardright__botton-terciary cardright__container-borrar">
+                    <a class="cardright__botton-a" href="#">Borrar</a>
+                </div>
+                <!-- actualizar -->
+                <div class="cardright__botton-terciary cardright__container-modificar">
+                    <a class="cardright__botton-a" href="#">Modificar</a>
+                </div>
+                <!-- listar -->
+                <div class="cardright__botton-terciary cardright__container-imprimir">
+                    <a class="cardright__botton-a" href="#">Listar</a>
+                </div>
+                <!-- ordenar -->
+                <div class="cardright__botton-terciary cardright__container-ordenar">
+                    <label>
+                        <a class="cardright__botton-a" href="#">Ordenar</a>
+                        <select>
+                            <option value></option>
+                        </select>
+                    </label>
+                </div>
+                <!-- buscar -->
+                <button class="cardright__botton-terciary cardright__container-buscar">Buscar</button>
+                <!--Esto es de js  -->
+                <input type="text" class="cardright__botton-terciary cardright__container-search"
+                    placeholder="Por id,nombre...">
+                <!--Esto es de js  -->
+
+            </div>
+
+            <div class="cardright__container-datos">
+
+                <div class="cardright__table">
+                    <!-- Encabezado de la tabla -->
+                    <div class="cardright__row cardright__header">
+                        <div class="cardright__cell">ID Cultivo</div>
+                        <div class="cardright__cell">Tipo de Cultivo</div>
+                        <div class="cardright__cell">Nombre de Cultivo</div>
+                        <div class="cardright__cell">Ubicacion</div>
+                        <div class="cardright__cell">Tamaño en m²</div>
+                        <div class="cardright__cell">Descripción</div>
+                    </div>
+                    <!-- Filas de datos -->
+                    <div class="cardright__row">
+                        <div class="cardright__cell">Data 1</div>
+                        <div class="cardright__cell">Data 2</div>
+                        <div class="cardright__cell">Data 3</div>
+                        <div class="cardright__cell">Data 4</div>
+                        <div class="cardright__cell">Data 5</div>
+                        <div class="cardright__cell">Data 6</div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <div class="cardright__paginacion">1 de 2</div>
+
+        </div>
+
+        <a class="cardright__footer" href="../index_main.html">
+            <img class="cardright__svg-footer" src="../../public/img_/svg/control_back.svg" alt>
+        </a>
+
+        </div>
+
+    </main>
+</body>
+
+</html>
