@@ -9,8 +9,11 @@ function inicializarValidaciones() {
 
 
             const name_cropCycle = document.querySelector('.cardright__input-form--name');
-            const news = document.querySelector('.cardright__input-form--news');
-            const size_cropCycle = document.querySelector('.cardright__input-form--size_m2');
+            const description_cycle = document.querySelector('.cardright__input-form--description');
+            const period_cycle_start = document.querySelector('.cardright__input-form--date-start');
+            const period_cycle_end = document.querySelector('.cardright__input-form--date-end');
+            const news_cycle = document.querySelector('.cardright__input-form--news');
+            const state_cycle = document.querySelector('.cardright__input-form--checkbox');
             let validarCampo = true;
             const inputs = form.querySelectorAll("input");
 
@@ -38,13 +41,17 @@ function inicializarValidaciones() {
             
                 let datos = {
                     name_cropCycle: name_cropCycle ? name_cropCycle.value : '',
-                    news: news ? news.value : '',
-                    size_cropCycle: size_cropCycle ? size_cropCycle.value : ''
+                    description_cycle: description_cycle ? description_cycle.value : '',
+                    period_cycle_start: period_cycle_start ? period_cycle_start.value : '',
+                    period_cycle_end: period_cycle_end ? period_cycle_end.value : '',
+                    news_cycle: news_cycle ? news_cycle.value : '',
+                    state_cycle: state_cycle ? state_cycle.value : '',
+
                 }; // Objeto para almacenar los valores del formulario
             if (validarCampo) {
                 try {
                     console.log("Datos enviados:", datos); // Agrega esto antes del fetch(
-                    let respuesta = await fetch("http://localhost:5501/cropCycle", {
+                    let respuesta = await fetch("http://localhost:5501/cropcycle", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",

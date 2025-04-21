@@ -37,14 +37,17 @@ CREATE TABLE users(
 );
 
 
-CREATE TABLE cropCycle(	
-	id INT AUTO_INCREMENT PRIMARY KEY,
-    name_cropCycle VARCHAR(100) NOT NULL,
-    news TEXT NOT NULL,
-    size_cropCycle INT,
+CREATE TABLE cropcycle (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name_cropCycle VARCHAR(255) NOT NULL,
+    state_cycle TINYINT(1) DEFAULT 1,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-    );
+    update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    period_cycle_start DATE,
+    period_cycle_end DATE,
+    description_cycle DATE,
+    news_cycle DATE
+);
 
 
 

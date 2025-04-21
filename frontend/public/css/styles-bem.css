@@ -315,6 +315,7 @@ body {
     margin: 0 0 1.2rem 0;
     border: 0.1rem solid var(--blanco);
     border-radius: 5rem;
+    cursor:pointer;
 }
 
 /* ESTE ES EL HOVER DEL LABEL PARA QUE CAMBIE DE COLOR */
