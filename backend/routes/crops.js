@@ -1,27 +1,31 @@
-// La conexion con la bd
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-// ⬆️ Require para express mysql2 y cors para el correcto funcionamiento del back
-const app = express(); // 👈 Le asignamos a app las propiedades express, para poder crear rutas
-app.use(express.json());// 👈 Para que peuda analizar el cuerpo de las solicitudes (body)
-app.use(cors());// 👈 Para poder hacer las solicitudes de puertos del back y front diferentes
 const mysql = require("mysql2");
 const multer = require("multer");
 const path = require("path");
-// Middleware para analizar JSON y formularios
-app.use(express.json());
+
+const app = express();
+
+// Middleware para CORS (debe ir antes de las rutas)
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+
+// Middleware para analizar formularios codificados (application/x-www-form-urlencoded)
 app.use(express.urlencoded({ extended: true }));
 
 // 🔥 Aquí sirve la carpeta 'uploads' como pública
 app.use('/uploads', express.static('uploads'));
+
 // Configurar multer
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, "uploads/"); // Carpeta donde se guardan
+        cb(null, "uploads/");
     },
     filename: function (req, file, cb) {
-        // Nombre del archivo único: fecha + nombre original
         cb(null, Date.now() + path.extname(file.originalname));
     }
 });
@@ -29,46 +33,44 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 //⬇️ Configuramos conexión a la BD
-const conexion = mysql.createConnection({ 
-  host: process.env.HOST,
-  user: process.env.USER,
-  password: process.env.PASSWORD,
-  database: process.env.DATABASE
+const conexion = mysql.createConnection({
+    host: process.env.HOST,
+    user: process.env.USER,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE
 });
-
 
 conexion.connect((err) => {
-  if (err) throw err;
-  console.log('Conectado a MySQL');
+    if (err) throw err;
+    console.log('Conectado a MySQL');
 });
+
+app.listen(5501, () => console.log("Servidor corriendo en puerto 5501"));
 
 //⬇️ Ruta para insertar datos ( modulo crear)
 app.post("/crops", upload.single("image_crop"), (req, res) => {
-  console.log("Datos recibidos en POST /crops:", req.body); 
+    console.log("Datos recibidos en POST /crops:", req.body);
 
-  const { name_crop, type_crop, location, description_crop, size_m2 } = req.body;
-  const image_crop = req.file ? req.file.filename : null;
+    const { name_crop, type_crop, location, description_crop, size_m2 } = req.body;
+    const image_crop = req.file ? req.file.filename : null;
 
-  if (!name_crop || !type_crop || !location || !description_crop || !size_m2 || !image_crop) {
-      return res.status(400).json({ error: "Todos los campos son obligatorios" });
-  }
+    if (!name_crop || !type_crop || !location || !description_crop || !size_m2 || !image_crop) {
+        return res.status(400).json({ error: "Todos los campos son obligatorios" });
+    }
 
-  const sql = "INSERT INTO crops (name_crop, type_crop, location, description_crop, size_m2, image_crop) VALUES (?, ?, ?, ?, ?, ?)";
-  conexion.query(sql, [name_crop, type_crop, location, description_crop, size_m2, image_crop], (error, resultado) => {
-      if (error) {
-          console.error("Error al insertar datos:", error);
-          return res.status(500).json({ error: "Error al insertar datos" });
-      }
+    const sql = "INSERT INTO crops (name_crop, type_crop, location, description_crop, size_m2, image_crop) VALUES (?, ?, ?, ?, ?, ?)";
+    conexion.query(sql, [name_crop, type_crop, location, description_crop, size_m2, image_crop], (error, resultado) => {
+        if (error) {
+            console.error("Error al insertar datos:", error);
+            return res.status(500).json({ error: "Error al insertar datos" });
+        }
 
-      console.log("Resultado del INSERT:", resultado);
-      res.json({ 
-          mensaje: "Datos guardados correctamente", 
-          id: resultado.insertId
-      });
-  });
+        console.log("Resultado del INSERT:", resultado);
+        res.json({
+            id: resultado.insertId
+        });
+    });
 });
-
-//⬆️ Ruta para insertar datos (modulo crear)
 
 // // ⬇️ Ruta para buscar un cultivo por ID (modulo buscar)
 
@@ -151,7 +153,6 @@ app.put('/crops/:id', (req, res) => {
 
 // ⬇️ Ruta para Listar (modulo listar)
 // 🟢 Iniciar servidor
-app.listen(5501, () => console.log("Servidor corriendo en puerto 5501"));
 app.get('/crops', (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const buscar = req.query.buscar || ''; // 👈 palabra clave para buscar
