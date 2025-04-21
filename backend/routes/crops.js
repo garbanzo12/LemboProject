@@ -47,6 +47,68 @@ conexion.connect((err) => {
 
 app.listen(5501, () => console.log("Servidor corriendo en puerto 5501"));
 
+//⬇️ Ruta para actualizar el cultivo (modulo actualizar)
+app.put('/crops/:id', upload.single('imagen_cultivo'), (req, res) => { // No olvides el middleware multer
+  const cropId = req.params.id;
+  console.log('====== INICIO ACTUALIZACIÓN ======');
+  console.log('ID recibido:', req.params.id);
+  console.log('Body recibido:', req.body);
+  console.log('File recibido:', req.file);
+  const {
+    nombre_cultivo,
+    tipo_cultivo,
+    ubicacion_cultivo,
+    descripcion_cultivo,
+    tamano_cultivo
+  } = req.body;
+
+  const imagen_cultivo = req.file ? req.file.filename : null;
+
+  // Query base SIN la coma final
+  let query = `
+    UPDATE crops 
+    SET 
+      name_crop = ?, 
+      type_crop = ?, 
+      location = ?, 
+      description_crop = ?, 
+      size_m2 = ?
+  `;
+
+  const values = [
+    nombre_cultivo,
+    tipo_cultivo,
+    ubicacion_cultivo,
+    descripcion_cultivo,
+    tamano_cultivo
+  ];
+
+  // Agregar imagen solo si existe
+  if (imagen_cultivo) {
+    query = query.replace('size_m2 = ?', 'size_m2 = ?, image_crop = ?');
+    values.push(imagen_cultivo);
+  }
+
+  // Añadir WHERE (solo una vez)
+  query += ' WHERE id = ?';
+  values.push(cropId);
+
+  console.log('Query final:', query); // Para depuración
+  console.log('Valores:', values);   // Para depuración
+
+  conexion.query(query, values, (err, result) => {
+    if (err) {
+      console.error('Error al actualizar el cultivo:', err);
+      return res.status(500).json({ 
+        error: 'Hubo un error al actualizar el cultivo.',
+        detalles: err.message 
+      });
+    }
+    res.json({ message: 'Cultivo actualizado exitosamente.' });
+  });
+});
+  //⬆️ Ruta para actualizar el cultivo (modulo actualizar)
+
 //⬇️ Ruta para insertar datos ( modulo crear)
 app.post("/crops", upload.single("image_crop"), (req, res) => {
     console.log("Datos recibidos en POST /crops:", req.body);
@@ -107,65 +169,8 @@ app.get("/crops/:id", (req, res) => {
 // // ⬆️ Ruta para buscar un cultivo por ID (modulo buscar)
 
 
-//⬇️ Ruta para actualizar el cultivo (modulo actualizar)
-app.put('/crops/:id', upload.single('imagen_cultivo'), (req, res) => { // No olvides el middleware multer
-  const cropId = req.params.id;
 
-  const {
-    nombre_cultivo,
-    tipo_cultivo,
-    ubicacion_cultivo,
-    descripcion_cultivo,
-    tamano_cultivo
-  } = req.body;
-
-  const imagen_cultivo = req.file ? req.file.filename : null;
-
-  // Query base SIN la coma final
-  let query = `
-    UPDATE crops 
-    SET 
-      name_crop = ?, 
-      type_crop = ?, 
-      location = ?, 
-      description_crop = ?, 
-      size_m2 = ?
-  `;
-
-  const values = [
-    nombre_cultivo,
-    tipo_cultivo,
-    ubicacion_cultivo,
-    descripcion_cultivo,
-    tamano_cultivo
-  ];
-
-  // Agregar imagen solo si existe
-  if (imagen_cultivo) {
-    query = query.replace('size_m2 = ?', 'size_m2 = ?, image_crop = ?');
-    values.push(imagen_cultivo);
-  }
-
-  // Añadir WHERE (solo una vez)
-  query += ' WHERE id = ?';
-  values.push(cropId);
-
-  console.log('Query final:', query); // Para depuración
-  console.log('Valores:', values);   // Para depuración
-
-  conexion.query(query, values, (err, result) => {
-    if (err) {
-      console.error('Error al actualizar el cultivo:', err);
-      return res.status(500).json({ 
-        error: 'Hubo un error al actualizar el cultivo.',
-        detalles: err.message 
-      });
-    }
-    res.json({ message: 'Cultivo actualizado exitosamente.' });
-  });
-});
-  //⬆️ Ruta para actualizar el cultivo (modulo actualizar)
-
+  
 // ⬇️ Ruta para Listar (modulo listar)
 // 🟢 Iniciar servidor
 app.get('/crops', (req, res) => {

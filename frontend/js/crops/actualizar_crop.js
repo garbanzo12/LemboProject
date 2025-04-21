@@ -7,11 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const choices = new Choices(cropSelect); // ⬅️ Estoy llamand a mi dependencia choices para el select
   // Inicializar Choices.js después de llenar las opciones
  
-    fetch('http://localhost:5501/crops') // ⬅️ hago un fetch para traer la lista de IDS
+    fetch('http://localhost:5501/crops/id') // ⬅️ hago un fetch para traer la lista de IDS
       .then(res => res.json()) // ⬅️ Aqui estoy trallendo el paquete json
       .then(ids => {
+        const todosLosIds = ids.cultivos; // Array con todos los IDs
+
         choices.setChoices( // ⬅️ Los meto en el choice
-          ids.cultivos.map(c => ({ value: c.id, label: `ID: ${c.id}` })),
+          todosLosIds.map(id => ({ value: id, label: `ID: ${id}` })),
           'value',
           'label',
           true
@@ -83,3 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+
+

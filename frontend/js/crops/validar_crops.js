@@ -90,8 +90,8 @@ function inicializarValidaciones() { //
                             navigator.clipboard.writeText(resultado.id)
                                 .then(() => {
                                     botonCopiar.textContent = "✅ Copiado";
-                                    setTimeout(() => botonCopiar.textContent = "Copiar ID");
-                                })
+                                    setTimeout(() => botonCopiar.textContent = "Copiar ID", 2000);
+                                    })
                                 .catch(() => alert("Error al copiar el ID"));
                         };
                     
