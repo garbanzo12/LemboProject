@@ -17,7 +17,7 @@ function inicializarValidaciones() { //
             const image_crop = document.querySelector('.cardright__input-form--file'); //✅
             let validarCampo = true;
             const inputs = form.querySelectorAll("input");
-
+    
 
             inputs.forEach((input) => {
                 let errorSpan = input.nextElementSibling;
@@ -142,3 +142,5 @@ setTimeout(() => {
 }, 100);
 
 });
+
+

@@ -14,7 +14,7 @@ async function obtenerIdsCultivos() {
 
 async function inicializarBuscar() {
   const formBuscar = document.querySelector('.cardright__form');
-  const selectId = document.querySelector('.cardright__selectId');
+  const selectId = document.querySelector('.cardright__selectid');
 
   const ids = await obtenerIdsCultivos();
   selectId.innerHTML = '';

@@ -1,11 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const cropSelect = document.querySelector('.cardright__selectId'); // ⬅️ Tomo del DOM a el select donde van a ir los IDS
+  const cropSelect = document.querySelector('.cardright__selectid'); // ⬅️ Tomo del DOM a el select donde van a ir los IDS
   const cropForm = document.querySelector('.cardright__form'); // ⬅️ Tomo del DOM a el form 
   let currentID = null; // ⬅️ Incializo la variable donde voy a guardar el id en null
 
   if (cropSelect && (cropSelect.tagName === 'SELECT' || cropSelect.type === 'text')) { // ⬅️  Hago validaciones
     const choices = new Choices(cropSelect); // ⬅️ Estoy llamand a mi dependencia choices para el select
-
+  // Inicializar Choices.js después de llenar las opciones
+ 
     fetch('http://localhost:5501/crops') // ⬅️ hago un fetch para traer la lista de IDS
       .then(res => res.json()) // ⬅️ Aqui estoy trallendo el paquete json
       .then(ids => {
@@ -15,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
           'label',
           true
         );
+        
       })
       .catch(err => console.error('Error al cargar IDs:', err)); // ⬅️ 
 
