@@ -1366,13 +1366,13 @@ DOMINGO ESTE ES DONDE SE VEN EL MAPA CON LOS DATOS DE LOS SENSORES*/
     transform: translate(-50%, -50%);
     width: 80rem;
     max-width: 90%;
-    background-color: #D4D4D4;
-    border: 2px solid #242424;
-    padding: 40px 30px;
-    border-radius: 20px;
-    font-family: 'Cascadia Code', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--gray-050) ;
+    border: 2px solid var(--gray-950);
+    padding: 4rem 3rem;
+    border-radius: 2rem;
+    font-family: var(--main-font);
     font-size: 2.4rem;
-    color: #2d572c;
+    color: var(--);     /* #2d572c  */
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
     z-index: 9999;
     text-align: center;
