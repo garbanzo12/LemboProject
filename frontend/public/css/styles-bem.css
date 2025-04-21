@@ -759,7 +759,14 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
 .cardright__tittle-listar {
     font-size: var(--fs-xs);
     padding: 1rem;
-    background-color: var(--gray-300);
+    /* background-color: var(--gray-300); */
+    font-weight: 700;
+    border-radius: 1rem;
+}
+.cardright__tittle-value {
+    font-size: var(--fs-xs);
+    padding: 1rem;
+    background-color: green;
     font-weight: 700;
     border-radius: 1rem;
 }
