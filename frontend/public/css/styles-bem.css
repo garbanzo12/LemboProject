@@ -687,7 +687,7 @@ body {
     background-color: var(--gray-050);
 }
 .cardright__input-form--date{
-    width: 14rem;
+    width: 15rem;
     font-size: var(--fs-xs);
     color: var(--gray-700);
     
