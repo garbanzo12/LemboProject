@@ -69,21 +69,31 @@
                     </div>
 
                     <div class="cardright__subcontainer-input">
-                        <label class="cardright__label-form" for="">Novedad</label>
+                        <label class="cardright__label-form" for="">Descripción</label>
                         <input class="cardright__input-form" placeholder="Ingrese Dato" type="text" disabled />
                     </div>
 
                     <div class="cardright__subcontainer-input">
-                        <label class="cardright__label-form" for="">Ingrese Tamaño m2</label>
-                        <input class="cardright__input-form" placeholder="Ingrese Dato" type="text" disabled />
+                        <div class="cardright__subcontainer-input--row">
+                            <label class="cardright__label-form" for="">Periodo</label>
+                            <!-- Se añade nueva clase: nuevo-tamanoM2 -->
+                            <input class="cardright__input-form--date" placeholder="Inicio de Periodo" type="date" disabled/>
+                            <input class="cardright__input-form--date" placeholder="Inicio de Periodo" type="date" disabled/>
+                        </div>
+                    </div>
+
+                    <div class="cardright__subcontainer-input">
+                        <label class="cardright__label-form" for="" >Novedad</label>
+                        <!-- Se añade nueva clase: nuevo-novedad -->
+                        <input class="cardright__input-form" placeholder="Ingrese Dato" type="text" disabled/>
                     </div>
 
                     <!-- BOTON INDICADOR CAMBIO DE COLOR ESTADO  -->
                     <div class="cardright__subcontainer-input">
                         <label class="cardright__label-form" for="boton">Habilitado/Deshabilitado:</label>
-                        <input class="cardright__input-form--checkbox" type="checkbox" id="toggle-color"/>
-                        <label for="toggle-color" class="cardright__label-form--color"></label>              
-                      </div>
+                        <input class="cardright__input-form--checkbox" type="checkbox" id="toggle-color"  disabled/>
+                        <label for="toggle-color" class="cardright__label-form--color"></label>
+                    </div>
 
                     <div class="cardright__subcontainer-input">
                         <!-- SANCHEZ ESTE BOTON NO VALIDA NADA SOLO LLEVA LOS DATOS A OTRA VENTA MODIFICAR LOS LEE Y LOS MODIFICA -->
