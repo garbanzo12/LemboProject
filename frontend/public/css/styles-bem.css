@@ -1367,13 +1367,13 @@ DOMINGO ESTE ES DONDE SE VEN EL MAPA CON LOS DATOS DE LOS SENSORES*/
     width: 80rem;
     max-width: 90%;
     background-color: var(--gray-050) ;
-    border: 2px solid var(--gray-950);
+    border: 0.2rem solid var(--gray-950);
     padding: 4rem 3rem;
-    border-radius: 2rem;
+    border-radius: 1rem;
     font-family: var(--main-font);
-    font-size: 2.4rem;
-    color: var(--);     /* #2d572c  */
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    font-size: var(--fs-xs);
+    color: var(--primary-400);     
+    box-shadow: 0 0.1rem 0.4rem var(--black);
     z-index: 9999;
     text-align: center;
     transition: all 0.3s ease;
@@ -1421,36 +1421,36 @@ DOMINGO ESTE ES DONDE SE VEN EL MAPA CON LOS DATOS DE LOS SENSORES*/
     }
   
     #texto-mensaje {
-      font-size: 1rem;
+        font-size: var(--fs-xxs);
     }
   }
   
   /* Botones del modal */
   #cuadro-mensaje button {
-    background-color: #2E566D;
+    background-color: var(--secundary-2-900);
     border: none;
-    padding: 12px 24px;
+    padding: 1.2rempx 2.4rem;
     color: white;
     font-size: 1rem;
-    border-radius: 8px;
+    border-radius: 0.8rem;
     cursor: pointer;
     font-weight: bold;
-    margin: 15px 10px 0;
+    margin: 1.5rem 1rem 0;
     transition: background-color 0.2s ease;
   }
   
   #cuadro-mensaje button:hover {
-    background-color: #617581;
+    background-color: var(--secundary-1-500);
   }
   
   /* Botón cerrar "X" */
   #cerrar-modal {
     position: absolute;
-    top: 12px;
-    right: 15px;
+    top: 1.2rem;
+    right: 1.5rem;
     background: transparent;
-    color: #2d572c;
-    font-size: 1.5rem;
+    color: var(--primary-600);
+    font-size: var(--fs-xxxs);
     padding: 0;
     border: none;
     cursor: pointer;
@@ -1458,8 +1458,8 @@ DOMINGO ESTE ES DONDE SE VEN EL MAPA CON LOS DATOS DE LOS SENSORES*/
   
   /* Texto del mensaje */
   #texto-mensaje {
-    margin-bottom: 25px;
-    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+    font-size: var(--fs-xxxs);
   }
       
 
