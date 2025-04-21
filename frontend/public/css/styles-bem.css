@@ -1457,3 +1457,56 @@ DOMINGO ESTE ES DONDE SE VEN EL MAPA CON LOS DATOS DE LOS SENSORES*/
       
 
   /* ⬆️  Esto de aqui es  un modal invisible para mostrar el ID ⬆️ */
+
+.cardright__image-upload{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: var(--white);
+    border-radius: 1rem;
+    text-align: center;
+    justify-content: center;
+    margin: 1.5rem 6rem;
+    padding: 0rem;
+    gap: 1rem;
+    border-radius: 1rem 1rem 1rem 1rem;
+    box-shadow: 0 0.4rem 0.8rem var(--black);
+    transition: 0.5s ease-out;
+}
+
+
+
+.cardright__pagination {
+    margin-top: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+  
+  }
+  
+  .cardright__pagination button {
+    padding: 0.4rem 0.8rem;
+    background-color: #f1f1f1;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+  }
+  
+  .cardright__pagination button.activo {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .cardright__pagination button:hover {
+    background-color: #ddd;
+  }
+  
+  .cardright__pagination span {
+    padding: 0.4rem 0.6rem;
+    font-weight: bold;
+    color: #888;
+  }

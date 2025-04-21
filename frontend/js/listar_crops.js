@@ -1,6 +1,7 @@
+console.log('dasasddas');
 document.addEventListener('DOMContentLoaded', () => { // ⬅️ Esperamos a que cargue el DOM
-  const tbody = document.querySelector('.usuario__table tbody'); // ⬅️ Seleccionamos la tabla y el tbody
-  const paginacion = document.querySelector('.paginacion');// ⬅️ Esto es para la paginacion
+  const tbody = document.querySelector('.cardright__dinamic-table'); // ⬅️ Seleccionamos la tabla y el tbody
+  const paginacion = document.querySelector('.cardright__pagination');// ⬅️ Esto es para la paginacion
   let paginaActual = 1;// ⬅️ Empezamos en la pagina 1
 
   async function obtenerCultivos(pagina = 1, buscar = '') {
@@ -23,16 +24,16 @@ document.addEventListener('DOMContentLoaded', () => { // ⬅️ Esperamos a que 
     cultivos.forEach(cultivo => { // ⬅️ for Each para recorrer cada fila
       const row = document.createElement('tr'); // ⬅️ Por fila se crea un tr
       // ⬇️ Estamos ingresando una td con clase usuario__table-data-cell y un svg por diseño,luego creamos dinamicamente los datos de la fila segun su propiedad⬇️
+      row.className = 'cardright__row'; // Añade la clase BEM
+
       row.innerHTML = `
-        <td class="usuario__table-data-cell usuario__table-data-cell--icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" ...></svg>
-        </td>
-        <td class="usuario__table-data-cell ">${cultivo.id}</td> 
-        <td class="usuario__table-data-cell">${cultivo.type_crop}</td>
-        <td class="usuario__table-data-cell">${cultivo.name_crop}</td>
-        <td class="usuario__table-data-cell">${cultivo.location}</td>
-        <td class="usuario__table-data-cell">${cultivo.size_m2}</td>
-        <td class="usuario__table-data-cell">${cultivo.description_crop}</td>
+
+        <td class="cardright__cell ">${cultivo.id}</td> 
+        <td class="cardright__cell">${cultivo.type_crop}</td>
+        <td class="cardright__cell">${cultivo.name_crop}</td>
+        <td class="cardright__cell">${cultivo.location}</td>
+        <td class="cardright__cell">${cultivo.size_m2}</td>
+        <td class="cardright__cell">${cultivo.description_crop}</td>
         
       `;
       tbody.appendChild(row);
@@ -40,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => { // ⬅️ Esperamos a que 
   }
     
   function mostrarPaginacion(totalCultivos, paginaActual, buscar = '') { // ⬅️ Funcion para las paginas
-    const totalPaginas = Math.ceil(totalCultivos / 25);
+    const totalPaginas = Math.ceil(totalCultivos / 20);
     paginacion.innerHTML = '';// ⬅️ para que no sedupliquen los botones al presionar otro
   
     const crearBoton = (num, texto = null, isActive = false) => {
@@ -95,8 +96,8 @@ document.addEventListener('DOMContentLoaded', () => { // ⬅️ Esperamos a que 
     obtenerCultivos();
 // ⬇️Aqui empieza el bloqeu de codigo para buscar⬇️
 
-  const button = document.querySelector(".usuario__search-button");  // ⬅️ Botón de búsqueda
-  const input = document.querySelector(".searchInput");  // ⬅️ Input de búsqueda
+  const button = document.querySelector(".cardright__container-buscar");  // ⬅️ Botón de búsqueda
+  const input = document.querySelector(".cardright__container-search");  // ⬅️ Input de búsqueda
 
 
   // Explicacion con manitos

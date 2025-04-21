@@ -108,7 +108,7 @@ app.get("/crops/:id", (req, res) => {
 
 
 //⬇️ Ruta para actualizar el cultivo (modulo actualizar)
-app.put('/crops/:id', (req, res) => {
+app.put('/crops/:id', upload.single('imagen_cultivo'), (req, res) => { // No olvides el middleware multer
   const cropId = req.params.id;
 
   const {
@@ -116,36 +116,51 @@ app.put('/crops/:id', (req, res) => {
     tipo_cultivo,
     ubicacion_cultivo,
     descripcion_cultivo,
-    tamano_cultivo,
-    imagen_cultivo,
+    tamano_cultivo
   } = req.body;
 
-  const query = `
+  const imagen_cultivo = req.file ? req.file.filename : null;
+
+  // Query base SIN la coma final
+  let query = `
     UPDATE crops 
     SET 
       name_crop = ?, 
       type_crop = ?, 
       location = ?, 
       description_crop = ?, 
-      size_m2 = ?,
-      image_crop = ?
-    WHERE id = ?
+      size_m2 = ?
   `;
 
-  conexion.query(query, [
+  const values = [
     nombre_cultivo,
     tipo_cultivo,
     ubicacion_cultivo,
     descripcion_cultivo,
-    tamano_cultivo,
-    imagen_cultivo,
-    cropId
-  ], (err, result) => {
+    tamano_cultivo
+  ];
+
+  // Agregar imagen solo si existe
+  if (imagen_cultivo) {
+    query = query.replace('size_m2 = ?', 'size_m2 = ?, image_crop = ?');
+    values.push(imagen_cultivo);
+  }
+
+  // Añadir WHERE (solo una vez)
+  query += ' WHERE id = ?';
+  values.push(cropId);
+
+  console.log('Query final:', query); // Para depuración
+  console.log('Valores:', values);   // Para depuración
+
+  conexion.query(query, values, (err, result) => {
     if (err) {
       console.error('Error al actualizar el cultivo:', err);
-      return res.status(500).json({ error: 'Hubo un error al actualizar el cultivo.' });
+      return res.status(500).json({ 
+        error: 'Hubo un error al actualizar el cultivo.',
+        detalles: err.message 
+      });
     }
-
     res.json({ message: 'Cultivo actualizado exitosamente.' });
   });
 });
@@ -168,11 +183,11 @@ app.get('/crops', (req, res) => {
       type_crop LIKE ? OR 
       location LIKE ? OR 
       description_crop LIKE ? OR
-      size_m2 LIKE ? OR
-      image_crop LIKE ?
+      size_m2 LIKE ?
+      LIMIT ? OFFSET ?
   `;
 // ⬇️ Iniciamos los parametros correspondientes a id , nombre , tipo , ubicación y descripción
-  let params = [`%${buscar}%`,`%${buscar}%`,`%${buscar}%`, `%${buscar}%`, `%${buscar}%`, `%${buscar}%`, `%${buscar}%`, limit, offset];
+  let params = [`%${buscar}%`,`%${buscar}%`, `%${buscar}%`, `%${buscar}%`, `%${buscar}%`, `%${buscar}%`, limit, offset];
 
 // ⬇️ Si hay una búsqueda, usamos WHERE para poder contar cuantos datos estamos tomando (Estamos opteniendo la cantidad de datos del cultivo)
   let queryCount = `
@@ -183,12 +198,11 @@ app.get('/crops', (req, res) => {
       type_crop LIKE ? OR 
       location LIKE ? OR 
       description_crop LIKE ? OR
-      size_m2 LIKE ? OR 
-      image_crop LIKE ?
+      size_m2 LIKE ?  
   `;
   // ⬇️ Iniciamos los parametros correspondientes a id , nombre , tipo , ubicación y descripción
 
-  let countParams = [`%${buscar}%`,`%${buscar}%`,`%${buscar}%`, `%${buscar}%`, `%${buscar}%`, `%${buscar}%`, `%${buscar}%`];
+  let countParams = [`%${buscar}%`,`%${buscar}%`, `%${buscar}%`, `%${buscar}%`, `%${buscar}%`, `%${buscar}%`];
 
   conexion.query(queryData, params, (err, results) => {
     if (err) {

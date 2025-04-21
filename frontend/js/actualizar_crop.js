@@ -39,8 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
           cropForm.ubicacion_cultivo.value = data.location;
           cropForm.descripcion_cultivo.value = data.description_crop;
           cropForm.tamano_cultivo.value = data.size_m2;
-          cropForm.imagen_cultivo.value = data.image_crop;
-
   })
   .catch(err => {
     console.error('Error al cargar datos del cultivo:', err);
@@ -57,34 +55,31 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('Por favor selecciona un cultivo para actualizar.');
         return;
       }
-
-      const data = { // ⬅️ Anteriormente se hizo un data para mostrar los valores, este es para mandarlos en json al backend
-        id: currentID,
-        nombre_cultivo: cropForm.nombre_cultivo.value,
-        tipo_cultivo: cropForm.tipo_cultivo.value,
-        ubicacion_cultivo: cropForm.ubicacion_cultivo.value,
-        descripcion_cultivo: cropForm.descripcion_cultivo.value,
-        tamano_cultivo: cropForm.tamano_cultivo.value,
-        imagen_cultivo: cropForm.imagen_cultivo.value, // ⬅️ Aquí deberías manejar la imagen de otra forma si es necesario
-      };
+      // const imagenInput = cropForm.elements['imagen_cultivo']; // Campo file
+      const data = new FormData();
+      data.append("nombre_cultivo", cropForm.nombre_cultivo.value);
+      data.append("tipo_cultivo", cropForm.tipo_cultivo.value);
+      data.append("ubicacion_cultivo", cropForm.ubicacion_cultivo.value);
+      data.append("descripcion_cultivo", cropForm.descripcion_cultivo.value);
+      data.append("tamano_cultivo", cropForm.tamano_cultivo.value);
+      if (cropForm.imagen_cultivo.files[0]) {
+        data.append("imagen_cultivo", cropForm.imagen_cultivo.files[0]);
+      }
 
       fetch(`http://localhost:5501/crops/${currentID}`, { // ⬅️ Mandamos con fetch la actualizacion con su id correspondiente
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        body: data
       })
-        .then(res => {
-          if (!res.ok) throw new Error(`Error HTTP: ${res.status}`);
-          window.location.href = '5-listar-cultivos.html'; // ⬅️ Redirección después de éxito
-          return res.json();
-        })
-        .then(msg => {
-          alert(msg.message || 'Cultivo actualizado con éxito'); // ⬅️ Alerta si la actualización fue exitosa
-        })
-        .catch(err => {
-          console.error('Error al enviar datos:', err);
-          alert('Hubo un problema al actualizar el cultivo.'); // ⬅️ Alerta en caso de error
-        });
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) throw new Error(data.error);
+        alert(data.message);
+        window.location.href = '5-listar_cropsMOD.html';
+      })
+      .catch(err => {
+        console.error('Error:', err);
+        alert(err.message || 'Error al actualizar');
+      });
     });
   }
 });

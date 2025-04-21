@@ -9,7 +9,7 @@
     <meta name="author"
         content="Aprendiz: Erick Ramirez, Aprendiz Aprendiz:Sanchez Hernandez, Aprendiz:Estefani Acevedo" />
     <meta http-equiv="Content-Language" content="es" />
-    <script src="/frontend/js/actualizar_crop.js"></script>
+    <script src="/frontend/js/listar_crops.js"></script>
     <link rel="stylesheet" href="../../public/css/styles-bem.css">
 
     <title>Listar Cultivos Preparando</title>
@@ -218,25 +218,21 @@
                 <table class="cardright__table">
                     <thead>
                         <tr class="cardright__row cardright__row--header">
-                            <th class="cardright__cell">ID Cultivo</th>
-                            <th class="cardright__cell">Tipo de Cultivo</th>
-                            <th class="cardright__cell">Nombre del Cultivo</th>
-                            <th class="cardright__cell">Ubicación</th>
-                            <th class="cardright__cell">Tamaño en m²</th>
-                            <th class="cardright__cell">Descripción</th>
+                            <td class="cardright__cell">ID Cultivo</td>
+                            <td class="cardright__cell">Tipo de Cultivo</td>
+                            <td class="cardright__cell">Nombre del Cultivo</td>
+                            <td class="cardright__cell">Ubicación</td>
+                            <td class="cardright__cell">Tamaño en m²</td>
+                            <td class="cardright__cell">Descripción</td>
                         </tr>
                     </thead>
                     
-                    <tbody>
-                        <tr class="cardright__row">
-                            <td>    <!-- sanchezesto es ERA "tr" LO AFECTA O SE CAMBIA? --> 
-                            </td>   <!-- sanchezesto es nuevo pero es para cerrar ,por si no funciona borrar --> 
-                        </tr>       <!-- sanchez esto es nuevo por si no funciona borrar </tr> -->
+                    <tbody class="cardright__dinamic-table">
                     </tbody>
 
                 </table>
                 <!-- sanchez esto tiene clase PAGINACION SUYA, Y LA OTRA BEM -->
-                <div class="cardright__paginacion    paginacion"></div>
+                <div class="cardright__pagination"></div>
             </div>
 
         </div>
