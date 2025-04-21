@@ -1,16 +1,16 @@
 console.log("hola");
 
 function inicializarValidaciones() {
-    const forms = document.querySelectorAll(".form");
+    const forms = document.querySelectorAll(".cardright__form--top3");
 
     forms.forEach((form) => {
         form.addEventListener("submit", async function (event) {
             event.preventDefault();
 
 
-            const name_cropCycle = document.querySelector('.nuevo-nombreCiclo');
-            const news = document.querySelector('.nuevo-novedad');
-            const size_cropCycle = document.querySelector('.nuevo-tamanoM2');
+            const name_cropCycle = document.querySelector('.cardright__input-form--name');
+            const news = document.querySelector('.cardright__input-form--news');
+            const size_cropCycle = document.querySelector('.cardright__input-form--size_m2');
             let validarCampo = true;
             const inputs = form.querySelectorAll("input");
 
