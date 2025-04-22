@@ -607,6 +607,7 @@ body {
     justify-content: center;
     margin: 1.5rem 6rem;
     padding: 0rem;
+    padding-top: 2rem;
     gap: 1rem;
     border-radius: 1rem 1rem 1rem 1rem;
     box-shadow: 0 0.4rem 0.8rem var(--black);
@@ -1151,6 +1152,10 @@ DOMINGO ESTE ES DONDE SE VEN EL MAPA CON LOS DATOS DE LOS SENSORES*/
         top: 5%;
     }
 
+    .cardright__container-input {
+        padding-top: 2rem;
+    }
+
     .cardright__subcontainer-input {
         display: flex;
         flex-direction: column;
@@ -1168,6 +1173,7 @@ DOMINGO ESTE ES DONDE SE VEN EL MAPA CON LOS DATOS DE LOS SENSORES*/
 }
 
 @media (max-width: 1280px) {
+
     .cardtittle__text {
         top: 0%;
         left: 0%;
