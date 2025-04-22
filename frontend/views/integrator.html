@@ -44,10 +44,11 @@
 
         </section>
     </aside>
-    <!-- 
-        /* ****************************************************** */
-        /* ****************************************************** */
-         -->
+    <!--     
+/* ****************************************************** */
+/* *************    ELEMENTOS CARD RIGHT    ************** */
+/* ****************************************************** */ -->
+
     <label class="side-main">
 
         <input class="inp" checked type="checkbox" />
@@ -55,25 +56,23 @@
         <div class="side-main__bar">
             <div class="side-main__bar-info">
                 <!-- JAVA SCRIPT PARA TOMAR LA MITAD DEL NOBRE -->
-                <div class="side-main__name">ERICK</div>
+                <h3 class="side-main__name">ERICK</h3>
                 <!-- JAVA SCRIPT PARA PONER EL ROLL AQUI  -->
-                <div class="side-main__roll">SADMND</div>
+                <h3 class="side-main__roll">SAD-MND</h3>
             </div>
             <div class="side-main__container-avatar">
                 <img class="side-main__bar-avatar" src="../public/img_/main/imagen_foto_perfil_github2.jpg" alt="">
             </div>
         </div>
 
+        <!-- AQUI INICIA LA BARRA CON ACCESOS DIRECTOS A LOS MODULOS POR LA BARRA -->
+
         <section class="side-main__menu-container menu-container">
             <!-- PRODUCCION -->
 
-            <a class="side-main__container-enlace" href="../index_main.html">
-                <!-- LA PAGINA MAIN, DEBE LISTAR LOS PROYECTOS QUE EXISTEN -->
+            <a class="side-main__container-enlace" href="./index_main.html">
                 <div class="side-main__menu-list">MAIN</div>
             </a>
-            <!-- <a class="side-main__container-enlace" href="../dashboard.html">
-                <div class="side-main__menu-list">INTEGRADOR</div>
-            </a> -->
 
             <!-- cultivos -->
             <div class="side-main__menu-list">
@@ -88,6 +87,9 @@
             </a>
             <a class="side-main__container-enlace" href="./crops/4-update_crops.html">
                 <div class="side-main__menu-list">Actualizar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./crops/5-listar_cicle_crops.html">
+                <div class="side-main__menu-list">Listar</div>
             </a>
 
             <!-- ciclos -->
@@ -104,13 +106,16 @@
             <a class="side-main__container-enlace" href="./cycle_crops/4-update_cycle_crops.html">
                 <div class="side-main__menu-list">Actualizar</div>
             </a>
+            <a class="side-main__container-enlace" href="./cycle_crops/5-listar_cicle_crops.html">
+                <div class="side-main__menu-list">Listar</div>
+            </a>
 
             <!-- iot -->
             <div class="side-main__menu-list">
                 <p>SENSORES</p>
                 <img class="side-main__menu-svg" src="../public/img_/svg/agriculture--iot.svg" alt>
             </div>
-            <a class="side-main__container-enlace" href="../sensors/1-create_sensor.html">
+            <a class="side-main__container-enlace" href="./sensors/1-create_sensor.html">
                 <div class="side-main__menu-list">Crear</div>
             </a>
             <a class="side-main__container-enlace" href="./sensors/2-seach_sensor.html">
@@ -118,6 +123,9 @@
             </a>
             <a class="side-main__container-enlace" href="./sensors/4-update_sensor.html">
                 <div class="side-main__menu-list">Actualizar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./sensors/5-listar_sensors.html">
+                <div class="side-main__menu-list">Listar</div>
             </a>
 
             <!-- insumos -->
@@ -134,6 +142,9 @@
             <a class="side-main__container-enlace" href="./insumes/4-update_insumes.html">
                 <div class="side-main__menu-list">Actualizar</div>
             </a>
+            <a class="side-main__container-enlace" href="./insumes/5-listar_insumes.html">
+                <div class="side-main__menu-list">Listar</div>
+            </a>
             <!-- usuarios -->
             <div class="side-main__menu-list">
                 <p>USUARIOS</p>
@@ -147,6 +158,9 @@
             </a>
             <a class="side-main__container-enlace" href="./users/4-update_user.html">
                 <div class="side-main__menu-list">Actualizar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./users/5-listar_users.html">
+                <div class="side-main__menu-list">Listar</div>
             </a>
             <!-- loging out -->
             <hr>
@@ -162,209 +176,190 @@
   /* ****************    CARD RIGHT BLOQUE   *************** */
   /* ******************************************************* */ 
   -->
-    <main class="cardright cardright--grande">
+    <main class="sideright">
 
-        <div class="cardright__produccion">
+        <form class="sideright__form">
 
-            <div class="cardright__produccion-header">
-                <!-- parte nombre producción -->
-                <div>
-                    <h2>Nombre producion</h2>
-                    <div class="cardright__">
-                        <!-- input para modificar el nombre -->
-                        <input type="text">
-                    </div>
+            <header class="sideright__form-header">
+
+                <div class="sideright__header-tittles">
+                    <h3 class="sideright__title-h3">Nombre producción</h3>
+                    <input class="sideright__input-form sideright__input-form--n-prodution" type="text" placeholder="nombre-produccion">
                 </div>
 
-                <!-- parte responsables -->
-                <div>
-                    <h3 class="side-main__card-module">RESPONSABLE</h3>
-                    <select class="cardright__">
-                        <option>Lista responsalbles</option>
-                        <option>Lista responsalbles</option>
-                    </select>
+                <div class="sideright__header-tittles">
+                    <h3 class="sideright__title-h3">RESPONSABLE</h3>
+                    <input class="sideright__input-form sideright__input-form--resp" type="text" placeholder="responsable">
                 </div>
-                <div>
-                    <!-- CONCATENAR CON JS fecha actual + nombre del cultivo + contador 0000  ==> esto se pone en el contendio de value-->
-                    <h3 class="cardright__title-value">Identificador de producción (25-05-2025-LECHUGA-0001)</h3>
-                    <input type="text">
+
+                <div class="sideright__header-tittles">
+                    <h3 class="sideright__title-h3 sideright__title-h3--id">Id producción</h3>
+                    <input class="sideright__input-form sideright__input-form-id-prod" type="text" placeholder="25-05-2025-LECHUGA-0001">
                 </div>
-            </div>
 
-            <!-- este contenedor CONTIENE EL CONTENEDOR DE TABLA SUBTITULOS Y TABLA DATOS  -->
+            </header>
 
-            <div class="cardright__controls-container cardright__produccion-body">
 
-                <!-- USUARIOS -->
-                <label class="side-main__module">
+            <fieldset class="sideright__form-body">
+                <div class=" cardright__produccion-body">
 
-                    <input class="inp" checked type="checkbox" />
-
-                    <div class="side-main__card-module">
-                        <div class="cardright__">
+                    <!-- Sección usuarios (opcional) -->
+                    <label class="side-main__module">
+                        <input class="inp" checked type="checkbox" id="usuarios">
+                        <div class="side-main__card-module">
                             USUARIOS
                         </div>
-                    </div>
-                    <!-- DESPLEGABLE -->
-                    <section class="side-main__card-actions">
-
-                        <div class="side-main__actions-container">
+                        <!-- Desplegable para agregar o eliminar usuarios -->
+                        <section class="side-main__actions-container">
+                            <h3 class="sime-main-card-tittle">VISUALIZAR</h3>
+                            <th>
+                            <td>DATO1</td>
+                            <td>DATO2</td>
+                            <td>DATO3</td>
+                            </th>
                             <h3 class="sime-main-card-tittle">AGREGAR</h3>
                             <select class="">
-                                <option>Nombre Cultivo</option>
-                                <option>Nombre Cultivo</option>
+                                <option value="">Seleccione un usuario</option>
+                                <!-- Los siguientes elementos son desplegables a partir de aquí -->
+                                <option>Nombre Usuario</option>
+                                <option>Nombre Usuario</option>
                             </select>
-                        </div>
-                    </section>
+                        </section>
+                    </label>
 
-                </label>
 
-                <!-- CULTIVO -->
-                <label class="side-main__module">
-
-                    <input class="inp" checked type="checkbox" />
-
-                    <div class="side-main__card-module">
-                        <div class="cardright__">
+                    <!-- Sección cultivo (opcional) -->
+                    <label class="side-main__module">
+                        <input class="inp" checked type="checkbox" id="cultivo">
+                        <div class="side-main__card-module">
                             CULTIVO
                         </div>
-                    </div>
-                    <!-- DESPLEGABLE -->
-                    <section class="side-main__card-actions">
-
-                        <div class="side-main__actions-container">
+                        <!-- Desplegable para agregar o eliminar cultivos -->
+                        <section class="side-main__actions-container">
+                            <h3 class="sime-main-card-tittle">VISUALIZAR</h3>
+                            <th>
+                            <td>DATO1</td>
+                            <td>DATO2</td>
+                            <td>DATO3</td>
+                            </th>
                             <h3 class="sime-main-card-tittle">AGREGAR</h3>
                             <select class="">
+                                <option value="">Seleccione un cultivo</option>
                                 <option>Nombre Cultivo</option>
                                 <option>Nombre Cultivo</option>
                             </select>
-                        </div>
-                    </section>
+                        </section>
+                    </label>
 
-                </label>
-
-                <!-- CICLO -->
-                <label class="side-main__module">
-
-                    <input class="inp" checked type="checkbox" />
-
-                    <div class="side-main__card-module">
-                        <div class="cardright__">
+                    <!-- Sección ciclo (opcional) -->
+                    <label class="side-main__module">
+                        <input class="inp" checked type="checkbox" id="ciclo-cultivo">
+                        <div class="side-main__card-module">
                             CICLO CULTIVO
                         </div>
-                    </div>
-                    <!-- DESPLEGABLE -->
-                    <section class="side-main__card-actions">
-
-                        <div class="side-main__actions-container">
+                        <!-- Desplegable para agregar o eliminar ciclos -->
+                        <section class="side-main__actions-container">
+                            <h3 class="sime-main-card-tittle">VISUALIZAR</h3>
+                            <th>
+                            <td>DATO1</td>
+                            <td>DATO2</td>
+                            <td>DATO3</td>
+                            </th>
                             <h3 class="sime-main-card-tittle">AGREGAR</h3>
                             <select class="">
+                                <option value="">Seleccione un ciclo</option>
                                 <option>Nombre Ciclo</option>
                                 <option>Nombre Ciclo</option>
                             </select>
-                        </div>
-                    </section>
+                        </section>
+                    </label>
 
-                </label>
-                <!-- SENSORES -->
-                <label class="side-main__module">
-
-                    <input class="inp" checked type="checkbox" />
-
-                    <div class="side-main__card-module">
-                        <div class="cardright__">
+                    <!-- Sección sensor (opcional) -->
+                    <label class="side-main__module">
+                        <input class="inp" checked type="checkbox" id="sensor-sensor">
+                        <div class="side-main__card-module">
                             SENSORES
                         </div>
-                    </div>
-                    <!-- DESPLEGABLE -->
-                    <section class="side-main__card-actions">
-
-                        <div class="side-main__actions-container">
+                        <!-- Desplegable para agregar o eliminar sensores -->
+                        <section class="side-main__actions-container">
+                            <h3 class="sime-main-card-tittle">VISUALIZAR</h3>
+                            <th>
+                            <td>DATO1</td>
+                            <td>DATO2</td>
+                            <td>DATO3</td>
+                            </th>
                             <h3 class="sime-main-card-tittle">AGREGAR</h3>
                             <select class="">
+                                <option value="">Seleccione un sensor</option>
                                 <option>Nombre Sensor</option>
                                 <option>Nombre Sensor</option>
                             </select>
-                        </div>
-                    </section>
+                        </section>
+                    </label>
 
-                </label>
-                <!-- INSUMOS -->
-                <label class="side-main__module">
-
-                    <input class="inp" checked type="checkbox" />
-
-                    <div class="side-main__card-module">
-                        <div class="cardright__">
+                    <!-- Sección suministro (opcional) -->
+                    <label class="side-main__module">
+                        <input class="inp" checked type="checkbox" id="suministro-sensor">
+                        <div class="side-main__card-module">
                             INSUMOS
                         </div>
-                    </div>
-                    <!-- DESPLEGABLE -->
-                    <section class="side-main__card-actions">
-
-                        <div class="side-main__actions-container">
+                        <!-- Desplegable para agregar o eliminar suministros -->
+                        <section class="side-main__actions-container">
+                            <h3 class="sime-main-card-tittle">VISUALIZAR</h3>
+                            <th>
+                            <td>DATO1</td>
+                            <td>DATO2</td>
+                            <td>DATO3</td>
+                            </th>
                             <h3 class="sime-main-card-tittle">AGREGAR</h3>
                             <select class="">
+                                <option value="">Seleccione un suministro</option>
                                 <option>Nombre Insumo</option>
                                 <option>Nombre Insumo</option>
                             </select>
-                        </div>
-                    </section>
-
-                </label>
-
-
-
-
-
-
-                <!-- METAS -->
+                        </section>
+                    </label>
+                </div>
+                <!-- Sección meta (opcional) -->
                 <label class="side-main__module">
 
-                    <input class="inp" checked type="checkbox" />
-
-                    <div class="side-main__card-module">
-                        <div class="cardright__">
-                            METAS
+                    <h3 class="side-main__card-module">
+                        METAS
+                    </h3>
+                    <!-- Desplegable para agregar o eliminar metas -->
+                    <section class="side-main__container">
+                        <div>
+                            <h3 class="side-main-card-tittle">FECHA INICIO</h3>
+                            <input type="text" class="inp" id="fecha-inicio">
                         </div>
-                    </div>
-                    <!-- DESPLEGABLE -->
-                    <section class="side-main__card-actions">
-
                         <div class="side-main__actions-container">
-                            <h3 class="sime-main-card-tittle">FECHA INICIO</h3>
-                            <input type="text">
+                            <h3 class="side-main-card-tittle">FECHA FINALIZACION</h3>
+                            <input type="text" class="inp" id="fecha-finalizacion">
                         </div>
-
                         <div class="side-main__actions-container">
-                            <h3 class="sime-main-card-tittle">FECHA FINALIZACION</h3>
-                            <input type="text">
+                            <h3 class="side-main-card-tittle">COSTE</h3>
+                            <input type="text" class="inp" id="fecha-finalizacion">
+                        </div>
+                        <div class="side-main__actions-container">
+                            <h3 class="side-main-card-tittle">GANANCIA</h3>
+                            <input type="text" class="inp" id="fecha-finalizacion">
                         </div>
                     </section>
-
                 </label>
 
+                </div>
 
+                <!-- Botón de crear -->
+                <button>Crear</button>
 
+            </fieldset>
 
+        </form>
 
-            </div>
-
-            <button>CREAR</button>
-
-            
-
-
-            <div class="cardright__paginacion">1 de 2</div>
-
-        </div>
-
-        <a class="cardright__footer" href="../index_main.html">
-            <img class="cardright__svg-footer" src="../../public/img_/svg/control_back.svg" alt>
-        </a>
-
-        </div>
-
+            <!-- Footer de la página (opcional) -->
+            <a class="sideright__footer" href="../index_main.html">
+                <img class="cardright__svg-footer" src="../../public/img_/svg/control_back.svg" alt>
+            </a>
     </main>
 </body>
 
