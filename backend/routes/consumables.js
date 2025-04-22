@@ -19,14 +19,14 @@ const conexion = mysql.createConnection({
 app.post("/consumables", (req, res) => {
     console.log("Datos recibidos en POST /consumables:", req.body); 
 
-    const { type_consumables,name_consumables, quantity_consumables, unit_consumables, unitary_value,total_value,description_consumables } = req.body;
+    const { type_consumables,name_consumables, quantity_consumables, unit_consumables, unitary_value,total_value,description_consumables,state_consumables } = req.body;
 
-    if (!type_consumables || !name_consumables || !quantity_consumables || !unit_consumables || !unitary_value || !total_value || !description_consumables) {
+    if (!type_consumables || !name_consumables || !quantity_consumables || !unit_consumables || !unitary_value || !total_value || !description_consumables  || !state_consumables) {
         return res.status(400).json({ error: "Todos los campos son obligatorios" });
     }
 
-    let sql = "INSERT INTO consumables (type_consumables,name_consumables, quantity_consumables, unit_consumables, unitary_value, total_value,description_consumables) VALUES (?, ?, ?, ?, ? ,? ,?)";
-    conexion.query(sql, [type_consumables,name_consumables, quantity_consumables, unit_consumables, unitary_value,total_value,description_consumables], (error, resultado) => {
+    let sql = "INSERT INTO consumables (type_consumables,name_consumables, quantity_consumables, unit_consumables, unitary_value, total_value,description_consumables,state_consumables) VALUES (?, ?, ?, ?, ? ,? ,?, ?)";
+    conexion.query(sql, [type_consumables,name_consumables, quantity_consumables, unit_consumables, unitary_value,total_value,description_consumables,state_consumables], (error, resultado) => {
         if (error) {
             console.error("Error al insertar datos:", error);
             return res.status(500).json({ error: "Error al insertar datos" });

@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => { // ⬅️ Esperamos a que 
   }
     
   function mostrarPaginacion(totalCultivos, paginaActual, buscar = '') { // ⬅️ Funcion para las paginas
-    const totalPaginas = Math.ceil(totalCultivos / 20);
+    const totalPaginas = Math.ceil(totalCultivos / 10);
     paginacion.innerHTML = '';// ⬅️ para que no sedupliquen los botones al presionar otro
   
     const crearBoton = (num, texto = null, isActive = false) => {

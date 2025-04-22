@@ -176,7 +176,7 @@ app.get("/crops/:id", (req, res) => {
 app.get('/crops', (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const buscar = req.query.buscar || ''; // 👈 palabra clave para buscar
-  const limit = 20; // 👈 Limito la cantidad de digitos que voy a mostar por pagina
+  const limit = 10; // 👈 Limito la cantidad de digitos que voy a mostar por pagina
   const offset = (page - 1) * limit;
 
   // ⬇️ Si hay una búsqueda, usamos WHERE para poder buscarlo (Estamos opteniendo los datos del cultivo)

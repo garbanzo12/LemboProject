@@ -40,15 +40,14 @@ CREATE TABLE users(
 CREATE TABLE cropcycle (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name_cropCycle VARCHAR(255) NOT NULL,
-    state_cycle TINYINT(1) DEFAULT 1,
+    state_cycle ENUM("habilitado", "deshabilitado") default "habilitado" ,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    period_cycle_start DATE,
-    period_cycle_end DATE,
-    description_cycle DATE,
-    news_cycle DATE
+    period_cycle_start DATE NOT NULL,
+    period_cycle_end DATE NOT NULL,
+    description_cycle TEXT,
+    news_cycle TEXT
 );
-
 
 
 CREATE TABLE consumables(	
@@ -56,10 +55,11 @@ CREATE TABLE consumables(
 	type_consumables TEXT NOT NULL,
     name_consumables VARCHAR(100) NOT NULL,
     quantity_consumables INT NOT NULL,
-	unit_consumables INT NOT NULL,
+	unit_consumables VARCHAR(20) NOT NULL,
 	unitary_value INT NOT NULL,
 	total_value INT NOT NULL,
     description_consumables TEXT,
+    state_consumables ENUM("habilitado", "deshabilitado") default "habilitado",
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     );

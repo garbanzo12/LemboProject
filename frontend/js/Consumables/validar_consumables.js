@@ -30,12 +30,15 @@ function inicializarValidaciones() {
         form.addEventListener("submit", async function (event) {
             event.preventDefault();
             
-            const name_cropCycle = document.querySelector('.cardright__input-form--name');
-            const description_cycle = document.querySelector('.cardright__input-form--description');
-            const period_cycle_start = document.querySelector('.cardright__input-form--date-start');
-            const period_cycle_end = document.querySelector('.cardright__input-form--date-end');
-            const news_cycle = document.querySelector('.cardright__input-form--news');
-            const state_cycle = toggleCheckbox ? (toggleCheckbox.checked ? 'habilitado' : 'deshabilitado') : '';
+            const type_consumables = document.querySelector('.cardright__input-form--type'); //✅
+            const name_consumables = document.querySelector('.cardright__input-form--name');//✅
+            const quantity_consumables = document.querySelector('.cardright__input-form--quantity');//✅
+            const unit_consumables = document.querySelector('.cardright__input-form--unit-consumables'); //✅
+            const unitary_value = document.querySelector('.cardright__input-form--unitary-value');//✅
+            const total_value = document.querySelector('.cardright__input-form--total-value');//✅
+            const description_consumables = document.querySelector('.cardright__input-form--description');//✅
+
+            const state_consumables = toggleCheckbox ? (toggleCheckbox.checked ? 'habilitado' : 'deshabilitado') : '';
             
             let validarCampo = true;
             const inputs = form.querySelectorAll("input");
@@ -59,18 +62,23 @@ function inicializarValidaciones() {
             });
             
             let datos = {
-                name_cropCycle: name_cropCycle ? name_cropCycle.value : '',
-                description_cycle: description_cycle ? description_cycle.value : '',
-                period_cycle_start: period_cycle_start ? period_cycle_start.value : '',
-                period_cycle_end: period_cycle_end ? period_cycle_end.value : '',
-                news_cycle: news_cycle ? news_cycle.value : '',
-                state_cycle: state_cycle
+                type_consumables: type_consumables ? type_consumables.value : '',
+                name_consumables: name_consumables ? name_consumables.value : '',
+                quantity_consumables: quantity_consumables ? quantity_consumables.value : '',
+                unit_consumables: unit_consumables ? unit_consumables.value : '',
+                unitary_value: unitary_value ? unitary_value.value : '',
+                total_value: total_value ? total_value.value : '',
+                description_consumables: description_consumables ? description_consumables.value : '',
+                state_consumables: state_consumables
             };
-
+            if(datos.unitary_value > datos.total_value){
+                mostrarMensaje(form, "❌ El valor unitario no puede ser mayor al valor total.", "red");
+                validarCampo = false;
+            }
             if (validarCampo) {
                 try {
                     console.log("Datos enviados:", datos);
-                    let respuesta = await fetch("http://localhost:5501/cropcycle", {
+                    let respuesta = await fetch("http://localhost:5501/consumables", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
