@@ -12,7 +12,7 @@
     <script src="/frontend/js/crops/listar_crops.js"></script>
     <link rel="stylesheet" href="../../public/css/styles-bem.css">
 
-    <title>Listar Cultivos Preparando</title>
+    <title>Listar Sensores</title>
 </head>
 
 <body>
@@ -87,14 +87,17 @@
                 <p>CULTIVO</p>
                 <img class="side-main__menu-svg" src="../../public/img_/svg/agriculture-outline.svg" alt>
             </div>
-            <a class="side-main__container-enlace" href="./1-create_crops.html">
+            <a class="side-main__container-enlace" href="../crops/1-create_crops.html">
                 <div class="side-main__menu-list">Crear</div>
             </a>
-            <a class="side-main__container-enlace" href="./2-seach_crops.html">
+            <a class="side-main__container-enlace" href="../crops/2-seach_crops.html">
                 <div class="side-main__menu-list">Buscar</div>
             </a>
-            <a class="side-main__container-enlace" href="./4-update_crops.html">
+            <a class="side-main__container-enlace" href="../crops/4-update_crops.html">
                 <div class="side-main__menu-list">Actualizar</div>
+            </a>
+            <a class="side-main__container-enlace" href="../crops/5-listar_cicle_crops.html">
+                <div class="side-main__menu-list">Listar</div>
             </a>
 
             <!-- ciclos -->
@@ -110,6 +113,9 @@
             </a>
             <a class="side-main__container-enlace" href="../cycle_crops/4-update_cycle_crops.html">
                 <div class="side-main__menu-list">Actualizar</div>
+            </a>
+            <a class="side-main__container-enlace" href="../cycle_crops/5-listar_cicle_crops.html">
+                <div class="side-main__menu-list">Listar</div>
             </a>
 
             <!-- iot -->
@@ -141,19 +147,25 @@
             <a class="side-main__container-enlace" href="../insumes/4-update_insumes.html">
                 <div class="side-main__menu-list">Actualizar</div>
             </a>
+            <a class="side-main__container-enlace" href="../insumes/5-listar_insumes.html">
+                <div class="side-main__menu-list">Listar</div>
+            </a>
             <!-- usuarios -->
             <div class="side-main__menu-list">
                 <p>USUARIOS</p>
                 <img class="side-main__menu-svg" src="../../public/img_/svg/agriculture-worker-outline.svg" alt>
             </div>
-            <a class="side-main__container-enlace" href="../users/1-create_user.html">
+            <a class="side-main__container-enlace" href="./1-create_user.html">
                 <div class="side-main__menu-list">Crear</div>
             </a>
-            <a class="side-main__container-enlace" href="../users/2-search_user.html">
+            <a class="side-main__container-enlace" href="./2-search_user.html">
                 <div class="side-main__menu-list">Buscar</div>
             </a>
-            <a class="side-main__container-enlace" href="../users/4-update_user.html">
+            <a class="side-main__container-enlace" href="./4-update_user.html">
                 <div class="side-main__menu-list">Actualizar</div>
+            </a>
+            <a class="side-main__container-enlace" href="../users/5-listar_users.html">
+                <div class="side-main__menu-list">Listar</div>
             </a>
             <!-- loging out -->
             <hr>
@@ -172,7 +184,7 @@
     <main class="cardright cardright--grande">
 
         <div class="cardright__table-listar">
-            <div class="cardright__tittle-listar">LISTAR CULTIVOS</div>
+            <div class="cardright__tittle-listar">LISTAR SENSORES</div>
 
             <!-- este contenedor CONTIENE EL CONTENEDOR DE TABLA SUBTITULOS Y TABLA DATOS  -->
 
@@ -218,11 +230,11 @@
                 <table class="cardright__table">
                     <thead>
                         <tr class="cardright__row cardright__row--header">
-                            <td class="cardright__cell">ID Cultivo</td>
-                            <td class="cardright__cell">Tipo de Cultivo</td>
-                            <td class="cardright__cell">Nombre del Cultivo</td>
-                            <td class="cardright__cell">Ubicación</td>
-                            <td class="cardright__cell">Tamaño en m²</td>
+                            <td class="cardright__cell">Tipo Sensor</td>
+                            <td class="cardright__cell">ID Sensor</td>
+                            <td class="cardright__cell">Nombre Sensor</td>
+                            <td class="cardright__cell">Unidas Medida</td>
+                            <td class="cardright__cell">Tiempo Escaneo</td>
                             <td class="cardright__cell">Descripción</td>
                         </tr>
                     </thead>
