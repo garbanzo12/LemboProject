@@ -16,33 +16,39 @@ const conexion = mysql.createConnection({
   database: process.env.DATABASE
 });
 //⬇️ Ruta para insertar datos ( modulo crear)
+const bcrypt = require('bcrypt'); // 👈 Para hashear la password
+app.post("/users", async (req, res) => {
+  console.log("Datos recibidos en POST /users:", req.body); 
 
-app.post("/users", (req, res) => {
-    console.log("Datos recibidos en POST /users:", req.body); 
+  const { type_user, type_ID, num_document_identity, name_user, email, cellphone, password, state_user } = req.body;
 
-    const { type_user,type_ID, name_user, email, contact,password } = req.body;
+  if (!type_user || !type_ID || !num_document_identity || !name_user || !email || !cellphone || !password || !state_user) {
+      return res.status(400).json({ error: "Todos los campos son obligatorios" });
+  }
 
-    if (!type_user || !type_ID || !name_user || !email || !contact  || !password) {
-        return res.status(400).json({ error: "Todos los campos son obligatorios" });
-    }
+  try {
+      // Hashear la contraseña antes de guardar
+      const hashedPassword = await bcrypt.hash(password, 10); // 10 = número de 'salt rounds'
 
-    let sql = "INSERT INTO users (type_user,type_ID, name_user, email, contact,password) VALUES (?, ?, ?, ?, ?, ?)";
-    conexion.query(sql, [type_user, type_ID, name_user, email, contact,password], (error, resultado) => {
-        if (error) {
-            console.error("Error al insertar datos:", error);
-            return res.status(500).json({ error: "Error al insertar datos" });
-        }
+      const sql = "INSERT INTO users (type_user, type_ID, num_document_identity, name_user, email, cellphone, password, state_user) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+      conexion.query(sql, [type_user, type_ID, num_document_identity, name_user, email, cellphone, hashedPassword, state_user], (error, resultado) => {
+          if (error) {
+              console.error("Error al insertar datos:", error);
+              return res.status(500).json({ error: "El Correo ya esta registrado" });
+          }
 
-        console.log("Resultado del INSERT:", resultado);
-        res.json({ 
-            mensaje: "Datos guardados correctamente", 
-            id: resultado.insertId
-        });
-  
-    
-    });
+          console.log("Resultado del INSERT:", resultado);
+          res.json({ 
+              mensaje: "Datos guardados correctamente", 
+              id: resultado.insertId
+          });
+      });
+
+  } catch (error) {
+      console.error("Error al hashear la contraseña:", error);
+      res.status(500).json({ error: "Error al procesar la contraseña" });
+  }
 });
-
 //⬆️ Ruta para insertar datos (modulo crear)
 
 

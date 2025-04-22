@@ -10,7 +10,7 @@
     content="Aprendiz: Erick Ramirez, Aprendiz Aprendiz:Sanchez Hernandez, Aprendiz:Estefani Acevedo" />
   <meta http-equiv="Content-Language" content="es" />
   <link rel="stylesheet" href="../../public/css/styles-bem.css">
-
+  <script src="/frontend/js/sensor/validar_sensors.js"></script>
   <title>Registro de Sensores</title>
 </head>
 
@@ -56,32 +56,28 @@
 
           <div class="cardright__subcontainer-input">
             <label class="cardright__label-form" for>Tipo de sensor</label>
-            <input class="cardright__input-form" placeholder="Tipo de sensor" type="text" />
+            <input class="cardright__input-form cardright__input-form--type" placeholder="Ej : Temperatura" type="text" />
           </div>
 
-          <div class="cardright__subcontainer-input">
-            <label class="cardright__label-form" for>ID sensor</label>
-            <input class="cardright__input-form" placeholder="ID sensor" type="number" />
-          </div>
 
           <div class="cardright__subcontainer-input">
             <label class="cardright__label-form" for>Nombre del sensor</label>
-            <input class="cardright__input-form" placeholder="Nombre del sensor" type="text" />
+            <input class="cardright__input-form cardright__input-form--name" placeholder="Ej : Eprom (marca)" type="text" />
           </div>
 
           <div class="cardright__subcontainer-input">
             <label class="cardright__label-form" for>Unidad de medida</label>
-            <input class="cardright__input-form" placeholder="Unidad de medida" type="text" />
+            <input class="cardright__input-form cardright__input-form--unit-sensor" placeholder="Ej : °C" type="text" />
           </div>
           
           <div class="cardright__subcontainer-input">
             <label class="cardright__label-form" for>Tiempo escaneo</label>
-            <input class="cardright__input-form" placeholder="Tiempo escaneo" type="text" />
+            <input class="cardright__input-form cardright__input-form--time" placeholder="Ej : 10 minuto" type="text" />
           </div>
 
           <div class="cardright__subcontainer-input">
             <label class="cardright__label-form" for>Descripción</label>
-            <input class="cardright__input-form" placeholder="Descripción del Cultivo" type="text" />
+            <input class="cardright__input-form cardright__input-form--description" placeholder="Ej : De color rojo " type="text" />
           </div>
 
           <!-- subtitulo si es necesario -->
@@ -89,18 +85,16 @@
 
           <div class="cardright__subcontainer-input">
             <label class="cardright__label-form">Resolución max 150*150 px</label>
-            <input class="cardright__input-form cardright__input-form--file" placeholder type="file" />
+            <input class="cardright__input-form cardright__input-form--file" placeholder = "" type="file" />
           </div>
 
           <div class="cardright__subcontainer-input">
-            <label class="cardright__label-form" for="boton">Habilitado/Deshabilitado:</label>
+            <label for="toggle-color" class="cardright__label-form--checkbox"></label>
 
+            <label class="cardright__label-form cardright__label-form--checkbox" for="boton">Habilitado/Deshabilitado:</label>
+            <input class="cardright__input-form" type="checkbox" id="toggle-color" checked />
 
-            <!-- el label contiene el checkbox para drle color -->
-            <label class="cardright__label-form cardright__label-form--color" for="">
-              <input class="cardright__input-form" type="checkbox"/>
-            </label>
-          </div>
+    </div>
 
 
           <button class="cardright__botton-primary" type="submit">CREAR</button>

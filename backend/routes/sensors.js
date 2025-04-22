@@ -1,44 +1,76 @@
-// La conexion con la bd
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-// ⬆️ Require para express mysql2 y cors para el correcto funcionamiento del back
-const app = express(); // 👈 Le asignamos a app las propiedades express, para poder crear rutas
-app.use(express.json());// 👈 Para que peuda analizar el cuerpo de las solicitudes (body)
-app.use(cors());// 👈 Para poder hacer las solicitudes de puertos del back y front diferentes
 const mysql = require("mysql2");
+const multer = require("multer");
+const path = require("path");
+
+const app = express();
+
+// Middleware para CORS (debe ir antes de las rutas)
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+
+// Middleware para analizar formularios codificados (application/x-www-form-urlencoded)
+app.use(express.urlencoded({ extended: true }));
+
+// 🔥 Aquí sirve la carpeta 'uploads' como pública
+app.use('/uploads', express.static('uploads'));
+
+// Configurar multer
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, "uploads/");
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + path.extname(file.originalname));
+    }
+});
+
+const upload = multer({ storage: storage });
 
 //⬇️ Configuramos conexión a la BD
-const conexion = mysql.createConnection({ 
-  host: process.env.HOST,
-  user: process.env.USER,
-  password: process.env.PASSWORD,
-  database: process.env.DATABASE
+const conexion = mysql.createConnection({
+    host: process.env.HOST,
+    user: process.env.USER,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE
 });
+
+conexion.connect((err) => {
+    if (err) throw err;
+    console.log('Conectado a MySQL');
+});
+
 //⬇️ Ruta para insertar datos (modulo crear)
-app.post("/sensors", (req, res) => {
-    console.log("Datos recibidos en POST /sensors:", req.body); 
 
-    const { type_sensors,name_sensors, unit_sensors, time_sensors} = req.body;
+app.post("/sensors", upload.single("image_sensor"), (req, res) => {
+  console.log("Datos recibidos en POST /sensors:", req.body);
 
-    if (!type_sensors || !name_sensors || !unit_sensors || !time_sensors) {
-        return res.status(400).json({ error: "Todos los campos son obligatorios" });
-    }
+  const { type_sensor, name_sensor, unit_sensor, time_sensor, description_sensor,state_sensor } = req.body;
+  const image_sensor = req.file ? req.file.filename : null;
 
-    let sql = "INSERT INTO sensors (type_sensors,name_sensors, unit_sensors, time_sensors) VALUES (?, ?, ? ,?)";
-    conexion.query(sql, [type_sensors,name_sensors, unit_sensors,time_sensors], (error, resultado) => {
-        if (error) {
-            console.error("Error al insertar datos:", error);
-            return res.status(500).json({ error: "Error al insertar datos" });
-        }
+  if (!type_sensor || !name_sensor || !unit_sensor || !time_sensor || !description_sensor || !image_sensor|| !state_sensor) {
+      return res.status(400).json({ error: "Todos los campos son obligatorios" });
+  }
 
-        console.log("Resultado del INSERT:", resultado);
-        res.json({ 
-            mensaje: "Datos guardados correctamente", 
-            id: resultado.insertId
-        });
-    });
+  const sql = "INSERT INTO sensors (type_sensor, name_sensor, unit_sensor, time_sensor, description_sensor, image_sensor,state_sensor) VALUES (?, ?, ?, ?, ?, ?, ?)";
+  conexion.query(sql, [type_sensor, name_sensor, unit_sensor, time_sensor, description_sensor, image_sensor,state_sensor], (error, resultado) => {
+      if (error) {
+          console.error("Error al insertar datos:", error);
+          return res.status(500).json({ error: "Error al insertar datos" });
+      }
+
+      console.log("Resultado del INSERT:", resultado);
+      res.json({
+          id: resultado.insertId
+      });
+  });
 });
+
 //⬆️ Ruta para insertar datos (modulo crear)
 
 
