@@ -280,13 +280,13 @@ body {
     outline: none;
     background-color: var(--gray-100);
     border: 0.1rem solid var(--gray-300);
-    width: 16rem;
+    min-width: 10rem;
     color: var(--black);
     border-radius: 1rem;
     cursor: pointer;
     font-size: var(--fs-xs);
     font-weight: bold;
-    margin: 2rem;
+    margin: 2rem 0;
     padding:  1.4rem;
     text-align: center;
     text-decoration: none;
@@ -678,7 +678,7 @@ body {
 
 /* modificador del label para el chechbox COLOR Y FORMA*/
 
-
+.cardright__selectid,
 .cardright__input-form {
     font-size: var(--fs-xs);
     color: var(--gray-700);
@@ -690,6 +690,7 @@ body {
     /* campo circular */
     background-color: var(--gray-050);
 }
+
 .cardright__input-form--date{
     width: 14rem;
     font-size: var(--fs-xs);
