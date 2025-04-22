@@ -672,7 +672,7 @@ body {
     font-weight: 200;
     color: var(--black);
     padding: 0 2.4rem;
-    margin: 0 0 0.2rem 0;
+    margin: -1rem 0 0.2rem 0;
 
 }
 
@@ -1483,6 +1483,8 @@ DOMINGO ESTE ES DONDE SE VEN EL MAPA CON LOS DATOS DE LOS SENSORES*/
       
 
   /* ⬆️  Esto de aqui es  un modal invisible para mostrar el ID ⬆️ */
+
+
 
 .cardright__image-upload{
     display: flex;

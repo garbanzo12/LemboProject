@@ -31,7 +31,7 @@ function inicializarValidaciones() { //
 
                 if (input.value.trim() === "") {
                     validarCampo = false;
-                    errorSpan.textContent = "El campo es obligatorio.";
+                    errorSpan.textContent = "Campo obligatorio.";
                 } else {
                     errorSpan.textContent = "";
 

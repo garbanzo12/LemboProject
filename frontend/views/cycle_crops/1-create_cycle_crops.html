@@ -61,13 +61,13 @@
                     <div class="cardright__subcontainer-input">
                         <label class="cardright__label-form" for="">Nombre del Ciclo Cultivo</label>
                         <!-- Se añade nueva clase: nuevo-nombreCiclo -->
-                        <input class="cardright__input-form cardright__input-form--name" placeholder="Ingrese Dato" type="text" />
+                        <input class="cardright__input-form cardright__input-form--name" placeholder="Ej : Fase de crecimiento" type="text" />
                     </div>
 
                     <div class="cardright__subcontainer-input">
                         <label class="cardright__label-form" for="">Descripción</label>
                         <!-- Se añade nueva clase: nuevo-novedad -->
-                        <input class="cardright__input-form cardright__input-form--description" placeholder="Ingrese Dato" type="text" />
+                        <input class="cardright__input-form cardright__input-form--description" placeholder="Ej : Creciendo rapidamente" type="text" />
                     </div>
 
                     <div class="cardright__subcontainer-input">
@@ -86,16 +86,16 @@
                     <div class="cardright__subcontainer-input">
                         <label class="cardright__label-form" for="">Novedad</label>
                         <!-- Se añade nueva clase: nuevo-novedad -->
-                        <input class="cardright__input-form cardright__input-form--news" placeholder="Ingrese Dato" type="text" />
+                        <input class="cardright__input-form cardright__input-form--news" placeholder="Ej : Hojas Opacas" type="text" />
                     </div>
 
                     <!-- BOTON INDICADOR CAMBIO DE COLOR ESTADO  -->
                     <div class="cardright__subcontainer-input">
-                        <input class="cardright__input-form--checkbox" type="checkbox" id="toggle-color" checked />
-              
+                        <label for="toggle-color" class="cardright__label-form--checkbox"></label>
+
                         <label class="cardright__label-form cardright__label-form--checkbox" for="boton">Habilitado/Deshabilitado:</label>
-                        
-                        <label for="toggle-color" class="cardright__label-form--color"></label>
+                        <input class="cardright__input-form" type="checkbox" id="toggle-color" checked />
+
                     </div>
                 </div>
                 <button class="cardright__botton-primary" type="submit">CREAR</button>
@@ -106,7 +106,7 @@
             </div>
 
             <div class="cardright__foot-form">
-                <p> CAPTURA DE ERRORES</p>
+                
             </div>
 
         </form>
