@@ -298,6 +298,33 @@ body {
     border: 0.1rem solid var(--gray-400);
 }
 
+/* ************************************* */
+.integrator__botton-primary {
+    outline: none;
+    background-color: var(--secundary-1-800);
+    border: 0.1rem solid var(--gray-300);
+    min-width: 20rem;
+    color: var(--white);
+    border-radius: 1rem;
+    cursor: pointer;
+    font-size: var(--fs-xs);
+    font-weight: bold;
+    margin: 1rem 0;
+    padding:  1.4rem;
+    text-align: center;
+    text-decoration: none;
+    text-decoration-color: none;
+}
+
+.integrator__botton-primary--color {
+    background-color: var(--secundary-1-950);
+}
+
+.integrator__botton-primary:hover {
+    background-color: var(--gray-200);
+    border: 0.1rem solid var(--gray-400);
+    color: var(--black);
+}
 
 /* ****************************************************** */
 /* *************    ELEMENTOS   BOTONES    ************** */
@@ -1077,12 +1104,163 @@ font-weight: 600;
 /* ************************************************************ */
 /* ********    BLOQUE INTEGRADOR - CREAR PRODUCCION   ********* */
 /* ************************************************************ */
-.integrator {}
-
+.integrator {
+    background-color: var(--secundary-1-950);
+    width: 90%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 /* ************************************************************ */
 /* ********  ELEMENTOS INTEGRADOR - CREAR PRODUCCION   ******** */
 /* ************************************************************ */
+
+.integrator__form{
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    border-radius: 1rem;
+    width: 90%;
+    position: relative;
+    top: 5%;
+}
+
+.integrator__form-header{
+    display: flex;
+    flex-direction: row;
+    background-color: var(--gray-200);
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    
+}
+
+.integrator__header-tittles{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin: 0.5rem 0rem;
+}
+.integrator__title-h3{
+    padding: 1rem;
+    margin: 0 1rem 0 1rem; 
+    font-size: var(--fs-xs);
+}
+.integrator__input-form{
+    background-color: var(--gray-050);
+    border-radius: 0.5rem;
+    padding: 1rem; 
+    margin: 0 0rem 0 rem; 
+    font-size: var(--fs-xs);
+}
+
+/* AQUI INICIA SEGUNDA PARTE */
+/* AQUI INICIA SEGUNDA PARTE */
+/* AQUI INICIA SEGUNDA PARTE */
+
+.integrator__form-body{
+background-color: var(--secundary-1-700);
+border-radius: 1rem;
+
+}
+
+/* este hace que los modulos sean columnas */
+.integrator__produccion-body{
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+    justify-content: space-evenly;
+}
+
+.integrator__module{
+    background-color: ;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+/* AQUI INICIA TERCERA PARTE */
+/* AQUI INICIA TERCERA PARTE */
+/* AQUI INICIA TERCERA PARTE */
+.integrator__module-table{
+    background-color: var(--gray-200);
+    display: flex;
+    flex-direction: column;
+}
+.integrator__module-header{
+    font-size: var(--fs-sm);
+    text-transform: uppercase;
+    padding: 1rem;
+    background-color: var(--gray-050);
+    color: var(--black); 
+    font-weight: 700; 
+    display: flex;
+    width: 100%;
+}
+
+.integrator__module-thead{
+    background-color: var(--white);
+    padding: 0.5rem;
+}
+
+/* cell */
+
+.integrator__table-header{
+    display: flex;
+    color: var(--black);
+    
+}
+.integrator__header-cell{
+    background-color: var(--gray-400);
+    width: 100%;
+    padding: 0.5rem;
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.integrator__table-fila{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--gray-300);
+    /* este es el tamaño del contenedor de datos */
+    height: 25rem;
+}
+
+.integrator__table-dato{
+    background-color: var(--gray-200);
+    width: 100%;
+    padding:  0.2rem 0;
+    text-align: center;
+    font-size: var(--fs-sm);
+    font-weight: 200;
+    text-transform: uppercase;
+    border: 0.1rem solid var(--white);
+}
+
+/* AQUI INICIA CUARTA PARTE */
+/* AQUI INICIA CUARTA PARTE */
+/* AQUI INICIA CUARTA PARTE */
+.integrator__tablet-botton{
+    font-size: var(--fs-xs);
+}
+
+.integrator__tablet-select{
+    background-color: var(--gray-200);
+    width: 100%;
+    padding:  0.2rem 0;
+    text-align: center;
+    font-size: var(--fs-sm);
+    font-weight: 200;
+    text-transform: uppercase;
+    border: 0.1rem solid var(--white);
+}
+    
+
+
 .integrator__container-header {}
 
 .integrator__header-text {}
