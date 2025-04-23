@@ -314,6 +314,7 @@ body {
     text-align: center;
     text-decoration: none;
     text-decoration-color: none;
+    width: 100%;
 }
 
 .integrator__botton-primary--color {
@@ -1258,7 +1259,11 @@ border-radius: 1rem;
     text-transform: uppercase;
     border: 0.1rem solid var(--white);
 }
-    
+.integrator__link{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}   
 
 
 .integrator__container-header {}
