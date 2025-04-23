@@ -1,170 +1,395 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../public/css/root.css">
-    <link rel="stylesheet" href="../public/css/styles_main.css">
+
+    <link rel="stylesheet" href="../public/css/styles-bem.css">
     <title>Index__Main</title>
 </head>
-<body>
 
-<header class="BarTop">
+<body>
+    <!--
+/* ****************************************************** */
+/* *************    BLOQUE BARRA CENTRAL   ************** */
+/* ****************************************************** */ -->
+
+    <header class="Bar">
         <ul class="Bar__List">
             <li class="Bar__Item">
-                <p class="BarTop__linkParag" >Cultivos</p>
-                <a class="BarTop__href" href="">
-                    <img src="../public/img/carbon--agriculture-analytics.svg" alt="modulo_Cultivos" class="BarTop__Image">
+                <p class="Bar__linkparag">Cultivos</p>
+                <a class="Bar__href" href="./crops/5-listar_crops.html">
+                    <img class="Bar__Image" src="../public/img_/svg/agriculture-analytics.svg" alt="modulo_Cultivos">
                 </a>
             </li>
             <li class="Bar__Item">
-                <p class="BarTop__linkParag" >Insumo</p>
-                <a class="BarTop__href" href="">
-                    <img src="../public/img/healthicons--agriculture-outline.svg" alt="modulo_insumo" class="BarTop__Image">
+                <p class="Bar__linkparag">Ciclos</p>
+                <a class="Bar__href" href="">
+                    <img class="Bar__Image" src="../public/img_/svg/agriculture-ciclo.svg" alt="modulo_Cultivos">
                 </a>
             </li>
             <li class="Bar__Item">
-                <p class="BarTop__linkParag" >Sensor</p>
-                <a class="BarTop__href" href="">
-                    <img src="../public/img/eos-icons--iot.svg" alt="modulo_Sensor" class="BarTop__Image">
+                <p class="Bar__linkparag">Insumo</p>
+                <a class="Bar__href" href="">
+                    <img class="Bar__Image" src="../public/img_/svg/agriculture-outline.svg" alt="modulo_insumo">
                 </a>
             </li>
             <li class="Bar__Item">
-                <p class="BarTop__linkParag" >Usuarios</p>
-                <a class="BarTop__href" href="">
-                    <img src="../public/img/healthicons--agriculture-worker-outline.svg" alt="modulo_Usuarios" class="BarTop__Image">
+                <p class="Bar__linkparag">Sensor</p>
+                <a class="Bar__href" href="">
+                    <img class="Bar__Image" src="../public/img_/svg/agriculture--iot.svg" alt="modulo_Sensor">
+                </a>
+            </li>
+            <li class="Bar__Item">
+                <p class="Bar__linkparag">Usuarios</p>
+                <a class="Bar__href" href="">
+                    <img class="Bar__Image" src="../public/img_/svg/agriculture-worker-outline.svg"
+                        alt="modulo_Usuarios">
                 </a>
             </li>
         </ul>
-</header>
-
-<!-- este nav  MENU  es para desplegar con position fixed absolute -->
-<nav class="BarGeneral">
-    <!-- Checkbox oculto -->
-    <input class="BarGeneral__check" type="checkbox" id="toggle-linksmodulos">
-
-    <!-- Label asociado al checkbox -->
-    <label for="toggle-linksmodulos" class="BarGeneral__side">
-        <div class="BarGeneral__nombreUser"><h2>ADMIN</h2>
-            <h3 class="BarGeneral__titleName" >VLADIMIR PUTIN</h3>
-        </div>
-        <img class="BarGeneral__Usuario" src="../public/img/imagen_foto_perfil_github2.jpg" alt="logo sgal">
-    </label>
-    
-    <ul class="BarLinksmodulos">
-         
-            <h4 class="BarLinksmodulos__title" >MODULO CULTIVO</h4> 
-            <a class="BarLinksmodulos__link" href="./crops/1_create_crops.html">CREAR CULTIVO</a>
-            <a class="BarLinksmodulos__link" href="./crops/1_create_crops.html">BUSCAR CULTIVO</a>
-            <a class="BarLinksmodulos__link" href="../crops/1_create_crops.html">VISUALIZAR CULTIVO</a>
-            <a class="BarLinksmodulos__link" href="../crops/1_create_crops.html">LISTAR CULTIVO</a>
-            
-            
-            <h4 class="BarLinksmodulos__title" >MODULO INSUMOS</h4> 
-            <a class="BarLinksmodulos__link"  href="../sgal insumos/Html/1-crear-insumo.html">CREAR INSUMOS</a>
-            <a class="BarLinksmodulos__link"  href="../sgal insumos/Html/2-buscar-insumo.html">BUSCAR INSUMOS</a>
-            <a class="BarLinksmodulos__link"  href="../sgal insumos/Html/3-visualizar-insumo.html">VISUALIZAR INSUMOS</a>
-            <a class="BarLinksmodulos__link"  href="../sgal insumos/Html/5-listar-insumos.html">LISTAR INSUMOS</a>
-             
-                        
-            <h4 class="BarLinksmodulos__title" >MODULO CICLO</h4> 
-            <a class="BarLinksmodulos__link"  href="../sgal ciclo cultivo/html/1-crear-ciclo-actualizando.html">CREAR CICLO</a>
-            <a class="BarLinksmodulos__link"  href="../sgal ciclo cultivo/html/2-buscar-ciclo-actualizando.html">BUSCAR CICLO</a>
-            <a class="BarLinksmodulos__link"  href="../sgal ciclo cultivo/html/3-visualizar-ciclo-actualizando.html">VISUALIZAR CICLO</a>
-            <a class="BarLinksmodulos__link"  href="../sgal ciclo cultivo/html/4-actualizar-ciclo-actualizando.html">ACTUALIZAR CICLO</a> 
-            <a class="BarLinksmodulos__link"  href="../sgal ciclo cultivo/html/5-listar-ciclo.html">LISTAR CICLO</a> 
-                        
-            <h4 class="BarLinksmodulos__title" id="seccion-usuarios">MODULO USUARIO</h4> 
-            <a class="BarLinksmodulos__link"  href="../sgal usuario/Html/1-crear-usuario-acualizado.html">CREAR USUARIO</a>
-            <a class="BarLinksmodulos__link"  href="../sgal usuario/Html/2-buscar-usuario.html">BUSCAR USUARIO</a>
-            <a class="BarLinksmodulos__link"  href="../sgal usuario/Html/3-visualizar-usuario.html">VISUALIZAR USUARIO</a>
-            <a class="BarLinksmodulos__link"  href="../sgal usuario/Html/4-actualizar-usuario.html">ACTUALIZAR USUARIO</a> 
-            <a class="BarLinksmodulos__link"  href="../sgal usuario/Html/5-listar-usuarios.html">LISTAR USUARIOS</a> 
-
-            <h4  class="BarLinksmodulos__ventorConfig" >
-                <a href=""><img class="Main__svg" src="../public/img/hugeicons--configuration-01.svg" alt=""></a>
-            </h4> 
-            <h4 class="BarLinksmodulos__title" ><a class="BarLinksmodulos__link"  href="../sgal home (ek)/index.html">CERRAR SESSION</a></h4> 
-    </ul>
-</nav>
-
-<main class="sectionContainers">
-    <header class="sectionContainers__Containertitle">
-        <h1  class="sectionContainers__title"><span>SISTEMA DE GESTION AGRICOLA</span></h1>
     </header>
-    
-    <section class="sectionContainers__card">
-        <h2 class="sectionContainers__cardTitle">MODULO CULTIVO</h2>
-        <div class="sectionContainers__cardContent">
-           
-            <p class="sectionContainers__cardParagraph">En 2022, las exportaciones de café disminuyeron 8% a poco más de 11,4 millones de sacos de 60 kg de café verde frente a los más de 12,4 millones de sacos puestos en los mercados internacionales a lo largo de 2021.
-            En diciembre las exportaciones cayeron 12% a poco más de un millón de sacos versus los casi 1,2 millones exportados en el mismo mes de 2021.
-                
-            </p>
-            <img  class="sectionContainers__cardImage" src="../public/img/cultivos_img.png" alt="Cultivo">
+
+    <!--/***************************************************** */
+/* *************      BLOQUE  MENU LEFT     ************** */
+/* ******************************************************* */-->
+
+    <label class="side-main">
+
+        <input class="side-main__inp" checked type="checkbox" />
+
+        <div class="side-main__bar">
+            <div class="side-main__bar-info">
+                <!-- JAVA SCRIPT PARA TOMAR LA MITAD DEL NOBRE -->
+                <h3 class="side-main__name">ERICK</h3>
+                <!-- JAVA SCRIPT PARA PONER EL ROLL AQUI  -->
+                <h3 class="side-main__roll">SAD-MND</h3>
+            </div>
+            <div class="side-main__container-avatar">
+                <img class="side-main__bar-avatar" src="../public/img_/main/imagen_foto_perfil_github2.jpg" alt="">
+            </div>
         </div>
-    </section>
 
-    <section class="sectionContainers__card">
-        <h2 class="sectionContainers__cardTitle">MODULO INSUMOS</h2>
-        <div class="sectionContainers__cardContent"> 
-            <img   class="sectionContainers__cardImage" src="../public/img/main02insumos.bmp" alt="Insumos">     
-            <div class="">
-                <p class="sectionContainers__cardParagraph">
-                    Productividad: kilos de CPS / ha café, Rendimiento: kilos de CPS / ha café productivo.
-                </p>
+        <!-- AQUI INICIA LA BARRA CON ACCESOS DIRECTOS A LOS MODULOS POR LA BARRA -->
 
-                <p class="sectionContainers__cardParagraph">
-                    Precio de venta: $ / kilo CPS vendido.
-                </p>
+        <section class="side-main__menu-container menu-container">
+            <!-- PRODUCCION -->
+            <div class="side-main__menu-list">
+                <p>PRODUCCIÓN</p>
+                
+            </div>
+            <a class="side-main__container-enlace" href="./integrator.html">
+                <div class="side-main__menu-list">CREAR INTEGRADOR</div>
+            </a>
+            <a class="side-main__container-enlace" href="./dashboard.html">
+                <div class="side-main__menu-list">VER PRODUCCIÓN</div>
+            </a>
 
-                <p class="sectionContainers__cardParagraph">
-                    Margen / hectárea: diferencia entre ingresos por ventas de café y costos de producción dividido entre el área total en café.
-                </p>
+            <!-- cultivos -->
+            <div class="side-main__menu-list">
+                <p>CULTIVO</p>
+                <img class="side-main__menu-svg" src="../public/img_/svg/agriculture-outline.svg" alt>
+            </div>
+            <a class="side-main__container-enlace" href="./crops/1-create_crops.html">
+                <div class="side-main__menu-list">Crear</div>
+            </a>
+            <a class="side-main__container-enlace" href="./crops/2-seach_crops.html">
+                <div class="side-main__menu-list">Buscar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./crops/4-update_crops.html">
+                <div class="side-main__menu-list">Actualizar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./crops/5-listar_crops.html">
+                <div class="side-main__menu-list">Listar</div>
+            </a>
 
-                <p class="sectionContainers__cardParagraph">
-                    Costo fertilización / ha: Costo de la fertilización por hectárea productiva (incluye mano de obra e insumos).
-                </p>
-                <p class="sectionContainers__cardParagraph">
-                    Precio fertilizante: precio promedio anual por kilo de fertilizante (tomado del SIPSA- DANE)
-                </p>
+            <!-- ciclos -->
+            <div class="side-main__menu-list">
+                <p>CICLO</p>
+                <img class="side-main__menu-svg" src="../public/img_/svg//agriculture-ciclo.svg" alt>
+            </div>
+            <a class="side-main__container-enlace" href="./cycle_crops/1-create_cycle_crops.html">
+                <div class="side-main__menu-list">Crear</div>
+            </a>
+            <a class="side-main__container-enlace" href="./cycle_crops/2-search_cycle_crops.html">
+                <div class="side-main__menu-list">Buscar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./cycle_crops/4-update_cycle_crops.html">
+                <div class="side-main__menu-list">Actualizar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./cycle_crops/5-listar_cicle_crops.html">
+                <div class="side-main__menu-list">Listar</div>
+            </a>
+
+            <!-- iot -->
+            <div class="side-main__menu-list">
+                <p>SENSORES</p>
+                <img class="side-main__menu-svg" src="../public/img_/svg/agriculture--iot.svg" alt>
+            </div>
+            <a class="side-main__container-enlace" href="./sensors/1-create_sensor.html">
+                <div class="side-main__menu-list">Crear</div>
+            </a>
+            <a class="side-main__container-enlace" href="./sensors/2-seach_sensor.html">
+                <div class="side-main__menu-list">Buscar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./sensors/4-update_sensor.html">
+                <div class="side-main__menu-list">Actualizar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./sensors/5-listar_sensors.html">
+                <div class="side-main__menu-list">Listar</div>
+            </a>
+
+            <!-- insumos -->
+            <div class="side-main__menu-list">
+                <p>INSUMOS</p>
+                <img class="side-main__menu-svg" src="../public/img_/svg/agriculture-analytics.svg" alt>
+            </div>
+            <a class="side-main__container-enlace" href="./insumes/1-create_insumes.html">
+                <div class="side-main__menu-list">Crear</div>
+            </a>
+            <a class="side-main__container-enlace" href="./insumes/2-search_insume.html">
+                <div class="side-main__menu-list">Buscar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./insumes/4-update_insumes.html">
+                <div class="side-main__menu-list">Actualizar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./insumes/5-listar_insumes.html">
+                <div class="side-main__menu-list">Listar</div>
+            </a>
+            <!-- usuarios -->
+            <div class="side-main__menu-list">
+                <p>USUARIOS</p>
+                <img class="side-main__menu-svg" src="../public/img_/svg/agriculture-worker-outline.svg" alt>
+            </div>
+            <a class="side-main__container-enlace" href="./users/1-create_user.html">
+                <div class="side-main__menu-list">Crear</div>
+            </a>
+            <a class="side-main__container-enlace" href="./users/2-search_user.html">
+                <div class="side-main__menu-list">Buscar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./users/4-update_user.html">
+                <div class="side-main__menu-list">Actualizar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./users/5-listar_users.html">
+                <div class="side-main__menu-list">Listar</div>
+            </a>
+            <!-- loging out -->
+            <hr>
+            </div>
+            <a class="side-main__container-enlace" href="./home/home.html">
+                <div class="side-main__menu-list">LOGIN OUT</div>
+            </a>
+
+        </section>
+    </label>
+
+    <!--   
+  /* ****************************************************** */
+  /* ***************    BLOQUE    TITTLE    *************** */
+  /* ****************************************************** */ -->
+
+    <header class="cardtittle cardtittle--center">
+        <p class="cardtittle__text">SENA SEDE LEMBO</p>
+        <a class="cardtittle__enlace" href="../index_main.html">
+            <img class="cardtittle__svg-home" src="../public/img_/svg/home.svg" alt>
+        </a>
+    </header>
+
+    <!-- 
+    /* ****************************************************** */
+    /* **************    ELEMENTOS CARD MAIN    ************* */
+    /* ****************************************************** */ -->
+
+
+    <main class="Containers">
+
+        <section class="Containers__card">
+            <h2 class="Containers__card-title">MODULO CULTIVO</h2>
+            <div class="Containers__card-content">
+                <div class="Containers__card-subcontent">
+                    <h2 class="Containers__card-subtitle">INFORMACIÓN SATELITAL</h2>
+                    <p class="Containers__card-paragraph">En 2022, las exportaciones de café disminuyeron 8% a poco
+                        más de 11,4 millones de sacos de 60 kg de café verde frente a los más de 12,4 millones de sacos
+                        puestos en los mercados internacionales a lo largo de 2021.
+                        En diciembre las exportaciones cayeron 12% a poco más de un millón de sacos versus los casi 1,2
+                        millones exportados en el mismo mes de 2021.
+                    </p>
+                    <p class="Containers__card-paragraph">
+                        En 2022, las exportaciones de café disminuyeron 8% a poco
+                        más de 11,4 millones de sacos de 60 kg de café verde frente a los más de 12,4 millones de sacos
+                        puestos en los mercados internacionales a lo largo de 2021.
+                        En diciembre las exportaciones cayeron 12% a poco más de un millón de sacos versus los casi 1,2
+                        millones exportados en el mismo mes de 2021.
+                    </p>
+                </div>
+
+                <div class="Containers__card-subcontent">
+                    <h2 class="Containers__card-subtitle">INFORMACIÓN SATELITAL</h2>
+                    <img class="Containers__card-image--wide" src="../public/img/cultivos_img.png" alt="Cultivo">
+                </div>
+            </div>
+        </section>
+
+
+        <section class="Containers__card">
+            <h2 class="Containers__card-title">MODULO INSUMOS</h2>
+            <div class="Containers__card-content">
+
+                <div class="Containers__card-subcontent">
+
+                    <h2 class="Containers__card-subtitle">FERTILIZANTES</h2>
+                    <div class="Containers__sub__content">
+                        <p class="Containers__card-paragraph--line">Nitrogenados</p>
+                        <p class="Containers__card-paragraph--line">100 und</p>
+                    </div>
+                    <div class="Containers__sub__content">
+                        <p class="Containers__card-paragraph--line">Fosfatados</p>
+                        <p class="Containers__card-paragraph--line">100 und</p>
+                    </div>
+                    <div class="Containers__sub__content">
+                        <p class="Containers__card-paragraph--line">Potásico</p>
+                        <p class="Containers__card-paragraph--line">100 und</p>
+                    </div>
+                    <div class="Containers__sub__content">
+                        <p class="Containers__card-paragraph--line">Orgánicos</p>
+                        <p class="Containers__card-paragraph--line">100 und</p>
+                    </div>
+                    <div class="Containers__sub__content">
+                        <p class="Containers__card-paragraph--line">Micronutriente</p>
+                        <p class="Containers__card-paragraph--line">100 und</p>
+                    </div>
+                    <div class="Containers__sub__content">
+                        <p class="Containers__card-paragraph--line">Líquidos</p>
+                        <p class="Containers__card-paragraph--line">100 und</p>
+                    </div>
+                </div>
+
+
+                <!-- img -->
+                <div class="Containers__card-subcontent">
+                    <h2 class="Containers__card-subtitle">FERTILIZANTE</h2>
+                    <img class="Containers__card-image" src="../public/img_/main/fertilizante bolsa.jpg" alt="Cultivo">
+                </div>
+
+
+                <!-- img -->
+                <div class="Containers__card-subcontent">
+                    <h2 class="Containers__card-subtitle">SEMILLAS</h2>
+                    <img class="Containers__card-image" src="../public/img_/main/semillas grupo.webp" alt="Cultivo">
+                </div>
+
+                <!-- Gráfico de Barras - -->
+                <div class="Containers__card-subcontent">
+
+                    <h2 class="Containers__card-subtitle">LISTA DE SEMILLAS</h2>
+                    <div class="Containers__sub__content">
+                        <p class="Containers__card-paragraph--line">CILANTRO</p>
+                        <p class="Containers__card-paragraph--line">700 und</p>
+                    </div>
+                    <div class="Containers__sub__content">
+                        <p class="Containers__card-paragraph--line"> GIRASOL</p>
+                        <p class="Containers__card-paragraph--line">80 und</p>
+                    </div>
+                    <div class="Containers__sub__content">
+                        <p class="Containers__card-paragraph--line">PEREGIL</p>
+                        <p class="Containers__card-paragraph--line">10 und</p>
+                    </div>
+                    <div class="Containers__sub__content">
+                        <p class="Containers__card-paragraph--line">GUAYABA</p>
+                        <p class="Containers__card-paragraph--line">100 und</p>
+                    </div>
+                    <div class="Containers__sub__content">
+                        <p class="Containers__card-paragraph--line">PAPAYA</p>
+                        <p class="Containers__card-paragraph--line">800 und</p>
+                    </div>
+                    <div class="Containers__sub__content">
+                        <p class="Containers__card-paragraph--line">FRIJOS</p>
+                        <p class="Containers__card-paragraph--line">350 und</p>
+                    </div>
+                </div>
 
             </div>
-            
-        </div>
-    </section>
+        </section>
 
-    <section class="sectionContainers__card">
-        <h2 class="sectionContainers__cardTitle">MODULO CICLOS</h2>
-        <div class="sectionContainers__cardContent">
-            <p class="sectionContainers__cardParagraph">
-                Lemobo Santa Rosa, febrero 10 de 2025. El Instituto Colombiano Agropecuario, ICA, estableció, las fechas que componen el ciclo de siembra para la temporada de maíz del semestre A y B del presente año, durante el XI Comité Fitosanitario de Maíz en el que asistieron los maiceros, asistentes técnicos, gremios, autoridades gubernamentales de la región.
-            </p>
-            <img   class="sectionContainers__cardImage" src="../public/img/main04usuario.bmp" alt="Ciclos">
-        </div>
-    </section>
 
-    <article class="sectionContainers__card">
-        <h2 class="sectionContainers__cardTitle">ELECCIONES DE DELEGADOS COOPCAFER 2023</h2>
-        <div class="sectionContainers__cardContent">
-            <img   class="sectionContainers__cardImage" src="../public/img/Article_DelegadoCoop.png" alt="Tema Especial">
-            <p class="sectionContainers__cardParagraph">En febrero de 2023 los asociados de la Cooperativa Departamental de Caficultores del Risaralda elegirán a los nuevos delegados que los representarán durante el periodo 2023- 2025, uno de los eventos democráticos más importantes que se realiza cada 3 años en Coopcafer.</p>
-            
-        </div>
-    </article>
 
-    <section class="sectionContainers__card">
-        <h2 class="sectionContainers__cardTitle">SENSORES PARA AGRICULTURA DE PRECISION</h2>
-        <div class="sectionContainers__cardContent">
-            <p class="sectionContainers__cardParagraph">A medida que la poblacion mundial crece, mayores son las necesidad de aliemntacion que se requieren. A causa de ello, los agrcultores necesitan utilizar el espacio fisico para la plantacion con mas eficiencia que nuna, por ello los sensores para agricultura de precision son cada vez mas comunes y por supuesto necesarios. Nota tomada de: https://www.slideshare.net/slideshow/sensores-ag-de-precisionpdf/253372512</p>
-            <img   class="sectionContainers__cardImage" src="../public/img/main03sensor.bmp" alt="Usuarios">
-        </div>
-    </section>
-</main>
+        <section class="Containers__card">
+            <h2 class="Containers__card-title">MODULO SENSORES</h2>
+            <div class="Containers__card-content">
 
-<footer class="footer" >
-    <!-- Imagen con grafico azul y blanco -->
-    <img class="footer__image" src="../public/img/main05footer.bmp" alt="Grafica fondo azul">
-</footer>
+                <div class="Containers__card-subcontent">
 
+                    <h2 class="Containers__card-subtitle">TEMPERATURA GENERAL</h2>
+                    <div class="Containers__sub__content">
+                        <p class="Containers__card-paragraph--line">SENSOR 1</p>
+                        <p class="Containers__card-paragraph--line">1 und</p>
+                    </div>
+
+                    <h2 class="Containers__card-subtitle">PH - RADIACION - LLUVIA</h2>
+                    <div class="Containers__sub__content">
+                        <p class="Containers__card-paragraph--line">PH SUELO</p>
+                        <p class="Containers__card-paragraph--line">2 und</p>
+                    </div>
+                    <div class="Containers__sub__content">
+                        <p class="Containers__card-paragraph--line">RADIACIÓN</p>
+                        <p class="Containers__card-paragraph--line">1 und</p>
+                    </div>
+                    <div class="Containers__sub__content">
+                        <p class="Containers__card-paragraph--line">LLUVIA</p>
+                        <p class="Containers__card-paragraph--line">1 und</p>
+                    </div>
+
+                </div>
+                <!-- img -->
+                <div class="Containers__card-subcontent">
+                    <h2 class="Containers__card-subtitle">SENSORE METEORILOGICO</h2>
+                    <img class="Containers__card-image" src="../public/img_/main/semillas grupo.webp" alt="Cultivo">
+                </div>
+                <!-- img -->
+                <div class="Containers__card-subcontent">
+                    <h2 class="Containers__card-subtitle">SENSORE METEORILOGICO</h2>
+                    <img class="Containers__card-image" src="../public/img_/main/SENSOR AGRICULTURA.jpg" alt="Cultivo">
+                </div>
+                <!-- img -->
+                <div class="Containers__card-subcontent">
+                    <h2 class="Containers__card-subtitle">SENSORE METEORILOGICO</h2>
+                    <img class="Containers__card-image" src="../public/img_/main/SENSOR RADIACION.jpeg" alt="Cultivo">
+                </div>
+            </div>
+        </section>
+
+
+        <section class="Containers__card">
+            <h2 class="Containers__card-title">MODULO CULTIVO</h2>
+            <div class="Containers__card-content">
+                <div class="Containers__card-subcontent">
+                    <h2 class="Containers__card-subtitle">INFORMACIÓN SATELITAL</h2>
+                    <p class="Containers__card-paragraph">En 2022, las exportaciones de café disminuyeron 8% a poco
+                        más de 11,4 millones de sacos de 60 kg de café verde frente a los más de 12,4 millones de sacos
+                        puestos en los mercados internacionales a lo largo de 2021.
+                        En diciembre las exportaciones cayeron 12% a poco más de un millón de sacos versus los casi 1,2
+                        millones exportados en el mismo mes de 2021.
+                    </p>
+                    <p class="Containers__card-paragraph">
+                        En 2022, las exportaciones de café disminuyeron 8% a poco
+                        más de 11,4 millones de sacos de 60 kg de café verde frente a los más de 12,4 millones de sacos
+                        puestos en los mercados internacionales a lo largo de 2021.
+                        En diciembre las exportaciones cayeron 12% a poco más de un millón de sacos versus los casi 1,2
+                        millones exportados en el mismo mes de 2021.
+                    </p>
+                </div>
+
+                <div class="Containers__card-subcontent">
+                    <h2 class="Containers__card-subtitle">INFORMACIÓN SATELITAL</h2>
+                    <img class="Containers__card-image--wide" src="../public/img/cultivos_img.png" alt="Cultivo">
+                </div>
+            </div>
+        </section>
+
+        <footer class="Containers__footer" >
+    
+            <img class="footer__image" src="../public/img/main05footer.bmp" alt="Grafica fondo azul">
+        </footer>
 </html>

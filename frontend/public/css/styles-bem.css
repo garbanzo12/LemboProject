@@ -48,6 +48,7 @@
     --secundary-1-800: #2e566d;
     --secundary-1-900: #17435d;
     --secundary-1-950: #00304d;
+    --secundary-1-951: #001725;
 
     /* Secundario 2 */
     --secundary-2-50: #f2ebf3;
@@ -158,6 +159,9 @@ body {
     align-items: center;
 }
 
+
+
+
 /* ******************************************************* */
 /* ******************************************************* */
 /* ***************    CLASES SEGUN BEM     *************** */
@@ -179,7 +183,6 @@ body {
     z-index: 5;
     top: 2%;
     left: 10%;
-
 }
 
 /* MODIFICARDOR titulo posicion */
@@ -287,18 +290,21 @@ body {
     font-size: var(--fs-xs);
     font-weight: bold;
     margin: 2rem 0;
-    padding:  1.4rem;
+    padding: 1.4rem;
     text-align: center;
     text-decoration: none;
     text-decoration-color: none;
-    
+
 }
-.cardright__botton-terciary:hover{
+
+.cardright__botton-terciary:hover {
     background-color: var(--gray-200);
     border: 0.1rem solid var(--gray-400);
 }
 
-/* ************************************* */
+/* ******************************************* */
+/* *************   INTEGRADOR   ************** */
+/* ******************************************* */
 .integrator__botton-primary {
     outline: none;
     background-color: var(--secundary-1-800);
@@ -310,7 +316,7 @@ body {
     font-size: var(--fs-xs);
     font-weight: bold;
     margin: 1rem 0;
-    padding:  1.4rem;
+    padding: 1.4rem;
     text-align: center;
     text-decoration: none;
     text-decoration-color: none;
@@ -343,12 +349,14 @@ body {
     margin: 0 0 1.2rem 0;
     border: 0.1rem solid var(--blanco);
     border-radius: 5rem;
-    cursor:pointer;
+    cursor: pointer;
 }
-.checkbox-checked{
+
+.checkbox-checked {
     background-color: var(--primary-950);
 
 }
+
 /* ESTE ES EL HOVER DEL LABEL PARA QUE CAMBIE DE COLOR */
 .cardright__input-form--checkbox[type="checkbox"]:checked+.cardright__label-form--color {
     background-color: var(--gray-950);
@@ -620,9 +628,11 @@ body {
     font-size: var(--fs-xs);
     font-weight: 200;
 }
-.cardright__foot-form p{
-    color:  var(--gray-100);
+
+.cardright__foot-form p {
+    color: var(--gray-100);
 }
+
 /* DETALLE INTERNO FORMULARIOS */
 /* este solo se usa si hay mas de 1 containers separados por titulo intermedio */
 .cardright__container-input {
@@ -691,7 +701,7 @@ body {
     align-items: center;
 }
 
-.cardright__subcontainer-input--row{
+.cardright__subcontainer-input--row {
     flex-direction: row;
 }
 
@@ -720,11 +730,11 @@ body {
     background-color: var(--gray-050);
 }
 
-.cardright__input-form--date{
+.cardright__input-form--date {
     width: 14rem;
     font-size: var(--fs-xs);
     color: var(--gray-700);
-    
+
     padding: 1.6rem 2.4rem;
     margin: 0 0 0 0;
     border: 0.1rem solid var(--blanco);
@@ -802,8 +812,9 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
     flex-direction: column;
     padding: 1rem;
     width: 95%;
-   
+
 }
+
 /* aqui esta el container del nombre del modulo cultivo, ciclo, etc...*/
 .cardright__tittle-listar {
     font-size: var(--fs-xs);
@@ -812,6 +823,7 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
     font-weight: 700;
     border-radius: 1rem;
 }
+
 .cardright__tittle-value {
     font-size: var(--fs-xs);
     padding: 1rem;
@@ -821,17 +833,18 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
 }
 
 .cardright__controls-container {
-    background-color: var(--gray-200) ;
+    background-color: var(--gray-200);
     display: flex;
     flex-direction: row;
     /* border-radius: 1rem 1rem 0 0; */
     justify-content: space-between;
 }
 
-.cardright__botton-a{
+.cardright__botton-a {
     text-decoration: none;
     color: var(--secundary-1-950);
 }
+
 /* ********************** TABLA *************************** */
 
 .cardright__container-datos {
@@ -844,7 +857,8 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
 /* ********************** CELDAS*************************** */
 .cardright__table {
     width: 100%;
-    border-collapse: collapse; /* Mejora visual de las líneas */
+    border-collapse: collapse;
+    /* Mejora visual de las líneas */
 }
 
 .cardright__row--header .cardright__cell {
@@ -862,7 +876,7 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
 }
 
 /* ********************** PAGINACION ************************* */
-.cardright__paginacion{
+.cardright__paginacion {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -870,26 +884,17 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
     padding: 1rem;
 }
 
-/* ************************************************************ */
-/* **********    BLOQUE  BARRA CENTRAL NAVEGACION   *********** */
-/* ************************************************************ */
-.centernav {}
-
-/* MODIFICADOR barra de navegacion */
-/* mediaquery */
 
 
 
-/* ************************************************************ */
-/* **********  ELEMENTOS  BARRA CENTRAL NAVEGACION  *********** */
-/* ************************************************************ */
-.centernav__container {}
+
+/* .centernav__container {}
 
 .centernav__subcontainer {}
 
 .centernav__title {}
 
-.centernav__svg {}
+.centernav__svg {} */
 
 
 
@@ -913,13 +918,15 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
     cursor: pointer;
     opacity: 0.7;
     transition: 0.4s;
+    z-index: 6;
 }
 
 .side-main:hover {
     opacity: 1;
 }
+
 /* ESTE ES EL CONTROL DEL CHECKBOX */
-.side-main>.inp {
+.side-main>.side-main__inp {
     display: none;
 }
 
@@ -934,7 +941,7 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
     padding: 0 1rem;
 }
 
-.side-main__bar-info{
+.side-main__bar-info {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -957,6 +964,7 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
     width: 5rem;
     margin: 0.2rem;
 }
+
 .side-main__bar-avatar {
     width: 100%;
     height: 100%;
@@ -1013,34 +1021,34 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
 }
 
 
-.inp:checked~.side-main__menu-container {
+.side-main__inp:checked~.side-main__menu-container {
     clip-path: inset(10% 50% 90% 50% round 0.1rem);
 }
 
-.inp:not(:checked)~.side-main__menu-container .side-main__menu-list {
+.side-main__inp:not(:checked)~.side-main__menu-container .side-main__menu-list {
     transform: translateY(0);
     opacity: 1;
 }
 
-.inp:not(:checked)~.side-main__menu-container .side-main__menu-list:nth-child(1) {
+.side-main__inp:not(:checked)~.side-main__menu-container .side-main__menu-list:nth-child(1) {
     transition:
         transform 0.4s var(--delay),
         opacity 0.4s var(--delay);
 }
 
-.inp:not(:checked)~.side-main__menu-container .side-main__menu-list:nth-child(2) {
+.side-main__inp:not(:checked)~.side-main__menu-container .side-main__menu-list:nth-child(2) {
     transition:
         transform 0.4s calc(var(--delay) + (var(--trdelay) * 1)),
         opacity 0.4s calc(var(--delay) + (var(--trdelay) * 1));
 }
 
-.inp:not(:checked)~.side-main__menu-container .side-main__menu-list:nth-child(3) {
+.side-main__inp:not(:checked)~.side-main__menu-container .side-main__menu-list:nth-child(3) {
     transition:
         transform 0.4s calc(var(--delay) + (var(--trdelay) * 2)),
         opacity 0.4s calc(var(--delay) + (var(--trdelay) * 2));
 }
 
-.inp:not(:checked)~.side-main__menu-container .side-main__menu-list:nth-child(4) {
+.side-main__inp:not(:checked)~.side-main__menu-container .side-main__menu-list:nth-child(4) {
     transition:
         transform 0.4s calc(var(--delay) + (var(--trdelay) * 3)),
         opacity 0.4s calc(var(--delay) + (var(--trdelay) * 3));
@@ -1053,8 +1061,8 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
 /* ************************************** */
 /* ************************************** */
 
-.side-main__bar-inp {
-    -webkit-appearance: none;
+.side-main__bar-side-main__inp {
+    /* -webkit-appearance: none; */
     display: none;
     visibility: hidden;
 }
@@ -1063,8 +1071,8 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
     --transform: -25%;
     display: block;
     width: 100%;
-    height: 3px;
-    border-radius: 50px;
+    height: 0.3rem;
+    border-radius: 5rem;
     background-color: white;
     transition: all 0.4s;
     position: relative;
@@ -1074,15 +1082,15 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
 
 
 .side-main__container-enlace {
-text-decoration: none;
-font-size: var(--fs-xxxs);
-font-weight: 600;
+    text-decoration: none;
+    font-size: var(--fs-xxxs);
+    font-weight: 600;
 }
 
-.side-main__menu-svg{
+.side-main__menu-svg {
     width: 4rem;
     height: 4rem;
-    padding:  0.5rem 1rem;
+    padding: 0.5rem 1rem;
 }
 
 .side-main__container-botton {}
@@ -1097,6 +1105,261 @@ font-weight: 600;
 /* ************************************** */
 /* ************************************** */
 
+
+
+
+
+
+/* *********************************************************** */
+/* **************     BLOQUE BARRA CENTRAL    **************** */
+/* *********************************************************** */
+
+.Bar {
+    background-color: var(--secundary-1-950);
+    width: auto;
+    height: auto;
+    flex-direction: column;
+    border-radius: 0.6rem;
+    margin: 0 auto;
+    color: var(--black);
+    display: flex;
+    justify-content: center;
+    /* Centra el contenido horizontalmente */
+    transition: background-color 0.5s ease;
+    /* ESTE CONETENEDOR ESTA EN MEDIO DE LA PANTALLA EN LA PARTE SUPERIOR SE ENCESITA QUE SE PEGUE A LA PARTE SUPERIOR CUANDO SE HACE SCROLL */
+    position: absolute;
+    top: 8%;
+}
+
+.Bar:hover {
+    background-color: var(--white);
+}
+
+
+/* ************************************************************ */
+/* ********************  ELEMENTOS  BAR   ********************* */
+/* ************************************************************ */
+
+.Bar__List {
+    display: flex;
+    flex-direction: row;
+    padding: 0 10rem 0 10rem;
+    gap: 3rem;
+    transition: gap 1s ease;
+}
+
+.Bar:hover .Bar__List {
+    gap: 8rem;
+    background-image: url("../img_/SEDE-AGRUPECUARIA-SENA-LEMBO.gif");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.Bar__Item {
+    background-color: var(--secundary-1-400);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: auto;
+    border-radius: 0.4rem;
+}
+
+.Bar__Item:hover {
+    opacity: 0.5;
+}
+
+.Bar__Image {
+    width: 6rem;
+    height: 6rem;
+}
+
+.Bar__linkparag {
+    width: auto;
+    flex-direction: column;
+    text-align: center;
+    margin: 0.4rem 0 0.8rem 0;
+}
+
+
+/* *********************************************************** */
+/* **************      BLOQUE MAIN CARDS      **************** */
+/* *********************************************************** */
+
+.Containers {
+    background: linear-gradient(to bottom,
+            var(--secundary-1-951),
+            var(--secundary-1-600));
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding-top: 190rem;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: start;
+}
+
+
+@media (max-width: 1280px) {
+    .Containers {
+        padding-top: 210rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .Containers {
+        padding-top: 360rem;
+    }
+}
+
+/* *********************************************************** */
+/* **************     ELEMENTOS MAIN CARDS    **************** */
+/* *********************************************************** */
+
+.Containers__card {
+    background: var(--gray-050);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 79%;
+    font-weight: bold;
+    border-radius: 2rem;
+    cursor: pointer;
+    z-index: 1;
+    margin: 2rem;
+}
+
+.Containers__card-title {
+    align-items: start;
+    font-size: var(--fs-sm);
+    font-weight: bold;
+}
+
+.Containers__card-content {
+    display: flex;
+    flex-wrap: wrap;
+    /* flex-direction: row; */
+    padding: 2rem;
+    gap: 1rem;
+    justify-content: space-around;
+}
+
+.Containers__card-content--row {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.Containers__card-subcontent {
+    display: flex;
+    flex-grow: 1;
+    background-color: var(--gray-050);
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    border-radius: 1rem;
+    align-items: center;
+    gap: 2rem;
+    box-shadow: 0 0 1rem var(--gray-700);
+}
+
+/* seudo clase */
+.Containers__card-subcontent:hover {
+    background-color: var(--gray-050);
+    display: flex;
+    flex-direction: column;
+    border-radius: 1rem;
+    align-items: center;
+    /* justify-content: center; */
+    gap: 2rem;
+    box-shadow: 0 0 1rem var(--gray-700);
+}
+
+
+.Containers__card-subtitle {
+    align-items: start;
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    padding: 1rem;
+    /* border-radius: 0.5rem; */
+    color: var(--gray-750);
+    display: flex;
+    flex-flow: column;
+    width: 30rem;
+}
+
+.Containers__sub__content {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--gray-050);
+    width: 30rem;
+}
+
+.Containers__card-paragraph {
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
+.Containers__card-paragraph--line {
+    background-color: var(--gray-100);
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    margin: 0 auto;
+    width: 14rem;
+    display: flex;
+    ;
+    justify-content: start;
+
+}
+
+.Containers__card-image {
+    height: 20rem;
+    /* Mantiene las proporciones */
+    width: 30rem;
+    /* La imagen ocupa un 20% del contenedor */
+
+}
+
+.Containers__card-image--wide {
+    height: 20rem;
+    /* Mantiene las proporciones */
+    width: 30rem;
+    /* La imagen ocupa un 20% del contenedor */
+
+}
+
+.Containers__footer {
+    height: 20rem;
+    /* Mantiene las proporciones */
+    width: 100%;
+    /* La imagen ocupa un 20% del contenedor */
+
+}
+
+
+/* ************************************* */
+/*********** GRAFICO CHARD  ********/
+/* ************************************* */
+
+
+
+
+
+
+
+
+
+
+/* ************************************* */
 
 
 
@@ -1119,7 +1382,7 @@ font-weight: 600;
 /* ********  ELEMENTOS INTEGRADOR - CREAR PRODUCCION   ******** */
 /* ************************************************************ */
 
-.integrator__form{
+.integrator__form {
     background-color: var(--white);
     display: flex;
     flex-direction: column;
@@ -1130,32 +1393,34 @@ font-weight: 600;
     top: 5%;
 }
 
-.integrator__form-header{
+.integrator__form-header {
     display: flex;
     flex-direction: row;
     background-color: var(--gray-200);
     border-radius: 1rem;
     margin-bottom: 1rem;
-    
+
 }
 
-.integrator__header-tittles{
+.integrator__header-tittles {
     display: flex;
     flex-direction: row;
     align-items: center;
     width: 100%;
     margin: 0.5rem 0rem;
 }
-.integrator__title-h3{
+
+.integrator__title-h3 {
     padding: 1rem;
-    margin: 0 1rem 0 1rem; 
+    margin: 0 1rem 0 1rem;
     font-size: var(--fs-xs);
 }
-.integrator__input-form{
+
+.integrator__input-form {
     background-color: var(--gray-050);
     border-radius: 0.5rem;
-    padding: 1rem; 
-    margin: 0 0rem 0 rem; 
+    padding: 1rem;
+    margin: 0 0rem 0 rem;
     font-size: var(--fs-xs);
 }
 
@@ -1163,21 +1428,21 @@ font-weight: 600;
 /* AQUI INICIA SEGUNDA PARTE */
 /* AQUI INICIA SEGUNDA PARTE */
 
-.integrator__form-body{
-background-color: var(--secundary-1-700);
-border-radius: 1rem;
+.integrator__form-body {
+    background-color: var(--secundary-1-700);
+    border-radius: 1rem;
 
 }
 
 /* este hace que los modulos sean columnas */
-.integrator__produccion-body{
+.integrator__produccion-body {
     display: flex;
     flex-direction: row;
     padding: 1rem;
     justify-content: space-evenly;
 }
 
-.integrator__module{
+.integrator__module {
     background-color: ;
     display: flex;
     flex-direction: column;
@@ -1187,35 +1452,37 @@ border-radius: 1rem;
 /* AQUI INICIA TERCERA PARTE */
 /* AQUI INICIA TERCERA PARTE */
 /* AQUI INICIA TERCERA PARTE */
-.integrator__module-table{
+.integrator__module-table {
     background-color: var(--gray-200);
     display: flex;
     flex-direction: column;
 }
-.integrator__module-header{
+
+.integrator__module-header {
     font-size: var(--fs-sm);
     text-transform: uppercase;
     padding: 1rem;
     background-color: var(--gray-050);
-    color: var(--black); 
-    font-weight: 700; 
+    color: var(--black);
+    font-weight: 700;
     display: flex;
     width: 100%;
 }
 
-.integrator__module-thead{
+.integrator__module-thead {
     background-color: var(--white);
     padding: 0.5rem;
 }
 
 /* cell */
 
-.integrator__table-header{
+.integrator__table-header {
     display: flex;
     color: var(--black);
-    
+
 }
-.integrator__header-cell{
+
+.integrator__header-cell {
     background-color: var(--gray-400);
     width: 100%;
     padding: 0.5rem;
@@ -1223,7 +1490,8 @@ border-radius: 1rem;
     font-weight: 500;
     text-transform: uppercase;
 }
-.integrator__table-fila{
+
+.integrator__table-fila {
     display: flex;
     flex-direction: column;
     border: 1px solid var(--gray-300);
@@ -1231,10 +1499,10 @@ border-radius: 1rem;
     height: 25rem;
 }
 
-.integrator__table-dato{
+.integrator__table-dato {
     background-color: var(--gray-200);
     width: 100%;
-    padding:  0.2rem 0;
+    padding: 0.2rem 0;
     text-align: center;
     font-size: var(--fs-sm);
     font-weight: 200;
@@ -1245,25 +1513,26 @@ border-radius: 1rem;
 /* AQUI INICIA CUARTA PARTE */
 /* AQUI INICIA CUARTA PARTE */
 /* AQUI INICIA CUARTA PARTE */
-.integrator__tablet-botton{
+.integrator__tablet-botton {
     font-size: var(--fs-xs);
 }
 
-.integrator__tablet-select{
+.integrator__tablet-select {
     background-color: var(--gray-200);
     width: 100%;
-    padding:  0.2rem 0;
+    padding: 0.2rem 0;
     text-align: center;
     font-size: var(--fs-sm);
     font-weight: 200;
     text-transform: uppercase;
     border: 0.1rem solid var(--white);
 }
-.integrator__link{
+
+.integrator__link {
     display: flex;
     justify-content: center;
     width: 100%;
-}   
+}
 
 
 .integrator__container-header {}
@@ -1566,8 +1835,8 @@ DOMINGO ESTE ES DONDE SE VEN EL MAPA CON LOS DATOS DE LOS SENSORES*/
 
 
 
-  /* ⬇️  Esto de aqui es  un modal invisible para mostrar el ID ⬇️ */
-  #cuadro-mensaje {
+/* ⬇️  Esto de aqui es  un modal invisible para mostrar el ID ⬇️ */
+#cuadro-mensaje {
     display: none;
     position: fixed;
     top: 20%;
@@ -1575,67 +1844,68 @@ DOMINGO ESTE ES DONDE SE VEN EL MAPA CON LOS DATOS DE LOS SENSORES*/
     transform: translate(-50%, -50%);
     width: 80rem;
     max-width: 90%;
-    background-color: var(--gray-050) ;
+    background-color: var(--gray-050);
     border: 0.2rem solid var(--gray-950);
     padding: 4rem 3rem;
     border-radius: 1rem;
     font-family: var(--main-font);
     font-size: var(--fs-xs);
-    color: var(--primary-400);     
+    color: var(--primary-400);
     box-shadow: 0 0.1rem 0.4rem var(--black);
     z-index: 9999;
     text-align: center;
     transition: all 0.3s ease;
-  }
-  @media (max-width: 1280px) {
+}
+
+@media (max-width: 1280px) {
     #cuadro-mensaje {
-      width: 50%;
-      padding: 6%;
-      top: 40%;
+        width: 50%;
+        padding: 6%;
+        top: 40%;
 
     }
-  
+
     #cuadro-mensaje button {
-      font-size: 0.95rem;
-      padding: 0.6rem 1.2rem;
+        font-size: 0.95rem;
+        padding: 0.6rem 1.2rem;
     }
-  
+
     #cerrar-modal {
-      font-size: 1.3rem;
+        font-size: 1.3rem;
     }
-  
+
     #texto-mensaje {
-      font-size: 1.1rem;
+        font-size: 1.1rem;
     }
-  }
+}
 
 
-  @media (min-width: 380px) and (max-width: 760px) {
+@media (min-width: 380px) and (max-width: 760px) {
     #cuadro-mensaje {
-      width: 80%;
-    
-      padding: 11%;
-      left: 50%;
+        width: 80%;
+
+        padding: 11%;
+        left: 50%;
     }
-  
+
     #cuadro-mensaje button {
-      font-size: 0.85rem;
-      padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
     }
-  
+
     #cerrar-modal {
-      font-size: 1rem;
-      top: 1%;
-      right: 1%;
+        font-size: 1rem;
+        top: 1%;
+        right: 1%;
     }
-  
+
     #texto-mensaje {
         font-size: var(--fs-xxs);
     }
-  }
-  
-  /* Botones del modal */
-  #cuadro-mensaje button {
+}
+
+/* Botones del modal */
+#cuadro-mensaje button {
     background-color: var(--secundary-2-900);
     border: none;
     padding: 1.2rempx 2.4rem;
@@ -1646,14 +1916,14 @@ DOMINGO ESTE ES DONDE SE VEN EL MAPA CON LOS DATOS DE LOS SENSORES*/
     font-weight: bold;
     margin: 1.5rem 1rem 0;
     transition: background-color 0.2s ease;
-  }
-  
-  #cuadro-mensaje button:hover {
+}
+
+#cuadro-mensaje button:hover {
     background-color: var(--secundary-1-500);
-  }
-  
-  /* Botón cerrar "X" */
-  #cerrar-modal {
+}
+
+/* Botón cerrar "X" */
+#cerrar-modal {
     position: absolute;
     top: 1.2rem;
     right: 1.5rem;
@@ -1663,20 +1933,20 @@ DOMINGO ESTE ES DONDE SE VEN EL MAPA CON LOS DATOS DE LOS SENSORES*/
     padding: 0;
     border: none;
     cursor: pointer;
-  }
-  
-  /* Texto del mensaje */
-  #texto-mensaje {
+}
+
+/* Texto del mensaje */
+#texto-mensaje {
     margin-bottom: 2.5rem;
     font-size: var(--fs-xxxs);
-  }
-      
-
-  /* ⬆️  Esto de aqui es  un modal invisible para mostrar el ID ⬆️ */
+}
 
 
+/* ⬆️  Esto de aqui es  un modal invisible para mostrar el ID ⬆️ */
 
-.cardright__image-upload{
+
+
+.cardright__image-upload {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -1701,10 +1971,10 @@ DOMINGO ESTE ES DONDE SE VEN EL MAPA CON LOS DATOS DE LOS SENSORES*/
     gap: 0.5rem;
     justify-content: center;
     align-items: center;
-  
-  }
-  
-  .cardright__pagination button {
+
+}
+
+.cardright__pagination button {
     padding: 0.4rem 0.8rem;
     background-color: #f1f1f1;
     border: none;
@@ -1712,19 +1982,19 @@ DOMINGO ESTE ES DONDE SE VEN EL MAPA CON LOS DATOS DE LOS SENSORES*/
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.2s;
-  }
-  
-  .cardright__pagination button.activo {
+}
+
+.cardright__pagination button.activo {
     background-color: #4caf50;
     color: white;
-  }
-  
-  .cardright__pagination button:hover {
+}
+
+.cardright__pagination button:hover {
     background-color: #ddd;
-  }
-  
-  .cardright__pagination span {
+}
+
+.cardright__pagination span {
     padding: 0.4rem 0.6rem;
     font-weight: bold;
     color: #888;
-  }
+}
