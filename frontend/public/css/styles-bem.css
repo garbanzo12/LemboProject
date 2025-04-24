@@ -1561,19 +1561,378 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
 /* ************    BLOQUE - VISUALIZAR PRODUCCION  ************* */
 /* ************************************************************* */
 
-/* PENDIENTE 
-
-DOMINGO ESTE ES DONDE SE VEN EL MAPA CON LOS DATOS DE LOS SENSORES*/
-
+.producto {
+    background-color: var(--secundary-1-950);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 /* ************************************************************* */
 /* ***********  ELEMENTOS - VISUALIZAR PRODUCCION   ************ */
 /* ************************************************************* */
 
-/* PENDIENTE 
+.producto__general-container {
+    background-color: var(--gray-200);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 98%;
+    border-radius: 1rem;
+    gap: 1rem;
+    padding: 1rem;
+}
 
-DOMINGO ESTE ES DONDE SE VEN EL MAPA CON LOS DATOS DE LOS SENSORES*/
+@media (max-width: 1280px) {
+    .producto__general-container {
+        margin-top: 90rem;
+    }
+}
 
+@media (max-width: 916px) {
+    .producto__general-container {
+        margin-top: 180rem;
+    }
+}
+
+@media (max-width: 766px) {
+    .producto__general-container {
+        margin-top: 220rem;
+    }
+}
+
+@media (max-width: 550px) {
+    .producto__general-container {
+        margin-top: 345rem;
+    }
+}
+
+
+
+.producto__form-header {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: var(--gray-200);
+    border-radius: 1rem;
+    padding: 1rem;
+
+
+
+}
+
+.producto__header-tittles {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: var(--gray-150);
+    border-radius: 1rem;
+    justify-content: center;
+    align-items: center;
+    /* width: 100%; */
+
+}
+
+.producto__title-h3 {
+    padding: 1rem;
+    margin: 0 1rem 0 1rem;
+    font-size: var(--fs-xs);
+    display: flex;
+}
+
+
+
+
+.producto__title-input {
+    background-color: var(--gray-050);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 0 0rem 0 rem;
+    font-size: var(--fs-xs);
+}
+
+.producto__form {
+    /* background-color: var(--white); */
+    display: flex;
+    flex-wrap: wrap;
+    /* padding: 1rem; */
+    border-radius: 1rem;
+    width: 98%;
+    gap: 1rem;
+
+    justify-content: space-evenly;
+}
+
+.producto__containers-chards {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.producto__card {
+    background-color: var(--gray-100);
+    border-radius: 1rem;
+    padding: 1rem;
+    box-shadow: 0 0.2rem 1rem var(--gray-900);
+    width: 25rem;
+    height: 25rem;
+
+}
+
+.producto__data {
+    background-color: var(--gray-100);
+    border-radius: 1rem;
+    padding: 1rem;
+    box-shadow: 0 0.2rem 1rem var(--gray-900);
+    width: 25rem;
+    height: 25rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.producto__modul {
+    width: 25%;
+    text-align: center;
+}
+
+.producto__chard {
+    /* background-color: var(--gray-300); */
+    width: 100%;
+    height: 15rem;
+    border-radius: 1rem;
+    padding: 1rem;
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5rem;
+}
+
+.producto__bar-container {
+    /* border: 0.1rem solid var(--white); */
+    display: flex;
+    width: 100%;
+    height: 100%;
+    gap: 1rem;
+    align-items: flex-end;
+}
+
+.producto__bar {
+    width: 25%;
+    background: linear-gradient(to top, var(--primary-500), var(--secundary-1-950));
+    text-align: center;
+    color: var(--white);
+    font-size: 12px;
+    border-radius: 0.5rem 0.5rem 0 0;
+    transition: height 1s ease-out;
+    position: relative;
+    box-shadow: 0 0.2rem 0.2rem var(--gray-950);
+}
+
+.producto__span {}
+
+.producto__bar .producto__span {
+    position: absolute;
+    bottom: -3.5rem;
+    left: -1rem;
+    right: 0;
+    color: var(--gray-550);
+    font-weight: bold;
+
+}
+
+.chart--animated .producto__bar:nth-child(1) {
+    height: 55%;
+}
+
+.chart--animated .producto__bar:nth-child(2) {
+    height: 90%;
+}
+
+.chart--animated .producto__bar:nth-child(3) {
+    height: 60%;
+}
+
+.chart--animated .producto__bar:nth-child(4) {
+    height: 85%;
+}
+
+/* chard torta */
+.producto__chart {
+    border: 0.1rem solid var(--white);
+    width: 19rem;
+    /* Diámetro del gráfico */
+    height: 19rem;
+    border-radius: 50%;
+    /* Hace que el contenedor sea circular */
+    position: relative;
+    background: conic-gradient(var(--gray-300) 0% 30%,
+            /* Segundo color: 40% (30%-70%) */
+            var(--secundary-1-950) 30% 100%
+            /* Tercer color: 30% */
+        );
+    top: 2%;
+    left: 10%;
+}
+
+.producto__chart--1 {
+    border: 0.1rem solid var(--white);
+    width: 19rem;
+    /* Diámetro del gráfico */
+    height: 19rem;
+    border-radius: 50%;
+    /* Hace que el contenedor sea circular */
+    position: relative;
+    background: conic-gradient(var(--gray-300) 0% 52%,
+    /* Segundo color: 40% (30%-70%) */
+    var(--secundary-1-900) 48% 100%
+    /* Tercer color: 30% */
+);
+    top: 2%;
+    left: 10%;
+}
+
+.producto__chart--2 {
+    border: 0.1rem solid var(--white);
+    width: 19rem;
+    /* Diámetro del gráfico */
+    height: 19rem;
+    border-radius: 50%;
+    /* Hace que el contenedor sea circular */
+    position: relative;
+    background: conic-gradient(var(--gray-300) 0% 90%,
+    /* Segundo color: 40% (30%-70%) */
+    var(--secundary-1-800) 10% 100%
+    /* Tercer color: 30% */
+);
+    top: 2%;
+    left: 10%;
+}
+
+
+
+
+.producto__chart--3 {
+    border: 0.1rem solid var(--white);
+    width: 19rem;
+    /* Diámetro del gráfico */
+    height: 19rem;
+    border-radius: 50%;
+    /* Hace que el contenedor sea circular */
+    position: relative;
+    background: conic-gradient(var(--gray-300) 0% 60%,
+    /* Segundo color: 40% (30%-70%) */
+    var(--secundary-1-900) 60% 100%
+    /* Tercer color: 30% */
+);
+    top: 2%;
+    left: 10%;
+}
+
+
+.producto__chart--4 {
+    border: 0.1rem solid var(--white);
+    width: 19rem;
+    /* Diámetro del gráfico */
+    height: 19rem;
+    border-radius: 50%;
+    /* Hace que el contenedor sea circular */
+    position: relative;
+    background: conic-gradient(var(--gray-200) 0% 33%,
+    /* Segundo color: 40% (30%-70%) */
+    var(--secundary-1-900) 33% 100%
+    /* Tercer color: 30% */
+);
+    top: 2%;
+    left: 10%;
+}
+
+.producto__chart--5 {
+    border: 0.1rem solid var(--gray-600);
+    width: 19rem;
+    /* Diámetro del gráfico */
+    height: 19rem;
+    border-radius: 50%;
+    /* Hace que el contenedor sea circular */
+    position: relative;
+    background: conic-gradient(var(--primary-950) 0% 73%,
+    /* Segundo color: 40% (30%-70%) */
+    var(--gray-200) 73% 100%
+    /* Tercer color: 30% */
+);
+    top: 2%;
+    left: 10%;
+}
+
+.producto__chart--6 {
+    border: 0.1rem solid var(--white);
+    width: 19rem;
+    /* Diámetro del gráfico */
+    height: 19rem;
+    border-radius: 50%;
+    /* Hace que el contenedor sea circular */
+    position: relative;
+    background: conic-gradient(var(--gray-300) 0% 88%,
+    /* Segundo color: 40% (30%-70%) */
+    var(--secundary-1-900) 88% 100%
+    /* Tercer color: 30% */
+);
+    top: 2%;
+    left: 10%;
+}
+
+.producto__chart--7 {
+    border: 0.1rem solid var(--white);
+    width: 19rem;
+    /* Diámetro del gráfico */
+    height: 19rem;
+    border-radius: 50%;
+    /* Hace que el contenedor sea circular */
+    position: relative;
+    background: conic-gradient(var(--gray-300) 0% 58%,
+    /* Segundo color: 40% (30%-70%) */
+    var(--secundary-1-800) 58% 100%
+    /* Tercer color: 30% */
+);
+    top: 2%;
+    left: 10%;
+}
+
+
+
+.producto__slice {
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: 0 0;
+}
+
+
+.producto__card--map {
+    background-color: var(--gray-100);
+    border-radius: 1rem;
+    padding: 1rem;
+    box-shadow: 0 0.2rem 1rem var(--gray-900);
+
+}
+
+
+
+.producto__container-img {
+    display: flex;
+}
+
+.producto__mapa {
+    background-color: var(--secundary-1-951);
+    width: 46rem;
+    height: 46rem;
+    /* object-fit: contain; */
+}
 
 
 /* ****************************************************** */
@@ -1908,7 +2267,7 @@ DOMINGO ESTE ES DONDE SE VEN EL MAPA CON LOS DATOS DE LOS SENSORES*/
 #cuadro-mensaje button {
     background-color: var(--secundary-2-900);
     border: none;
-    padding: 1.2rempx 2.4rem;
+    padding: 1.2rem 2.4rem;
     color: white;
     font-size: 1rem;
     border-radius: 0.8rem;
@@ -1976,9 +2335,9 @@ DOMINGO ESTE ES DONDE SE VEN EL MAPA CON LOS DATOS DE LOS SENSORES*/
 
 .cardright__pagination button {
     padding: 0.4rem 0.8rem;
-    background-color: #f1f1f1;
+    background-color: var(--gray-050);
     border: none;
-    border-radius: 5px;
+    border-radius: 0.5rem;
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.2s;
@@ -1986,15 +2345,15 @@ DOMINGO ESTE ES DONDE SE VEN EL MAPA CON LOS DATOS DE LOS SENSORES*/
 
 .cardright__pagination button.activo {
     background-color: #4caf50;
-    color: white;
+    color: var(--blanco);
 }
 
 .cardright__pagination button:hover {
-    background-color: #ddd;
+    background-color: var(--gray-050);
 }
 
 .cardright__pagination span {
     padding: 0.4rem 0.6rem;
     font-weight: bold;
-    color: #888;
+    color: var(--gray-400);
 }

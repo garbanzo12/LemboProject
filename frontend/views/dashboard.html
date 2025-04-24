@@ -5,299 +5,468 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document</title>
-  <link rel="stylesheet" href="../public/css/dashboard.css" />
+  <link rel="stylesheet" href="../public/css/styles-bem.css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
 </head>
 
 <body>
-  <main class="dashboard__windows">
 
-    
-    <div class="dashboard__img-wrapper">
-      <img id="imagen-mapa" src="../public/img_/main/sedelembo.png" alt="Mapa" />
-      <div id="contenedor"></div>
-    </div>
-    <button id="guardar">Guardar selección</button>
-    
 
-    <div class="dashboard__menu">
-      <button class="dashboard__botton">SERSOR</button>
-      <button class="dashboard__botton dashboard__botton--dark">UNIT</button>
-      <button class="dashboard__botton">HUMANITARIAN</button>
-      <button class="dashboard__botton dashboard__botton--dark">SIGNS</button>
-      <button class="dashboard__botton">RETROFIT</button>
-      <button class="dashboard__botton dashboard__botton--dark">CUSTOM</button>
-    </div>
+  <!--   
+/* ****************************************************** */
+/* ***************    ELEMENTOS TITTLE    *************** */
+/* ****************************************************** */ -->
 
-    <div class="menu__sensors">
+  <header class="cardtittle cardtittle--center">
+      <p class="cardtittle__text">SENA SEDE LEMBO</p>
+      <a class="cardtittle__enlace" href="../index_main.html">
+          <img class="cardtittle__svg-home" src="../public/img_/svg/home.svg" alt>
+      </a>
+  </header>
+  <!-- 
+/* ****************************************************** */
+/* *************    ELEMENTOS CARD LEFT    ************** */
+/* ****************************************************** */
+-->
+  <aside class="cardleft cardleft--pequeño">
+      <section class="cardleft__container">
+          <img class="cardleft__logo-sgal" src="../public/img_/left_side/LogoSgal.png" alt="Imagen de Logo Sgal" />
 
-      <!-- modulo 1 -->
-      <div class="menu__sensors__container">
-        <p class="menu__sensors__tittle">TEMPERATURA</p>
-        <div class="menu__sensors__temp__media">
-          <p class="menu__sensors__value">26</p>
-          <p class="menu__sensors__unds">°C</p>
-        </div>
 
-        <div class="menu__sensors__temp__min">
-            <p class=" menu__sensors__text">Min</p>
-          <p class="menu__sensors__value--pequeño">26</p>
-          <p class="menu__sensors__unds--pequeño">°C</p>
-        </div>
+          <img class="cardleft__img" src="../public/img_/left_side/movil01.png" alt="Imagen de celular  cuadros" />
 
-        <div class="menu__sensors__temp__max">
-            <P class=" menu__sensors__text">Max</P>
-          <p class="menu__sensors__value--pequeño">26</p>
-          <p class="menu__sensors__unds--pequeño">°C</p>
-        </div>
+          <img class="cardleft__logo-sena" src="../public/img_/svg_sena/logo-sena-verde-complementario-svg-2022.svg"
+              alt="Imagen de Logo Sena" />
+
+      </section>
+  </aside>
+  <!--     
+/* ****************************************************** */
+/* *************    ELEMENTOS CARD RIGHT    ************** */
+/* ****************************************************** */ -->
+
+  <label class="side-main">
+
+      <input class="side-main__inp" checked type="checkbox" />
+
+      <div class="side-main__bar">
+          <div class="side-main__bar-info">
+              <!-- JAVA SCRIPT PARA TOMAR LA MITAD DEL NOBRE -->
+              <h3 class="side-main__name">ERICK</h3>
+              <!-- JAVA SCRIPT PARA PONER EL ROLL AQUI  -->
+              <h3 class="side-main__roll">SAD-MND</h3>
+          </div>
+          <div class="side-main__container-avatar">
+              <img class="side-main__bar-avatar" src="../public/img_/main/imagen_foto_perfil_github2.jpg" alt="">
+          </div>
       </div>
 
-      <!-- modulo 2 -->
-      <div class="menu__sensors__container">
-        <p class="menu__sensors__tittle">HUMEDAD</p>
-        <div class="menu__sensors__temp__media">
-          <p class="menu__sensors__value">66</p>
-          <p class="menu__sensors__unds">%</p>
-        </div>
+      <!-- AQUI INICIA LA BARRA CON ACCESOS DIRECTOS A LOS MODULOS POR LA BARRA -->
 
-        <div class="menu__sensors__temp__min">
-            <p class=" menu__sensors__text">Min</p>
-          <p class="menu__sensors__value--pequeño">45</p>
-          <p class="menu__sensors__unds--pequeño">%</p>
-        </div>
+      <section class="side-main__menu-container menu-container">
+          <!-- PRODUCCION -->
 
-        <div class="menu__sensors__temp__max">
-            <P class=" menu__sensors__text">Max</P>
-          <p class="menu__sensors__value--pequeño">79</p>
-          <p class="menu__sensors__unds--pequeño">%</p>
-        </div>
+          <a class="side-main__container-enlace" href="./index_main.html">
+              <div class="side-main__menu-list">MAIN</div>
+          </a>
+
+          <!-- cultivos -->
+          <div class="side-main__menu-list">
+              <p>CULTIVO</p>
+              <img class="side-main__menu-svg" src="../public/img_/svg/agriculture-outline.svg" alt>
+          </div>
+          <a class="side-main__container-enlace" href="./crops/1-create_crops.html">
+              <div class="side-main__menu-list">Crear</div>
+          </a>
+          <a class="side-main__container-enlace" href="./crops/2-seach_crops.html">
+              <div class="side-main__menu-list">Buscar</div>
+          </a>
+          <a class="side-main__container-enlace" href="./crops/4-update_crops.html">
+              <div class="side-main__menu-list">Actualizar</div>
+          </a>
+          <a class="side-main__container-enlace" href="./crops/5-listar_crops.html">
+              <div class="side-main__menu-list">Listar</div>
+          </a>
+
+          <!-- ciclos -->
+          <div class="side-main__menu-list">
+              <p>CICLO</p>
+              <img class="side-main__menu-svg" src="../public/img_/svg//agriculture-ciclo.svg" alt>
+          </div>
+          <a class="side-main__container-enlace" href="./cycle_crops/1-create_cycle_crops.html">
+              <div class="side-main__menu-list">Crear</div>
+          </a>
+          <a class="side-main__container-enlace" href="./cycle_crops/2-search_cycle_crops.html">
+              <div class="side-main__menu-list">Buscar</div>
+          </a>
+          <a class="side-main__container-enlace" href="./cycle_crops/4-update_cycle_crops.html">
+              <div class="side-main__menu-list">Actualizar</div>
+          </a>
+          <a class="side-main__container-enlace" href="./cycle_crops/5-listar_cicle_crops.html">
+              <div class="side-main__menu-list">Listar</div>
+          </a>
+
+          <!-- iot -->
+          <div class="side-main__menu-list">
+              <p>SENSORES</p>
+              <img class="side-main__menu-svg" src="../public/img_/svg/agriculture--iot.svg" alt>
+          </div>
+          <a class="side-main__container-enlace" href="./sensors/1-create_sensor.html">
+              <div class="side-main__menu-list">Crear</div>
+          </a>
+          <a class="side-main__container-enlace" href="./sensors/2-seach_sensor.html">
+              <div class="side-main__menu-list">Buscar</div>
+          </a>
+          <a class="side-main__container-enlace" href="./sensors/4-update_sensor.html">
+              <div class="side-main__menu-list">Actualizar</div>
+          </a>
+          <a class="side-main__container-enlace" href="./sensors/5-listar_sensors.html">
+              <div class="side-main__menu-list">Listar</div>
+          </a>
+
+          <!-- insumos -->
+          <div class="side-main__menu-list">
+              <p>INSUMOS</p>
+              <img class="side-main__menu-svg" src="../public/img_/svg/agriculture-analytics.svg" alt>
+          </div>
+          <a class="side-main__container-enlace" href="./insumes/1-create_insumes.html">
+              <div class="side-main__menu-list">Crear</div>
+          </a>
+          <a class="side-main__container-enlace" href="./insumes/2-search_insume.html">
+              <div class="side-main__menu-list">Buscar</div>
+          </a>
+          <a class="side-main__container-enlace" href="./insumes/4-update_insumes.html">
+              <div class="side-main__menu-list">Actualizar</div>
+          </a>
+          <a class="side-main__container-enlace" href="./insumes/5-listar_insumes.html">
+              <div class="side-main__menu-list">Listar</div>
+          </a>
+          <!-- usuarios -->
+          <div class="side-main__menu-list">
+              <p>USUARIOS</p>
+              <img class="side-main__menu-svg" src="../public/img_/svg/agriculture-worker-outline.svg" alt>
+          </div>
+          <a class="side-main__container-enlace" href="./users/1-create_user.html">
+              <div class="side-main__menu-list">Crear</div>
+          </a>
+          <a class="side-main__container-enlace" href="./users/2-search_user.html">
+              <div class="side-main__menu-list">Buscar</div>
+          </a>
+          <a class="side-main__container-enlace" href="./users/4-update_user.html">
+              <div class="side-main__menu-list">Actualizar</div>
+          </a>
+          <a class="side-main__container-enlace" href="./users/5-listar_users.html">
+              <div class="side-main__menu-list">Listar</div>
+          </a>
+          <!-- loging out -->
+          <hr>
+          </div>
+          <a class="side-main__container-enlace" href="./home/home.html">
+              <div class="side-main__menu-list">LOGIN OUT</div>
+          </a>
+
+      </section>
+  </label>
+  <!-- 
+/* ******************************************************* */
+/* ****************     BLOQUE  PRODUCTO  *************** */
+/* ******************************************************* */ 
+-->
+  <main class="producto">
+
+      <div class="producto__general-container">
+
+          <head class="producto__form-header">
+              <div class="producto__header-tittles">
+                  <div class="producto__title-h3">IDENTIFICARDOR</div> <input type="text" name=""
+                      placeholder="25-05-2025-LECHUGA-0001">
+                  <div class="producto__title-h3">RESPONSABLE</div> <input type="text" name=""
+                      placeholder="NICHOLAS TESLA">
+              </div>
+
+          </head>
+          
+          <form class="producto__form">
+
+              <div class="producto__containers-chards">
+
+                  <div class="producto__card">
+                      <div class="producto__title-h3">EXISTENCIA INSUMOS</div>
+                      <div class="producto__chard chart--animated">
+                          <div class="producto__bar-container">
+                              <div class="producto__bar" data-percent="75%"><span
+                                      class="producto__span">Semilla</span></div>
+                              <div class="producto__bar" data-percent="90%"><span
+                                      class="producto__span">Tool</span></div>
+                              <div class="producto__bar" data-percent="60%"><span class="producto__span">Humus</span>
+                              </div>
+                              <div class="producto__bar" data-percent="85%"><span class="producto__span">Riego</span>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="producto__card">
+                      <div class="producto__title-h3">FIN DE PRODUCCION </div>
+                      <div class="producto__chart">
+                          <div class="producto__slice"></div>
+                          <div class="producto__slice"></div>
+                          <div class="producto__slice"></div>
+                      </div>
+                  </div>
+
+              </div>
+              <!-- fin contaniner charts -->
+
+
+
+              <div class="producto__card--map">
+                  <div class="producto__container-img">
+                      <img class="producto__mapa" id="imagen-mapa" src="../public/img_/main/sedelembo.png" alt="Mapa" />
+                      <div class="producto__container" id="contenedor"></div>
+                  </div>
+                  <button id="guardar">Guardar selección</button><button id="guardar">Borrar Selección</button>
+              </div>
+
+
+              <div class="producto__containers-chards">
+
+                  <div class="producto__card">
+                      <div class="producto__title-h3">EXISTENCIA INSUMOS</div>
+                      <div class="producto__chard chart--animated">
+                          <div class="producto__bar-container">
+                              <div class="producto__bar" data-percent="75%"><span
+                                      class="producto__span">Semilla</span></div>
+                              <div class="producto__bar" data-percent="90%"><span
+                                      class="producto__span">Tool</span></div>
+                              <div class="producto__bar" data-percent="60%"><span class="producto__span">Humus</span>
+                              </div>
+                              <div class="producto__bar" data-percent="85%"><span class="producto__span">Riego</span>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+
+                  
+                  <div class="producto__card">
+                      <div class="producto__title-h3">% AREA CULTIVADA </div>
+                      <div class="producto__chart--1 ">
+                          <div class="producto__slice "></div>
+                          <div class="producto__slice "></div>
+                          <div class="producto__slice "></div>
+                      </div>
+                  </div>
+
+              </div>
+              <!-- fin contaniner charts -->
+              <div class="producto__containers-chards">
+
+                  <div class="producto__card">
+                      <div class="producto__title-h3">EXISTENCIA INSUMOS</div>
+                      <div class="producto__chard chart--animated">
+                          <div class="producto__bar-container">
+                              <div class="producto__bar" data-percent="75%"><span
+                                      class="producto__span">Semilla</span></div>
+                              <div class="producto__bar" data-percent="90%"><span
+                                      class="producto__span">Tool</span></div>
+                              <div class="producto__bar" data-percent="60%"><span class="producto__span">Humus</span>
+                              </div>
+                              <div class="producto__bar" data-percent="85%"><span class="producto__span">Riego</span>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="producto__card">
+                      <div class="producto__title-h3">INSUMOS APLICADOS </div>
+                      <div class="producto__chart--2">
+                          <div class="producto__slice "></div>
+                          <div class="producto__slice "></div>
+                          <div class="producto__slice "></div>
+                      </div>
+                  </div>
+
+              </div>
+              <!-- fin contaniner charts -->
+
+              <div class="producto__containers-chards">
+
+                  <div class="producto__data">
+                      <div class="producto__modul">
+                          <h3 class="producto__chard-tittle">TEMPERATURA</h3>
+                          <div class="producto__metric">
+                              <div class="producto__value">38 °C</div>
+                              <div class="producto__value-min">39 °C</div>
+                              <div class="producto__value-high">39 °C</div>
+                          </div>
+                      </div>
+                      <div class="producto__modul">
+                          <h3 class="producto__chard-tittle">HUMEDAD</h3>
+                          <div class="producto__metric">
+                              <div class="producto__value">66 %</div>
+                              <div class="producto__value-min">34 %</div>
+                              <div class="producto__value-high">88 %</div>
+                          </div>
+                      </div>
+                      <div class="producto__modul">
+                          <h3 class="producto__chard-tittle">HUMEDAD</h3>
+                          <div class="producto__metric">
+                              <div class="producto__value">66 %</div>
+                              <div class="producto__value-min">34 %</div>
+                              <div class="producto__value-high">88 %</div>
+                          </div>
+                      </div>
+                      <div class="producto__modul">
+                          <h3 class="producto__chard-tittle">HUMEDAD</h3>
+                          <div class="producto__metric">
+                              <div class="producto__value">66 %</div>
+                              <div class="producto__value-min">34 %</div>
+                              <div class="producto__value-high">88 %</div>
+                          </div>
+                      </div>
+                      <div class="producto__modul">
+                          <h3 class="producto__chard-tittle">HUMEDAD</h3>
+                          <div class="producto__metric">
+                              <div class="producto__value">66 %</div>
+                              <div class="producto__value-min">34 %</div>
+                              <div class="producto__value-high">88 %</div>
+                          </div>
+                      </div>
+                      <div class="producto__modul">
+                          <h3 class="producto__chard-tittle">HUMEDAD</h3>
+                          <div class="producto__metric">
+                              <div class="producto__value">66 %</div>
+                              <div class="producto__value-min">34 %</div>
+                              <div class="producto__value-high">88 %</div>
+                          </div>
+                      </div>
+
+                  </div>
+
+                  <div class="producto__containers-chards">
+
+                      <div class="producto__card">
+                          <div class="producto__title-h3">CICLO CULTIVO </div>
+                          <div class="producto__chart--3">
+                              <div class="producto__slice "></div>
+                              <div class="producto__slice "></div>
+                              <div class="producto__slice "></div>
+                          </div>
+                      </div>
+  
+                  </div>
+
+              </div>
+
+          </form>
+
+          <form class="producto__form">
+
+              <div class="producto__containers-chards">
+
+                  <div class="producto__card">
+                      <div class="producto__title-h3">% INSUMOS APLICADOS </div>
+                      <div class="producto__chart--4">
+                          <div class="producto__slice "></div>
+                          <div class="producto__slice "></div>
+                          <div class="producto__slice "></div>
+                      </div>
+                  </div>
+
+              </div>
+              <!-- fin contaniner charts -->
+
+              <div class="producto__containers-chards">
+
+                  <div class="producto__card">
+                      <div class="producto__title-h3">EXISTENCIA INSUMOS</div>
+                      <div class="producto__chard chart--animated">
+                          <div class="producto__bar-container">
+                              <div class="producto__bar" data-percent="75%"><span
+                                      class="producto__span">Semilla</span></div>
+                              <div class="producto__bar" data-percent="90%"><span
+                                      class="producto__span">Tool</span></div>
+                              <div class="producto__bar" data-percent="60%"><span class="producto__span">Humus</span>
+                              </div>
+                              <div class="producto__bar" data-percent="85%"><span class="producto__span">Riego</span>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  
+
+              </div>
+              <!-- fin contaniner charts -->
+
+              <div class="producto__containers-chards">
+
+
+
+                  <div class="producto__card">
+                      <div class="producto__title-h3">ACTIVIDAD PERSONAL </div>
+                      <div class="producto__chart--5">
+                          <div class="producto__slice "></div>
+                          <div class="producto__slice "></div>
+                          <div class="producto__slice "></div>
+                      </div>
+                  </div>
+
+              </div>
+              <!-- fin contaniner charts -->
+
+              <div class="producto__containers-chards">
+
+                  <div class="producto__card">
+                      <div class="producto__title-h3">SENSORES ACTIVOS </div>
+                      <div class="producto__chart--6">
+                          <div class="producto__slice "></div>
+                          <div class="producto__slice "></div>
+                          <div class="producto__slice "></div>
+                      </div>
+                  </div>
+
+              </div>
+              <!-- fin contaniner charts -->
+
+              <div class="producto__containers-chards">
+              
+                  <div class="producto__card">
+                      <div class="producto__title-h3">HUMEDAD </div>
+                      <div class="producto__chart--7">
+                          <div class="producto__slice "></div>
+                          <div class="producto__slice "></div>
+                          <div class="producto__slice "></div>
+                      </div>
+                  </div>
+
+              </div>
+              <!-- fin contaniner charts -->
+
+              <div class="producto__card">
+                  <div class="producto__title-h3">EXISTENCIA INSUMOS</div>
+                  <div class="producto__chard chart--animated">
+                      <div class="producto__bar-container">
+                          <div class="producto__bar" data-percent="75%"><span
+                                  class="producto__span">Semilla</span></div>
+                          <div class="producto__bar" data-percent="90%"><span
+                                  class="producto__span">Tool</span></div>
+                          <div class="producto__bar" data-percent="60%"><span class="producto__span">Humus</span>
+                          </div>
+                          <div class="producto__bar" data-percent="85%"><span class="producto__span">Riego</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              
+          </form>
+
       </div>
-
-      <!-- modulo 3 -->
-      <div class="menu__sensors__container">
-        <p class="menu__sensors__tittle">RADIACION</p>
-        <div class="menu__sensors__temp__media">
-          <p class="menu__sensors__value">26</p>
-          <p class="menu__sensors__unds">°C</p>
-        </div>
-
-        <div class="menu__sensors__temp__min">
-            <p class=" menu__sensors__text">Min</p>
-          <p class="menu__sensors__value--pequeño">26</p>
-          <p class="menu__sensors__unds--pequeño">°C</p>
-        </div>
-
-        <div class="menu__sensors__temp__max">
-            <P class=" menu__sensors__text">Max</P>
-          <p class="menu__sensors__value--pequeño">26</p>
-          <p class="menu__sensors__unds--pequeño">°C</p>
-        </div>
-      </div>
-
-      <!-- modulo 4 -->
-      <div class="menu__sensors__container">
-        <p class="menu__sensors__tittle">LLUVIA</p>
-        <div class="menu__sensors__temp__media">
-          <p class="menu__sensors__value">10</p>
-          <p class="menu__sensors__unds">mm/dia</p>
-        </div>
-
-        <div class="menu__sensors__temp__min">
-                    <p class=" menu__sensors__text">Min</p>
-          <p class="menu__sensors__value--pequeño">5</p>
-          <p class="menu__sensors__unds--pequeño">mm/dia</p>
-        </div>
-
-        <div class="menu__sensors__temp__max">
-                    <p class=" menu__sensors__text">Max</p>
-          <p class="menu__sensors__value--pequeño">26</p>
-          <p class="menu__sensors__unds--pequeño">mm/dia</p>
-        </div>
-      </div>
-      <!-- modulo 5 -->
-      <div class="menu__sensors__container">
-        <p class="menu__sensors__tittle">PH SUELO</p>
-        <div class="menu__sensors__temp__media">
-          <p class="menu__sensors__value">5.5</p>
-          <p class="menu__sensors__unds">Ph</p>
-        </div>
-
-        <div class="menu__sensors__temp__min">
-            <p class=" menu__sensors__text">Min</p>
-          <p class="menu__sensors__value--pequeño">5</p>
-          <p class="menu__sensors__unds--pequeño">Ph</p>
-        </div>
-
-        <div class="menu__sensors__temp__max">
-            <p class=" menu__sensors__text">Max</P>
-          <p class="menu__sensors__value--pequeño">6</p>
-          <p class="menu__sensors__unds--pequeño">Ph</p>
-        </div>
-      </div>
-      <!-- modulo 6 -->
-      <div class="menu__sensors__container">
-        <p class="menu__sensors__tittle">CONDUCTIVIDAD</p>
-        <div class="menu__sensors__temp__media">
-          <p class="menu__sensors__value">26</p>
-          <p class="menu__sensors__unds">°C</p>
-        </div>
-
-        <div class="menu__sensors__temp__min">
-            <p class=" menu__sensors__text">Min</p>
-          <p class="menu__sensors__value--pequeño">26</p>
-          <p class="menu__sensors__unds--pequeño">°C</p>
-        </div>
-
-        <div class="menu__sensors__temp__max">
-            <p class=" menu__sensors__text">Max</p>
-          <p class="menu__sensors__value--pequeño">26</p>
-          <p class="menu__sensors__unds--pequeño">°C</p>
-        </div>
-      </div>
-
-
-
-
-      <div class="menu__sensors__container">
-        <p class="menu__sensors__tittle">
-          <i class="fas fa-temperature-high"></i> TEMPERATURA
-        </p>
-
-        <div class="menu__lectures">
-        <div class="menu__sensors__temp__media">
-          <p class="menu__sensors__value">26</p>
-          <p class="menu__sensors__unds">°C</p>
-        </div>
-      
-        <div class="menu__sensors__temp__min">
-          <p class="menu__sensors__text">
-            <i class="fas fa-arrow-down"></i> Min
-          </p>
-          <p class="menu__sensors__value--pequeño">26</p>
-          <p class="menu__sensors__unds--pequeño">°C</p>
-        </div>
-      
-        <div class="menu__sensors__temp__max">
-          <p class="menu__sensors__text">
-            <i class="fas fa-arrow-up"></i> Max
-          </p>
-          <p class="menu__sensors__value--pequeño">26</p>
-          <p class="menu__sensors__unds--pequeño">°C</p>
-        </div>
-      </div>
-      </div>
-      
-
-    </div>
-
   </main>
 
-
-  <script>
-    const opcionesValidas = [100, 400, 600, 900];
-    let cantidad = parseInt(prompt("Elige la cantidad de cuadros: 100, 400, 600 o 900", "900"));
-  
-    if (!opcionesValidas.includes(cantidad)) {
-      alert("Opción inválida. Se usará 900 por defecto.");
-      cantidad = 900;
-    }
-  
-    const columnas = Math.ceil(Math.sqrt(cantidad));
-    const filas = Math.ceil(cantidad / columnas);
-    const contenedor = document.getElementById('contenedor');
-  
-    for (let i = 0; i < cantidad; i++) {
-      const fila = Math.floor(i / columnas);
-      const columna = i % columnas;
-  
-      const checkboxId = `checkbox-${i}`;
-      const top = (fila / filas) * 100;
-      const left = (columna / columnas) * 100;
-      const ancho = 100 / columnas;
-      const alto = 100 / filas;
-  
-      const input = document.createElement('input');
-      input.type = 'checkbox';
-      input.className = 'checkbox';
-      input.id = checkboxId;
-  
-      const label = document.createElement('label');
-      label.className = 'celda';
-      label.setAttribute('for', checkboxId);
-      label.style.top = `${top}%`;
-      label.style.left = `${left}%`;
-      label.style.width = `${ancho}%`;
-      label.style.height = `${alto}%`;
-  
-      // Bloqueos de prueba
-      if (i === 2) {
-        input.disabled = true;
-        label.classList.add('bloqueado');
-      }
-      if (i === 6 || i === 8) {
-        input.disabled = true;
-        label.classList.add('bloqueado-especial');
-      }
-  
-      contenedor.appendChild(input);
-      contenedor.appendChild(label);
-    }
-  
-    // Guardar
-    document.getElementById('guardar').addEventListener('click', () => {
-      const seleccionados = Array.from(document.querySelectorAll('.checkbox:checked'))
-        .map(checkbox => parseInt(checkbox.id.replace('checkbox-', '')));
-  
-      fetch('http://localhost:5501/cuadros_seleccionados', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ seleccionados })
-      })
-      .then(res => res.json())
-      .then(data => {
-        alert("Cuadros guardados correctamente");
-        console.log(data);
-      });
-    });
-  
-    // Cargar seleccionados
-    fetch('http://localhost:5501/cuadros_seleccionados')
-      .then(res => res.json())
-      .then(ids => {
-       
-
-        ids.forEach(id => {
-          const checkbox = document.getElementById(`checkbox-${id}`);
-          const label = document.querySelector(`label[for="checkbox-${id}"]`);
-      
-      if (checkbox && label) {
-        checkbox.checked = true;
-        checkbox.disabled = true; // Bloquear para que no se pueda desmarcar
-        label.classList.add('celda'); // Azul + pointer-events: none
-        
-        label.style.display = 'flex';
-        label.style.backgroundColor = 'blue';
-
-      }
-        });
-    
-        });
-      
-  </script>
-  
-     
 </body>
 
 </html>
-
-<!-- <div class="dash__main     map-container"> -->
-<!-- <img class="dash__board__img      map-background" src="../public/img_/main/sedelembo.png" alt /> -->
-
-<!-- AQUI VA EL CONTENEDOR DE CHECBOX -->
-<!-- <div class="dash__leabel       contenedor"> -->
-
-<!-- </div> -->
-<!-- AQUI VA EL FINAL CONTENEDOR DE CHECBOX -->
-
-<!-- </div> -->
