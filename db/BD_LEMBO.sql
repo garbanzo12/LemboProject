@@ -83,3 +83,17 @@ CREATE TABLE sensors(
   usuario_id INT, -- opcional si usas autenticación
   fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+
+
+
+    DROP TABLE productions;
+    CREATE TABLE productions(	
+    name_production VARCHAR(100) NOT NULL UNIQUE,
+    responsable VARCHAR(50) NOT NULL,
+    id VARCHAR(40) PRIMARY KEY,
+    state_production ENUM("habilitado", "deshabilitado") default "habilitado",
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    );

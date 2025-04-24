@@ -189,8 +189,8 @@
 
                 <div class="integrator__header-tittles">
                     <h3 class="integrator__title-h3">RESPONSABLE</h3>
-                    <input class="integrator__input-form integrator__input-form--resp" type="text"
-                        placeholder="responsable">
+                  <select class="integrator__input-form integrator__input-form--resp"  required>
+        <option value="" disabled selected>Seleccione un responsable</option>
                 </div>
 
                 <div class="integrator__header-tittles">
@@ -211,29 +211,21 @@
 
                         <table class="integrator__module-table">
                             <caption class="integrator__module-header">USUARIOS</caption>
-
                             <thead class="integrator__module-thead">
                                 <tr class="integrator__table-header">
                                     <th class="integrator__header-cell">NOMBRE</th>
                                 </tr>
-                                <tr class="integrator__table-fila">
-                                    <td class="integrator__table-dato">dAVID</td>
-                                    <td class="integrator__table-dato">carkis</td>
-                                    <td class="integrator__table-dato">andre</td>
-                                    <td class="integrator__table-dato">vinci</td>
-                                    <td class="integrator__table-dato">dAVID</td>
-                                    <td class="integrator__table-dato">galel</td>
-                                    <td class="integrator__table-dato">dAVID</td>
-
-                                </tr>
-
-
+                            </thead>
+                            <tbody class="integrator__table-fila integrator_users-list">
+                                <!-- Las celdas se agregarán dinámicamente aquí -->
+                            </tbody>
                         </table>
                         <hr>
-                        <button class="integrator__botton-primary" type="">AGREGAR</button>
-                        <select class="integrator__tablet-select">
-                            <option value="">Andres</option>
-                            <option value="">David</option>
+
+                        <button class="integrator__botton-primary integrator__add-user" type="button">AGREGAR</button>
+                        <select class="integrator__tablet-select integrator__tablet-select--users">
+                            <option value="" disabled selected>Seleccione un responsable</option>
+
                         </select>
                         <hr>
                         <button2 class="integrator__botton-primary" type="">DESHABILITAR</button2>
@@ -266,7 +258,7 @@
                         <hr>
                         <button class="integrator__botton-primary" type="">AGREGAR</button>
                         <select class="integrator__tablet-select">
-                            <option value="">pAPA</option>
+                            <option value="">pAPA</option>  <!-- cultivos -->
                             <option value="">FLORES</option>
                         </select>
                         <hr>
@@ -301,7 +293,7 @@
                         <button class="integrator__botton-primary" type="">AGREGAR</button>
                         <select class="integrator__tablet-select">
                             <option value="">pAPA</option>
-                            <option value="">FLORES</option>
+                            <option value="">FLORES</option><!-- ciclos -->
                         </select>
                         <hr>
                         <button2 class="integrator__botton-primary" type="">DESHABILITAR</button2>
@@ -336,7 +328,7 @@
                         <button class="integrator__botton-primary" type="">AGREGAR</button>
                         <select class="integrator__tablet-select">
                             <option value="">GUADAÑA</option>
-                            <option value="">PODADORA</option>
+                            <option value="">PODADORA</option> <!-- insumos -->
                         </select>
                         <hr>
                         <button2 class="integrator__botton-primary" type="">DESHABILITAR</button2>
@@ -370,7 +362,7 @@
                         <hr>
                         <button class="integrator__botton-primary" type="">AGREGAR</button>
                         <select class="integrator__tablet-select">
-                            <option value="">TEMPERATURA</option>
+                            <option value="">TEMPERATURA</option><!-- sensores -->
                             <option value="">HUMEDAD</option>
                             <option value="">CONDUCTIVIDAD</option>
                             <option value="">RADIACION</option>
