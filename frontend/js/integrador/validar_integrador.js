@@ -7,7 +7,8 @@ const produccionData = {
     users_selected: [],
     crops_selected: [],
     name_cropCycle: [],
-    name_consumables: []
+    name_consumables: [],
+    name_sensor: []
 };
 
 // Cargar responsables en el select principal
@@ -74,6 +75,13 @@ function agregarUsuarioATabla() {
     
     const celdaEliminar = document.createElement("td");
     const botonEliminar = document.createElement("button");
+    const botonEnviarFormulario = document.querySelector(".integrator__botton-primary--color");
+    botonEnviarFormulario.addEventListener("click", () => {
+        produccionData.users_selected = produccionData.users_selected.filter(
+            user => user !== usuarioSeleccionado
+        );
+        nuevaFila.remove();
+    });
     botonEliminar.textContent = "×";
     botonEliminar.className = "eliminar-usuario";
     botonEliminar.addEventListener("click", () => {
@@ -140,6 +148,13 @@ function agregarcultivoATabla() {
     
     const celdaEliminar = document.createElement("td");
     const botonEliminar = document.createElement("button");
+    const botonEnviarFormulario = document.querySelector(".integrator__botton-primary--color");
+    botonEnviarFormulario.addEventListener("click", () => {
+        produccionData.crops_selected = produccionData.crops_selected.filter(
+            cultivo => cultivo !== cultivoseleccionado
+        );
+        nuevaFila.remove();
+    });
     botonEliminar.textContent = "×";
     botonEliminar.className = "eliminar-cultivo";
     botonEliminar.addEventListener("click", () => {
@@ -206,6 +221,13 @@ function agregarcicloATabla() {
     
     const celdaEliminar = document.createElement("td");
     const botonEliminar = document.createElement("button");
+    const botonEnviarFormulario = document.querySelector(".integrator__botton-primary--color");
+    botonEnviarFormulario.addEventListener("click", () => {
+        produccionData.name_cropCycle = produccionData.name_cropCycle.filter(
+            ciclo => ciclo !== cicloseleccionado
+        );
+        nuevaFila.remove();
+    });
     botonEliminar.textContent = "×";
     botonEliminar.className = "eliminar-cultivo";
     botonEliminar.addEventListener("click", () => {
@@ -273,6 +295,13 @@ function agregarinsumoATabla() {
     
     const celdaEliminar = document.createElement("td");
     const botonEliminar = document.createElement("button");
+    const botonEnviarFormulario = document.querySelector(".integrator__botton-primary--color");
+    botonEnviarFormulario.addEventListener("click", () => {
+        produccionData.name_consumables = produccionData.name_consumables.filter(
+            insumo => insumo !== insumoseleccionado
+        );
+        nuevaFila.remove();
+    });
     botonEliminar.textContent = "×";
     botonEliminar.className = "eliminar-cultivo";
     botonEliminar.addEventListener("click", () => {
@@ -281,7 +310,7 @@ function agregarinsumoATabla() {
         );
         nuevaFila.remove();
     });
-    
+  
     produccionData.name_consumables.push(insumoseleccionado);
     
     celdaEliminar.appendChild(botonEliminar);
@@ -293,6 +322,78 @@ function agregarinsumoATabla() {
 }
 // ⬆️ Funciones de insumo ⬆️  
 
+
+// ⬇️ Funciones de sensores ⬇️
+async function cargarSensorSelect() {
+    try {
+        const response = await fetch("http://localhost:5501/sensors/responsable");
+        const sensores = await response.json();
+        const select = document.querySelector(".integrator__tablet-select--sensor");
+
+        sensores.forEach(sensor => {
+            const option = document.createElement("option");
+            option.value = sensor.name_sensor;
+            option.textContent = sensor.name_sensor;
+            select.appendChild(option);
+        });
+
+        document.querySelector(".integrator__add-sensor").addEventListener("click", agregarsensorATabla);
+        
+    } catch (error) {
+        console.error("Error al cargar sensores:", error);
+    }
+}
+
+// Agregar cultivo a la tabla y al objeto
+function agregarsensorATabla() {
+    const select = document.querySelector(".integrator__tablet-select--sensor");
+    const sensoreseleccionado = select.value.trim();
+    
+    if (!sensoreseleccionado) return;
+    
+    if (produccionData.name_sensor.some(sensor => 
+        sensor.toLowerCase() === sensoreseleccionado.toLowerCase()
+    )) {
+        alert(`El sensor "${sensoreseleccionado}" ya está en la lista`);
+        select.value = "";
+        return;
+    }
+    
+    const tbody = document.querySelector(".integrator_sensor-list");
+    const nuevaFila = document.createElement("tr");
+    
+    const celda = document.createElement("td");
+    celda.className = "integrator__table-dato";
+    celda.textContent = sensoreseleccionado;
+    
+    const celdaEliminar = document.createElement("td");
+    const botonEliminar = document.createElement("button");
+    const botonEnviarFormulario = document.querySelector(".integrator__botton-primary--color");
+    botonEnviarFormulario.addEventListener("click", () => {
+        produccionData.name_sensor = produccionData.name_sensor.filter(
+            sensor => sensor !== sensoreseleccionado
+        );
+        nuevaFila.remove();
+    });
+    botonEliminar.textContent = "×";
+    botonEliminar.className = "eliminar-cultivo";
+    botonEliminar.addEventListener("click", () => {
+        produccionData.name_sensor = produccionData.name_sensor.filter(
+            sensor => sensor !== sensoreseleccionado
+        );
+        nuevaFila.remove();
+    });
+    
+    produccionData.name_sensor.push(sensoreseleccionado);
+    
+    celdaEliminar.appendChild(botonEliminar);
+    nuevaFila.appendChild(celda);
+    nuevaFila.appendChild(celdaEliminar);
+    tbody.appendChild(nuevaFila);
+    
+    select.value = "";
+}
+// ⬆️ Funciones de sensores ⬆️  
 // Función para enviar los datos al servidor
 async function enviarProduccion() {
     produccionData.name_production = document.querySelector('.integrator__input-form--n-prodution').value;
@@ -386,6 +487,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cargarCultivoSelect()
     cargarCicloSelect()
     cargarInsumoSelect()
+    cargarSensorSelect()
     document.querySelector('.integrator__botton-primary--color').addEventListener("click", enviarProduccion);
     setTimeout(() => {
         inicializarValidaciones();

@@ -350,26 +350,19 @@
 
                         <table class="integrator__module-table">
                             <caption class="integrator__module-header">SENSORES</caption>
-
                             <thead class="integrator__module-thead">
                                 <tr class="integrator__table-header">
                                     <th class="integrator__header-cell">NOMBRE</th>
                                 </tr>
-                                <tr class="integrator__table-fila">
-                                    <td class="integrator__table-dato">TEMPERATURA</td>
-                                    <td class="integrator__table-dato">HUMEDAD</td>
-                                    <td class="integrator__table-dato">PH SUELO</td>
-                                    <td class="integrator__table-dato">CONDUCTIVIDAD</td>
-                                    <td class="integrator__table-dato">RADIACION</td>
-                                </tr>
+                            </thead>
+                            <tbody class="integrator__table-fila integrator_sensor-list">
+                                <!-- Las celdas se agregarán dinámicamente aquí -->
+                            </tbody>
                         </table>
                         <hr>
-                        <button class="integrator__botton-primary" type="">AGREGAR</button>
-                        <select class="integrator__tablet-select">
-                            <option value="">TEMPERATURA</option><!-- sensores -->
-                            <option value="">HUMEDAD</option>
-                            <option value="">CONDUCTIVIDAD</option>
-                            <option value="">RADIACION</option>
+                        <button class="integrator__botton-primary integrator__add-sensor" type="button">AGREGAR</button>
+                        <select class="integrator__tablet-select integrator__tablet-select--sensor">
+                            <option value="" disabled selected>Seleccione un responsable</option>
                         </select>
                         <hr>
                         <button2 class="integrator__botton-primary" type="">DESHABILITAR</button2>

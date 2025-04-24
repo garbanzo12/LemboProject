@@ -97,8 +97,8 @@ app.get("/cycle/responsable", (req, res) => {
 });
 
 
-app.get("/consumable/responsable", (req, res) => {
-    const sql = "SELECT name_consumables FROM consumables WHERE state_consumables = 'habilitado'";
+app.get("/sensors/responsable", (req, res) => {
+    const sql = "SELECT name_sensor FROM sensors WHERE state_sensor = 'habilitado'";
     conexion.query(sql, (error, results) => {
         if (error) {
             console.error("Error en la consulta SQL:", error);
@@ -112,11 +112,27 @@ app.get("/consumable/responsable", (req, res) => {
         res.json(results); // Devuelve el array de insumos
     });
 });
+
+app.get("/consumable/responsable", (req, res) => {
+    const sql = "SELECT name_consumables FROM consumables WHERE state_consumables = 'habilitado'";
+    conexion.query(sql, (error, results) => {
+        if (error) {
+            console.error("Error en la consulta SQL:", error);
+            return res.status(500).json({ error: "Error en la base de datos" });
+        }
+        
+        if (!results || results.length === 0) {
+            return res.status(404).json([]); // Devuelve un array vacío si no hay resultados
+        }
+        
+        res.json(results); // Devuelve el array de sensor
+    });
+});
 // Ruta POST simplificada
 app.post("/productions", async (req, res) => {
-    const { name_production,responsable,users_selected,crops_selected,name_cropCycle,name_consumables } = req.body;
+    const { name_production,responsable,users_selected,crops_selected,name_cropCycle,name_consumables,name_sensor } = req.body;
 
-    if (!name_production || !responsable  || !users_selected || !crops_selected|| !name_cropCycle|| !name_consumables ) {
+    if (!name_production || !responsable  || !users_selected || !crops_selected|| !name_cropCycle|| !name_consumables || !name_sensor) {
         return res.status(400).json({ error: "Todos los campos son obligatorios" });
     }
 
@@ -146,8 +162,8 @@ app.post("/productions", async (req, res) => {
         // Generar ID con formato: PROD-Nombre-Fecha-Secuencial
         const id = `PROD-${name_production}-${datePart}-${String(sequenceNumber).padStart(3, '0')}`;
            // Insertar solo el nombre (otros campos tendrán valores por defecto)
-    const sql = "INSERT INTO productions (name_production,responsable,users_selected,crops_selected,name_cropCycle,name_consumables, id) VALUES (?, ? , ?, ?, ?, ?, ?)";
-    conexion.query(sql, [name_production,responsable,users_selected,crops_selected,name_cropCycle,name_consumables, id], (error, resultado) => {
+    const sql = "INSERT INTO productions (name_production,responsable,users_selected,crops_selected,name_cropCycle,name_consumables,name_sensor, id) VALUES (?, ? , ?, ?, ?, ?, ?, ?)";
+    conexion.query(sql, [name_production,responsable,users_selected,crops_selected,name_cropCycle,name_consumables,name_sensor, id], (error, resultado) => {
         if (error) {
             console.error("Error en DB:", error);
             return res.status(500).json({ 

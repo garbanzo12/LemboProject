@@ -86,14 +86,18 @@ CREATE TABLE sensors(
 
 
 
-
+    
     DROP TABLE productions;
     CREATE TABLE productions(	
     name_production VARCHAR(100) NOT NULL UNIQUE,
     responsable VARCHAR(50) NOT NULL,
     id VARCHAR(40) PRIMARY KEY,
     state_production ENUM("habilitado", "deshabilitado") default "habilitado",
-
+	users_selected TEXT,
+    crops_selected TEXT,
+    name_cropCycle TEXT,
+	name_consumables TEXT,
+	name_sensor TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     );
