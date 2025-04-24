@@ -5,7 +5,9 @@ const produccionData = {
     name_production: '',
     responsable: '',
     users_selected: [],
-    crops_selected: []
+    crops_selected: [],
+    name_cropCycle: [],
+    name_consumables: []
 };
 
 // Cargar responsables en el select principal
@@ -93,7 +95,7 @@ function agregarUsuarioATabla() {
 // ⬆️ Funciones de usuario
 
 
-// ⬇️ Funciones de cultivo
+// ⬇️ Funciones de cultivo⬇️
 async function cargarCultivoSelect() {
     try {
         const response = await fetch("http://localhost:5501/crops/responsable");
@@ -121,8 +123,8 @@ function agregarcultivoATabla() {
     
     if (!cultivoseleccionado) return;
     
-    if (produccionData.crops_selected.some(user => 
-        user.toLowerCase() === cultivoseleccionado.toLowerCase()
+    if (produccionData.crops_selected.some(cultivo => 
+        cultivo.toLowerCase() === cultivoseleccionado.toLowerCase()
     )) {
         alert(`El cultivo "${cultivoseleccionado}" ya está en la lista`);
         select.value = "";
@@ -142,7 +144,7 @@ function agregarcultivoATabla() {
     botonEliminar.className = "eliminar-cultivo";
     botonEliminar.addEventListener("click", () => {
         produccionData.crops_selected = produccionData.crops_selected.filter(
-            user => user !== cultivoseleccionado
+            cultivo => cultivo !== cultivoseleccionado
         );
         nuevaFila.remove();
     });
@@ -156,6 +158,140 @@ function agregarcultivoATabla() {
     
     select.value = "";
 }
+// ⬆️ Funciones de cultivo⬆️ 
+
+
+// ⬇️ Funciones de ciclo ⬇️
+async function cargarCicloSelect() {
+    try {
+        const response = await fetch("http://localhost:5501/cycle/responsable");
+        const ciclos = await response.json();
+        const select = document.querySelector(".integrator__tablet-select--cycle");
+
+        ciclos.forEach(ciclo => {
+            const option = document.createElement("option");
+            option.value = ciclo.name_cropCycle;
+            option.textContent = ciclo.name_cropCycle;
+            select.appendChild(option);
+        });
+
+        document.querySelector(".integrator__add-cycle").addEventListener("click", agregarcicloATabla);
+        
+    } catch (error) {
+        console.error("Error al cargar ciclos:", error);
+    }
+}
+
+// Agregar cultivo a la tabla y al objeto
+function agregarcicloATabla() {
+    const select = document.querySelector(".integrator__tablet-select--cycle");
+    const cicloseleccionado = select.value.trim();
+    
+    if (!cicloseleccionado) return;
+    
+    if (produccionData.name_cropCycle.some(ciclo => 
+        ciclo.toLowerCase() === cicloseleccionado.toLowerCase()
+    )) {
+        alert(`El Ciclo "${cicloseleccionado}" ya está en la lista`);
+        select.value = "";
+        return;
+    }
+    
+    const tbody = document.querySelector(".integrator_cycle-list");
+    const nuevaFila = document.createElement("tr");
+    
+    const celda = document.createElement("td");
+    celda.className = "integrator__table-dato";
+    celda.textContent = cicloseleccionado;
+    
+    const celdaEliminar = document.createElement("td");
+    const botonEliminar = document.createElement("button");
+    botonEliminar.textContent = "×";
+    botonEliminar.className = "eliminar-cultivo";
+    botonEliminar.addEventListener("click", () => {
+        produccionData.name_cropCycle = produccionData.name_cropCycle.filter(
+            ciclo => ciclo !== cicloseleccionado
+        );
+        nuevaFila.remove();
+    });
+    
+    produccionData.name_cropCycle.push(cicloseleccionado);
+    
+    celdaEliminar.appendChild(botonEliminar);
+    nuevaFila.appendChild(celda);
+    nuevaFila.appendChild(celdaEliminar);
+    tbody.appendChild(nuevaFila);
+    
+    select.value = "";
+}
+// ⬆️ Funciones de ciclo⬆️ 
+
+
+
+// ⬇️ Funciones de insumo ⬇️
+async function cargarInsumoSelect() {
+    try {
+        const response = await fetch("http://localhost:5501/consumable/responsable");
+        const insumos = await response.json();
+        const select = document.querySelector(".integrator__tablet-select--consumable");
+
+        insumos.forEach(insumo => {
+            const option = document.createElement("option");
+            option.value = insumo.name_consumables;
+            option.textContent = insumo.name_consumables;
+            select.appendChild(option);
+        });
+
+        document.querySelector(".integrator__add-consumable").addEventListener("click", agregarinsumoATabla);
+        
+    } catch (error) {
+        console.error("Error al cargar insumos:", error);
+    }
+}
+
+// Agregar cultivo a la tabla y al objeto
+function agregarinsumoATabla() {
+    const select = document.querySelector(".integrator__tablet-select--consumable");
+    const insumoseleccionado = select.value.trim();
+    
+    if (!insumoseleccionado) return;
+    
+    if (produccionData.name_consumables.some(insumo => 
+        insumo.toLowerCase() === insumoseleccionado.toLowerCase()
+    )) {
+        alert(`El insumo "${insumoseleccionado}" ya está en la lista`);
+        select.value = "";
+        return;
+    }
+    
+    const tbody = document.querySelector(".integrator_consumable-list");
+    const nuevaFila = document.createElement("tr");
+    
+    const celda = document.createElement("td");
+    celda.className = "integrator__table-dato";
+    celda.textContent = insumoseleccionado;
+    
+    const celdaEliminar = document.createElement("td");
+    const botonEliminar = document.createElement("button");
+    botonEliminar.textContent = "×";
+    botonEliminar.className = "eliminar-cultivo";
+    botonEliminar.addEventListener("click", () => {
+        produccionData.name_consumables = produccionData.name_consumables.filter(
+            insumo => insumo !== insumoseleccionado
+        );
+        nuevaFila.remove();
+    });
+    
+    produccionData.name_consumables.push(insumoseleccionado);
+    
+    celdaEliminar.appendChild(botonEliminar);
+    nuevaFila.appendChild(celda);
+    nuevaFila.appendChild(celdaEliminar);
+    tbody.appendChild(nuevaFila);
+    
+    select.value = "";
+}
+// ⬆️ Funciones de insumo ⬆️  
 
 // Función para enviar los datos al servidor
 async function enviarProduccion() {
@@ -248,6 +384,8 @@ document.addEventListener("DOMContentLoaded", () => {
     cargarResponsables();
     cargarUsuariosSelect();
     cargarCultivoSelect()
+    cargarCicloSelect()
+    cargarInsumoSelect()
     document.querySelector('.integrator__botton-primary--color').addEventListener("click", enviarProduccion);
     setTimeout(() => {
         inicializarValidaciones();
