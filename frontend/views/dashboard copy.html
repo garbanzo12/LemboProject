@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="../public/css/dashboard.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <main class="dashboard__windows">
+
+    <div class="dashboard__img-wrapper">
+      <img id="imagen-mapa" src="../public/img_/main/sedelembo.png" alt="Mapa" />
+      <div id="contenedor"></div>
+    </div>
+    
+    
+    <!-- Contenedor para los botones de guardar y borrar -->
+    <div class="botones-accion">
+      <button id="guardar">Guardar selección</button>
+      <button id="borrar">Borrar selección</button>
+    </div>
+
+
+    <div class="dashboard__menu">
+      <button class="dashboard__botton">SERSOR</button>
+      <button class="dashboard__botton dashboard__botton--dark">UNIT</button>
+      <button class="dashboard__botton">HUMANITARIAN</button>
+      <button class="dashboard__botton dashboard__botton--dark">SIGNS</button>
+      <button class="dashboard__botton">RETROFIT</button>
+      <button class="dashboard__botton dashboard__botton--dark">CUSTOM</button>
+    </div>
+
+    <!-- Resto del código HTML se mantiene igual -->
+    <!-- ... -->
+
+  </main>
+
+  <script>
+    // Pedir filas y columnas al usuario
+    let filas = parseInt(prompt("Introduce el número de filas:", "30"));
+    let columnas = parseInt(prompt("Introduce el número de columnas:", "30"));
+
+    // Validar entrada
+    if (isNaN(filas) || isNaN(columnas) || filas <= 0 || columnas <= 0) {
+      alert("Valores inválidos. Se usarán 30 filas y 30 columnas por defecto.");
+      filas = 30;
+      columnas = 30;
+    }
+
+    const cantidad = filas * columnas;
+    const contenedor = document.getElementById('contenedor');
+
+    // Asegurar que el contenedor tenga la relación de aspecto correcta
+    contenedor.style.aspectRatio = `${columnas}/${filas}`;
+
+    for (let i = 0; i < cantidad; i++) {
+      const filaActual = Math.floor(i / columnas);
+      const columnaActual = i % columnas;
+
+      const checkboxId = `checkbox-${i}`;
+      const ancho = 100 / columnas;
+      const alto = 100 / filas;
+      const top = filaActual * alto;
+      const left = columnaActual * ancho;
+
+      const input = document.createElement('input');
+      input.type = 'checkbox';
+      input.className = 'checkbox';
+      input.id = checkboxId;
+
+      const label = document.createElement('label');
+      label.className = 'celda';
+      label.setAttribute('for', checkboxId);
+      label.style.top = `${top}%`;
+      label.style.left = `${left}%`;
+      label.style.width = `${ancho}%`;
+      label.style.height = `${alto}%`;
+
+      // Bloqueos de prueba
+      if (i === 2) {
+        input.disabled = true;
+        label.classList.add('bloqueado');
+      }
+      if (i === 6 || i === 8) {
+        input.disabled = true;
+        label.classList.add('bloqueado-especial');
+      }
+
+      contenedor.appendChild(input);
+      contenedor.appendChild(label);
+    }
+
+    // Función para obtener los números de los cuadros azules
+    function obtenerCuadrosAzules() {
+      return Array.from(document.querySelectorAll('.celda'))
+        .filter(label => label.style.backgroundColor === 'blue')
+        .map(label => {
+          const id = label.getAttribute('for').replace('checkbox-', '');
+          return parseInt(id);
+        });
+    }
+
+    // Guardar selección (ahora guarda los cuadros azules)
+    document.getElementById('guardar').addEventListener('click', () => {
+      const cuadrosAzules = obtenerCuadrosAzules();
+
+      fetch('http://localhost:5501/cuadros_seleccionados', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ seleccionados: cuadrosAzules })
+      })
+        .then(res => res.json())
+        .then(data => {
+          alert(`Se guardaron ${cuadrosAzules.length} cuadros azules correctamente`);
+          console.log("Cuadros guardados:", cuadrosAzules, "Respuesta:", data);
+        })
+        .catch(error => {
+          console.error('Error al guardar:', error);
+          alert("Error al guardar los cuadros");
+        });
+    });
+
+    // Borrar selección (nueva funcionalidad)
+    document.getElementById('borrar').addEventListener('click', () => {
+      const confirmacion = confirm("¿Estás seguro de que quieres borrar toda la selección?");
+
+      if (confirmacion) {
+        // Quitar el azul de todos los labels
+        document.querySelectorAll('.celda').forEach(label => {
+          label.style.backgroundColor = '';
+        });
+
+        // Desmarcar y habilitar todos los checkboxes
+        document.querySelectorAll('.checkbox').forEach(checkbox => {
+          checkbox.checked = false;
+          // Solo habilitamos los que no están bloqueados
+          if (!checkbox.disabled || checkbox.id === 'checkbox-2' || checkbox.id === 'checkbox-6' || checkbox.id === 'checkbox-8') {
+            checkbox.disabled = false;
+          }
+        });
+
+        alert("Se ha borrado toda la selección");
+      }
+    });
+
+    // Cargar seleccionados (manteniendo la misma lógica original)
+    fetch('http://localhost:5501/cuadros_seleccionados')
+      .then(res => res.json())
+      .then(ids => {
+        ids.forEach(id => {
+          const checkbox = document.getElementById(`checkbox-${id}`);
+          const label = document.querySelector(`label[for="checkbox-${id}"]`);
+
+          if (checkbox && label) {
+            checkbox.checked = true;
+            checkbox.disabled = true;
+            label.classList.add('celda');
+            label.style.display = 'flex';
+            label.style.backgroundColor = 'blue';
+          }
+        });
+      })
+      .catch(error => {
+        console.error('Error al cargar selección:', error);
+      });
+  </script>
+
+  <style>
+    #imagen-mapa {
+      object-fit: cover;
+      aspect-ratio: 1 / 1
+    }
+
+    /* Estilos adicionales para los nuevos elementos */
+    .botones-accion {
+      display: flex;
+      gap: 10px;
+      margin: 10px auto;
+      justify-content: center;
+    }
+
+    #guardar,
+    #borrar {
+      padding: 10px 20px;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    #guardar {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    #guardar:hover {
+      background-color: #45a049;
+    }
+
+    #borrar {
+      background-color: #f44336;
+      color: white;
+    }
+
+    #borrar:hover {
+      background-color: #d32f2f;
+    }
+  </style>
+</body>
+
+</html>5
