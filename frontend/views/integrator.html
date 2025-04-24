@@ -229,10 +229,7 @@
                         </select>
                         <hr>
                         <button2 class="integrator__botton-primary" type="">DESHABILITAR</button2>
-                        <select class="integrator__tablet-select">
-                            <option value="">David</option>
-                            <option value="">Andres</option>
-                        </select>
+                       
                         <button class="integrator__botton-primary" type="">CREAR ITEM</button>
 
                     </div>
@@ -242,39 +239,64 @@
                     <div class="integrator__module">
 
                         <table class="integrator__module-table">
-                            <caption class="integrator__module-header">CULTIVOS</caption>
-
+                            <caption class="integrator__module-header">Cultivos</caption>
                             <thead class="integrator__module-thead">
                                 <tr class="integrator__table-header">
                                     <th class="integrator__header-cell">NOMBRE</th>
                                 </tr>
-                                <tr class="integrator__table-fila">
-                                    <td class="integrator__table-dato">PAPAS</td>
-                                    <td class="integrator__table-dato">DOLARES</td>
-                                    <td class="integrator__table-dato">MARACANA</td>
-                                    <td class="integrator__table-dato">GUANABANA</td>
-                                </tr>
+                            </thead>
+                            <tbody class="integrator__table-fila integrator_crops-list">
+                                <!-- Las celdas se agregarán dinámicamente aquí -->
+                            </tbody>
                         </table>
                         <hr>
-                        <button class="integrator__botton-primary" type="">AGREGAR</button>
-                        <select class="integrator__tablet-select">
-                            <option value="">pAPA</option>  <!-- cultivos -->
-                            <option value="">FLORES</option>
-                        </select>
+                        <button class="integrator__botton-primary integrator__add-crop" type="button">AGREGAR</button>
+                        <select class="integrator__tablet-select integrator__tablet-select--crops">
+                            <option value="" disabled selected>Seleccione un responsable</option>
                         <hr>
                         <button2 class="integrator__botton-primary" type="">DESHABILITAR</button2>
-                        <select class="integrator__tablet-select">
-                            <option value="">GUANABANA</option>
-                            <option value="">PAPAS</option>
-                        </select>
+                      
                         <button class="integrator__botton-primary" type="">CREAR ITEM</button>
 
                     </div>
                     <!-- fin modulo -->
+                     
                     <!-- Sección Cultivos -->
-
+                     <!-- ⬇️ No tocar este bloque por nada del mundo ⬇️ -->
                     <div class="integrator__module">
 
+                        <table class="integrator__module-table">
+                            <caption class="integrator__module-header">este bloque no se ve</caption>
+
+                            <thead class="integrator__module-thead">
+                                <tr class="integrator__table-header">
+                                    <th class="integrator__header-cell">este bloque no se ve</th>
+                                </tr>
+                                <tr class="integrator__table-fila">
+                                    <td class="integrator__table-dato">este bloque no se ve</td>
+                                    <td class="integrator__table-dato">este bloque no se ve</td>
+                                    <td class="integrator__table-dato">este bloque no se ve</td>
+                                    <td class="integrator__table-dato">este bloque no se ve</td>
+                                </tr>
+
+                        </table>
+                        <hr>
+                        <button class="integrator__botton-primary" type="">AGREGAR</button>
+                        <select class="integrator__tablet-select">
+                         
+                        </select>
+                        <hr>
+                        <button2 class="integrator__botton-primary" type="">DESHABILITAR</button2>
+                        <select class="integrator__tablet-select">
+                            <option value="">PALA</option>
+                            <option value="">RECATON</option>
+                        </select>
+                        <button class="integrator__botton-primary" type="">CREAR ITEM</button>
+
+                    </div>
+                       <!-- ⬆️ No tocar este bloque por nada del mundo ⬆️ -->
+                    <div class="integrator__module">
+                        <!-- Modulo de ciclos -->
                         <table class="integrator__module-table">
                             <caption class="integrator__module-header">CICLOS</caption>
 
@@ -283,23 +305,24 @@
                                     <th class="integrator__header-cell">NOMBRE</th>
                                 </tr>
                                 <tr class="integrator__table-fila">
-                                    <td class="integrator__table-dato">PAPAS</td>
-                                    <td class="integrator__table-dato">DOLARES</td>
-                                    <td class="integrator__table-dato">MARACANA</td>
-                                    <td class="integrator__table-dato">GUANABANA</td>
+                                    <td class="integrator__table-dato">PALA</td>
+                                    <td class="integrator__table-dato">SEMILLAS</td>
+                                    <td class="integrator__table-dato">HUMUS</td>
+                                    <td class="integrator__table-dato">ABONO</td>
                                 </tr>
+
                         </table>
                         <hr>
                         <button class="integrator__botton-primary" type="">AGREGAR</button>
                         <select class="integrator__tablet-select">
-                            <option value="">pAPA</option>
-                            <option value="">FLORES</option><!-- ciclos -->
+                            <option value="">GUADAÑA</option>
+                            <option value="">PODADORA</option> <!-- insumos -->
                         </select>
                         <hr>
                         <button2 class="integrator__botton-primary" type="">DESHABILITAR</button2>
                         <select class="integrator__tablet-select">
-                            <option value="">GUANABANA</option>
-                            <option value="">PAPAS</option>
+                            <option value="">PALA</option>
+                            <option value="">RECATON</option>
                         </select>
                         <button class="integrator__botton-primary" type="">CREAR ITEM</button>
 

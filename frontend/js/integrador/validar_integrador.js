@@ -4,7 +4,8 @@ console.log("holas");
 const produccionData = {
     name_production: '',
     responsable: '',
-    users_selected: []
+    users_selected: [],
+    crops_selected: []
 };
 
 // Cargar responsables en el select principal
@@ -81,6 +82,72 @@ function agregarUsuarioATabla() {
     });
     
     produccionData.users_selected.push(usuarioSeleccionado);
+    
+    celdaEliminar.appendChild(botonEliminar);
+    nuevaFila.appendChild(celda);
+    nuevaFila.appendChild(celdaEliminar);
+    tbody.appendChild(nuevaFila);
+    
+    select.value = "";
+}
+// ⬆️ Funciones de usuario
+
+
+// ⬇️ Funciones de cultivo
+async function cargarCultivoSelect() {
+    try {
+        const response = await fetch("http://localhost:5501/crops/responsable");
+        const cultivos = await response.json();
+        const select = document.querySelector(".integrator__tablet-select--crops");
+
+        cultivos.forEach(cultivo => {
+            const option = document.createElement("option");
+            option.value = cultivo.name_crop;
+            option.textContent = cultivo.name_crop;
+            select.appendChild(option);
+        });
+
+        document.querySelector(".integrator__add-crop").addEventListener("click", agregarcultivoATabla);
+        
+    } catch (error) {
+        console.error("Error al cargar cultivos:", error);
+    }
+}
+
+// Agregar cultivo a la tabla y al objeto
+function agregarcultivoATabla() {
+    const select = document.querySelector(".integrator__tablet-select--crops");
+    const cultivoseleccionado = select.value.trim();
+    
+    if (!cultivoseleccionado) return;
+    
+    if (produccionData.crops_selected.some(user => 
+        user.toLowerCase() === cultivoseleccionado.toLowerCase()
+    )) {
+        alert(`El cultivo "${cultivoseleccionado}" ya está en la lista`);
+        select.value = "";
+        return;
+    }
+    
+    const tbody = document.querySelector(".integrator_crops-list");
+    const nuevaFila = document.createElement("tr");
+    
+    const celda = document.createElement("td");
+    celda.className = "integrator__table-dato";
+    celda.textContent = cultivoseleccionado;
+    
+    const celdaEliminar = document.createElement("td");
+    const botonEliminar = document.createElement("button");
+    botonEliminar.textContent = "×";
+    botonEliminar.className = "eliminar-cultivo";
+    botonEliminar.addEventListener("click", () => {
+        produccionData.crops_selected = produccionData.crops_selected.filter(
+            user => user !== cultivoseleccionado
+        );
+        nuevaFila.remove();
+    });
+    
+    produccionData.crops_selected.push(cultivoseleccionado);
     
     celdaEliminar.appendChild(botonEliminar);
     nuevaFila.appendChild(celda);
@@ -180,6 +247,7 @@ function mostrarMensaje(form, mensaje, color) {
 document.addEventListener("DOMContentLoaded", () => {
     cargarResponsables();
     cargarUsuariosSelect();
+    cargarCultivoSelect()
     document.querySelector('.integrator__botton-primary--color').addEventListener("click", enviarProduccion);
     setTimeout(() => {
         inicializarValidaciones();
