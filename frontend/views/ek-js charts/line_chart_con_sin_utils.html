@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfico Funcional</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div style="width: 80%; margin: 20px auto;">
+        <canvas id="myChart"></canvas>
+    </div>
+    
+    <div style="text-align: center; margin: 20px;">
+        <button onclick="changeLegendPosition('top')">Top</button>
+        <button onclick="changeLegendPosition('right')">Right</button>
+        <button onclick="changeLegendPosition('bottom')">Bottom</button>
+        <button onclick="changeLegendPosition('left')">Left</button>
+    </div>
+
+    <script>
+        // Datos manuales (sin usar Utils)
+        const data = {
+            labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio'],
+            datasets: [{
+                label: 'Ventas 2024',
+                data: [65, 59, 80, 81, 56, 55, 40],
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]
+        };
+
+        const config = {
+            /*  puede ser bar  line      */
+            type: 'bar',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    }
+                }
+            }
+        };
+
+        let myChart;
+
+        window.onload = function() {
+            const ctx = document.getElementById('myChart').getContext('2d');
+            myChart = new Chart(ctx, config);
+        };
+
+        function changeLegendPosition(position) {
+            if (myChart) {
+                myChart.options.plugins.legend.position = position;
+                myChart.update();
+            }
+        }
+    </script>
+</body>
+</html>

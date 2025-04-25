@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfico con Suggested Min/Max</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/utils.js"></script>
+</head>
+<body>
+    <div style="width: 80%; margin: 20px auto;">
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script>
+        // Setup - Primero declaramos los datos
+        const DATA_COUNT = 7;
+        const NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 100};
+
+        const labels = Utils.months({count: 7});
+        const data = {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Dataset 1',
+                    data: [10, 30, 39, 20, 25, 34, -10],
+                    borderColor: Utils.CHART_COLORS.red,
+                    backgroundColor: Utils.CHART_COLORS.red,
+                },
+                {
+                    label: 'Dataset 2',
+                    data: [18, 33, 22, 19, 11, 39, 30],
+                    borderColor: Utils.CHART_COLORS.blue,
+                    backgroundColor: Utils.CHART_COLORS.blue,
+                }
+            ]
+        };
+
+        // Config - Luego la configuración que usa los datos
+        const config = {
+            type: 'line',
+            data: data,
+            options: {
+              responsive: true,
+              plugins: {
+                title: {
+                  display: true,
+                  text: 'Suggested Min and Max Settings'
+                }
+              },
+              scales: {
+                y: {
+                  // the data minimum used for determining the ticks is Math.min(dataMin, suggestedMin)
+                  suggestedMin: 30,
+          
+                  // the data maximum used for determining the ticks is Math.max(dataMax, suggestedMax)
+                  suggestedMax: 50,
+                }
+              }
+            },
+          };
+
+        // Inicialización del gráfico
+        window.addEventListener('DOMContentLoaded', () => {
+            const ctx = document.getElementById('myChart').getContext('2d');
+            new Chart(ctx, config);
+        });
+    </script>
+</body>
+</html>
