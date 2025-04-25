@@ -1,0 +1,24 @@
+.parent {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    }
+    
+    .div1 { grid-area: 7 / 10 / 8 / 13; }
+    .div2 { grid-area: 8 / 10 / 12 / 13; }
+    .div3 { grid-area: 12 / 10 / 13 / 13; }
+    .div4 { grid-area: 12 / 1 / 13 / 10; }
+    .div5 { grid-area: 2 / 10 / 7 / 13; }
+    .div6 { grid-area: 1 / 1 / 2 / 13; }
+    .div7 { grid-area: 2 / 5 / 3 / 10; }
+    .div8 { grid-area: 3 / 5 / 7 / 10; }
+    .div9 { grid-area: 7 / 5 / 12 / 10; }
+    .div10 { grid-area: 11 / 1 / 12 / 5; }
+    .div11 { grid-area: 9 / 1 / 11 / 4; }
+    .div12 { grid-area: 9 / 4 / 11 / 5; }
+    .div13 { grid-area: 2 / 1 / 7 / 5; }
+    .div14 { grid-area: 7 / 1 / 9 / 4; }
+    .div15 { grid-area: 7 / 4 / 9 / 5; }
+    

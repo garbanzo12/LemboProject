@@ -1680,6 +1680,14 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
     height: 25rem;
 
 }
+.producto__chart-js {
+    background-color: var(--gray-100);
+    border-radius: 1rem;
+    padding: 1rem;
+    box-shadow: 0 0.2rem 1rem var(--gray-900);
+
+
+}
 
 .producto__data {
     background-color: var(--gray-100);
