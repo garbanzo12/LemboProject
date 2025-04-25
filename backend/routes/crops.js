@@ -1,59 +1,63 @@
-require("dotenv").config();
 const express = require("express");
-const cors = require("cors");
+const router = express.Router();
 const mysql = require("mysql2");
 const multer = require("multer");
 const path = require("path");
+require("dotenv").config();
 
-const app = express();
-
-// Middleware para CORS (debe ir antes de las rutas)
-app.use(cors({
-    origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-}));
-
-// Middleware para analizar formularios codificados (application/x-www-form-urlencoded)
-app.use(express.urlencoded({ extended: true }));
-
-// 🔥 Aquí sirve la carpeta 'uploads' como pública
-app.use('/uploads', express.static('uploads'));
-
-// Configurar multer
+// Configurar Multer para subir imágenes
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, "uploads/");
-    },
-    filename: function (req, file, cb) {
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
+  destination: function (req, file, cb) {
+    cb(null, "uploads/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname));
+  }
 });
+const upload = multer({ storage });
 
-const upload = multer({ storage: storage });
-
-//⬇️ Configuramos conexión a la BD
+// Conexión a la base de datos
 const conexion = mysql.createConnection({
-    host: process.env.HOST,
-    user: process.env.USER,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE
+  host: process.env.HOST,
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE
 });
 
 conexion.connect((err) => {
-    if (err) throw err;
-    console.log('Conectado a MySQL');
+  if (err) throw err;
+  console.log("Conectado a MySQL [crops]");
 });
 
-app.listen(5501, () => console.log("Servidor corriendo en puerto 5501"));
 
-//⬇️ Ruta para actualizar el cultivo (modulo actualizar)
-app.put('/crops/:id', upload.single('imagen_cultivo'), (req, res) => { // No olvides el middleware multer
+// Ruta para insertar un cultivo
+router.post("/crops", upload.single("image_crop"), (req, res) => {
+  const { name_crop, type_crop, location, description_crop, size_m2 } = req.body;
+  const image_crop = req.file ? req.file.filename : null;
+
+  if (!name_crop || !type_crop || !location || !description_crop || !size_m2 || !image_crop) {
+    return res.status(400).json({ error: "Todos los campos son obligatorios" });
+  }
+
+  const sql = `
+    INSERT INTO crops (name_crop, type_crop, location, description_crop, size_m2, image_crop)
+    VALUES (?, ?, ?, ?, ?, ?)
+  `;
+
+  conexion.query(sql, [name_crop, type_crop, location, description_crop, size_m2, image_crop], (error, resultado) => {
+    if (error) {
+      console.error("Error al insertar cultivo:", error);
+      return res.status(500).json({ error: "Error al insertar cultivo" });
+    }
+
+    res.json({ id: resultado.insertId });
+  });
+});
+
+
+// Ruta para actualizar un cultivo
+router.put("/crops/:id", upload.single("imagen_cultivo"), (req, res) => {
   const cropId = req.params.id;
-  console.log('====== INICIO ACTUALIZACIÓN ======');
-  console.log('ID recibido:', req.params.id);
-  console.log('Body recibido:', req.body);
-  console.log('File recibido:', req.file);
   const {
     nombre_cultivo,
     tipo_cultivo,
@@ -64,167 +68,98 @@ app.put('/crops/:id', upload.single('imagen_cultivo'), (req, res) => { // No olv
 
   const imagen_cultivo = req.file ? req.file.filename : null;
 
-  // Query base SIN la coma final
   let query = `
     UPDATE crops 
-    SET 
-      name_crop = ?, 
-      type_crop = ?, 
-      location = ?, 
-      description_crop = ?, 
-      size_m2 = ?
+    SET name_crop = ?, type_crop = ?, location = ?, description_crop = ?, size_m2 = ?
   `;
+  const values = [nombre_cultivo, tipo_cultivo, ubicacion_cultivo, descripcion_cultivo, tamano_cultivo];
 
-  const values = [
-    nombre_cultivo,
-    tipo_cultivo,
-    ubicacion_cultivo,
-    descripcion_cultivo,
-    tamano_cultivo
-  ];
-
-  // Agregar imagen solo si existe
   if (imagen_cultivo) {
-    query = query.replace('size_m2 = ?', 'size_m2 = ?, image_crop = ?');
+    query += `, image_crop = ?`;
     values.push(imagen_cultivo);
   }
 
-  // Añadir WHERE (solo una vez)
-  query += ' WHERE id = ?';
+  query += ` WHERE id = ?`;
   values.push(cropId);
-
-  console.log('Query final:', query); // Para depuración
-  console.log('Valores:', values);   // Para depuración
 
   conexion.query(query, values, (err, result) => {
     if (err) {
-      console.error('Error al actualizar el cultivo:', err);
-      return res.status(500).json({ 
-        error: 'Hubo un error al actualizar el cultivo.',
-        detalles: err.message 
-      });
+      console.error("Error al actualizar cultivo:", err);
+      return res.status(500).json({ error: "Error al actualizar cultivo" });
     }
-    res.json({ message: 'Cultivo actualizado exitosamente.' });
+    res.json({ mensaje: "Cultivo actualizado exitosamente" });
   });
 });
-  //⬆️ Ruta para actualizar el cultivo (modulo actualizar)
 
-//⬇️ Ruta para insertar datos ( modulo crear)
-app.post("/crops", upload.single("image_crop"), (req, res) => {
-    console.log("Datos recibidos en POST /crops:", req.body);
 
-    const { name_crop, type_crop, location, description_crop, size_m2 } = req.body;
-    const image_crop = req.file ? req.file.filename : null;
+// Ruta para obtener cultivo por ID
+router.get("/crops/:id", (req, res) => {
+  const id = req.params.id;
+  const sql = "SELECT * FROM crops WHERE id = ?";
 
-    if (!name_crop || !type_crop || !location || !description_crop || !size_m2 || !image_crop) {
-        return res.status(400).json({ error: "Todos los campos son obligatorios" });
-    }
-
-    const sql = "INSERT INTO crops (name_crop, type_crop, location, description_crop, size_m2, image_crop) VALUES (?, ?, ?, ?, ?, ?)";
-    conexion.query(sql, [name_crop, type_crop, location, description_crop, size_m2, image_crop], (error, resultado) => {
-        if (error) {
-            console.error("Error al insertar datos:", error);
-            return res.status(500).json({ error: "Error al insertar datos" });
-        }
-
-        console.log("Resultado del INSERT:", resultado);
-        res.json({
-            id: resultado.insertId
-        });
-    });
+  conexion.query(sql, [id], (error, resultado) => {
+    if (error) return res.status(500).json({ error: "Error al obtener cultivo" });
+    if (resultado.length === 0) return res.status(404).json({ mensaje: "Cultivo no encontrado" });
+    res.json(resultado[0]);
+  });
 });
 
-// // ⬇️ Ruta para buscar un cultivo por ID (modulo buscar)
 
-// ✅ Ruta para obtener solo los IDs de cultivos (sin límite de paginación)
-app.get('/crops/id', (req, res) => {
-  const sql = 'SELECT id FROM crops';
+// Ruta para listar IDs de cultivos
+router.get("/crops/id", (req, res) => {
+  const sql = "SELECT id FROM crops";
   conexion.query(sql, (err, results) => {
-    if (err) {
-      console.error('Error al obtener los IDs de cultivos:', err);
-      return res.status(500).json({ error: 'Error al obtener los IDs' });
-    }
-
+    if (err) return res.status(500).json({ error: "Error al obtener IDs" });
     const ids = results.map(row => row.id);
     res.json({ cultivos: ids });
   });
 });
-app.get("/crops/:id", (req, res) => {
-  const cropId = req.params.id;
-
-  let sql = "SELECT * FROM crops WHERE id = ?";
-  conexion.query(sql, [cropId], (error, resultados) => {
-      if (error) {
-          console.error("Error al buscar cultivo:", error);
-          return res.status(500).json({ error: "Error al buscar cultivo" });
-      }
-
-      if (resultados.length === 0) {
-          return res.status(404).json({ mensaje: "Cultivo no encontrado" });
-      }
-
-      res.json(resultados[0]);
-  });
-});
-// // ⬆️ Ruta para buscar un cultivo por ID (modulo buscar)
 
 
-
-  
-// ⬇️ Ruta para Listar (modulo listar)
-// 🟢 Iniciar servidor
-app.get('/crops', (req, res) => {
+// Ruta para listar cultivos con paginación y búsqueda
+router.get("/crops", (req, res) => {
   const page = parseInt(req.query.page) || 1;
-  const buscar = req.query.buscar || ''; // 👈 palabra clave para buscar
-  const limit = 10; // 👈 Limito la cantidad de digitos que voy a mostar por pagina
+  const buscar = req.query.buscar || "";
+  const limit = 10;
   const offset = (page - 1) * limit;
 
-  // ⬇️ Si hay una búsqueda, usamos WHERE para poder buscarlo (Estamos opteniendo los datos del cultivo)
-  let queryData = `
-    SELECT * FROM crops 
+  const filtro = `%${buscar}%`;
+
+  const queryData = `
+    SELECT * FROM crops
     WHERE 
       id LIKE ? OR 
       name_crop LIKE ? OR 
       type_crop LIKE ? OR 
       location LIKE ? OR 
-      description_crop LIKE ? OR
+      description_crop LIKE ? OR 
       size_m2 LIKE ?
-      LIMIT ? OFFSET ?
+    LIMIT ? OFFSET ?
   `;
-// ⬇️ Iniciamos los parametros correspondientes a id , nombre , tipo , ubicación y descripción
-  let params = [`%${buscar}%`,`%${buscar}%`, `%${buscar}%`, `%${buscar}%`, `%${buscar}%`, `%${buscar}%`, limit, offset];
 
-// ⬇️ Si hay una búsqueda, usamos WHERE para poder contar cuantos datos estamos tomando (Estamos opteniendo la cantidad de datos del cultivo)
-  let queryCount = `
-    SELECT COUNT(*) AS total FROM crops 
+  const queryCount = `
+    SELECT COUNT(*) AS total FROM crops
     WHERE 
       id LIKE ? OR 
       name_crop LIKE ? OR 
       type_crop LIKE ? OR 
       location LIKE ? OR 
-      description_crop LIKE ? OR
-      size_m2 LIKE ?  
+      description_crop LIKE ? OR 
+      size_m2 LIKE ?
   `;
-  // ⬇️ Iniciamos los parametros correspondientes a id , nombre , tipo , ubicación y descripción
 
-  let countParams = [`%${buscar}%`,`%${buscar}%`, `%${buscar}%`, `%${buscar}%`, `%${buscar}%`, `%${buscar}%`];
+  const params = [filtro, filtro, filtro, filtro, filtro, filtro, limit, offset];
+  const countParams = [filtro, filtro, filtro, filtro, filtro, filtro];
 
   conexion.query(queryData, params, (err, results) => {
-    if (err) {
-      console.error('Error al obtener cultivos:', err);
-      return res.status(500).send('Error al obtener cultivos');
-    }
+    if (err) return res.status(500).json({ error: "Error al obtener cultivos" });
 
-    conexion.query(queryCount, countParams, (err2, countResult) => {
-      if (err2) {
-        console.error('Error al contar cultivos:', err2);
-        return res.status(500).send('Error al contar cultivos');
-      }
+    conexion.query(queryCount, countParams, (err2, count) => {
+      if (err2) return res.status(500).json({ error: "Error al contar cultivos" });
 
-      const total = countResult[0].total;
-      res.json({ cultivos: results, total });
+      res.json({ cultivos: results, total: count[0].total });
     });
   });
 });
 
-// ⬆️ Ruta para Listar (modulo listar)
+module.exports = router;
