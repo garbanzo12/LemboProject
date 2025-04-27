@@ -20,7 +20,7 @@ app.use(require("./cropCycle"));
 app.use(require("./cuadros"));
 app.use(require("./sensors"));
 app.use(require("./users"));
-app.use(require("./integrador"));
+app.use("/integrador", require("./integrador"));
 
 app.listen(port, () => {
   console.log(`Servidor corriendo en http://localhost:${port}`);

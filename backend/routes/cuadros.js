@@ -21,8 +21,6 @@
   conexion.connect(err => {
     if (err) {
       console.error('Error de conexión a la BD:', err);
-    } else {
-      console.log('Conectado a la base de datos');
     }
   });
 

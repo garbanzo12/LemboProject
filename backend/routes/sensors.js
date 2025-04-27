@@ -38,10 +38,7 @@ function sensors(){
     if (err) throw err;
     console.log("Conectado a MySQL [Sensor]");
   });
-  conexion.connect((err) => {
-    if (err) throw err;
-    console.log('Conectado a MySQL');
-  });
+ 
   
   router.post("/sensors", upload.single("image_sensor"), (req, res) => {
     console.log("Datos recibidos en POST /sensors:", req.body);
