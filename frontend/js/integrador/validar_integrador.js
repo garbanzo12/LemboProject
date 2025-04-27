@@ -14,7 +14,7 @@ const produccionData = {
 // Cargar responsables en el select principal
 async function cargarResponsables() {
     try {
-        const response = await fetch("http://localhost:5501/users/responsable");
+        const response = await fetch("http://localhost:5501/integrador/users/responsable");
         const usuarios = await response.json();
         const select = document.querySelector(".integrator__input-form--resp");
 
@@ -33,7 +33,7 @@ async function cargarResponsables() {
 // Cargar usuarios en el select de agregar
 async function cargarUsuariosSelect() {
     try {
-        const response = await fetch("http://localhost:5501/users/responsable");
+        const response = await fetch("http://localhost:5501/integrador/users/responsable");
         const usuarios = await response.json();
         const select = document.querySelector(".integrator__tablet-select--users");
 
@@ -106,7 +106,7 @@ function agregarUsuarioATabla() {
 // ⬇️ Funciones de cultivo⬇️
 async function cargarCultivoSelect() {
     try {
-        const response = await fetch("http://localhost:5501/crops/responsable");
+        const response = await fetch("http://localhost:5501/integrador/crops/responsable");
         const cultivos = await response.json();
         const select = document.querySelector(".integrator__tablet-select--crops");
 
@@ -179,7 +179,7 @@ function agregarcultivoATabla() {
 // ⬇️ Funciones de ciclo ⬇️
 async function cargarCicloSelect() {
     try {
-        const response = await fetch("http://localhost:5501/cycle/responsable");
+        const response = await fetch("http://localhost:5501/integrador/cycle/responsable");
         const ciclos = await response.json();
         const select = document.querySelector(".integrator__tablet-select--cycle");
 
@@ -253,7 +253,7 @@ function agregarcicloATabla() {
 // ⬇️ Funciones de insumo ⬇️
 async function cargarInsumoSelect() {
     try {
-        const response = await fetch("http://localhost:5501/consumable/responsable");
+        const response = await fetch("http://localhost:5501/integrador/consumable/responsable");
         const insumos = await response.json();
         const select = document.querySelector(".integrator__tablet-select--consumable");
 
@@ -326,7 +326,7 @@ function agregarinsumoATabla() {
 // ⬇️ Funciones de sensores ⬇️
 async function cargarSensorSelect() {
     try {
-        const response = await fetch("http://localhost:5501/sensors/responsable");
+        const response = await fetch("http://localhost:5501/integrador/sensors/responsable");
         const sensores = await response.json();
         const select = document.querySelector(".integrator__tablet-select--sensor");
 
@@ -400,7 +400,7 @@ async function enviarProduccion() {
     produccionData.responsable = document.querySelector('.integrator__input-form--resp').value;
     console.log(produccionData)
     try {
-        const response = await fetch("http://localhost:5501/productions", {
+        const response = await fetch("http://localhost:5501/integrador/productions", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(produccionData)
