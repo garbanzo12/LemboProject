@@ -4,18 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gráfico con Chart.js</title>
-    <!-- Incluir Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Incluir las utilidades de Chart.js (para samples) -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/utils.js"></script>
 </head>
 <body>
-    <!-- Elemento canvas donde se dibujará el gráfico -->
     <div style="width: 80%; margin: 20px auto;">
         <canvas id="myChart"></canvas>
     </div>
-    
-    <!-- Botones para cambiar posición de leyenda -->
+
     <div style="text-align: center; margin: 20px;">
         <button onclick="changeLegendPosition('top')">Top</button>
         <button onclick="changeLegendPosition('right')">Right</button>
@@ -25,20 +20,16 @@
 
     <script>
         // Configuración de datos
-        const DATA_COUNT = 7;
-        const NUMBER_CFG = {count: DATA_COUNT, min: -100, max: 100};
-        
+        const labels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio'];
         const data = {
-            labels: Utils.months({count: DATA_COUNT}),
-            datasets: [
-                {
-                    label: 'Dataset 1',
-                    data: Utils.numbers(NUMBER_CFG),
-                    fill: false,
-                    borderColor: Utils.CHART_COLORS.red,
-                    backgroundColor: Utils.transparentize(Utils.CHART_COLORS.red, 0.5),
-                },
-            ]
+            labels: labels,
+            datasets: [{
+                label: 'Dataset 1',
+                data: [10, 20, -30, 40, -50, 60, 70],
+                fill: false,
+                borderColor: 'red',
+                backgroundColor: 'rgba(255, 0, 0, 0.5)',
+            }]
         };
 
         // Configuración del gráfico
@@ -49,7 +40,7 @@
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'top', // posición inicial de la leyenda
+                        position: 'top', // Posición inicial de la leyenda
                     },
                 }
             },
@@ -64,7 +55,7 @@
             myChart = new Chart(ctx, config);
         };
 
-        // Función para cambiar posición de la leyenda
+        // Función para cambiar la posición de la leyenda
         function changeLegendPosition(position) {
             if (myChart) {
                 myChart.options.plugins.legend.position = position;

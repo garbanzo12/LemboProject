@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- CDN de Chart.js versión 2.5.0 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <!-- CDN de Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+    <section class="layout">
+        <div class="producto__user">1</div>
+        <div class="producto__titulo">2</div>
+        <div class="producto__listar-prodocuciones">3</div>
+        <div class="producto__crop">4</div>
+        <div class="producto__notificaciones">5</div>
+        <div class="producto__listar-insumos">6
+
+
+
+
+            <div class="producto__col2">
+                <div class="producto__col">
+                    <h2 class="producto__subtittle">INVENTARIO INSUMOS</h2>
+                    <canvas id="myChart" style="width: 100%; max-width: 300px"></canvas>
+                </div>
+                <div class="producto__col">
+                    <h2 class="producto__subtittle">INVENTARIO IOT</h2>
+                    <canvas id="myChart2" style="width: 100%; max-width: 300px"></canvas>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+
+
+        
+        <div class="producto__financiero">
+            <h2 class="producto__subtittle">FINANZAS GENERALES</h2>
+
+            <div class="producto__row">
+                <div class="producto__col2">
+                    <div class="producto__col">
+                        <h2 class="producto__subtittle">INVENTARIO INSUMOS</h2>
+                        <canvas id="myChart" style="width: 100%; max-width: 300px"></canvas>
+                    </div>
+                    <div class="producto__col">
+                        <h2 class="producto__subtittle">INVENTARIO IOT</h2>
+                        <canvas id="myChart2" style="width: 100%; max-width: 300px"></canvas>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="producto__col2">
+                    <div class="producto__col">
+                        <h2 class="producto__subtittle">INVENTARIO INSUMOS</h2>
+                        <canvas id="myChart" style="width: 100%; max-width: 300px"></canvas>
+                    </div>
+                    <div class="producto__col">
+                        <h2 class="producto__subtittle">INVENTARIO IOT</h2>
+                        <canvas id="myChart2" style="width: 100%; max-width: 300px"></canvas>
+                    </div>
+                </div>
+
+
+
+                <div class="producto__col2">
+                    <div class="producto__col">
+                        <h2 class="producto__subtittle">INVENTARIO INSUMOS</h2>
+                        <canvas id="myChart" style="width: 100%; max-width: 300px"></canvas>
+                    </div>
+                    <div class="producto__col">
+                        <h2 class="producto__subtittle">INVENTARIO IOT</h2>
+                        <canvas id="myChart2" style="width: 100%; max-width: 300px"></canvas>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+        <div class="producto__sensores">
+            <div id="myPlot" style="width: 100%; max-width: 500px"></div>
+        </div>
+        <div class="producto__footter">9</div>
+    </section>
+
+    <script>
+        // Configuración del primer gráfico con Chart.js
+        var xValues = ["HUMUS", "SEMILLAS", "HERBICIDA", "FUNGICIDA", "ABONO"];
+        var yValues = [75, 69, 74, 64, 65];
+        var barColors = ["green", "green", "green", "green", "green"];
+
+        new Chart("myChart", {
+            type: "bar",
+            data: {
+                labels: xValues,
+                datasets: [
+                    {
+                        label: "Costos X Producción", // Este texto aparecerá en la leyenda
+                        backgroundColor: barColors,
+                        data: yValues,
+                    },
+                ],
+            },
+            options: {
+                indexAxis: "y",
+                plugins: {
+                    legend: { display: true }, // Asegúrate de habilitar la leyenda
+                    title: {
+                        display: true,
+                        text: "COSTOS X PRODUCCIÓN",
+                    },
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            color: "yellow",
+                            lineWidth: 5,
+                        },
+                        ticks: {
+                            min: 10,
+                            max: 80,
+                        },
+                    },
+                    y: {
+                        grid: {
+                            color: "orange",
+                            lineWidth: 2,
+                        },
+                    },
+                },
+            },
+        });
+
+        // Configuración del segundo gráfico con Chart.js
+        var xValues2 = ["Italy", "France", "Spain", "USA", "Argentina"];
+        var yValues2 = [55, 49, 44, 24, 15];
+        var barColors2 = ["red", "green", "blue", "orange", "brown"];
+
+        new Chart("myChart2", {
+            type: "bar",
+            data: {
+                labels: xValues2,
+                datasets: [
+                    {
+                        label: "Inventario x inversion",
+                        backgroundColor: barColors2,
+                        data: yValues2,
+                    },
+                ],
+            },
+            options: {
+                indexAxis: "y",
+                plugins: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: "GANANCIAS X PRODUCCIÓN",
+                    },
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            color: "lightblue", // Color de las líneas del eje X
+                            lineWidth: 2,
+                        },
+                        ticks: {
+                            min: 10,
+                            max: 60,
+                        },
+                    },
+                    y: {
+                        grid: {
+                            color: "lightgreen", // Color de las líneas del eje Y
+                            lineWidth: 2,
+                        },
+                    },
+                },
+            },
+        });
+
+        // Configuración de gráfica con Plotly.js
+        let exp1 = (x) => x;
+        let exp2 = (x) => 1.5 * x;
+        let exp3 = (x) => 1.5 * x + 7;
+
+        const x1Values = [];
+        const y1Values = [];
+        const x2Values = [];
+        const y2Values = [];
+        const x3Values = [];
+        const y3Values = [];
+
+        for (let x = 0; x <= 10; x++) {
+            x1Values.push(x);
+            y1Values.push(exp1(x));
+            y2Values.push(exp2(x));
+            y3Values.push(exp3(x));
+        }
+
+        const data = [
+            { x: x1Values, y: y1Values, mode: "lines", line: { color: "red" } },
+            { x: x1Values, y: y2Values, mode: "lines", line: { color: "blue" } },
+            { x: x1Values, y: y3Values, mode: "lines", line: { color: "green" } },
+        ];
+
+        const layout = {
+            title: "Curvas de Producción",
+        };
+
+        Plotly.newPlot("myPlot", data, layout);
+    </script>
+</body>
+
+</html>
