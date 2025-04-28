@@ -25,17 +25,31 @@ function inicializarValidaciones() {
             this.style.backgroundColor = this.checked ? 'var(--checked-color)' : 'var(--unchecked-color)';
         });
     }
-  
+    const type_consumables = document.querySelector('.cardright__input-form--type'); //✅
+    const name_consumables = document.querySelector('.cardright__input-form--name');//✅
+    const quantity_consumables = document.querySelector('.cardright__input-form--quantity');//✅
+    const unit_consumables = document.querySelector('.cardright__input-form--unit-consumables'); //✅
+    const unitary_value = document.querySelector('.cardright__input-form--unitary-value');//✅
+    const total_value = document.querySelector('.cardright__input-form--total-value');
+
+            function calcularTotal() {
+                const precioUnitario = parseFloat(unitary_value.value) || 0;
+                const cantidad = parseFloat(quantity_consumables.value) || 0;
+                const totalCalculado = precioUnitario * cantidad;
+            
+                total_value.value = totalCalculado; // Mostrarlo con 2 decimales
+                console.log(total_value.value)
+            }
+            unitary_value.addEventListener('input', calcularTotal);
+            quantity_consumables.addEventListener('input', calcularTotal);
+
     forms.forEach((form) => {
         form.addEventListener("submit", async function (event) {
             event.preventDefault();
             
-            const type_consumables = document.querySelector('.cardright__input-form--type'); //✅
-            const name_consumables = document.querySelector('.cardright__input-form--name');//✅
-            const quantity_consumables = document.querySelector('.cardright__input-form--quantity');//✅
-            const unit_consumables = document.querySelector('.cardright__input-form--unit-consumables'); //✅
-            const unitary_value = document.querySelector('.cardright__input-form--unitary-value');//✅
-            const total_value = document.querySelector('.cardright__input-form--total-value');//✅
+           
+            
+          
             const description_consumables = document.querySelector('.cardright__input-form--description');//✅
 
             const state_consumables = toggleCheckbox ? (toggleCheckbox.checked ? 'habilitado' : 'deshabilitado') : '';
@@ -132,4 +146,5 @@ function mostrarMensaje(form, mensaje, color) {
 
 setTimeout(() => {
     inicializarValidaciones();
+
 }, 100);

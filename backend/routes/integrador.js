@@ -65,7 +65,8 @@ router.get("/sensors/responsable", (req, res) => {
 });
 
 router.get("/consumable/responsable", (req, res) => {
-    const sql = "SELECT name_consumables, quantity_consumables,unitary_value  FROM consumables WHERE state_consumables = 'habilitado'";
+    const sql = "SELECT name_consumables, quantity_consumables, unitary_value FROM consumables WHERE state_consumables = 'habilitado' AND quantity_consumables > 0";
+
     conexion.query(sql, (error, results) => {
         if (error) return res.status(500).json({ error: "Error en la base de datos" });
         if (!results.length) return res.status(404).json([]);

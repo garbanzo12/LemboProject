@@ -62,6 +62,7 @@ async function cargarResponsables() {
 
 // Cargar usuarios en el select de agregar
 async function cargarUsuariosSelect() {
+   
     try {
         const response = await fetch("http://localhost:5501/integrador/users/responsable");
         const usuarios = await response.json();
@@ -83,6 +84,10 @@ async function cargarUsuariosSelect() {
 
 // Agregar usuario a la tabla y al objeto
 function agregarUsuarioATabla() {
+    if (produccionData.users_selected.length >= 3) {
+        alert("Solo puedes agregar hasta 3 usuarios.");
+        return;
+    }
     const select = document.querySelector(".integrator__tablet-select--users");
     const usuarioSeleccionado = select.value.trim();
     
@@ -156,6 +161,10 @@ async function cargarCultivoSelect() {
 
 // Agregar cultivo a la tabla y al objeto
 function agregarcultivoATabla() {
+    if (produccionData.crops_selected.length >= 3) {
+        alert("Solo puedes agregar hasta 3 usuarios.");
+        return;
+    }
     const select = document.querySelector(".integrator__tablet-select--crops");
     const cultivoseleccionado = select.value.trim();
     
@@ -229,6 +238,10 @@ async function cargarCicloSelect() {
 
 // Agregar cultivo a la tabla y al objeto
 function agregarcicloATabla() {
+    if (produccionData.name_cropCycle.length >= 3) {
+        alert("Solo puedes agregar hasta 3 cultivos.");
+        return;
+    }
     const select = document.querySelector(".integrator__tablet-select--cycle");
     const cicloseleccionado = select.value.trim();
     
@@ -338,11 +351,18 @@ function actualizarTotalDinero() {
 
     resumen.textContent = `💲 Total insumos: $${total.toFixed(2)}`;
     produccionData.total_value_consumables = total;
-    console.log(produccionData.total_value_consumables)
 
 }
 
 function agregarinsumoATabla() {
+    if (produccionData.name_consumables.length >= 3) {
+        alert("Solo puedes agregar hasta 3 insumos.");
+        return;
+    }
+    if (produccionData.name_consumables.length >= 3) {
+        alert("Solo puedes agregar hasta 3 cultivos.");
+        return;
+    }
     const select = document.querySelector(".integrator__tablet-select--consumable");
     const insumoseleccionado = select.value.trim();
     
@@ -516,6 +536,10 @@ async function cargarSensorSelect() {
 
 // Agregar cultivo a la tabla y al objeto
 function agregarsensorATabla() {
+    if (produccionData.name_sensor.length >= 3) {
+        alert("Solo puedes agregar hasta 3 sensores.");
+        return;
+    }
     const select = document.querySelector(".integrator__tablet-select--sensor");
     const sensoreseleccionado = select.value.trim();
     
