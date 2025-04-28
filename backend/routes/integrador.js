@@ -65,22 +65,59 @@ router.get("/sensors/responsable", (req, res) => {
 });
 
 router.get("/consumable/responsable", (req, res) => {
-    const sql = "SELECT name_consumables FROM consumables WHERE state_consumables = 'habilitado'";
+    const sql = "SELECT name_consumables, quantity_consumables,unitary_value  FROM consumables WHERE state_consumables = 'habilitado'";
     conexion.query(sql, (error, results) => {
         if (error) return res.status(500).json({ error: "Error en la base de datos" });
         if (!results.length) return res.status(404).json([]);
         res.json(results);
     });
 });
+router.post("/consumable/actualizar-stock", async (req, res) => {
+    const { consumos } = req.body; // consumos será un array de objetos { name_consumables, cantidadConsumida }
 
+    if (!Array.isArray(consumos) || consumos.length === 0) {
+        return res.status(400).json({ error: "No se recibieron consumos válidos" });
+    }
+
+    const conexionPromesa = conexion.promise(); // Usamos conexion promesa para await
+
+    try {
+        for (const consumo of consumos) {
+            const { name_consumables, cantidadConsumida } = consumo;
+
+            // Actualizar stock en la base de datos
+            await conexionPromesa.query(
+                "UPDATE consumables SET quantity_consumables = quantity_consumables - ? WHERE name_consumables = ?",
+                [cantidadConsumida, name_consumables]
+            );
+        }
+
+        res.json({ mensaje: "Stock actualizado exitosamente" });
+    } catch (error) {
+        console.error("Error actualizando stock:", error);
+        res.status(500).json({ error: "Error al actualizar stock" });
+    }
+});
 router.post("/productions", async (req, res) => {
-    const { name_production, responsable, users_selected, crops_selected, name_cropCycle, name_consumables, name_sensor } = req.body;
+    let { name_production, responsable, users_selected, crops_selected, name_cropCycle, name_consumables, quantity_consumables,unitary_value_consumables,total_value_consumables, name_sensor } = req.body;
 
-    if (!name_production || !responsable || !users_selected || !crops_selected || !name_cropCycle || !name_consumables || !name_sensor) {
+    // Validar que existan todos los campos
+    if (!name_production || !responsable || !users_selected || !crops_selected || !name_cropCycle || !name_consumables || !quantity_consumables ||  !unitary_value_consumables|| !total_value_consumables ||!name_sensor) {
         return res.status(400).json({ error: "Todos los campos son obligatorios" });
     }
 
     try {
+        // Convertir arrays en strings separados por coma
+        users_selected = Array.isArray(users_selected) ? users_selected.join(", ") : users_selected;
+        crops_selected = Array.isArray(crops_selected) ? crops_selected.join(", ") : crops_selected;
+        name_cropCycle = Array.isArray(name_cropCycle) ? name_cropCycle.join(", ") : name_cropCycle;
+        name_consumables = Array.isArray(name_consumables) ? name_consumables.join(", ") : name_consumables;
+        quantity_consumables = Array.isArray(quantity_consumables) ? quantity_consumables.join(", ") : quantity_consumables;  // Recordar que se tuvo que cambiar quantity_consumables a text para hacepat mas de un dato, pero a la hora de hacer operable estos valores se debe usar split(',') 
+        unitary_value_consumables = Array.isArray(unitary_value_consumables) ? unitary_value_consumables.join(", ") : unitary_value_consumables; 
+        total_value_consumables = Array.isArray(total_value_consumables) ? total_value_consumables.join(", ") : total_value_consumables; 
+        name_sensor = Array.isArray(name_sensor) ? name_sensor.join(", ") : name_sensor;
+
+        // Crear el ID personalizado
         const [lastIdResult] = await conexion.promise().query(
             "SELECT id FROM productions ORDER BY created_at DESC LIMIT 1"
         );
@@ -100,20 +137,33 @@ router.post("/productions", async (req, res) => {
 
         const id = `PROD-${name_production}-${datePart}-${String(sequenceNumber).padStart(3, '0')}`;
 
-        const sql = "INSERT INTO productions (name_production, responsable, users_selected, crops_selected, name_cropCycle, name_consumables, name_sensor, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        conexion.query(sql, [name_production, responsable, users_selected, crops_selected, name_cropCycle, name_consumables, name_sensor, id], (error, resultado) => {
-            if (error) {
-                return res.status(500).json({ 
-                    error: "Error al guardar en base de datos",
-                    details: error.code === 'ER_DUP_ENTRY' ? "El nombre de producción ya existe" : "Error del servidor"
-                });
-            }
+        // Insertar en la base de datos
+        const sql = `
+            INSERT INTO productions 
+            (name_production, responsable, users_selected, crops_selected, name_cropCycle, name_consumables, quantity_consumables,unitary_value_consumables,total_value_consumables, name_sensor, id) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        `;
 
-            res.json({ success: true, message: "Producción creada exitosamente", id });
-        });
+        await conexion.promise().query(sql, [
+            name_production,
+            responsable,
+            users_selected,
+            crops_selected,
+            name_cropCycle,
+            name_consumables,
+            quantity_consumables,
+            unitary_value_consumables,
+            total_value_consumables,
+            name_sensor,
+            id
+        ]);
+
+        res.json({ success: true, message: "Producción creada exitosamente", id });
     } catch (error) {
+        console.error("Error en el servidor:", error);
         res.status(500).json({ error: "Error al guardar en base de datos", details: error.message });
     }
 });
+
 
 module.exports = router;

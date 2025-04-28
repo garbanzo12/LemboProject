@@ -227,7 +227,7 @@
 
                         <button class="integrator__botton-primary integrator__add-user" type="button">AGREGAR</button>
                         <select class="integrator__tablet-select integrator__tablet-select--users">
-                            <option value="" disabled selected>Seleccione un responsable</option>
+                            <option value="" disabled selected>Elige Usuarios</option>
 
                         </select>
                         <hr>
@@ -255,7 +255,7 @@
                         <hr>
                         <button class="integrator__botton-primary integrator__add-crop" type="button">AGREGAR</button>
                         <select class="integrator__tablet-select integrator__tablet-select--crops">
-                            <option value="" disabled selected>Seleccione un responsable</option>
+                            <option value="" disabled selected>Elige Cultivos</option>
                         <hr>
                         <button2 class="integrator__botton-primary" type="">DESHABILITAR</button2>
                       
@@ -298,7 +298,7 @@
                     <div class="integrator__module">
                         <!-- Modulo de ciclos -->
                         <table class="integrator__module-table">
-                            <caption class="integrator__module-header">Cultivos</caption>
+                            <caption class="integrator__module-header">Ciclos</caption>
                             <thead class="integrator__module-thead">
                                 <tr class="integrator__table-header">
                                     <th class="integrator__header-cell">NOMBRE</th>
@@ -311,7 +311,7 @@
                         <hr>
                         <button class="integrator__botton-primary integrator__add-cycle" type="button">AGREGAR</button>
                         <select class="integrator__tablet-select integrator__tablet-select--cycle">
-                            <option value="" disabled selected>Seleccione un responsable</option>
+                            <option value="" disabled selected>Elige Ciclos</option>
                         </select>
                         <hr>
                         <button2 class="integrator__botton-primary" type="">DESHABILITAR</button2>
@@ -320,33 +320,43 @@
 
                     </div>
                     <!-- fin modulo -->
-                    <!-- Sección Insumos -->
+                   <!-- Sección Insumos -->
+<div class="integrator__module">
 
-                    <div class="integrator__module">
+    <div class="contenedor-insumos">
+        <div class="contenedor-tabla">
+            <table class="integrator__module-table">
+                <caption class="integrator__module-header">INSUMOS</caption>
+                <thead class="integrator__module-thead">
+                    <tr class="integrator__table-header">
+                        <th class="integrator__header-cell">NOMBRE</th>
+                        
+                    </tr>
+                </thead>
+                <tbody class="integrator__table-fila integrator_consumable-list">
+                    <!-- Las celdas se agregarán dinámicamente aquí -->
+                </tbody>
+            </table>
+        </div>
 
-                        <table class="integrator__module-table">
-                            <caption class="integrator__module-header">INSUMOS</caption>
-                            <thead class="integrator__module-thead">
-                                <tr class="integrator__table-header">
-                                    <th class="integrator__header-cell">NOMBRE</th>
-                                </tr>
-                            </thead>
-                            <tbody class="integrator__table-fila integrator_consumable-list">
-                                <!-- Las celdas se agregarán dinámicamente aquí -->
-                            </tbody>
-                        </table>
-                        <hr>
-                        <button class="integrator__botton-primary integrator__add-consumable" type="button">AGREGAR</button>
-                        <select class="integrator__tablet-select integrator__tablet-select--consumable">
-                            <option value="" disabled selected>Seleccione un responsable</option>
-                        </select>
-                        <hr>
-                        <button2 class="integrator__botton-primary" type="">DESHABILITAR</button2>
-                     
-                        <button class="integrator__botton-primary" type="">CREAR ITEM</button>
+        <div class="resumen-total-dinero">
+            💲 Total insumos: $0.00
+        </div>
+    </div>
 
-                    </div>
-                    <!-- fin modulo -->
+    <hr>
+    <button class="integrator__botton-primary integrator__add-consumable" type="button">AGREGAR</button>
+    <select class="integrator__tablet-select integrator__tablet-select--consumable">
+        <option value="" disabled selected>Elige Insumos</option>
+    </select>
+    <hr>
+    <button2 class="integrator__botton-primary" type="">DESHABILITAR</button2>
+
+    <button class="integrator__botton-primary" type="">CREAR ITEM</button>
+
+</div>
+<!-- fin modulo -->
+
                     <!-- Sección Sensores -->
 
                     <div class="integrator__module">
@@ -365,7 +375,7 @@
                         <hr>
                         <button class="integrator__botton-primary integrator__add-sensor" type="button">AGREGAR</button>
                         <select class="integrator__tablet-select integrator__tablet-select--sensor">
-                            <option value="" disabled selected>Seleccione un responsable</option>
+                            <option value="" disabled selected>Elige Sensores</option>
                         </select>
                         <hr>
                         <button2 class="integrator__botton-primary" type="">DESHABILITAR</button2>

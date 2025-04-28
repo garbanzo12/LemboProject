@@ -8,8 +8,38 @@ const produccionData = {
     crops_selected: [],
     name_cropCycle: [],
     name_consumables: [],
+    quantity_consumables : [],
+    unitary_value_consumables : [],
+    total_value_consumables : '',
     name_sensor: []
 };
+function limpiarCamposSeleccionados() {
+    // Vaciar el objeto global
+    produccionData.users_selected = [];
+    produccionData.crops_selected = [];
+    produccionData.name_cropCycle = [];
+    produccionData.name_consumables = [];
+    produccionData.quantity_consumables = [];
+    produccionData.unitary_value_consumables = [];
+    produccionData.total_value_consumables = [];
+    produccionData.name_sensor = [];
+
+    // Limpiar todas las tablas visuales
+    const tablas = [
+        ".integrator_users-list",
+        ".integrator_crops-list",
+        ".integrator_cycle-list",
+        ".integrator_consumable-list",
+        ".integrator_sensor-list"
+    ];
+
+    tablas.forEach(selector => {
+        const tbody = document.querySelector(selector);
+        if (tbody) {
+            tbody.innerHTML = ""; // 💥 Borra todas las filas
+        }
+    });
+}
 
 // Cargar responsables en el select principal
 async function cargarResponsables() {
@@ -75,13 +105,13 @@ function agregarUsuarioATabla() {
     
     const celdaEliminar = document.createElement("td");
     const botonEliminar = document.createElement("button");
-    const botonEnviarFormulario = document.querySelector(".integrator__botton-primary--color");
-    botonEnviarFormulario.addEventListener("click", () => {
-        produccionData.users_selected = produccionData.users_selected.filter(
-            user => user !== usuarioSeleccionado
-        );
-        nuevaFila.remove();
-    });
+    // const botonEnviarFormulario = document.querySelector(".integrator__botton-primary--color");
+    // botonEnviarFormulario.addEventListener("click", () => {
+    //     produccionData.users_selected = produccionData.users_selected.filter(
+    //         user => user !== usuarioSeleccionado
+    //     );
+    //     nuevaFila.remove();
+    // });
     botonEliminar.textContent = "×";
     botonEliminar.className = "eliminar-usuario";
     botonEliminar.addEventListener("click", () => {
@@ -148,13 +178,13 @@ function agregarcultivoATabla() {
     
     const celdaEliminar = document.createElement("td");
     const botonEliminar = document.createElement("button");
-    const botonEnviarFormulario = document.querySelector(".integrator__botton-primary--color");
-    botonEnviarFormulario.addEventListener("click", () => {
-        produccionData.crops_selected = produccionData.crops_selected.filter(
-            cultivo => cultivo !== cultivoseleccionado
-        );
-        nuevaFila.remove();
-    });
+    // const botonEnviarFormulario = document.querySelector(".integrator__botton-primary--color");
+    // botonEnviarFormulario.addEventListener("click", () => {
+    //     produccionData.crops_selected = produccionData.crops_selected.filter(
+    //         cultivo => cultivo !== cultivoseleccionado
+    //     );
+    //     nuevaFila.remove();
+    // });
     botonEliminar.textContent = "×";
     botonEliminar.className = "eliminar-cultivo";
     botonEliminar.addEventListener("click", () => {
@@ -221,13 +251,13 @@ function agregarcicloATabla() {
     
     const celdaEliminar = document.createElement("td");
     const botonEliminar = document.createElement("button");
-    const botonEnviarFormulario = document.querySelector(".integrator__botton-primary--color");
-    botonEnviarFormulario.addEventListener("click", () => {
-        produccionData.name_cropCycle = produccionData.name_cropCycle.filter(
-            ciclo => ciclo !== cicloseleccionado
-        );
-        nuevaFila.remove();
-    });
+    // const botonEnviarFormulario = document.querySelector(".integrator__botton-primary--color");
+    // botonEnviarFormulario.addEventListener("click", () => {
+    //     produccionData.name_cropCycle = produccionData.name_cropCycle.filter(
+    //         ciclo => ciclo !== cicloseleccionado
+    //     );
+    //     nuevaFila.remove();
+    // });
     botonEliminar.textContent = "×";
     botonEliminar.className = "eliminar-cultivo";
     botonEliminar.addEventListener("click", () => {
@@ -251,6 +281,9 @@ function agregarcicloATabla() {
 
 
 // ⬇️ Funciones de insumo ⬇️
+
+let insumosDisponibles = {}; // Guardamos nombre, cantidad y precio aquí
+
 async function cargarInsumoSelect() {
     try {
         const response = await fetch("http://localhost:5501/integrador/consumable/responsable");
@@ -260,24 +293,82 @@ async function cargarInsumoSelect() {
         insumos.forEach(insumo => {
             const option = document.createElement("option");
             option.value = insumo.name_consumables;
-            option.textContent = insumo.name_consumables;
+            option.textContent = `${insumo.name_consumables} (Disponible: ${insumo.quantity_consumables})`;
             select.appendChild(option);
+
+            // Guardamos objeto con cantidad y precio
+            insumosDisponibles[insumo.name_consumables] = {
+                cantidad: insumo.quantity_consumables,
+                precio: insumo.unitary_value
+            };
         });
 
         document.querySelector(".integrator__add-consumable").addEventListener("click", agregarinsumoATabla);
-        
+
     } catch (error) {
         console.error("Error al cargar insumos:", error);
     }
 }
 
-// Agregar cultivo a la tabla y al objeto
+// Mostrar el resumen total de dinero
+function actualizarTotalDinero() {
+    const filas = document.querySelectorAll(".integrator_consumable-list tr");
+    let total = 0;
+
+    filas.forEach(fila => {
+        const columnas = fila.querySelectorAll("td");
+        if (columnas.length >= 3) {
+            const precioTexto = columnas[2].textContent.replace('$', '').trim();
+            const precio = parseFloat(precioTexto);
+            if (!isNaN(precio)) total += precio;
+        }
+    });
+
+    let resumen = document.querySelector(".resumen-total-dinero");
+    if (!resumen) {
+        resumen = document.createElement("div");
+        resumen.className = "resumen-total-dinero";
+        resumen.style.marginTop = "10px";
+        resumen.style.fontWeight = "bold";
+        resumen.style.fontSize = "1.2rem";
+
+        const tabla = document.querySelector(".integrator_consumable-list");
+        tabla.parentNode.appendChild(resumen);
+    }
+
+    resumen.textContent = `💲 Total insumos: $${total.toFixed(2)}`;
+    produccionData.total_value_consumables = total;
+    console.log(produccionData.total_value_consumables)
+
+}
+
 function agregarinsumoATabla() {
     const select = document.querySelector(".integrator__tablet-select--consumable");
     const insumoseleccionado = select.value.trim();
     
     if (!insumoseleccionado) return;
-    
+
+    const insumoInfo = insumosDisponibles[insumoseleccionado];
+
+    if (!insumoInfo) {
+        alert("Insumo no encontrado.");
+        return;
+    }
+
+    // Pedir cantidad
+    const cantidadDeseada = prompt(`¿Cuántas unidades deseas consumir de ${insumoseleccionado}?`);
+    const cantidadConsumir = parseInt(cantidadDeseada, 10);
+
+    if (isNaN(cantidadConsumir) || cantidadConsumir <= 0) {
+        alert("Por favor ingresa un número válido mayor que 0.");
+        return;
+    }
+
+    if (cantidadConsumir > insumoInfo.cantidad) {
+        alert(`No puedes consumir más de ${insumoInfo.cantidad} unidades.`);
+        return;
+    }
+
     if (produccionData.name_consumables.some(insumo => 
         insumo.toLowerCase() === insumoseleccionado.toLowerCase()
     )) {
@@ -285,43 +376,122 @@ function agregarinsumoATabla() {
         select.value = "";
         return;
     }
-    
+
+    // Calcular valor total
+    const totalPrecio = insumoInfo.precio * cantidadConsumir;
+
+    // Actualizar stock en memoria
+    insumoInfo.cantidad -= cantidadConsumir;
+
+    // Crear fila
     const tbody = document.querySelector(".integrator_consumable-list");
     const nuevaFila = document.createElement("tr");
-    
-    const celda = document.createElement("td");
-    celda.className = "integrator__table-dato";
-    celda.textContent = insumoseleccionado;
-    
+
+    const celdaNombre = document.createElement("td");
+    celdaNombre.className = "integrator__table-dato";
+    celdaNombre.textContent = insumoseleccionado;
+
+    const celdaCantidad = document.createElement("td");
+    celdaCantidad.className = "integrator__table-dato";
+    celdaCantidad.textContent = cantidadConsumir;
+
+    const celdaPrecioTotal = document.createElement("td");
+    celdaPrecioTotal.className = "integrator__table-dato";
+    celdaPrecioTotal.textContent = `$${totalPrecio.toFixed(2)}`;
+
     const celdaEliminar = document.createElement("td");
     const botonEliminar = document.createElement("button");
-    const botonEnviarFormulario = document.querySelector(".integrator__botton-primary--color");
-    botonEnviarFormulario.addEventListener("click", () => {
-        produccionData.name_consumables = produccionData.name_consumables.filter(
-            insumo => insumo !== insumoseleccionado
-        );
-        nuevaFila.remove();
-    });
     botonEliminar.textContent = "×";
     botonEliminar.className = "eliminar-cultivo";
+
     botonEliminar.addEventListener("click", () => {
-        produccionData.name_consumables = produccionData.name_consumables.filter(
-            insumo => insumo !== insumoseleccionado
+        // Devolver stock
+        insumoInfo.cantidad += cantidadConsumir;
+
+        // Eliminar del objeto global
+        const index = produccionData.name_consumables.findIndex(
+            insumo => insumo === insumoseleccionado
         );
+        if (index !== -1) {
+            produccionData.name_consumables.splice(index, 1);
+            produccionData.quantity_consumables.splice(index, 1);
+        }
+
         nuevaFila.remove();
+        actualizarTotalDinero(); // Actualizar resumen
     });
-  
-    produccionData.name_consumables.push(insumoseleccionado);
-    
+
     celdaEliminar.appendChild(botonEliminar);
-    nuevaFila.appendChild(celda);
+
+    nuevaFila.appendChild(celdaNombre);
+    nuevaFila.appendChild(celdaCantidad);
+    nuevaFila.appendChild(celdaPrecioTotal);
     nuevaFila.appendChild(celdaEliminar);
+
     tbody.appendChild(nuevaFila);
-    
+
+    // Agregar a producción
+    produccionData.name_consumables.push(insumoseleccionado);
+    produccionData.quantity_consumables.push(cantidadConsumir);
+    produccionData.unitary_value_consumables.push(totalPrecio);
+   
+
+    actualizarTotalDinero();
     select.value = "";
 }
-// ⬆️ Funciones de insumo ⬆️  
 
+// ⬆️ Funciones de insumo ⬆️
+
+
+// ⬇️ Agregar Insumo ⬇️
+
+async function actualizarStock() {
+    try {
+        // Crear array de consumo real
+        const consumos = [];
+
+        const filas = document.querySelectorAll(".integrator_consumable-list tr");
+
+        filas.forEach(fila => {
+            const columnas = fila.querySelectorAll("td");
+            if (columnas.length >= 2) {
+                const nombre = columnas[0].textContent.trim();
+                const cantidad = parseInt(columnas[1].textContent.trim(), 10);
+
+                consumos.push({
+                    name_consumables: nombre,
+                    cantidadConsumida: cantidad
+                    
+                });
+
+            }
+
+        });
+
+        console.log(consumos)
+        // Hacemos el POST al servidor
+        const response = await fetch("http://localhost:5501/integrador/consumable/actualizar-stock", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ consumos })
+        });
+
+        const resultado = await response.json();
+
+        if (response.ok) {
+            console.log("✅ Stock actualizado:", resultado);
+            return true
+        } else {
+            console.error("❌ Error en stock:", resultado);
+            alert("❌ Error al actualizar stock");
+            return false
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("❌ Error al actualizar stock");
+    }
+}
+// ⬆️ Agregar Insumo ⬆️
 
 // ⬇️ Funciones de sensores ⬇️
 async function cargarSensorSelect() {
@@ -368,13 +538,13 @@ function agregarsensorATabla() {
     
     const celdaEliminar = document.createElement("td");
     const botonEliminar = document.createElement("button");
-    const botonEnviarFormulario = document.querySelector(".integrator__botton-primary--color");
-    botonEnviarFormulario.addEventListener("click", () => {
-        produccionData.name_sensor = produccionData.name_sensor.filter(
-            sensor => sensor !== sensoreseleccionado
-        );
-        nuevaFila.remove();
-    });
+    // const botonEnviarFormulario = document.querySelector(".integrator__botton-primary--color");
+    // botonEnviarFormulario.addEventListener("click", () => {
+    //     produccionData.name_sensor = produccionData.name_sensor.filter(
+    //         sensor => sensor !== sensoreseleccionado
+    //     );
+    //     nuevaFila.remove();
+    // });
     botonEliminar.textContent = "×";
     botonEliminar.className = "eliminar-cultivo";
     botonEliminar.addEventListener("click", () => {
@@ -399,6 +569,8 @@ async function enviarProduccion() {
     produccionData.name_production = document.querySelector('.integrator__input-form--n-prodution').value;
     produccionData.responsable = document.querySelector('.integrator__input-form--resp').value;
     console.log(produccionData)
+    const form = document.querySelector(".integrator__form");
+
     try {
         const response = await fetch("http://localhost:5501/integrador/productions", {
             method: "POST",
@@ -408,18 +580,23 @@ async function enviarProduccion() {
         const id = await response.json();
 
         if (response.ok) {
-            const form = document.querySelector(".integrator__form");
             form.reset();
-            mostrarMensaje(form,`✅Datos enviados correctamente ID : ${id.id}`,"green");
+            mostrarMensaje(form, `✅Datos enviados correctamente ID : ${id.id}`, "green");
             produccionData.users_selected = [];
+            return true; // ✅ Producción guardada exitosamente
         } else {
-            mostrarMensaje(form,"❌Datos enviados incorrectamente","red");
+            if (produccionData.name_production.trim() === "") {
+                mostrarMensaje(form, "❌Verifica que el nombre de la producción esté rellenado", "red");
+            }
+            return false; // ❌ Error al guardar
         }
     } catch (error) {
         console.error("Error:", error);
-        alert("Error al enviar los datos");
+        mostrarMensaje(form, "❌Datos enviados incorrectamente", "red");
+        return false; // ❌ Error de conexión o servidor
     }
 }
+
 
 // Validaciones del formulario
 function inicializarValidaciones() {
@@ -488,7 +665,19 @@ document.addEventListener("DOMContentLoaded", () => {
     cargarCicloSelect()
     cargarInsumoSelect()
     cargarSensorSelect()
-    document.querySelector('.integrator__botton-primary--color').addEventListener("click", enviarProduccion);
+    
+    document.querySelector('.integrator__botton-primary--color').addEventListener("click", async () => {
+        const produccionGuardada = await enviarProduccion();  // 👈 Guarda producción
+    
+        if (produccionGuardada) {
+            const stockActualizado = await actualizarStock(); // 👈 Luego actualizar stock
+            
+            if (stockActualizado) {
+                limpiarCamposSeleccionados(); // 👈 Solo aquí limpiamos
+            }
+        }
+    });
+    
     setTimeout(() => {
         inicializarValidaciones();
     }, 100);

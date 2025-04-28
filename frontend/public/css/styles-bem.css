@@ -1524,7 +1524,6 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
     text-align: center;
     font-size: var(--fs-sm);
     font-weight: 200;
-    text-transform: uppercase;
     border: 0.1rem solid var(--white);
 }
 
@@ -2356,4 +2355,25 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
     padding: 0.4rem 0.6rem;
     font-weight: bold;
     color: var(--gray-400);
+}
+
+.contenedor-insumos {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+.contenedor-tabla {
+    flex: 1;
+    overflow-y: auto; /* Scroll en la tabla si hay muchos insumos */
+}
+
+.resumen-total-dinero {
+    background-color: #e0e0e0;
+    padding: 5px 10px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.1rem;
+    color: #333;
 }

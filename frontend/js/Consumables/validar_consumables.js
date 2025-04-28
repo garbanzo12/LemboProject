@@ -56,6 +56,12 @@ function inicializarValidaciones() {
                 if (input.value.trim() === "" && input.type !== "checkbox") {
                     validarCampo = false;
                     errorSpan.textContent = "Campo obligatorio.";
+                } else if (input === name_consumables && input.value.trim().length > 20) {
+                    validarCampo = false;
+                    errorSpan.textContent = "Solo se permiten 20 caracteres.";
+                } else if (input === description_consumables && input.value.trim().length > 50) {
+                    validarCampo = false;
+                    errorSpan.textContent = "Solo se permiten 50 caracteres.";
                 } else {
                     errorSpan.textContent = "";
                 }
