@@ -1,37 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gráfico con Suggested Min/Max</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
     <div style="width: 80%; margin: 20px auto;">
-        <canvas id="myChart"></canvas>
+        <canvas id="Costo_General_Cultivos"></canvas>
     </div>
 
     <script>
         // Setup - Definimos manualmente las etiquetas y colores
-        const labels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio'];
+        const labels = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+        const datasets = [
+            {
+                label: 'Dataset 1',
+                data: [154380, 402340, 1756000, 129890, 300000, 785390, 2520000],
+                borderColor: 'red',
+                backgroundColor: 'rgba(255, 0, 0, 0.2)',
+            },
+            {
+                label: 'Dataset 2',
+                data: [342560, 654200, 898430, 543400, 1200000, 705410, 4340000],
+                borderColor: 'blue',
+                backgroundColor: 'rgba(0, 0, 255, 0.2)',
+            },
+            {
+                label: 'Dataset 3',
+                data: [400000, 150000, 730000, 985500, 2400000, 305000, 4675000],
+                borderColor: 'green',
+                backgroundColor: 'rgba(0, 255, 0, 0.2)',
+            }
+        ];
+    
+        // Calculamos los valores totales
+        const totalData = labels.map((_, index) => {
+            return datasets.reduce((sum, dataset) => sum + dataset.data[index], 0);
+        });
+    
+        datasets.push({
+            label: 'Dataset Total',
+            data: totalData,
+            borderColor: 'purple',
+            backgroundColor: 'rgba(128, 0, 128, 0.2)',
+        });
+    
         const data = {
             labels: labels,
-            datasets: [
-                {
-                    label: 'Dataset 1',
-                    data: [10, 30, 39, 20, 25, 34, -10],
-                    borderColor: 'red',
-                    backgroundColor: 'rgba(255, 0, 0, 0.2)',
-                },
-                {
-                    label: 'Dataset 2',
-                    data: [18, 33, 22, 19, 11, 39, 30],
-                    borderColor: 'blue',
-                    backgroundColor: 'rgba(0, 0, 255, 0.2)',
-                }
-            ]
+            datasets: datasets,
         };
-
+    
         // Configuración del gráfico
         const config = {
             type: 'line',
@@ -41,23 +63,24 @@
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Suggested Min and Max Settings'
-                    }
+                        text: 'Valores Totales Calculados Automáticamente',
+                    },
                 },
                 scales: {
                     y: {
-                        suggestedMin: 30,
-                        suggestedMax: 50,
-                    }
-                }
-            }
+                        suggestedMin: 0,
+                        suggestedMax: Math.max(...totalData) + 100000, // Ajustamos el límite máximo dinámicamente
+                    },
+                },
+            },
         };
-
+    
         // Inicialización del gráfico
         window.addEventListener('DOMContentLoaded', () => {
-            const ctx = document.getElementById('myChart').getContext('2d');
+            const ctx = document.getElementById('Costo_General_Cultivos').getContext('2d');
             new Chart(ctx, config);
         });
     </script>
 </body>
+
 </html>

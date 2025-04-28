@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gráfico de barras con Chart.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> <!-- Plugin necesario -->
+</head>
+<body>
+    <canvas id="myBarChart" width="400px" max-height="200px"></canvas>
+    <script>
+        const ctx = document.getElementById('myBarChart').getContext('2d');
+        const myBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Barra 1', 'Barra 2', 'Barra 3', 'Barra 4', 'Barra 5'],
+                datasets: [{
+                    data: [12, 19, 3, 5, 2], // Valores de las barras
+                    backgroundColor: [ // Colores de las barras
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(75, 192, 192, 0.8)',
+                        'rgba(153, 102, 255, 0.8)',
+                        'rgba(255, 159, 64, 0.8)'
+                    ]
+                }]
+            },
+            options: {
+                plugins: {
+                    datalabels: { // Configuración para mostrar los nombres
+                        color: '#fff',
+                        anchor: 'center',
+                        align: 'center',
+                        font: {
+                            weight: 'bold',
+                            size: 14
+                        },
+                        formatter: function(value, context) {
+                            return context.chart.data.labels[context.dataIndex];
+                        }
+                    }
+                },
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        ticks: {
+                            color: '#000' // Colores de las etiquetas
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: '#000'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

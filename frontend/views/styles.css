@@ -88,7 +88,15 @@
   --secundary-4-900: #fdc817;
   --secundary-4-950: #fdc300;
 
-  /* Colores para alertas */
+  /* Colores para grafocps chat con opacidad */
+  --color-shadow-dark: rgba(0, 0, 0, 0.1);
+  --color-shadow-light: rgba(255, 255, 255, 0.8);
+
+  --secundary-chart: rgba(253, 200, 23, 0.9);
+  
+
+/* Colores para alertas */
+
 
   /* --alerta-green: #8b4e92; */
   /* --alerta-red: #fc0202; */
@@ -156,23 +164,15 @@ body {
   align-items: center;
 }
 
-.layout {
+.producto {
   width: 100%;
   height: 100%;
-  display: grid;
-  grid:
-    "producto__user producto__titulo producto__titulo" 1fr
-    "producto__listar-prodocuciones producto__crop producto__notificaciones" 2fr
-    "producto__listar-prodocuciones producto__crop producto__notificaciones" 2fr
-    "producto__listar-insumos producto__financiero producto__sensores" 4fr
-    "producto__footter producto__footter producto__footter" 1fr
-    / 1fr 4fr 2fr;
   gap: 1rem;
   padding: 1rem;
   background: linear-gradient(
     to bottom,
-    var(--secundary-1-950),
-    var(--secundary-1-951)
+    var(--secundary-1-951),
+    var(--secundary-1-800)
   );
 }
 
@@ -180,87 +180,114 @@ body {
   grid-area: producto__user;
   /* Cambia "white" si prefieres otro color */
   border: 0.1rem solid var(--gray-200);
-}
-
-.producto__titulo {
-  grid-area: producto__titulo;
-  background-color: var(--secundary-1-950);
-  border: 0.1rem solid var(--gray-200);
   border-radius: 1rem;
-}
-
-.producto__listar-prodocuciones {
-  grid-area: producto__listar-prodocuciones;
-
-  border: 0.1rem solid var(--gray-200);
-  border-radius: 1rem;
-}
-
-.producto__crop {
-  grid-area: producto__crop;
-
-  border: 0.1rem solid var(--gray-200);
-  border-radius: 1rem;
-}
-
-.producto__notificaciones {
-  grid-area: producto__notificaciones;
-  background-color: var(--secundary-1-950);
-  border: 0.1rem solid var(--gray-200);
-  border-radius: 1rem;
-}
-
-.producto__listar-insumos {
-  grid-area: producto__listar-insumos;
-
-  border: 0.1rem solid var(--gray-200);
-  border-radius: 1rem;
-}
-
-.producto__financiero {
-  grid-area: producto__financiero;
-
-  border: 0.1rem solid var(--gray-200);
-  border-radius: 1rem;
-  width: 100%;
-  width: 100%;
-}
-.producto__subtittle {
-  font-size: var(--fs-xxs);
-  color: var(--white);
+  padding: 1rem;
   display: flex;
   justify-content: center;
 }
 
-.producto__row {
+.producto__subtittle {
+  background-color: var(--secundary-1-800);
+  border-radius: 0.7rem;
+  color: var(--white);
+  font-weight: 900;
   display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  padding: 1rem;
-  margin: 1rem;
-  border: 0.1rem solid var(--gray-150);
+  font-size: var(--fs-xs);
+  text-align: center;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+
 }
 
-.producto__col {
+.producto__container-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* CONTENEDOR PARA VARIOS  */
+.producto__subcontainer {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  flex-grow: 1;
   padding: 1rem;
-  margin: 1rem;
-  border: 0.1rem solid var(--gray-150);
-}
-
-.producto__sensores {
-  grid-area: producto__sensores;
-
-  border: 0.1rem solid var(--gray-200);
+  background-color: var(--primary-950);
+  /* opacity: 0.5; */
   border-radius: 1rem;
+  flex-grow: 1;
+
+}
+/* ************************  */
+.producto__chart {
+  width: 100%;
+  width: 100%;
+  flex-grow: 1;
 }
 
-.producto__footter {
-  grid-area: producto__footter;
-
-  border: 0.4rem solid var(--gray-200);
-  border-radius: 1rem;
+.produto__map-img {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
 }
+
+.producto__img-gps {
+  width: 40rem;
+  height: 40rem;
+}
+/* ************************** */
+
+.producto__tabla {
+color: var(--white);
+background-color: var(--secundary-1-800);
+}
+
+.producto__tabla-header {
+  font-size: var(--fs-xs);
+}
+
+.producto__tabla-data {
+  font-size: var(--fs-xs);
+  background-color: var(--primary-950);
+  color: var(--white);
+
+}
+.producto__cell {
+padding: 0.3rem;
+text-align: center;
+min-width: 8rem;
+}
+
+.producto__cell-lg {
+  padding: 0.3rem;
+  min-width: 18rem;
+  }
+
+  /* ************************ */
+
+  .producto__tabla {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.producto__tabla th {
+    background-color: #f4f4f4;
+    color: #333;
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.producto__tabla td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.producto__tabla tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+  
+
+
