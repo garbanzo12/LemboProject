@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(data => {
         if (data.error) throw new Error(data.error);
         alert(data.message);
-        window.location.href = '5-listar_cropsMOD.html';
+        window.location.href = '5-listar_crops.html';
       })
       .catch(err => {
         console.error('Error:', err);
