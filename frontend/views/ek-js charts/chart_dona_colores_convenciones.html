@@ -6,29 +6,43 @@
 <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
 
 <script>
-var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-var yValues = [55, 49, 44, 24, 15];
+var xValuesD = [ "03", "06", "09", "12"];
+var yValuesD = [45, 45, 45, 45];
 var barColors = [
-  "#b91d47",
-  "#00aba9",
-  "#2b5797",
-  "#e8c3b9",
-  "#1e7145"
+  "#0000FF", // Azul brillante
+  "#00008B", // Azul oscuro
+  "#0000FF", // Azul brillante
+  "#00008B"  // Azul oscuro
 ];
 
 new Chart("myChart", {
   type: "doughnut",
   data: {
-    labels: xValues,
+    labels: xValuesD,
     datasets: [{
       backgroundColor: barColors,
-      data: yValues
+      data: yValuesD
     }]
   },
   options: {
     title: {
-      display: true,
-      text: "World Wide Wine Production 2018"
+      display: false,
+      text: "TEMPERATURA TIEMPO REAL",
+      fontColor: "white" // Color del título
+    },
+    legend: {
+      labels: {
+        fontColor: "white" // Color de la leyenda
+      }
+    },
+    tooltips: {
+      titleFontColor: "white", // Color del texto del título del tooltip
+      bodyFontColor: "white"  // Color del texto del contenido del tooltip
+    },
+    plugins: {
+      datalabels: {
+        color: "white" // Color de las etiquetas de datos (si las usas)
+      }
     }
   }
 });
