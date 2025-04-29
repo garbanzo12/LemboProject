@@ -97,6 +97,8 @@ function inicializarValidaciones() { //
                     
                         // También opcionalmente mostrar debajo del formulario
                         mostrarMensaje(form, mensaje, "green");
+                        window.parent.postMessage("cerrarModalYActualizar", "*"); // Esto es para cuando el archivo se abre como modal
+
                     }
 
                     

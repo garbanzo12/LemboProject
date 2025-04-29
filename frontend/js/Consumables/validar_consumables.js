@@ -116,6 +116,8 @@ function inicializarValidaciones() {
                             toggleCheckbox.style.backgroundColor = 'var(--checked-color)';
                         }
                         mostrarMensaje(form, "✅ Datos guardados correctamente.", "green");
+                        window.parent.postMessage("cerrarModalYActualizar", "*"); // Esto es para cuando el archivo se abre como modal
+
                     } else {
                         throw new Error(resultado.error || "Error desconocido.");
                     }

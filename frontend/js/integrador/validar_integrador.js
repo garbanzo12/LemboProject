@@ -706,3 +706,101 @@ document.addEventListener("DOMContentLoaded", () => {
         inicializarValidaciones();
     }, 100);
 });
+
+
+
+
+
+//⬇️ Dezpliegue de modales
+
+// document.addEventListener("DOMContentLoaded", () => {
+//   const btnsCrearItem = document.querySelectorAll(".integrator__module .integrator__botton-primary");
+  
+//   btnsCrearItem.forEach((btn, index) => {
+//     btn.addEventListener("click", () => {
+//       const modulo = btn.closest(".integrator__module");
+//       const header = modulo.querySelector(".integrator__module-header")?.textContent?.trim()?.toUpperCase();
+
+//       if (header === "INSUMOS") {
+//         const modal = document.getElementById("modal-insumo");
+//         const iframe = document.getElementById("iframe-insumo");
+//         iframe.src = "/frontend/views/insumes/1-create_insumes.html"; // Asegúrate que la ruta sea correcta
+//         modal.style.display = "flex";
+//       }
+//     });
+//   });
+
+//   const cerrarModal = document.querySelector(".modal__close");
+//   cerrarModal.addEventListener("click", () => {
+//     document.getElementById("modal-insumo").style.display = "none";
+//     location.reload(); // 🔄 Refresca la página
+
+//   });
+
+//   // Opcional: cerrar al hacer clic fuera del contenido
+//   window.addEventListener("click", (e) => {
+//     const modal = document.getElementById("modal-insumo");
+//     if (e.target === modal) modal.style.display = "none";
+//   });
+// });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const btnsCrearItem = document.querySelectorAll(".integrator__module .integrator__botton-primary");
+  
+    btnsCrearItem.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const modulo = btn.closest(".integrator__module");
+        const header = modulo.querySelector(".integrator__module-header")?.textContent?.trim()?.toUpperCase();
+  
+        const rutas = {
+          "INSUMOS": "/frontend/views/insumes/1-create_insumes.html",
+          "USUARIOS": "/frontend/views/users/1-create_user.html",
+          "CULTIVOS": "/frontend/views/crops/1-create_crops.html",
+          "CICLOS": "/frontend/views/cycle_crops/1-create_cycle_crops.html",
+          "SENSORES": "/frontend/views/sensors/1-create_sensor.html"
+        };
+  
+        if (rutas[header]) {
+          const modal = document.getElementById("modal-global");
+          const iframe = document.getElementById("iframe-global");
+          iframe.src = rutas[header];
+          modal.style.display = "flex";
+        }
+      });
+    });
+  
+    // Al cerrar modal con la X
+    const cerrarModal = document.querySelector(".modal__close");
+    cerrarModal.addEventListener("click", () => {
+      document.getElementById("modal-global").style.display = "none";
+      location.reload(); // Recarga la página al cerrar
+    });
+  
+      
+    // Al hacer clic fuera del contenido del modal
+    window.addEventListener("click", (e) => {
+      const modal = document.getElementById("modal-global");
+      if (e.target === modal) {
+        modal.style.display = "none";
+        location.reload(); // También recarga si se cierra haciendo clic afuera
+      }
+    });
+  
+    // Escuchar desde iframe si quiere cerrar modal y refrescar
+    window.addEventListener("message", (e) => {
+      if (e.data === "cerrarModalYActualizar") {
+        document.getElementById("modal-global").style.display = "none";
+        location.reload();
+      }
+    });
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          const modal = document.getElementById("modal-global");
+          if (modal.style.display === "flex") {
+            modal.style.display = "none";
+            location.reload(); // 🔄 Refresca la página al cerrar con ESC
+          }
+        }
+      });
+  });
+  
