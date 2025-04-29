@@ -37,14 +37,14 @@
 
             <!-- modulo 2 -->
             <div class="producto__subcontainer2">
-                <h2 class="producto__subtittle">MAPA</h2>
+                <h2 class="producto__subtittle">MAPA SENA SEDE LEMBO</h2>
 
                 <div class="producto__img-wrapper">
                     <img class="producto__imagen-mapa" id="imagen-mapa" src="../../public/img_/main/sedelembo.png"
                         alt="Mapa" />
                     <div class="producto__contenedor" id="contenedor"></div>
                 </div>
-                <button id="guardar">Guardar selección</button>
+                <button class="producto__card-button" id="guardar">Guardar selección</button>
             </div>
 
 
@@ -217,11 +217,11 @@
             label.style.height = `${alto}%`;
 
             // Bloqueos de prueba
-            if (i === 2) {
+            if ( i === 221 || i === 222 || i === 240 || i === 241 || i === 242) {
                 input.disabled = true;
                 label.classList.add('bloqueado');
             }
-            if (i === 6 || i === 8) {
+            if ( i === 401 || i === 402 || i === 430 || i === 431 || i === 432) {
                 input.disabled = true;
                 label.classList.add('bloqueado-especial');
             }
@@ -418,30 +418,34 @@
         const datasets = [
             {
                 label: "PAPA",
-                data: [165200, 385400, 1823000, 118600, 287500, 812000, 2635000],
-                borderColor: "rgb(255, 255, 255)",
-                backgroundColor: "rgba(255, 255, 255, 0.2)",
+                data: [65200, 385400, 823000, 1218600, 1287500, 1812000, 2635000],
+                borderColor: "rgba(0, 51, 102, 1)", 
+                borderDash: [5, 1],
+                backgroundColor: "rgba(0, 51, 102, 1)",
                 tension: 0.3,
             },
             {
                 label: "MAIZ",
-                data: [321500, 682300, 845600, 512300, 1258000, 654700, 4215000],
-                borderColor: "#fdce2e",
-                backgroundColor: "rgba(253, 206, 46, 0.2)",
+                data: [321500, 682300, 845600, 1512300, 1858000, 2654700, 4215000],
+                borderColor: "rgba(25, 25, 112, 1)", 
+                borderDash: [5, 2],
+                backgroundColor: "rgba(25, 25, 112, 1)",
                 tension: 0.3,
             },
             {
                 label: "PLATANO",
-                data: [421850, 587300, 923150, 482600, 1125000, 763200, 3875000],
-                borderColor: "#D26AFF",
-                backgroundColor: "rgba(210, 106, 255, 0.2)",
+                data: [218500, 587300, 1023150, 1582600, 2025000, 3553200, 3875000],
+                borderColor: "rgba(0, 100, 0, 1)",
+                borderDash: [5, 2],
+                backgroundColor: "rgba(0, 100, 0, 1)",
                 borderWidth: 2.5,
                 tension: 0.3,
             },
             {
                 label: "TRIGO",
-                data: [387600, 142300, 715800, 1012400, 2385000, 287400, 4556000],
-                borderColor: "rgb(0, 200, 0)",
+                data: [57600, 200500, 700500, 1500500, 2055000, 2885000, 3556000],
+                borderColor: "rgba(000, 000, 000, 1)",  
+                borderDash: [5, 2],
                 backgroundColor: "rgba(0, 200, 0, 0.2)",
                 borderWidth: 2.5,
                 tension: 0.3,
@@ -457,7 +461,18 @@
             label: "TOTAL",
             data: totalData,
             borderColor: "rgba(000, 000, 000, 0.7)",  // Negrito
+            borderDash: [5, 2],
             backgroundColor: "rgba(000, 000, 000, 0.2)",
+            borderWidth: 3,
+            tension: 0.3,
+        });
+
+        datasets.push({
+            label: "PRESUPUESTO",
+            data: [48500100,48500100,48500100,48500100,48500100,48500100,48500100,48500100,48500100,48500100,48500100,48500100],
+            borderColor: "rgba(000, 000, 000, 0.7)",  // Negrito
+            borderDash: [5, 2],
+            backgroundColor: "rgba(000, 000, 000, 1)",
             borderWidth: 3,
             tension: 0.3,
         });
@@ -507,8 +522,7 @@
                         grid: {
                             color: 'rgba(255, 255, 255, 0.7)'
                         },
-                        suggestedMin: 0,
-                        suggestedMax: Math.max(...totalData) + 100000,
+                        suggestedMin: 0  // Solo mantener el mínimo en 0
                     },
                 },
                 elements: {
@@ -550,28 +564,26 @@
             datasets: [
                 {
                     label: "TEMPERATURA",
-                    data: [65, 59, 80, 81, 56, 55, 40],
+                    data: [16, 15, 14, 17, 20, 24, 26 ],
                     fill: false,
                     borderColor: "rgb(255, 255, 255)",  // Blanco
                     borderWidth: 2.5,
-                    borderDash: [], // Línea continua
+                    borderDash: [10, 5, 3, 5], // Línea discontinua (rayitas)
                     tension: 0.3,
                 },
                 {
                     label: "HUMEDAD",
-                    data: [45, 55, 55, 62, 65, 50, 51],
+                    data: [70, 75, 80, 85, 85, 70, 75],
                     fill: false,
-                    borderColor: "#5D8BF4",  // Azul claro
-                    borderWidth: 2.5,
-                    borderDash: [5, 5], // Línea punteada
+                    borderColor: "rgba(0, 51, 102, 1)", 
+                    borderDash: [10, 5, 3, 5], // Línea discontinua (rayitas)
                     tension: 0.3,
                 },
                 {
                     label: "RADIACION",
                     data: [30, 45, 80, 95, 85, 60, 40],
                     fill: false,
-                    borderColor: "#2DC83D",  // Verde
-                    borderWidth: 2.5,
+                    borderColor: "rgba(0, 100, 0, 1)",
                     borderDash: [10, 5, 3, 5], // Línea discontinua (rayitas)
                     tension: 0.3,
                 },
@@ -581,12 +593,12 @@
                     fill: false,
                     borderColor: "#051367",  // Azul oscuro
                     borderWidth: 2.5,
-                    borderDash: [15, 3], // Línea segmentada larga
+                    borderDash: [10, 5, 3, 5], // Línea discontinua (rayitas)
                     tension: 0.3,
                 }
             ],
         };
-    
+
         const config_sen = {
             type: "line",
             data: data_sen,
@@ -613,7 +625,7 @@
                             color: 'white'
                         },
                         grid: {
-                            color: 'rgba(255, 255, 255, 0.6)'  
+                            color: 'rgba(255, 255, 255, 0.6)'
                         }
                     },
                     y: {
@@ -621,7 +633,7 @@
                             color: 'white'
                         },
                         grid: {
-                            color: 'rgba(255, 255, 255, 0.6)'  
+                            color: 'rgba(255, 255, 255, 0.6)'
                         },
                         suggestedMin: 0,
                         suggestedMax: 100
@@ -634,14 +646,14 @@
                 }
             },
         };
-    
+
         let myChart_sen;
-    
+
         window.onload = function () {
             const ctx = document.getElementById("Sensors_24/7").getContext("2d");
             myChart = new Chart(ctx, config_sen);
         };
-    
+
         function changeLegendPosition(position) {
             if (myChart) {
                 myChart.options.plugins.legend.position = position;

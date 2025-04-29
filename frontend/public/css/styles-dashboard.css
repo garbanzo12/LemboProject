@@ -157,11 +157,36 @@ body {
   margin: 0 auto;
   font-family: var(--main-font);
   display: flex;
-  width: 100vw;
-  height: 100vh;
   background-color: var(--gray-700);
   justify-content: center;
   align-items: center;
+}
+
+
+.producto__card-button {
+  font-size: var(--fs-xl);
+  font-weight: bold;
+  height: 3rem;
+  font-size: var(--fs-xxs);
+  border-radius: 0.6rem;
+  border: none;
+  background-color: var(--secundary-1-700);
+  color: var(--gray-050);
+  margin: 0.4rem 0;
+
+}
+
+.producto__card-button:hover {
+  font-size: var(--fs-xl);
+  font-weight: bold;
+  height: 3rem;
+  font-size: var(--fs-xxs);
+  border-radius: 0.6rem;
+  border: none;
+  background-color: var(--secundary-1-950);
+  color: var(--gray-050);
+  
+
 }
 
 .producto {
@@ -191,12 +216,12 @@ body {
   border-radius: 0.7rem;
   color: var(--white);
   font-weight: 900;
-  display: flex;
+  /* display: flex; */
   font-size: var(--fs-xs);
   text-align: center;
-  padding: 0.5rem;
+  padding: 0.5rem 2rem;
   margin: 0.5rem 0;
-
+  text-align: center;
 }
 
 .producto__container-row {
@@ -216,7 +241,7 @@ body {
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  background-color: var(--primary-950);
+  background-color: var(--gray-550);
   /* opacity: 0.5; */
   border-radius: 1rem;
   flex-grow: 1;
@@ -282,16 +307,16 @@ body {
 }
 
 .checkbox:checked + .celda {
-  background-color: #fbff00;
+  background-color: var(--primary-950);  /* verde chillon */
 }
-
+/* ESTE ES PARA LOS ESPACIOS USADOS EN CULTIVOS */
 .celda.bloqueado {
-  background-color: red;
+  background-color: var(--primary-500); /* azul clarito o morado  */
   pointer-events: none;
 }
-
+/* ESTE ES PARA LOS CUADROS QUE SON LAS CONSTRUCCIONES */
 .celda.bloqueado-especial {
-  background-color: blue;
+  background-color: var(--blanco); /* azul oscuro o morado oscuro  */
   pointer-events: none;
 }
 
