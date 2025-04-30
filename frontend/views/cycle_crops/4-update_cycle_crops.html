@@ -9,9 +9,14 @@
     <meta name="author"
         content="Aprendiz: Erick Ramirez, Aprendiz Aprendiz:Sanchez Hernandez, Aprendiz:Estefani Acevedo" />
     <meta http-equiv="Content-Language" content="es" />
+  <!-- CSS de Choices -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
 
+  <!-- JS de Choices -->
+  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+  <script src="/frontend/js/CropCycle/actualizarCropCycle.js"></script>
     <link rel="stylesheet" href="../../public/css/styles-bem.css">
-
+    
     <title>Actualizar Ciclo de Cultivo</title>
 </head>
 
@@ -60,32 +65,34 @@
 
                     <div class="cardright__subcontainer-input">
                         <label class="cardright__label-form" for="">ID Ciclo Cultivo</label>
-                        <input class="cardright__input-form" placeholder="Ingrese Dato" type="text"/>
-                    </div>
+                        <select class="cardright__selectid" required>
+                            <option value="">Seleccione un ID de cultivo</option>
+                            <!-- Opciones se agregarán dinámicamente -->
+                          </select>                    </div>
 
                     <div class="cardright__subcontainer-input">
                         <label class="cardright__label-form" for="">Nombre del Ciclo Cultivo</label>
-                        <input class="cardright__input-form" placeholder="Ingrese Dato" type="text"/>
+                        <input class="cardright__input-form" placeholder="Ingrese Dato" name="nombre_ciclo" type="text"/>
                     </div>
 
                     <div class="cardright__subcontainer-input">
                         <label class="cardright__label-form" for="">Descripción</label>
-                        <input class="cardright__input-form" placeholder="Ingrese Dato" type="text"/>
+                        <input class="cardright__input-form" placeholder="Ingrese Dato" name="descripcion_ciclo" type="text"/>
                     </div>
 
                     <div class="cardright__subcontainer-input">
                         <div class="cardright__subcontainer-input--row">
                             <label class="cardright__label-form" for="">Periodo</label>
                             <!-- Se añade nueva clase: nuevo-tamanoM2 -->
-                            <input class="cardright__input-form--date" placeholder="Inicio de Periodo" type="date"/>
-                            <input class="cardright__input-form--date" placeholder="Inicio de Periodo" type="date"/>
+                            <input class="cardright__input-form--date" placeholder="Inicio de Periodo" name="periodo_inicio"  type="date"/>
+                            <input class="cardright__input-form--date" placeholder="Inicio de Periodo" name="periodo_fin"  type="date"/>
                         </div>
                     </div>
 
                     <div class="cardright__subcontainer-input">
                         <label class="cardright__label-form" for="" >Novedad</label>
                         <!-- Se añade nueva clase: nuevo-novedad -->
-                        <input class="cardright__input-form" placeholder="Ingrese Dato" type="text"/>
+                        <input class="cardright__input-form" placeholder="Ingrese Dato" name="novedades_ciclo" type="text"/>
                     </div>
 
                     <!-- BOTON INDICADOR CAMBIO DE COLOR ESTADO  -->

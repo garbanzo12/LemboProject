@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       currentID = id;
 
-      fetch(`http://localhost:5501/crops/${id}`) // ⬅️ Por medio del ID traigo la columna correspondiente( anteriormente la traje tambien, pero para cargar el select, ahora es para los inputs)
+      fetch(`http://localhost:5501/api/crops/${id}`) // ⬅️ Por medio del ID traigo la columna correspondiente( anteriormente la traje tambien, pero para cargar el select, ahora es para los inputs)
         .then(res => {
           if (!res.ok) throw new Error('No se encontró el cultivo');
           return res.json(); // ⬅️ 
@@ -68,14 +68,14 @@ document.addEventListener('DOMContentLoaded', () => {
         data.append("imagen_cultivo", cropForm.imagen_cultivo.files[0]);
       }
 
-      fetch(`http://localhost:5501/crops/${currentID}`, { // ⬅️ Mandamos con fetch la actualizacion con su id correspondiente
+      fetch(`http://localhost:5501/api/crops/${currentID}`, { // ⬅️ Mandamos con fetch la actualizacion con su id correspondiente
         method: 'PUT',
         body: data
       })
       .then(res => res.json())
       .then(data => {
         if (data.error) throw new Error(data.error);
-        alert(data.message);
+       
         window.location.href = '5-listar_crops.html';
       })
       .catch(err => {
