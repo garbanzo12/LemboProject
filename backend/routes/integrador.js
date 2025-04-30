@@ -106,8 +106,16 @@ router.post("/productions", async (req, res) => {
     if (!name_production || !responsable || !users_selected || !crops_selected || !name_cropCycle || !name_consumables || !quantity_consumables ||  !unitary_value_consumables|| !total_value_consumables ||!name_sensor) {
         return res.status(400).json({ error: "Todos los campos son obligatorios" });
     }
-
+  
     try {
+        // ✅ Validar duplicado
+        const [duplicateCheck] = await conexion.promise().query(
+            "SELECT id FROM productions WHERE name_production = ?",
+            [name_production]
+        );
+        if (duplicateCheck.length > 0) {
+            return res.status(409).json({ error: "Ya existe una producción con ese nombre" }); // 409 Conflict
+        }
         // Convertir arrays en strings separados por coma
         users_selected = Array.isArray(users_selected) ? users_selected.join(", ") : users_selected;
         crops_selected = Array.isArray(crops_selected) ? crops_selected.join(", ") : crops_selected;

@@ -607,12 +607,21 @@ async function enviarProduccion() {
             form.reset();
             mostrarMensaje(form, `✅Datos enviados correctamente ID : ${id.id}`, "green");
             produccionData.users_selected = [];
-            return true; // ✅ Producción guardada exitosamente
-        } else {
-            if (produccionData.name_production.trim() === "") {
-                mostrarMensaje(form, "❌Verifica que el nombre de la producción esté rellenado", "red");
+            const resumen = document.querySelector(".resumen-total-dinero");
+            if (resumen) {
+                resumen.textContent = "💲 Total insumos: $0.00";
             }
-            return false; // ❌ Error al guardar
+            return true; // ✅ Producción guardada exitosamente
+
+        }else {
+            if (id.error === "Ya existe una producción con ese nombre") {
+                mostrarMensaje(form, "❌Nombre de producción ya registrado", "red");
+            } else if (produccionData.name_production.trim() === "") {
+                mostrarMensaje(form, "❌Verifica que el nombre de la producción esté rellenado", "red");
+            } else {
+                mostrarMensaje(form, "❌Error al guardar los datos", "red");
+            }
+            return false;
         }
     } catch (error) {
         console.error("Error:", error);
@@ -713,39 +722,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //⬇️ Dezpliegue de modales
 
-// document.addEventListener("DOMContentLoaded", () => {
-//   const btnsCrearItem = document.querySelectorAll(".integrator__module .integrator__botton-primary");
-  
-//   btnsCrearItem.forEach((btn, index) => {
-//     btn.addEventListener("click", () => {
-//       const modulo = btn.closest(".integrator__module");
-//       const header = modulo.querySelector(".integrator__module-header")?.textContent?.trim()?.toUpperCase();
-
-//       if (header === "INSUMOS") {
-//         const modal = document.getElementById("modal-insumo");
-//         const iframe = document.getElementById("iframe-insumo");
-//         iframe.src = "/frontend/views/insumes/1-create_insumes.html"; // Asegúrate que la ruta sea correcta
-//         modal.style.display = "flex";
-//       }
-//     });
-//   });
-
-//   const cerrarModal = document.querySelector(".modal__close");
-//   cerrarModal.addEventListener("click", () => {
-//     document.getElementById("modal-insumo").style.display = "none";
-//     location.reload(); // 🔄 Refresca la página
-
-//   });
-
-//   // Opcional: cerrar al hacer clic fuera del contenido
-//   window.addEventListener("click", (e) => {
-//     const modal = document.getElementById("modal-insumo");
-//     if (e.target === modal) modal.style.display = "none";
-//   });
-// });
-
 document.addEventListener("DOMContentLoaded", () => {
-    const btnsCrearItem = document.querySelectorAll(".integrator__module .integrator__botton-primary");
+    const btnsCrearItem = document.querySelectorAll(".integrator__module .integrator__botton-primary--modal");
   
     btnsCrearItem.forEach((btn) => {
       btn.addEventListener("click", () => {
