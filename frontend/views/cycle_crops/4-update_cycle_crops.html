@@ -66,9 +66,9 @@
                     <div class="cardright__subcontainer-input">
                         <label class="cardright__label-form" for="">ID Ciclo Cultivo</label>
                         <select class="cardright__selectid" required>
-                            <option value="">Seleccione un ID de cultivo</option>
+                            <option value="">Seleccione un ID de Ciclo</option>
                             <!-- Opciones se agregarán dinámicamente -->
-                          </select>                    </div>
+                          </select> </div>
 
                     <div class="cardright__subcontainer-input">
                         <label class="cardright__label-form" for="">Nombre del Ciclo Cultivo</label>
@@ -97,9 +97,13 @@
 
                     <!-- BOTON INDICADOR CAMBIO DE COLOR ESTADO  -->
                     <div class="cardright__subcontainer-input">
-                        <label class="cardright__label-form" for="boton">Habilitado/Deshabilitado:</label>
-                        <input class="cardright__input-form--checkbox" type="checkbox" id="toggle-color"/>
-                        <label for="toggle-color" class="cardright__label-form--color"></label>
+                       <!-- Checkbox sin atributo name -->
+                    <input class="cardright__input-form--checkbox" type="checkbox" id="toggle-color" />
+                    <label for="toggle-color" class="cardright__label-form--color"></label>
+                                        
+                    <!-- Campo oculto para enviar el valor -->
+                    <input type="hidden" name="estado_ciclo" id="estado_ciclo_hidden" />
+
                     </div>
 
                     <div class="cardright__subcontainer-input">

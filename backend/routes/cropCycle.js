@@ -71,15 +71,16 @@ router.put("/api/cropcycle/:id",upload.none(), (req, res) => {
     periodo_inicio,
     periodo_fin,
     descripcion_ciclo,
-    novedades_ciclo
+    novedades_ciclo,
+    estado_ciclo
   } = req.body;
 
 
   let query = `
     UPDATE cropcycle 
-    SET name_cropCycle = ?, period_cycle_start = ?, period_cycle_end = ?, description_cycle = ?, news_cycle = ?
+    SET name_cropCycle = ?, period_cycle_start = ?, period_cycle_end = ?, description_cycle = ?, news_cycle = ?, state_cycle = ?
   `;
-  const values = [nombre_ciclo, periodo_inicio, periodo_fin, descripcion_ciclo, novedades_ciclo];
+  const values = [nombre_ciclo, periodo_inicio, periodo_fin, descripcion_ciclo, novedades_ciclo,estado_ciclo];
 
   
   query += ` WHERE id = ?`;

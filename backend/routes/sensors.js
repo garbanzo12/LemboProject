@@ -5,6 +5,7 @@ function sensors(){
   const cors = require("cors");
   const mysql = require("mysql2");
   const multer = require("multer");
+  
   const path = require("path");
   const router = express.Router(); // Cambiado: app → router
   
@@ -26,7 +27,7 @@ function sensors(){
     }
   });
   
-  const upload = multer({ storage: storage });
+  const upload = multer({ dest: 'uploads/' });
   
   const conexion = mysql.createConnection({
     host: process.env.HOST,
@@ -64,24 +65,30 @@ function sensors(){
     });
   });
   
-  router.get("/sensors/:id", (req, res) => {
-    const sensorId = req.params.id;
   
-    let sql = "SELECT * FROM sensors WHERE id = ?";
-    conexion.query(sql, [sensorId], (error, resultados) => {
-        if (error) {
-            console.error("Error al buscar sensor:", error);
-            return res.status(500).json({ error: "Error al buscar sensor" });
-        }
+  // Ruta para obtener sensor por ID
+  router.get("/api/sensors/:id", (req, res) => {
+    const id = req.params.id;
+    const sql = "SELECT * FROM sensors WHERE id = ?";
   
-        if (resultados.length === 0) {
-            return res.status(404).json({ mensaje: "sensor no encontrado" });
-        }
-  
-        res.json(resultados[0]);
+    conexion.query(sql, [id], (error, resultado) => {
+      if (error) return res.status(500).json({ error: "Error al obtener sensor" });
+      if (resultado.length === 0) return res.status(404).json({ mensaje: "sensor no encontrado" });
+      res.json(resultado[0]);
     });
   });
   
+  
+    // Ruta para listar IDs de sensors (Modulo Buscar)
+    router.get("/sensors/id", (req, res) => {
+      const sql = "SELECT id FROM sensors";
+      conexion.query(sql, (err, results) => {
+        if (err) return res.status(500).json({ error: "Error al obtener IDs" });
+        const ids = results.map(row => row.id);
+        res.json({ sensores: ids });
+      });
+    });
+    
   router.get('/sensors', (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const buscar = req.query.buscar || '';
@@ -92,11 +99,11 @@ function sensors(){
       SELECT * FROM sensors 
       WHERE 
         id LIKE ? OR 
-        type_sensors LIKE ? OR 
-        name_sensors LIKE ? OR 
-        unit_sensors LIKE ? OR 
-        time_sensors LIKE ? OR 
-        description_sensors LIKE ? 
+        type_sensor LIKE ? OR 
+        name_sensor LIKE ? OR 
+        unit_sensor LIKE ? OR 
+        time_sensor LIKE ? OR 
+        description_sensor LIKE ? 
       LIMIT ? OFFSET ?
     `;
     let params = [`%${buscar}%`,`%${buscar}%`,`%${buscar}%`, `%${buscar}%`, `%${buscar}%`, `%${buscar}%`, limit, offset];
@@ -105,11 +112,11 @@ function sensors(){
       SELECT COUNT(*) AS total FROM sensors 
       WHERE 
         id LIKE ? OR 
-        type_sensors LIKE ? OR 
-        name_sensors LIKE ? OR 
-        unit_sensors LIKE ? OR 
-        time_sensors LIKE ? OR 
-        description_sensors LIKE ? 
+        type_sensor LIKE ? OR 
+        name_sensor LIKE ? OR 
+        unit_sensor LIKE ? OR 
+        time_sensor LIKE ? OR 
+        description_sensor LIKE ? 
     `;
     let countParams = [`%${buscar}%`,`%${buscar}%`,`%${buscar}%`, `%${buscar}%`, `%${buscar}%`, `%${buscar}%`];
   
@@ -131,41 +138,40 @@ function sensors(){
     });
   });
   
-  router.post('/sensors/:id', (req, res) => {
+  // Ruta para actualizar un sensor
+  router.put("/api/sensors/:id", upload.single("imagen_sensor"), (req, res) => {
+    const cropId = req.params.id;
     const {
-      id,
-      tipo_sensor,
       nombre_sensor,
-      cantidad_sensor,
+      tipo_sensor,
+      unidad_sensor,
       tiempo_sensor,
       descripcion_sensor,
+      estado_sensor
     } = req.body;
   
-    const query = `
+    const imagen_sensor = req.file ? req.file.filename : null;
+  
+    let query = `
       UPDATE sensors 
-      SET 
-        type_sensors = ?, 
-        name_sensors = ?, 
-        unit_sensors = ?, 
-        time_sensors = ?, 
-        description_sensors = ?
-      WHERE id = ?
+      SET name_sensor = ?, type_sensor = ?, unit_sensor = ?, time_sensor = ?, description_sensor = ?, state_sensor = ?
     `;
+    const values = [nombre_sensor,tipo_sensor, unidad_sensor, tiempo_sensor, descripcion_sensor, estado_sensor];
   
-    conexion.query(query, [
-        tipo_sensor,
-        nombre_sensor,
-        cantidad_sensor,
-        tiempo_sensor,
-        descripcion_sensor,
-      id
-    ], (err, result) => {
+    if (imagen_sensor) {
+      query += `, image_sensor = ?`;
+      values.push(imagen_sensor);
+    }
+  
+    query += ` WHERE id = ?`;
+    values.push(cropId);
+  
+    conexion.query(query, values, (err, result) => {
       if (err) {
-        console.error('Error al actualizar el sensor:', err);
-        return res.status(500).json({ error: 'Hubo un error al actualizar el sensor.' });
+        console.error("Error al actualizar sensor:", err);
+        return res.status(500).json({ error: "Error al actualizar sensor" });
       }
-  
-      res.json({ message: 'sensor actualizado exitosamente.' });
+      res.json({ mensaje: "sensor actualizado exitosamente" });
     });
   });
 
