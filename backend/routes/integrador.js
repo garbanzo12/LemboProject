@@ -176,3 +176,103 @@ router.post("/productions", async (req, res) => {
 
 
 module.exports = router;
+
+
+
+// actualizar Integrador ⬇️
+router.get("/productions/ids", async (req, res) => {
+    try {
+        const [result] = await conexion.promise().query("SELECT id FROM productions");
+        res.json(result);
+    } catch (err) {
+        console.error("Error al obtener IDs:", err);
+        res.status(500).json({ error: "Error al obtener IDs" });
+    }
+});
+router.get("/productions/:id", async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const [result] = await conexion.promise().query("SELECT * FROM productions WHERE id = ?", [id]);
+
+        if (result.length === 0) {
+            return res.status(404).json({ error: "Producción no encontrada" });
+        }
+
+        const produccion = result[0];
+
+        // Descomponer los campos que estaban como strings separados por comas
+        produccion.users_selected = produccion.users_selected?.split(",").map(s => s.trim()) || [];
+        produccion.crops_selected = produccion.crops_selected?.split(",").map(s => s.trim()) || [];
+        produccion.name_cropCycle = produccion.name_cropCycle?.split(",").map(s => s.trim()) || [];
+        produccion.name_consumables = produccion.name_consumables?.split(",").map(s => s.trim()) || [];
+        produccion.quantity_consumables = produccion.quantity_consumables?.split(",").map(s => s.trim()) || [];
+        produccion.unitary_value_consumables = produccion.unitary_value_consumables?.split(",").map(s => s.trim()) || [];
+        produccion.total_value_consumables = parseFloat(produccion.total_value_consumables || 0);
+        produccion.name_sensor = produccion.name_sensor?.split(",").map(s => s.trim()) || [];
+
+        res.json(produccion);
+    } catch (err) {
+        console.error("Error al obtener producción:", err);
+        res.status(500).json({ error: "Error al obtener la producción" });
+    }
+});
+router.put("/productions/:id", async (req, res) => {
+    const { id } = req.params;
+    let {
+        name_production,
+        responsable,
+        users_selected,
+        crops_selected,
+        name_cropCycle,
+        name_consumables,
+        quantity_consumables,
+        unitary_value_consumables,
+        total_value_consumables,
+        name_sensor
+    } = req.body;
+
+    try {
+        // Validación mínima
+        if (!name_production || !responsable) {
+            return res.status(400).json({ error: "Faltan campos obligatorios" });
+        }
+
+        // Convertir arrays a strings
+        users_selected = Array.isArray(users_selected) ? users_selected.join(", ") : users_selected;
+        crops_selected = Array.isArray(crops_selected) ? crops_selected.join(", ") : crops_selected;
+        name_cropCycle = Array.isArray(name_cropCycle) ? name_cropCycle.join(", ") : name_cropCycle;
+        name_consumables = Array.isArray(name_consumables) ? name_consumables.join(", ") : name_consumables;
+        quantity_consumables = Array.isArray(quantity_consumables) ? quantity_consumables.join(", ") : quantity_consumables;
+        unitary_value_consumables = Array.isArray(unitary_value_consumables) ? unitary_value_consumables.join(", ") : unitary_value_consumables;
+        total_value_consumables = Array.isArray(total_value_consumables) ? total_value_consumables.join(", ") : total_value_consumables;
+        name_sensor = Array.isArray(name_sensor) ? name_sensor.join(", ") : name_sensor;
+
+        const sql = `
+            UPDATE productions SET
+                name_production = ?, responsable = ?, users_selected = ?, crops_selected = ?, 
+                name_cropCycle = ?, name_consumables = ?, quantity_consumables = ?, 
+                unitary_value_consumables = ?, total_value_consumables = ?, name_sensor = ?
+            WHERE id = ?
+        `;
+
+        await conexion.promise().query(sql, [
+            name_production,
+            responsable,
+            users_selected,
+            crops_selected,
+            name_cropCycle,
+            name_consumables,
+            quantity_consumables,
+            unitary_value_consumables,
+            total_value_consumables,
+            name_sensor,
+            id
+        ]);
+
+        res.json({ success: true, message: "Producción actualizada correctamente" });
+    } catch (err) {
+        console.error("Error al actualizar producción:", err);
+        res.status(500).json({ error: "Error al actualizar producción" });
+    }
+});
