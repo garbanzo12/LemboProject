@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", async () => {
     const selectId = document.getElementById("select-id-production");
     const inputNombre = document.querySelector(".integrator__input-form--n-prodution");
@@ -27,7 +28,29 @@ document.addEventListener("DOMContentLoaded", async () => {
     const btnAddSensor = document.querySelector(".integrator__add-sensor");
 
     let produccionCargada = null;
-    let insumosDisponibles = {}; // Para almacenar información de insumos
+    let insumosDisponibles = {};
+    let insumosConsumidos = {};
+
+    // Función para limpiar todos los campos
+    const limpiarCampos = () => {
+        inputNombre.value = "";
+        selectResponsable.value = "";
+        tbodyUsers.innerHTML = "";
+        tbodyCrops.innerHTML = "";
+        tbodyCycle.innerHTML = "";
+        tbodyInsumos.innerHTML = "";
+        tbodySensores.innerHTML = "";
+        resumen.textContent = "💲 Total insumos: $0.00";
+        selectUsers.value = "";
+        selectCrops.value = "";
+        selectCycle.value = "";
+        selectConsumable.value = "";
+        selectSensor.value = "";
+        choices.setChoices([], 'value', 'label', true);
+        cargarIds();
+        produccionCargada = null;
+        insumosConsumidos = {};
+    };
 
     // Inicializar Choices
     const choices = new Choices(selectId, {
@@ -46,7 +69,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const cargarResponsables = async () => {
         const res = await fetch("http://localhost:5501/integrador/users/responsable");
         const data = await res.json();
-        selectResponsable.innerHTML = ""; // Limpiar opciones existentes
+        selectResponsable.innerHTML = "";
         data.forEach(user => {
             const opt = document.createElement("option");
             opt.value = user.name_user;
@@ -59,7 +82,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const cargarUsuariosSelect = async () => {
         const res = await fetch("http://localhost:5501/integrador/users/responsable");
         const data = await res.json();
-        selectUsers.innerHTML = ""; // Limpiar opciones existentes
+        selectUsers.innerHTML = "";
         data.forEach(user => {
             const opt = document.createElement("option");
             opt.value = user.name_user;
@@ -72,7 +95,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const cargarCultivoSelect = async () => {
         const res = await fetch("http://localhost:5501/integrador/crops/responsable");
         const data = await res.json();
-        selectCrops.innerHTML = ""; // Limpiar opciones existentes
+        selectCrops.innerHTML = "";
         data.forEach(crop => {
             const opt = document.createElement("option");
             opt.value = crop.name_crop;
@@ -85,7 +108,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const cargarCicloSelect = async () => {
         const res = await fetch("http://localhost:5501/integrador/cycle/responsable");
         const data = await res.json();
-        selectCycle.innerHTML = ""; // Limpiar opciones existentes
+        selectCycle.innerHTML = "";
         data.forEach(cycle => {
             const opt = document.createElement("option");
             opt.value = cycle.name_cropCycle;
@@ -98,7 +121,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const cargarInsumoSelect = async () => {
         const res = await fetch("http://localhost:5501/integrador/consumable/responsable");
         const data = await res.json();
-        selectConsumable.innerHTML = ""; // Limpiar opciones existentes
+        selectConsumable.innerHTML = "";
         
         data.forEach(insumo => {
             const opt = document.createElement("option");
@@ -106,7 +129,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             opt.textContent = `${insumo.name_consumables} (Disponible: ${insumo.quantity_consumables})`;
             selectConsumable.appendChild(opt);
 
-            // Guardar información de insumos
             insumosDisponibles[insumo.name_consumables] = {
                 cantidad: insumo.quantity_consumables,
                 precio: insumo.unitary_value
@@ -118,7 +140,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const cargarSensorSelect = async () => {
         const res = await fetch("http://localhost:5501/integrador/sensors/responsable");
         const data = await res.json();
-        selectSensor.innerHTML = ""; // Limpiar opciones existentes
+        selectSensor.innerHTML = "";
         data.forEach(sensor => {
             const opt = document.createElement("option");
             opt.value = sensor.name_sensor;
@@ -127,19 +149,40 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     };
 
-    // Función para agregar botón de eliminar a una fila
-    const agregarBotonEliminar = (fila, lista, texto) => {
-        const celdaEliminar = document.createElement("td");
-        const botonEliminar = document.createElement("button");
-        botonEliminar.textContent = "×";
-        botonEliminar.className = "eliminar-item";
-        botonEliminar.addEventListener("click", () => {
-            lista = lista.filter(item => item !== texto);
-            fila.remove();
-            actualizarTotalDinero(); // Actualizar total si es la tabla de insumos
-        });
-        celdaEliminar.appendChild(botonEliminar);
-        fila.appendChild(celdaEliminar);
+    // Función para consumir insumo
+    const consumirInsumo = async (nombre, cantidad) => {
+        try {
+            const response = await fetch("http://localhost:5501/integrador/consumable/consumir-stock", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ 
+                    name_consumables: nombre, 
+                    cantidadConsumida: cantidad 
+                })
+            });
+            return response.ok;
+        } catch (error) {
+            console.error("Error al consumir insumo:", error);
+            return false;
+        }
+    };
+
+    // Función para devolver insumo
+    const devolverInsumo = async (nombre, cantidad) => {
+        try {
+            const response = await fetch("http://localhost:5501/integrador/consumable/devolver-stock", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ 
+                    name_consumables: nombre, 
+                    cantidadDevuelta: cantidad 
+                })
+            });
+            return response.ok;
+        } catch (error) {
+            console.error("Error al devolver insumo:", error);
+            return false;
+        }
     };
 
     // Rellenar tablas con botones de eliminar
@@ -147,18 +190,28 @@ document.addEventListener("DOMContentLoaded", async () => {
         tbody.innerHTML = "";
         lista.forEach(texto => {
             const tr = document.createElement("tr");
-            
             const td = document.createElement("td");
             td.className = "integrator__table-dato";
             td.textContent = texto;
             tr.appendChild(td);
             
-            agregarBotonEliminar(tr, lista, texto);
+            const celdaEliminar = document.createElement("td");
+            const botonEliminar = document.createElement("button");
+            botonEliminar.type = "button";
+            botonEliminar.textContent = "×";
+            botonEliminar.className = "eliminar-item";
+            botonEliminar.addEventListener("click", () => {
+                tr.remove();
+                actualizarTotalDinero();
+            });
+            celdaEliminar.appendChild(botonEliminar);
+            tr.appendChild(celdaEliminar);
+            
             tbody.appendChild(tr);
         });
     };
 
-    // Rellenar tabla de insumos con botones de eliminar
+    // Rellenar tabla de insumos
     const rellenarInsumos = (nombres, cantidades, precios, tbody) => {
         tbody.innerHTML = "";
         let total = 0;
@@ -167,28 +220,53 @@ document.addEventListener("DOMContentLoaded", async () => {
             const tr = document.createElement("tr");
 
             const tdNombre = document.createElement("td");
+            tdNombre.className = "integrator__table-dato";
             tdNombre.textContent = nombres[i];
 
             const tdCantidad = document.createElement("td");
+            tdCantidad.className = "integrator__table-dato";
             tdCantidad.textContent = cantidades[i];
 
             const tdPrecio = document.createElement("td");
+            tdPrecio.className = "integrator__table-dato";
             const precio = parseFloat(precios[i] || 0);
             total += precio;
             tdPrecio.textContent = `$${precio.toFixed(2)}`;
 
+            const tdEliminar = document.createElement("td");
+            const btnEliminar = document.createElement("button");
+            btnEliminar.type = "button";
+            btnEliminar.textContent = "×";
+            btnEliminar.className = "eliminar-item";
+            btnEliminar.addEventListener("click", async () => {
+                if (confirm(`¿Devolver ${cantidades[i]} unidades de ${nombres[i]} al inventario?`)) {
+                    const exito = await devolverInsumo(nombres[i], cantidades[i]);
+                    if (exito) {
+                        tr.remove();
+                        actualizarTotalDinero();
+                    } else {
+                        alert("Error al devolver el insumo al inventario");
+                    }
+                }
+            });
+            tdEliminar.appendChild(btnEliminar);
+
             tr.appendChild(tdNombre);
             tr.appendChild(tdCantidad);
             tr.appendChild(tdPrecio);
+            tr.appendChild(tdEliminar);
             
-            agregarBotonEliminar(tr, nombres, nombres[i]);
             tbody.appendChild(tr);
+            insumosConsumidos[nombres[i]] = {
+                cantidad: cantidades[i],
+                precio: precios[i]
+            };
         }
 
         resumen.textContent = `💲 Total insumos: $${total.toFixed(2)}`;
     };
 
-    // Actualizar total de dinero para insumos
+    // Actualizar total de dinero
     const actualizarTotalDinero = () => {
         const filas = tbodyInsumos.querySelectorAll("tr");
         let total = 0;
@@ -210,7 +288,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         const usuarioSeleccionado = selectUsers.value.trim();
         if (!usuarioSeleccionado) return;
 
-        // Verificar si ya existe
         const existe = Array.from(tbodyUsers.querySelectorAll("td")).some(
             td => td.textContent.toLowerCase() === usuarioSeleccionado.toLowerCase()
         );
@@ -221,16 +298,24 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
         }
 
-        // Crear nueva fila
         const tr = document.createElement("tr");
         const td = document.createElement("td");
         td.className = "integrator__table-dato";
         td.textContent = usuarioSeleccionado;
         tr.appendChild(td);
         
-        agregarBotonEliminar(tr, [], usuarioSeleccionado);
-        tbodyUsers.appendChild(tr);
+        const celdaEliminar = document.createElement("td");
+        const botonEliminar = document.createElement("button");
+        botonEliminar.type = "button";
+        botonEliminar.textContent = "×";
+        botonEliminar.className = "eliminar-item";
+        botonEliminar.addEventListener("click", () => {
+            tr.remove();
+        });
+        celdaEliminar.appendChild(botonEliminar);
+        tr.appendChild(celdaEliminar);
         
+        tbodyUsers.appendChild(tr);
         selectUsers.value = "";
     };
 
@@ -239,7 +324,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         const cultivoSeleccionado = selectCrops.value.trim();
         if (!cultivoSeleccionado) return;
 
-        // Verificar si ya existe
         const existe = Array.from(tbodyCrops.querySelectorAll("td")).some(
             td => td.textContent.toLowerCase() === cultivoSeleccionado.toLowerCase()
         );
@@ -250,16 +334,24 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
         }
 
-        // Crear nueva fila
         const tr = document.createElement("tr");
         const td = document.createElement("td");
         td.className = "integrator__table-dato";
         td.textContent = cultivoSeleccionado;
         tr.appendChild(td);
         
-        agregarBotonEliminar(tr, [], cultivoSeleccionado);
-        tbodyCrops.appendChild(tr);
+        const celdaEliminar = document.createElement("td");
+        const botonEliminar = document.createElement("button");
+        botonEliminar.type = "button";
+        botonEliminar.textContent = "×";
+        botonEliminar.className = "eliminar-item";
+        botonEliminar.addEventListener("click", () => {
+            tr.remove();
+        });
+        celdaEliminar.appendChild(botonEliminar);
+        tr.appendChild(celdaEliminar);
         
+        tbodyCrops.appendChild(tr);
         selectCrops.value = "";
     };
 
@@ -268,7 +360,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         const cicloSeleccionado = selectCycle.value.trim();
         if (!cicloSeleccionado) return;
 
-        // Verificar si ya existe
         const existe = Array.from(tbodyCycle.querySelectorAll("td")).some(
             td => td.textContent.toLowerCase() === cicloSeleccionado.toLowerCase()
         );
@@ -279,16 +370,24 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
         }
 
-        // Crear nueva fila
         const tr = document.createElement("tr");
         const td = document.createElement("td");
         td.className = "integrator__table-dato";
         td.textContent = cicloSeleccionado;
         tr.appendChild(td);
         
-        agregarBotonEliminar(tr, [], cicloSeleccionado);
-        tbodyCycle.appendChild(tr);
+        const celdaEliminar = document.createElement("td");
+        const botonEliminar = document.createElement("button");
+        botonEliminar.type = "button";
+        botonEliminar.textContent = "×";
+        botonEliminar.className = "eliminar-item";
+        botonEliminar.addEventListener("click", () => {
+            tr.remove();
+        });
+        celdaEliminar.appendChild(botonEliminar);
+        tr.appendChild(celdaEliminar);
         
+        tbodyCycle.appendChild(tr);
         selectCycle.value = "";
     };
 
@@ -297,7 +396,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         const sensorSeleccionado = selectSensor.value.trim();
         if (!sensorSeleccionado) return;
 
-        // Verificar si ya existe
         const existe = Array.from(tbodySensores.querySelectorAll("td")).some(
             td => td.textContent.toLowerCase() === sensorSeleccionado.toLowerCase()
         );
@@ -308,89 +406,220 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
         }
 
-        // Crear nueva fila
         const tr = document.createElement("tr");
         const td = document.createElement("td");
         td.className = "integrator__table-dato";
         td.textContent = sensorSeleccionado;
         tr.appendChild(td);
         
-        agregarBotonEliminar(tr, [], sensorSeleccionado);
-        tbodySensores.appendChild(tr);
+        const celdaEliminar = document.createElement("td");
+        const botonEliminar = document.createElement("button");
+        botonEliminar.type = "button";
+        botonEliminar.textContent = "×";
+        botonEliminar.className = "eliminar-item";
+        botonEliminar.addEventListener("click", () => {
+            tr.remove();
+        });
+        celdaEliminar.appendChild(botonEliminar);
+        tr.appendChild(celdaEliminar);
         
+        tbodySensores.appendChild(tr);
         selectSensor.value = "";
     };
 
     // Función para agregar un nuevo insumo
-    const agregarInsumoATabla = () => {
-        const insumoSeleccionado = selectConsumable.value.trim();
-        if (!insumoSeleccionado) return;
+  // Modificar la función agregarinsumoATabla
+// Función para agregar un nuevo insumo (actualizada)
+const agregarinsumoATabla = () => {
+    const insumoseleccionado = selectConsumable.value.trim();
+    if (!insumoseleccionado) return;
 
-        const insumoInfo = insumosDisponibles[insumoSeleccionado];
-        if (!insumoInfo) {
-            alert("Insumo no encontrado.");
-            return;
+    const insumoInfo = insumosDisponibles[insumoseleccionado];
+    if (!insumoInfo) {
+        alert("Insumo no encontrado.");
+        return;
+    }
+
+    // Verificar si ya hay 3 insumos
+    const filasInsumos = tbodyInsumos.querySelectorAll("tr");
+    if (filasInsumos.length >= 3) {
+        alert("Solo puedes agregar hasta 3 insumos.");
+        return;
+    }
+
+    // Verificar si el insumo ya está en la lista
+    const existe = Array.from(tbodyInsumos.querySelectorAll("td:first-child")).some(
+        td => td.textContent.toLowerCase() === insumoseleccionado.toLowerCase()
+    );
+    if (existe) {
+        alert(`El insumo "${insumoseleccionado}" ya está en la lista`);
+        selectConsumable.value = "";
+        return;
+    }
+
+    // Pedir cantidad
+    const cantidadDeseada = prompt(`¿Cuántas unidades deseas consumir de ${insumoseleccionado}?`);
+    const cantidadConsumir = parseInt(cantidadDeseada, 10);
+
+    if (isNaN(cantidadConsumir) || cantidadConsumir <= 0) {
+        alert("Por favor ingresa un número válido mayor que 0.");
+        return;
+    }
+
+    if (cantidadConsumir > insumoInfo.cantidad) {
+        alert(`No puedes consumir más de ${insumoInfo.cantidad} unidades.`);
+        return;
+    }
+
+    // Calcular valor total
+    const totalPrecio = insumoInfo.precio * cantidadConsumir;
+
+    // Crear fila en la tabla
+    const tr = document.createElement("tr");
+
+    const tdNombre = document.createElement("td");
+    tdNombre.className = "integrator__table-dato";
+    tdNombre.textContent = insumoseleccionado;
+
+    const tdCantidad = document.createElement("td");
+    tdCantidad.className = "integrator__table-dato";
+    tdCantidad.textContent = cantidadConsumir;
+
+    const tdPrecio = document.createElement("td");
+    tdPrecio.className = "integrator__table-dato";
+    tdPrecio.textContent = `$${totalPrecio.toFixed(2)}`;
+
+    const tdEliminar = document.createElement("td");
+    const btnEliminar = document.createElement("button");
+    btnEliminar.type = "button";
+    btnEliminar.textContent = "×";
+    btnEliminar.className = "eliminar-item";
+    btnEliminar.addEventListener("click", async () => {
+        if (confirm(`¿Devolver ${cantidadConsumir} unidades de ${insumoseleccionado} al inventario?`)) {
+            const exito = await devolverInsumo(insumoseleccionado, cantidadConsumir);
+            if (exito) {
+                tr.remove();
+                actualizarTotalDinero();
+            } else {
+                alert("Error al devolver el insumo al inventario");
+            }
         }
+    });
+    tdEliminar.appendChild(btnEliminar);
 
-        // Pedir cantidad
-        const cantidadDeseada = prompt(`¿Cuántas unidades deseas consumir de ${insumoSeleccionado}?`);
-        const cantidadConsumir = parseInt(cantidadDeseada, 10);
+    tr.appendChild(tdNombre);
+    tr.appendChild(tdCantidad);
+    tr.appendChild(tdPrecio);
+    tr.appendChild(tdEliminar);
+    
+    tbodyInsumos.appendChild(tr);
+    selectConsumable.value = "";
+    
+    // Actualizar el total
+    actualizarTotalDinero();
+};
 
-        if (isNaN(cantidadConsumir)) {
-            alert("Por favor ingresa un número válido.");
-            return;
+// Modificar la función actualizarStock para que realmente reste
+const actualizarStock = async () => {
+    const insumoFilas = tbodyInsumos.querySelectorAll("tr");
+    const consumos = [];
+    
+    insumoFilas.forEach(fila => {
+        const tds = fila.querySelectorAll("td");
+        if (tds.length >= 3) {
+            consumos.push({
+                name_consumables: tds[0].textContent,
+                cantidadConsumida: parseInt(tds[1].textContent)
+            });
         }
+    });
 
-        if (cantidadConsumir <= 0) {
-            alert("La cantidad debe ser mayor que 0.");
-            return;
-        }
-
-        if (cantidadConsumir > insumoInfo.cantidad) {
-            alert(`No puedes consumir más de ${insumoInfo.cantidad} unidades.`);
-            return;
-        }
-
-        // Verificar si ya existe
-        const existe = Array.from(tbodyInsumos.querySelectorAll("tr")).some(tr => {
-            const tds = tr.querySelectorAll("td");
-            return tds.length > 0 && tds[0].textContent.toLowerCase() === insumoSeleccionado.toLowerCase();
+    try {
+        const response = await fetch("http://localhost:5501/integrador/consumable/actualizar-stock", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ consumos })
         });
 
-        if (existe) {
-            alert(`El insumo "${insumoSeleccionado}" ya está en la lista`);
-            selectConsumable.value = "";
+        if (!response.ok) {
+            throw new Error("Error al actualizar stock");
+        }
+        return true;
+    } catch (error) {
+        console.error("Error:", error);
+        alert("❌ Error al actualizar stock");
+        return false;
+    }
+};
+
+    // Modificamos el event listener del formulario para el manejo de insumos
+    form.addEventListener("submit", async e => {
+        e.preventDefault();
+    
+        if (!produccionCargada) {
+            alert("Selecciona una producción para actualizar.");
             return;
         }
+    
+        // 1. Primero actualizamos la producción
+        const payload = {
+            name_production: inputNombre.value.trim(),
+            responsable: selectResponsable.value.trim(),
+            users_selected: Array.from(tbodyUsers.querySelectorAll("td:first-child")).map(td => td.textContent),
+            crops_selected: Array.from(tbodyCrops.querySelectorAll("td:first-child")).map(td => td.textContent),
+            name_cropCycle: Array.from(tbodyCycle.querySelectorAll("td:first-child")).map(td => td.textContent),
+            name_sensor: Array.from(tbodySensores.querySelectorAll("td:first-child")).map(td => td.textContent),
+            name_consumables: [],
+            quantity_consumables: [],
+            unitary_value_consumables: [],
+            total_value_consumables: 0,
+        };
+    
+        // Calcular total de insumos
+        const insumoFilas = tbodyInsumos.querySelectorAll("tr");
+        let total = 0;
+        insumoFilas.forEach(fila => {
+            const tds = fila.querySelectorAll("td");
+            if (tds.length >= 3) {
+                const nombre = tds[0].textContent;
+                const cantidad = tds[1].textContent;
+                const valor = parseFloat(tds[2].textContent.replace('$', '')) || 0;
+    
+                payload.name_consumables.push(nombre);
+                payload.quantity_consumables.push(parseInt(cantidad));
+                payload.unitary_value_consumables.push(valor);
+                total += valor;
+            }
+        });
+        payload.total_value_consumables = total;
+    
+        try {
+            // 2. Actualizar la producción en el servidor
+            const res = await fetch(`http://localhost:5501/integrador/productions/${produccionCargada.id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            });
+    
+            if (!res.ok) {
+                const error = await res.json();
+                throw new Error(error.message || "Error al actualizar producción");
+            }
+    
+            // 3. Si la producción se actualizó correctamente, actualizar el stock
+            const stockActualizado = await actualizarStock();
+            if (!stockActualizado) {
+                throw new Error("Error al actualizar stock");
+            }
+    
+            mostrarMensaje(form,"✅ Producción actualizada correctamente.","green");
+            limpiarCampos();
+        } catch (error) {
+            console.error("Error al actualizar:", error);
+            alert(`❌ Error: ${error.message}`);
+        }
+    });
 
-        // Calcular valor total
-        const totalPrecio = insumoInfo.precio * cantidadConsumir;
-
-        // Crear fila
-        const tr = document.createElement("tr");
-
-        const tdNombre = document.createElement("td");
-        tdNombre.className = "integrator__table-dato";
-        tdNombre.textContent = insumoSeleccionado;
-
-        const tdCantidad = document.createElement("td");
-        tdCantidad.className = "integrator__table-dato";
-        tdCantidad.textContent = cantidadConsumir;
-
-        const tdPrecioTotal = document.createElement("td");
-        tdPrecioTotal.className = "integrator__table-dato";
-        tdPrecioTotal.textContent = `$${totalPrecio.toFixed(2)}`;
-
-        tr.appendChild(tdNombre);
-        tr.appendChild(tdCantidad);
-        tr.appendChild(tdPrecioTotal);
-        
-        agregarBotonEliminar(tr, [], insumoSeleccionado);
-        tbodyInsumos.appendChild(tr);
-
-        actualizarTotalDinero();
-        selectConsumable.value = "";
-    };
 
     // Obtener datos de la producción seleccionada
     selectId.addEventListener("change", async () => {
@@ -447,17 +676,22 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         payload.total_value_consumables = total;
 
-        const res = await fetch(`http://localhost:5501/integrador/productions/${produccionCargada.id}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-        });
+        try {
+            const res = await fetch(`http://localhost:5501/integrador/productions/${produccionCargada.id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            });
 
-        if (res.ok) {
-            alert("✅ Producción actualizada.");
-        } else {
-            const error = await res.json();
-            alert("❌ Error: " + (error.message || "desconocido"));
+            if (res.ok) {
+                
+            } else {
+                const error = await res.json();
+                alert("❌ Error: " + (error.message || "desconocido"));
+            }
+        } catch (error) {
+            console.error("Error al actualizar:", error);
+            alert("❌ Error de conexión al intentar actualizar");
         }
     });
 
@@ -465,7 +699,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     btnAddUser?.addEventListener("click", agregarUsuarioATabla);
     btnAddCrop?.addEventListener("click", agregarCultivoATabla);
     btnAddCycle?.addEventListener("click", agregarCicloATabla);
-    btnAddConsumable?.addEventListener("click", agregarInsumoATabla);
+    btnAddConsumable?.addEventListener("click", agregarinsumoATabla);
     btnAddSensor?.addEventListener("click", agregarSensorATabla);
 
     // Cargar todos los datos iniciales
@@ -477,3 +711,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     await cargarInsumoSelect();
     await cargarSensorSelect();
 });
+
+function mostrarMensaje(form, mensaje, color) {
+    let mensajeSpan = form.querySelector(".cardright__foot-form");
+    
+    if (!mensajeSpan) {
+        mensajeSpan = document.createElement("span");
+        mensajeSpan.classList.add("cardright__foot-form");
+        mensajeSpan.style.display = "block";
+        mensajeSpan.style.marginTop = "10px";
+        mensajeSpan.style.fontWeight = "bold";
+        form.appendChild(mensajeSpan);
+    }
+
+    mensajeSpan.textContent = mensaje;
+    mensajeSpan.style.color = color;
+}

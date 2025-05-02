@@ -276,3 +276,22 @@ router.put("/productions/:id", async (req, res) => {
         res.status(500).json({ error: "Error al actualizar producción" });
     }
 });
+// para ddevolver un insumo ya no requerido
+router.post("/consumable/devolver-stock", async (req, res) => {
+    const { name_consumables, cantidadDevuelta } = req.body;
+
+    if (!name_consumables || !cantidadDevuelta) {
+        return res.status(400).json({ error: "Faltan parámetros" });
+    }
+
+    try {
+        await conexion.promise().query(
+            "UPDATE consumables SET quantity_consumables = quantity_consumables + ? WHERE name_consumables = ?",
+            [cantidadDevuelta, name_consumables]
+        );
+        res.json({ success: true });
+    } catch (error) {
+        console.error("Error devolviendo stock:", error);
+        res.status(500).json({ error: "Error al devolver stock" });
+    }
+});
