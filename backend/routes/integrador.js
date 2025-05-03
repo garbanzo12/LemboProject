@@ -175,7 +175,7 @@ router.post("/productions", async (req, res) => {
 });
 
 
-module.exports = router;
+
 
 
 
@@ -295,3 +295,151 @@ router.post("/consumable/devolver-stock", async (req, res) => {
         res.status(500).json({ error: "Error al devolver stock" });
     }
 });
+
+
+
+ // Ruta para listar producciones con paginación y búsqueda
+// Ruta para listar producciones con paginación y búsqueda
+router.get("/listar-produccion", (req, res) => {
+    const page = parseInt(req.query.page) || 1;
+    const buscar = req.query.buscar || "";
+    const limit = 10;
+    const offset = (page - 1) * limit;
+
+    // Manejo seguro de valores NULL
+    const safeSearch = buscar === '' ? null : `%${buscar}%`;
+
+    const queryData = `
+    SELECT 
+        id,
+        COALESCE(name_production, '') as name_production,
+        COALESCE(responsable, '') as responsable,
+        COALESCE(users_selected, '[]') as users_selected,
+        COALESCE(crops_selected, '[]') as crops_selected,
+        COALESCE(name_cropCycle, '') as name_cropCycle,
+        COALESCE(name_consumables, '[]') as name_consumables,
+        COALESCE(quantity_consumables, '[]') as quantity_consumables,
+        COALESCE(unitary_value_consumables, '[]') as unitary_value_consumables,
+        COALESCE(total_value_consumables, 0) as total_value_consumables,
+        COALESCE(name_sensor, '[]') as name_sensor,
+        COALESCE(state_production, 'habilitado') as state_production
+    FROM productions
+    WHERE 
+        (? IS NULL OR id LIKE ?) OR
+        (? IS NULL OR name_production LIKE ?) OR
+        (? IS NULL OR responsable LIKE ?) OR
+        (? IS NULL OR name_cropCycle LIKE ?) OR
+        (? IS NULL OR name_sensor LIKE ?) OR
+        (? IS NULL OR name_consumables LIKE ?) OR
+        (? IS NULL OR crops_selected LIKE ?) OR
+        (? IS NULL OR users_selected LIKE ?)
+    LIMIT ? OFFSET ?
+`;
+
+const queryCount = `
+    SELECT COUNT(*) AS total 
+    FROM productions
+    WHERE 
+        (? IS NULL OR id LIKE ?) OR
+        (? IS NULL OR name_production LIKE ?) OR
+        (? IS NULL OR responsable LIKE ?) OR
+        (? IS NULL OR name_cropCycle LIKE ?) OR
+        (? IS NULL OR name_sensor LIKE ?) OR
+        (? IS NULL OR name_consumables LIKE ?) OR
+        (? IS NULL OR crops_selected LIKE ?) OR
+        (? IS NULL OR users_selected LIKE ?)
+`;
+
+// Parámetros actualizados para ambas consultas
+const params = [
+    safeSearch, safeSearch,       // id
+    safeSearch, safeSearch,       // name_production
+    safeSearch, safeSearch,       // responsable
+    safeSearch, safeSearch,       // name_cropCycle
+    safeSearch, safeSearch,       // name_sensor
+    safeSearch, safeSearch,       // name_consumables
+    safeSearch, safeSearch,       // crops_selected
+    safeSearch, safeSearch,       // users_selected
+    limit, offset
+];
+
+const countParams = [
+    safeSearch, safeSearch,       // id
+    safeSearch, safeSearch,       // name_production
+    safeSearch, safeSearch,       // responsable
+    safeSearch, safeSearch,       // name_cropCycle
+    safeSearch, safeSearch,       // name_sensor
+    safeSearch, safeSearch,       // name_consumables
+    safeSearch, safeSearch,       // crops_selected
+    safeSearch, safeSearch        // users_selected
+];
+    // Primera consulta: Obtener datos
+    conexion.query(queryData, params, (err, results) => {
+        if (err) {
+            console.error("Error en consulta de datos:", err);
+            return res.status(500).json({ 
+                error: "Error al obtener producciones",
+                details: err.message 
+            });
+        }
+
+        // Segunda consulta: Obtener total
+        conexion.query(queryCount, countParams, (err2, countResults) => {
+            if (err2) {
+                console.error("Error en consulta de conteo:", err2);
+                return res.status(500).json({ 
+                    error: "Error al contar producciones",
+                    details: err2.message 
+                });
+            }
+
+            try {
+                // Procesar los resultados para manejar arrays JSON
+                const producciones = results.map(row => {
+                    // Debug: verificar el valor crudo
+                    return {
+                        ...row,
+                        users_selected: safeParseJSON(row.users_selected),
+                        crops_selected: safeParseJSON(row.crops_selected),
+                        name_consumables: safeParseJSON(row.name_consumables),
+                        quantity_consumables: (row.quantity_consumables),
+                        unitary_value_consumables: safeParseJSON(row.unitary_value_consumables),
+                        name_sensor: safeParseJSON(row.name_sensor)
+                    };
+                });
+
+                res.json({ 
+                    producciones: producciones,
+                    total: countResults[0].total 
+                });
+            } catch (parseError) {
+                console.error("Error parseando JSON:", parseError);
+                res.status(500).json({ 
+                    error: "Error procesando datos",
+                    details: parseError.message 
+                });
+            }
+        });
+    });
+});
+
+// Función helper para parsear JSON de forma segura
+function safeParseJSON(jsonString) {
+    try {
+        const parsed = JSON.parse(jsonString);
+        return Array.isArray(parsed) ? parsed : [];
+    } catch (e) {
+        // Si falla el parseo, intentar separar por comas
+        if (typeof jsonString === 'string') {
+            return jsonString.split(',').map(item => item.trim());
+        }
+        return [];
+    }
+}
+
+
+
+
+
+
+module.exports = router;

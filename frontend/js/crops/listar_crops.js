@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => { // ⬅️ Esperamos a que 
   
 // ⬇️ Estoy llamando a la funcion obtenerCultivos, de esta parte todo el codigo
     obtenerCultivos();
-// ⬇️Aqui empieza el bloqeu de codigo para buscar⬇️
+// ⬇️Aqui empieza el bloque de codigo para buscar⬇️
 
   const button = document.querySelector(".cardright__container-buscar");  // ⬅️ Botón de búsqueda
   const input = document.querySelector(".cardright__container-search");  // ⬅️ Input de búsqueda
