@@ -13,7 +13,7 @@ console.log('holis')
     inputs[3].value = formatDate(data.period_cycle_start) || '';     // ⬅️ Ubicación
     inputs[4].value = formatDate(data.period_cycle_end)  || '';  //⬅️  Descripción
     inputs[5].value = data.news_cycle || '';   
-    inputs[6].value = data.state_cycle || '';          // ⬅️ Tamaño m2
+    inputs[6].value = data.state_cycle || '';          // ⬅️ Estado
 
   });
 

@@ -295,8 +295,30 @@ router.post("/consumable/devolver-stock", async (req, res) => {
         res.status(500).json({ error: "Error al devolver stock" });
     }
 });
+//⬇️ Ruta para buscar ⬇️
+  // Ruta para listar IDs de Produccion (Modulo Buscar)
+  router.get("/buscar-id-integrador/id", (req, res) => {
+    const sql = "SELECT id FROM productions";
+    conexion.query(sql, (err, results) => {
+      if (err) return res.status(500).json({ error: "Error al obtener IDs" });
+      const ids = results.map(row => row.id);
+      res.json({ producciones: ids });
+    });
+  });
+  
+  // Ruta para obtener cultivo por ID, para poder visualizar
+  router.get("/api/conseguir-datos-id/:id", (req, res) => {
+    const id = req.params.id;
+    const sql = "SELECT * FROM productions WHERE id = ?";
+  
+    conexion.query(sql, [id], (error, resultado) => {
+      if (error) return res.status(500).json({ error: "Error al obtener cultivo" });
+      if (resultado.length === 0) return res.status(404).json({ mensaje: "Cultivo no encontrado" });
+      res.json(resultado[0]);
+    });
+  });
 
-
+//⬆️ Ruta para buscar ⬆️
 
  // Ruta para listar producciones con paginación y búsqueda
 // Ruta para listar producciones con paginación y búsqueda
@@ -514,7 +536,7 @@ router.get("/api/costos-cultivos", (req, res) => {
     const sql = `
     SELECT 
     MONTH(p.created_at) AS mes,
-    p.name_cropCycle AS cultivo,
+    p.crops_selected AS cultivo,
     SUM(p.total_value_consumables) AS costo_total
     FROM productions p
     WHERE p.state_production = 'habilitado'
@@ -536,13 +558,13 @@ router.get("/api/costos-cultivos", (req, res) => {
 router.get('/api/inversion-anual', (req, res) => {
     const sql = `
  SELECT 
-    p.name_cropCycle AS nombre,
+    p.crops_selected AS nombre,
     SUM(p.total_value_consumables) AS total_inversion
 FROM productions p
 WHERE p.state_production = 'habilitado'
   AND YEAR(p.created_at) = YEAR(CURDATE())
-GROUP BY p.name_cropCycle
-ORDER BY p.name_cropCycle;
+GROUP BY p.crops_selected
+ORDER BY p.crops_selected;
     `;
   
     conexion.query(sql, (err, results) => {
