@@ -443,3 +443,68 @@ function safeParseJSON(jsonString) {
 
 
 module.exports = router;
+
+
+
+
+//⬇️ Visualizar datos de la produccion en general ⬇️
+
+
+// Endpoint para obtener datos de cultivos
+// Endpoint para obtener cultivos con su tamaño en m²
+router.get("/api/cultivos", async (req, res) => {
+    const sql = `
+      SELECT name_crop, size_m2 
+      FROM crops
+      WHERE state_crop = 'habilitado'
+    `;
+  
+    conexion.query(sql, (err, resultados) => {
+      if (err) {
+        console.error("Error al obtener cultivos:", err);
+        return res.status(500).json({ error: "Error en la base de datos" });
+      }
+  
+      res.json(resultados);
+    });
+  });
+  
+
+
+  router.get("/api/insumos", async (req, res) => {
+    const sql = `
+        SELECT name_consumables, quantity_consumables
+        FROM consumables
+        WHERE state_consumables = 'habilitado'
+    `;
+
+    conexion.query(sql, (err, resultados) => {
+        if (err) {
+            console.error("Error al obtener insumos:", err);
+            return res.status(500).json({ error: "Error en la base de datos" });
+        }
+
+        res.json(resultados);
+    });
+});
+
+router.get("/api/finanzas", async (req, res) => {
+    const sql = `
+        SELECT 
+            MONTH(created_at) AS mes,
+            SUM(total_value) AS total_mensual
+        FROM consumables
+        WHERE state_consumables = 'habilitado'
+        GROUP BY mes
+        ORDER BY mes;
+    `;
+
+    conexion.query(sql, (err, resultados) => {
+        if (err) {
+            console.error("Error al obtener datos financieros:", err);
+            return res.status(500).json({ error: "Error en la base de datos" });
+        }
+
+        res.json(resultados); // [{mes: 1, total_mensual: 2000}, ...]
+    });
+});

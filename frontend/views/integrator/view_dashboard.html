@@ -27,11 +27,11 @@
         <div class="producto__container-row">
             <!-- modulo 1 -->
             <div class="producto__subcontainer">
-                <h2 class="producto__subtittle">LISTA DE CULTIVOS</h2>
+                <h2 class="producto__subtittle">LISTA DE CULTIVOS SEGUN m²</h2>
 
                 <div id="chart_lista_cultivos" style="width: 100%; height: 100%"></div>
 
-                <div><label for="">BUSCAR</label><input type="text" name="" id=""></div>
+               
             </div>
 
 
@@ -181,13 +181,9 @@
 
 
     <script>
-        const opcionesValidas = [100, 400, 600, 900];
-        let cantidad = parseInt(prompt("Elige la cantidad de cuadros: 100, 400, 600 o 900", "900"));
-
-        if (!opcionesValidas.includes(cantidad)) {
-            alert("Opción inválida. Se usará 900 por defecto.");
-            cantidad = 900;
-        }
+        
+        cantidad = 900;
+        
 
         const columnas = Math.ceil(Math.sqrt(cantidad));
         const filas = Math.ceil(cantidad / columnas);
@@ -280,78 +276,111 @@
         // Chart 1 - Cultivos
         google.charts.setOnLoadCallback(drawCultivosChart);
         function drawCultivosChart() {
-            const data = google.visualization.arrayToDataTable([
-                ["Semilla", "Cantidad"],
-                ["Papa", 1],
-                ["Maiz", 1],
-                ["Platano", 1],
-                ["Trigo", 1],
-                ["Soya", 1],
-                ["Avena", 1],
-                ["Cebada", 1],
-                ["Tomate", 1],
-                ["Toronja", 1],
-                ["Aguacate", 1],
-                ["Cafe", 1],
-                ["Yuca", 1],
-            ]);
+    fetch('http://localhost:5501/integrador/api/cultivos')
+    .then(response => response.json())
+    .then(dataFromDb => {
+        const data = new google.visualization.DataTable();
+        data.addColumn('string', 'name_crop');
+        data.addColumn('number', 'Area en m²');
 
-            const options = {
-                title: "LISTADO GENREAL CULTIVOS",
-                titleTextStyle: { color: "white" },
-                backgroundColor: "transparent",
-                hAxis: {
-                    textStyle: { color: "white" },
-                    minValue: 0, // Valor mínimo del eje horizontal
-                    maxValue: 1 // Ajusta este valor según los datos
-                },
+        dataFromDb.forEach(row => {
+            data.addRow([row.name_crop, parseFloat(row.size_m2) || 0]);
+        });
 
-                vAxis: { textStyle: { color: "white" } },
-                legend: { position: "none" },
-                chartArea: { left: 50, top: 20, width: "100%", height: "100%" },
+        const options = {
+            title: "LISTADO GENERAL DE CULTIVOS POR ÁREA (m²)",
+            titleTextStyle: { color: "white" },
+            backgroundColor: "transparent",
+            hAxis: {
+              title: "Área (m²)",
+              textStyle: { color: "white" },
+              minValue: 0
+            },
+            vAxis: {
+              textStyle: { color: "white" }
+            },
+            legend: { position: "none" },
+            chartArea: { left: 50, top: 20, width: "100%", height: "100%" },
+        };
 
-            };
+        const chart = new google.visualization.BarChart(
+            document.getElementById("chart_lista_cultivos")
+        );
+        chart.draw(data, options);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        const data = google.visualization.arrayToDataTable([
+            ["Cultivo", "Metros cuadrados"],
+            ["Error al cargar datos", 1]
+        ]);
+        const chart = new google.visualization.BarChart(
+            document.getElementById("chart_lista_cultivos")
+        );
+        chart.draw(data, {
+            title: "LISTADO GENERAL DE CULTIVOS POR ÁREA (m²)",
+            backgroundColor: "transparent",
+            titleTextStyle: { color: "white" },
+            legend: { position: "none" },
+            hAxis: { textStyle: { color: "white" } },
+            vAxis: { textStyle: { color: "white" } },
+            chartArea: { left: 50, top: 20, width: "100%", height: "100%" },
+        });
+    });
+}
 
-            const chart = new google.visualization.BarChart(
-                document.getElementById("chart_lista_cultivos")
-            );
-            chart.draw(data, options);
-        }
 
         // Chart 2 - Insumos
         google.charts.setOnLoadCallback(drawInsumosChart);
-        function drawInsumosChart() {
-            const data = google.visualization.arrayToDataTable([
-                ["Semilla", "Cantidad"],
-                ["Papa", 45],
-                ["Maiz", 62],
-                ["Platano", 118],
-                ["Trigo", 94],
-                ["Soya", 77],
-                ["Avena", 39],
-                ["Cebada", 155],
-                ["Tomate", 83],
-                ["Toronja", 66],
-                ["Aguacate", 66],
-                ["Cafe", 66],
-                ["Yuca", 66],
-            ]);
 
-            const options = {
-                title: "LISTADO GENREAL INSUMOS",
-                titleTextStyle: { color: "white" },
-                backgroundColor: "transparent",
-                hAxis: { textStyle: { color: "white" } },
-                vAxis: { textStyle: { color: "white" } },
-                legend: { position: "none" },
-                chartArea: { left: 50, top: 20, width: "100%", height: "80%" },
-            };
+function drawInsumosChart() {
+    fetch('http://localhost:5501/integrador/api/insumos')  // Cambiar URL si es necesario
+    .then(response => response.json())
+    .then(dataFromDb => {
+        const data = new google.visualization.DataTable();
+        data.addColumn('string', 'Semilla');
+        data.addColumn('number', 'Cantidad');
 
-            const chart = new google.visualization.BarChart(
-                document.getElementById("chart_lista_insumos")
-            );
-            chart.draw(data, options);
-        }
+        dataFromDb.forEach(row => {
+            data.addRow([row.name_consumables, parseInt(row.quantity_consumables) || 0]);
+        });
+
+        const options = {
+            title: "LISTADO GENERAL DE INSUMOS",
+            titleTextStyle: { color: "white" },
+            backgroundColor: "transparent",
+            hAxis: { textStyle: { color: "white" } },
+            vAxis: { textStyle: { color: "white" } },
+            legend: { position: "none" },
+            chartArea: { left: 50, top: 20, width: "100%", height: "80%" },
+        };
+
+        const chart = new google.visualization.BarChart(
+            document.getElementById("chart_lista_insumos")
+        );
+        chart.draw(data, options);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        const data = google.visualization.arrayToDataTable([
+            ["Semilla", "Cantidad"],
+            ["Error al cargar datos", 1]
+        ]);
+        const chart = new google.visualization.BarChart(
+            document.getElementById("chart_lista_insumos")
+        );
+        chart.draw(data, {
+            title: "LISTADO GENERAL DE INSUMOS",
+            backgroundColor: "transparent",
+            titleTextStyle: { color: "white" },
+            legend: { position: "none" },
+            hAxis: { textStyle: { color: "white" } },
+            vAxis: { textStyle: { color: "white" } },
+            chartArea: { left: 50, top: 20, width: "100%", height: "80%" },
+        });
+    });
+}
+
 
         // Chart 3 - Finanzas
 
