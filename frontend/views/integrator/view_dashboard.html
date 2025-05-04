@@ -88,24 +88,19 @@
             </div>
 
             <div class="producto__subcontainer">
-                <h2 class="producto__subtittle">CALCURALDORA DE INVERSION</h2>
+                <h2 class="producto__subtittle">CALCULADORA DE INVERSIÓN</h2>
                 <table class="producto__tabla">
                     <thead>
-                        <tr class="producto__tabla-header">
-                            <th class="producto__cell">Id_Cultivo</th>
-                            <th class="producto__cell">Nombre</th>
-                            <th class="producto__cell">Total</th>
-                        </tr>
+                      <tr class="producto__tabla-header">
+                        <th class="producto__cell">Nombre</th>
+                        <th class="producto__cell">Total Invertido</th>
+                      </tr>
                     </thead>
-                    <tbody>
-                        <tr class="producto__tabla-data">
-                            <td class="producto__cell">001</td>
-                            <td class="producto__cell">Papa</td>
-                            <td class="producto__cell-lg">VALUE GRAFICO</td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <tbody id="tablaInversion"></tbody>
+                  </table>
+                  
             </div>
+            
 
             <!-- modulo 2.1  SENSORES-->
             <div class="producto__subcontainer">
@@ -426,149 +421,114 @@ function drawInsumosChart() {
 
 
 
-    <script>
-        // Chart 4 - Cultivos X Costo $$$$
-
-        // Setup - Definimos manualmente las etiquetas y colores
-        const labels = [
-            "Ene",
-            "Feb",
-            "Mar",
-            "Abr",
-            "May",
-            "Jun",
-            "Jul",
-            "Ago",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dic",
+<script>
+    fetch("http://localhost:5501/integrador/api/costos-cultivos")
+      .then((res) => res.json())
+      .then((dataFromDb) => {
+        const labels = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+        
+        const cultivosSet = new Set();
+        const dataPorCultivo = {};
+    
+        // Agrupar datos
+        dataFromDb.forEach((item) => {
+          const mes = parseInt(item.mes) - 1;
+          const cultivo = item.cultivo;
+          const valor = item.costo_total;
+    
+          cultivosSet.add(cultivo);
+    
+          if (!dataPorCultivo[cultivo]) {
+            dataPorCultivo[cultivo] = Array(12).fill(0);
+          }
+          dataPorCultivo[cultivo][mes] += valor;
+        });
+    
+        const colores = [
+          "rgba(0, 51, 102, 1)", "rgba(25, 25, 112, 1)",
+          "rgba(0, 100, 0, 1)", "rgba(100, 0, 0, 1)",
+          "rgba(255, 165, 0, 1)", "rgba(128, 0, 128, 1)"
         ];
-        const datasets = [
-            {
-                label: "PAPA",
-                data: [65200, 385400, 823000, 1218600, 1287500, 1812000, 2635000],
-                borderColor: "rgba(0, 51, 102, 1)", 
-                borderDash: [5, 1],
-                backgroundColor: "rgba(0, 51, 102, 1)",
-                tension: 0.3,
-            },
-            {
-                label: "MAIZ",
-                data: [321500, 682300, 845600, 1512300, 1858000, 2654700, 4215000],
-                borderColor: "rgba(25, 25, 112, 1)", 
-                borderDash: [5, 2],
-                backgroundColor: "rgba(25, 25, 112, 1)",
-                tension: 0.3,
-            },
-            {
-                label: "PLATANO",
-                data: [218500, 587300, 1023150, 1582600, 2025000, 3553200, 3875000],
-                borderColor: "rgba(0, 100, 0, 1)",
-                borderDash: [5, 2],
-                backgroundColor: "rgba(0, 100, 0, 1)",
-                borderWidth: 2.5,
-                tension: 0.3,
-            },
-            {
-                label: "TRIGO",
-                data: [57600, 200500, 700500, 1500500, 2055000, 2885000, 3556000],
-                borderColor: "rgba(000, 000, 000, 1)",  
-                borderDash: [5, 2],
-                backgroundColor: "rgba(0, 200, 0, 0.2)",
-                borderWidth: 2.5,
-                tension: 0.3,
-            },
-        ];
-
-        // Calculamos los valores totales
-        const totalData = labels.map((_, index) => {
-            return datasets.reduce((sum, dataset) => sum + (dataset.data[index] || 0), 0);
+    
+        const datasets = Array.from(cultivosSet).map((cultivo, index) => ({
+          label: cultivo,
+          data: dataPorCultivo[cultivo],
+          borderColor: colores[index % colores.length],
+          backgroundColor: colores[index % colores.length],
+          borderDash: [5, 2],
+          tension: 0.3
+        }));
+    
+        // TOTAL por mes
+        const totalData = Array(12).fill(0);
+        datasets.forEach(ds => {
+          ds.data.forEach((val, idx) => totalData[idx] += val);
         });
-
+    
         datasets.push({
-            label: "TOTAL",
-            data: totalData,
-            borderColor: "rgba(000, 000, 000, 0.7)",  // Negrito
-            borderDash: [5, 2],
-            backgroundColor: "rgba(000, 000, 000, 0.2)",
-            borderWidth: 3,
-            tension: 0.3,
+          label: "TOTAL",
+          data: totalData,
+          borderColor: "rgba(0, 0, 0, 0.7)",
+          backgroundColor: "rgba(0, 0, 0, 0.2)",
+          borderWidth: 3,
+          tension: 0.3,
         });
-
+    
+        // PRESUPUESTO (ejemplo)
         datasets.push({
-            label: "PRESUPUESTO",
-            data: [48500100,48500100,48500100,48500100,48500100,48500100,48500100,48500100,48500100,48500100,48500100,48500100],
-            borderColor: "rgba(000, 000, 000, 0.7)",  // Negrito
-            borderDash: [5, 2],
-            backgroundColor: "rgba(000, 000, 000, 1)",
-            borderWidth: 3,
-            tension: 0.3,
+          label: "PRESUPUESTO",
+          data: Array(12).fill(50000),
+          borderColor: "rgba(0, 0, 0, 0.7)",
+          backgroundColor: "rgba(0, 0, 0, 1)",
+          borderWidth: 3,
+          borderDash: [5, 2],
+          tension: 0.3,
         });
-
-        const data = {
+    
+        new Chart(document.getElementById("Costo_General_Cultivos").getContext("2d"), {
+          type: "line",
+          data: {
             labels: labels,
-            datasets: datasets,
-        };
-
-        // Configuración del gráfico
-        const config = {
-            type: "line",
-            data: data,
-            options: {
-                responsive: true,
-                plugins: {
-                    title: {
-                        display: true,
-                        text: "Cultivos por Costo Mensual",
-                        color: 'white',
-                        font: {
-                            size: 16
-                        }
-                    },
-                    legend: {
-                        labels: {
-                            color: 'white',
-                            font: {
-                                size: 14
-                            }
-                        }
-                    },
-                },
-                scales: {
-                    x: {
-                        ticks: {
-                            color: 'white'
-                        },
-                        grid: {
-                            color: 'rgba(255, 255, 255, 0.7)'
-                        }
-                    },
-                    y: {
-                        ticks: {
-                            color: 'white'
-                        },
-                        grid: {
-                            color: 'rgba(255, 255, 255, 0.7)'
-                        },
-                        suggestedMin: 0  // Solo mantener el mínimo en 0
-                    },
-                },
-                elements: {
-                    line: {
-                        borderWidth: 2
-                    }
+            datasets: datasets
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              title: {
+                display: true,
+                text: "Cultivos por Costo Mensual",
+                color: 'white',
+                font: { size: 16 }
+              },
+              legend: {
+                labels: {
+                  color: 'white',
+                  font: { size: 14 }
                 }
+              }
             },
-        };
-
-        // Inicialización del gráfico
-        window.addEventListener("DOMContentLoaded", () => {
-            const ctx = document.getElementById("Costo_General_Cultivos").getContext("2d");
-            new Chart(ctx, config);
+            scales: {
+              x: {
+                ticks: { color: 'white' },
+                grid: { color: 'rgba(255, 255, 255, 0.7)' }
+              },
+              y: {
+                ticks: { color: 'white' },
+                grid: { color: 'rgba(255, 255, 255, 0.7)' },
+                suggestedMin: 0
+              }
+            },
+            elements: {
+              line: {
+                borderWidth: 2
+              }
+            }
+          }
         });
+      })
+      .catch((err) => console.error("Error al cargar gráfico:", err));
     </script>
-
+    
 
     <!-- Chart 5 - TEMPERATURA -->
 
@@ -690,7 +650,39 @@ function drawInsumosChart() {
             }
         }
     </script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  const tbody = document.getElementById('tablaInversion');
+  let totalGeneral = 0;
 
+  try {
+    const response = await fetch('http://localhost:5501/integrador/api/inversion-anual');
+    const datos = await response.json();
+
+    datos.forEach(fila => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="producto__cell" style="background-color: white; color: black;">${fila.nombre}</td>
+        <td class="producto__cell-lg" style="background-color: white; color: black;">$${fila.total_inversion.toLocaleString()}</td>
+      `;
+      totalGeneral += parseFloat(fila.total_inversion);
+      tbody.appendChild(tr);
+    });
+
+    const trTotal = document.createElement('tr');
+    trTotal.innerHTML = `
+      <td class="producto__cell" style="background-color: white; color: black;"><strong>Total General</strong></td>
+      <td class="producto__cell-lg" style="background-color: white; color: black;"><strong>$${totalGeneral.toLocaleString()}</strong></td>
+    `;
+    tbody.appendChild(trTotal);
+  } catch (error) {
+    console.error('Error al cargar la inversión:', error);
+  }
+});
+
+
+    </script>
+    
 </body>
 
 </html>

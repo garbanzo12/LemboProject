@@ -508,3 +508,48 @@ router.get("/api/finanzas", async (req, res) => {
         res.json(resultados); // [{mes: 1, total_mensual: 2000}, ...]
     });
 });
+
+
+router.get("/api/costos-cultivos", (req, res) => {
+    const sql = `
+    SELECT 
+    MONTH(p.created_at) AS mes,
+    p.name_cropCycle AS cultivo,
+    SUM(p.total_value_consumables) AS costo_total
+    FROM productions p
+    WHERE p.state_production = 'habilitado'
+    GROUP BY mes, cultivo
+    ORDER BY mes;
+    `;
+
+    conexion.query(sql, (err, resultados) => {
+        if (err) {
+            console.error("Error al obtener costos de cultivos:", err);
+            return res.status(500).json({ error: "Error en la base de datos" });
+        }
+
+        res.json(resultados);
+    });
+});
+
+// Ruta para obtener datos de inversión anual
+router.get('/api/inversion-anual', (req, res) => {
+    const sql = `
+ SELECT 
+    p.name_cropCycle AS nombre,
+    SUM(p.total_value_consumables) AS total_inversion
+FROM productions p
+WHERE p.state_production = 'habilitado'
+  AND YEAR(p.created_at) = YEAR(CURDATE())
+GROUP BY p.name_cropCycle
+ORDER BY p.name_cropCycle;
+    `;
+  
+    conexion.query(sql, (err, results) => {
+      if (err) {
+        console.error('Error en consulta SQL:', err);
+        return res.status(500).json({ error: 'Error interno del servidor' });
+      }
+      res.json(results);
+    });
+  });
