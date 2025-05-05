@@ -9,7 +9,12 @@
     <meta name="author"
         content="Aprendiz: Erick Ramirez, Aprendiz Aprendiz:Sanchez Hernandez, Aprendiz:Estefani Acevedo" />
     <meta http-equiv="Content-Language" content="es" />
+  <!-- CSS de Choices -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
 
+  <!-- JS de Choices -->
+  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+  <script src="/frontend/js/Consumables/buscarConsumable.js"></script>
     <link rel="stylesheet" href="../../public/css/styles-bem.css">
 
     <title>Busqueda De Insumos</title>
@@ -59,8 +64,10 @@
 
                     <div class="cardright__subcontainer-input">
                         <label class="cardright__label-form " for="">Id Insumo</label>
-                        <input class="cardright__input-form" placeholder="Id del usuario" type="number" />
-                    </div>
+                        <select class="cardright__selectid"> <!-- Esto es de js -->
+                            <option value="">Cargando IDs...</option> <!--Esto es de js  -->
+                          </select>              
+                           </div>
 
 
                     <div class="cardright__subcontainer-input">
@@ -85,21 +92,7 @@
         </a>
     </main>
 
-    <script>
-        fetch("/SGL CODE/Estandarizacion/config.json")
-            .then(result => result.json())
-            .then(data => {
-                // Crea un elemento script
-                const script = document.createElement("script")
-                // Asignamos la ruta del script
-                script.src = data.validar12;
-                // Indica que el script solo se ejecuta cuando el HTML se haya cargado
-                script.defer = true;
-                // Ponemos el script en el head para que entienda donde va
-                document.head.appendChild(script);
-            })
-            .catch(error => console.log('Error al cargar script'))
-    </script>
+
 </body>
 
 </html>

@@ -9,9 +9,9 @@
     <meta name="author"
         content="Aprendiz: Erick Ramirez, Aprendiz Aprendiz:Sanchez Hernandez, Aprendiz:Estefani Acevedo" />
     <meta http-equiv="Content-Language" content="es" />
-
+    <script src="/frontend/js/Consumables/viewConsumables.js"></script>
     <link rel="stylesheet" href="../../public/css/styles-bem.css">
-
+    
     <title>Visualización de Insumos</title>
 </head>
 
@@ -98,7 +98,7 @@
                         <label for="toggle-color" class="cardright__label-form--color"></label>              
                       </div>
 
-                    <button class="cardright__botton-primary" type="submit">ACTUALIZAR</button>
+                    <a class="cardright__botton-primary" href="/frontend/views/insumes/4-update_insumes.html" >ACTUALIZAR</a>
                 </div>
 
             </fieldset>
@@ -120,21 +120,7 @@
 
     </main>
 
-    <script>
-        fetch("/SGL CODE/Estandarizacion/config.json")
-            .then(result => result.json())
-            .then(data => {
-                // Crea un elemento script
-                const script = document.createElement("script")
-                // Asignamos la ruta del script
-                script.src = data.validar13;
-                // Indica que el script solo se ejecuta cuando el HTML se haya cargado
-                script.defer = true;
-                // Ponemos el script en el head para que entienda donde va
-                document.head.appendChild(script);
-            })
-            .catch(error => console.log('Error al cargar script'))
-    </script>
+
 </body>
 
 </html>
