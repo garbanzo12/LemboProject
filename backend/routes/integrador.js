@@ -237,7 +237,7 @@ router.put("/productions/:id", async (req, res) => {
         if (!name_production || !responsable) {
             return res.status(400).json({ error: "Faltan campos obligatorios" });
         }
-
+        
         // Convertir arrays a strings
         users_selected = Array.isArray(users_selected) ? users_selected.join(", ") : users_selected;
         crops_selected = Array.isArray(crops_selected) ? crops_selected.join(", ") : crops_selected;

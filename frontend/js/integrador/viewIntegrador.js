@@ -16,9 +16,14 @@ console.log(data)
     inputs[5].value = data.name_cropCycle || '';   
     inputs[6].value = data.name_consumables || '';   
     inputs[7].value = data.quantity_consumables || '';   
-    inputs[8].value = data.unitary_value_consumables || '';   
-    inputs[9].value = data.total_value_consumables || '';   
-    inputs[10].value = data.name_sensor || '';   
+
+    if( data.unitary_value_consumables == ''){
+      inputs[8].value = data.total_value_consumables
+    }else{
+      inputs[8].value = data.unitary_value_consumables || ""; 
+    } 
+    inputs[9].value = data.name_sensor || '';   
+    inputs[10].value = data.total_value_consumables || '';   
     inputs[11].value = data.state_production || '';          // ⬅️ Estado
 
   });

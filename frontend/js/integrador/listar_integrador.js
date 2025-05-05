@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
             : safe(produccion.quantity_consumables);
             
           row.innerHTML = `
+        
             <td class="cardright__cell">${safe(produccion.id)}</td>
             <td class="cardright__cell">${safe(produccion.responsable)}</td>
             <td class="cardright__cell">${usuarios}</td>
@@ -74,7 +75,16 @@ document.addEventListener('DOMContentLoaded', () => {
             <td class="cardright__cell">${safe(produccion.name_sensor)}</td>
             <td class="cardright__cell">${safe(produccion.state_production)}</td>
           `;
-          
+          console.log(produccion)
+          row.style.cursor = 'pointer'; // opcional, para mostrar que es clickeable
+
+row.addEventListener('click', () => {
+
+
+  localStorage.setItem('ProduccionSeleccionada', JSON.stringify(produccion));
+  window.location.href = '/frontend/views/integrator/visualizarIntegrador.html';
+});
+
           tbody.appendChild(row);
         });
     }
