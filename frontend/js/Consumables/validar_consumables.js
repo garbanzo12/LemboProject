@@ -91,10 +91,7 @@ function inicializarValidaciones() {
                 description_consumables: description_consumables ? description_consumables.value : '',
                 state_consumables: state_consumables
             };
-            if(datos.unitary_value > datos.total_value){
-                mostrarMensaje(form, "❌ El valor unitario no puede ser mayor al valor total.", "red");
-                validarCampo = false;
-            }
+           
             if (validarCampo) {
                 try {
                     console.log("Datos enviados:", datos);

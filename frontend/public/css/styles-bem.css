@@ -341,6 +341,14 @@ body {
 .cardright__input-form--checkbox[type="checkbox"] {
     display: none;
 }
+.cardright__label-form--color.inicial {
+    background-color: white; /* fondo blanco al iniciar */
+}
+
+/* Cuando está chequeado */
+.cardright__input-form--checkbox[type="checkbox"]:checked + .cardright__label-form--color {
+    background-color: var(--gray-950);
+}
 
 .cardright__label-form--color {
     background-color: var(--primary-950);
@@ -400,6 +408,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    
 }
 
 .cardleft__logo-sena {
@@ -917,6 +926,7 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
     top: 1rem;
     cursor: pointer;
     opacity: 0.7;
+
     transition: 0.4s;
     z-index: 6;
 }
@@ -981,12 +991,18 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
     position: absolute;
     width: 100%;
     left: 0;
+
     top: 130%;
     overflow: hidden;
     clip-path: inset(0% 0% 0% 0% round 1rem);
     transition: all 0.4s;
 }
-
+.side-main__menu-container {
+    max-height: calc(100vh - 100px); /* ajusta 100px según la altura de la barra superior */
+    overflow-y: auto;
+    padding-right: 5px; /* para evitar que el scroll tape el contenido */
+  }
+  
 .side-main__menu-list {
     --delay: 0.4s;
     --trdelay: 0.15s;

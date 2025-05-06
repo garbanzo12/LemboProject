@@ -557,78 +557,19 @@ const actualizarStock = async () => {
     }
 };
 
-    // Modificamos el event listener del formulario para el manejo de insumos
-    form.addEventListener("submit", async e => {
-        e.preventDefault();
     
-        if (!produccionCargada) {
-            alert("Selecciona una producción para actualizar.");
-            return;
-        }
-    
-        // 1. Primero actualizamos la producción
-        const payload = {
-            name_production: inputNombre.value.trim(),
-            responsable: selectResponsable.value.trim(),
-            users_selected: Array.from(tbodyUsers.querySelectorAll("td:first-child")).map(td => td.textContent),
-            crops_selected: Array.from(tbodyCrops.querySelectorAll("td:first-child")).map(td => td.textContent),
-            name_cropCycle: Array.from(tbodyCycle.querySelectorAll("td:first-child")).map(td => td.textContent),
-            name_sensor: Array.from(tbodySensores.querySelectorAll("td:first-child")).map(td => td.textContent),
-            name_consumables: [],
-            quantity_consumables: [],
-            unitary_value_consumables: [],
-            total_value_consumables: 0,
-            
-        };
-    
-        // Calcular total de insumos
-        const insumoFilas = tbodyInsumos.querySelectorAll("tr");
-        let total = 0;
-        insumoFilas.forEach(fila => {
-            const tds = fila.querySelectorAll("td");
-            if (tds.length >= 3) {
-                const nombre = tds[0].textContent;
-                const cantidad = tds[1].textContent;
-                const valor = parseFloat(tds[2].textContent.replace('$', '')) || 0;
-    
-                payload.name_consumables.push(nombre);
-                payload.quantity_consumables.push(parseInt(cantidad));
-                payload.unitary_value_consumables.push(valor);
-                total += valor;
-            }
-        });
-        payload.total_value_consumables = total;
-    
-        try {
-            // 2. Actualizar la producción en el servidor
-            const res = await fetch(`http://localhost:5501/integrador/productions/${produccionCargada.id}`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
-            });
-    
-            if (!res.ok) {
-                const error = await res.json();
-                throw new Error(error.message || "Error al actualizar producción");
-            }
-    
-            // 3. Si la producción se actualizó correctamente, actualizar el stock
-            const stockActualizado = await actualizarStock();
-            if (!stockActualizado) {
-                throw new Error("Error al actualizar stock");
-            }
-    
-            mostrarMensaje(form,"✅ Producción actualizada correctamente.","green");
-            limpiarCampos();
-        } catch (error) {
-            console.error("Error al actualizar:", error);
-            alert(`❌ Error: ${error.message}`);
-        }
-    });
-
-    
-    let estadoProduccion = 'habilitado'; // valor por defecto
+    let estadoProduccion = ''; // valor por defecto
     // Obtener datos de la producción seleccionada
+    const checkbox = document.querySelector('.cardright__input-form--checkbox');
+const label = document.querySelector('.cardright__label-form--color');
+
+// Al cargar, agregamos clase "inicial"
+label.classList.add('inicial');
+
+// Cuando se interactúa, quitamos la clase "inicial"
+checkbox.addEventListener('change', () => {
+    label.classList.remove('inicial');
+});
     selectId.addEventListener("change", async () => {
         const id = selectId.value;
         const res = await fetch(`http://localhost:5501/integrador/productions/${id}`);
@@ -704,7 +645,7 @@ const actualizarStock = async () => {
             });
 
             if (res.ok) {
-                
+                mostrarMensaje(form,"✅ Producción actualizada correctamente.","green");
             } else {
                 const error = await res.json();
                 alert("❌ Error: " + (error.message || "desconocido"));

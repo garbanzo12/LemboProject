@@ -35,12 +35,14 @@
   -->
   <aside class="cardleft">
     <section class="cardleft__container">
-      <img class="cardleft__logo-sena" src="../../public/img_/svg_sena/logo-sena-verde-complementario-svg-2022.svg"
-        alt="Imagen de Logo Sena" />
+      
 
-      <img class="cardleft__img" src="../../public/img_/left_side/movil01.png" alt="Imagen de celular  cuadros" />
+    <img class="cardleft__img" src="../../public/img_/left_side/movil01.png" alt="Imagen de celular  cuadros" />
 
-      <img class="cardleft__logo-sgal" src="../../public/img_/left_side/LogoSgal.png" alt="Imagen de Logo Sgal" />
+    <img class="cardleft__logo-sgal" src="../../public/img_/left_side/LogoSgal.png" alt="Imagen de Logo Sgal" />
+    <label class="side-main">
+
+    </label>
     </section>
   </aside>
   <!-- 
@@ -144,7 +146,13 @@
     </a>
 
   </main>
-
+  <script>
+    fetch('sidebar.html')
+      .then(res => res.text())
+      .then(html => {
+        document.querySelector('.side-main').innerHTML = html;
+      });
+  </script>
 </body>
 
 </html>
