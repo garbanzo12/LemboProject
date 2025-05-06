@@ -210,7 +210,8 @@ router.get("/productions/:id", async (req, res) => {
         produccion.unitary_value_consumables = produccion.unitary_value_consumables?.split(",").map(s => s.trim()) || [];
         produccion.total_value_consumables = parseFloat(produccion.total_value_consumables || 0);
         produccion.name_sensor = produccion.name_sensor?.split(",").map(s => s.trim()) || [];
-
+        produccion.state_production = produccion.state_production?.split(",").map(s => s.trim()) || [];
+        
         res.json(produccion);
     } catch (err) {
         console.error("Error al obtener producción:", err);
@@ -229,7 +230,8 @@ router.put("/productions/:id", async (req, res) => {
         quantity_consumables,
         unitary_value_consumables,
         total_value_consumables,
-        name_sensor
+        name_sensor, 
+        state_production
     } = req.body;
 
     try {
@@ -247,12 +249,13 @@ router.put("/productions/:id", async (req, res) => {
         unitary_value_consumables = Array.isArray(unitary_value_consumables) ? unitary_value_consumables.join(", ") : unitary_value_consumables;
         total_value_consumables = Array.isArray(total_value_consumables) ? total_value_consumables.join(", ") : total_value_consumables;
         name_sensor = Array.isArray(name_sensor) ? name_sensor.join(", ") : name_sensor;
+        state_production = Array.isArray(state_production) ? state_production.join(", ") : state_production;
 
         const sql = `
             UPDATE productions SET
                 name_production = ?, responsable = ?, users_selected = ?, crops_selected = ?, 
                 name_cropCycle = ?, name_consumables = ?, quantity_consumables = ?, 
-                unitary_value_consumables = ?, total_value_consumables = ?, name_sensor = ?
+                unitary_value_consumables = ?, total_value_consumables = ?, name_sensor = ?, state_production = ?
             WHERE id = ?
         `;
 
@@ -267,6 +270,7 @@ router.put("/productions/:id", async (req, res) => {
             unitary_value_consumables,
             total_value_consumables,
             name_sensor,
+            state_production,
             id
         ]);
 
@@ -490,7 +494,24 @@ router.get("/api/cultivos", async (req, res) => {
       res.json(resultados);
     });
   });
+
+
+  router.get("/api/estado-produccion", async (req, res) => {
+    const sql = `
+      SELECT state_production
+      FROM productions
+      
+    `;
   
+    conexion.query(sql, (err, resultados) => {
+      if (err) {
+        console.error("Error al obtener cultivos:", err);
+        return res.status(500).json({ error: "Error en la base de datos" });
+      }
+  
+      res.json(resultados);
+    });
+  });
 
 
   router.get("/api/insumos", async (req, res) => {

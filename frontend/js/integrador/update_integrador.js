@@ -1,5 +1,10 @@
 
 document.addEventListener("DOMContentLoaded", async () => {
+  
+     
+    
+
+
     const selectId = document.getElementById("select-id-production");
     const inputNombre = document.querySelector(".integrator__input-form--n-prodution");
     const selectResponsable = document.querySelector(".integrator__input-form--resp");
@@ -573,6 +578,7 @@ const actualizarStock = async () => {
             quantity_consumables: [],
             unitary_value_consumables: [],
             total_value_consumables: 0,
+            
         };
     
         // Calcular total de insumos
@@ -620,7 +626,8 @@ const actualizarStock = async () => {
         }
     });
 
-
+    
+    let estadoProduccion = 'habilitado'; // valor por defecto
     // Obtener datos de la producción seleccionada
     selectId.addEventListener("change", async () => {
         const id = selectId.value;
@@ -637,14 +644,25 @@ const actualizarStock = async () => {
         rellenarLista(data.name_cropCycle, tbodyCycle);
         rellenarLista(data.name_sensor, tbodySensores);
         rellenarInsumos(data.name_consumables, data.quantity_consumables, data.unitary_value_consumables, tbodyInsumos);
-    });
+         // Inicializar checkbox según el valor actual
+    const toggleCheckbox = document.getElementById('toggle-color');
+    toggleCheckbox.checked = data.state_production === 'deshabilitado';
+    estadoProduccion = data.state_production;
 
+    toggleCheckbox.addEventListener('change', () => {
+        estadoProduccion = toggleCheckbox.checked ? 'deshabilitado' : 'habilitado';
+        console.log('Estado cambiado:', estadoProduccion);
+    });
+});
+
+   
     // Enviar cambios
     form.addEventListener("submit", async e => {
         e.preventDefault();
 
         if (!produccionCargada) return alert("Selecciona una producción.");
-
+      
+        
         const payload = {
             name_production: inputNombre.value.trim(),
             responsable: selectResponsable.value.trim(),
@@ -656,6 +674,8 @@ const actualizarStock = async () => {
             quantity_consumables: [],
             unitary_value_consumables: [],
             total_value_consumables: 0,
+            state_production : estadoProduccion 
+            
         };
 
         const insumoFilas = tbodyInsumos.querySelectorAll("tr");
