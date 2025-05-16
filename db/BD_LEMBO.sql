@@ -18,12 +18,11 @@ CREATE TABLE users(
     name_user VARCHAR(100) ,
     email VARCHAR(100) NOT NULL UNIQUE,
     cellphone VARCHAR(20),
-    state ENUM('Activo', 'Inactivo') DEFAULT 'Activo',
-    password VARCHAR(255) NOT NULL,
+	state_user ENUM("habilitado", "deshabilitado") default "habilitado",
+    password varchar(100) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-    );
-
+    );
 
     CREATE TABLE crops (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -32,9 +31,12 @@ CREATE TABLE users(
     location VARCHAR(100) NOT NULL,
     description_crop VARCHAR(20),
     size_m2 VARCHAR(255),
+    image_crop TEXT,
+    state_crop("habilitado", "deshabilitado") default "habilitado",
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+
 
 
 CREATE TABLE cropcycle (
@@ -68,14 +70,16 @@ CREATE TABLE consumables(
     
 CREATE TABLE sensors(	
 	id INT AUTO_INCREMENT PRIMARY KEY,
-	type_sensors TEXT NOT NULL,
-    name_sensors VARCHAR(100) NOT NULL,
-	unit_sensors INT NOT NULL,
-	time_sensors INT,
-    description_sensors TEXT,
+	type_sensor TEXT NOT NULL,
+    name_sensor VARCHAR(100) NOT NULL,
+	unit_sensor TEXT,
+	time_sensor TEXT,
+    description_sensor TEXT,
+    image_sensor TEXT,
+	state_sensor ENUM("habilitado", "deshabilitado") default "habilitado",
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-    );
+    );
 
     CREATE TABLE cuadros_seleccionados (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -85,7 +89,7 @@ CREATE TABLE sensors(
 );
 
 
-    CREATE TABLE productions(	
+CREATE TABLE productions(	
     name_production VARCHAR(100) NOT NULL UNIQUE,
     responsable VARCHAR(50) NOT NULL,
     id VARCHAR(40) PRIMARY KEY,
@@ -94,8 +98,10 @@ CREATE TABLE sensors(
     crops_selected TEXT,
     name_cropCycle TEXT,
 	name_consumables TEXT,
-	quantity_consumables INT NOT NULL,
+	quantity_consumables TEXT,
+    unitary_value_consumables TEXT,
+    total_value_consumables TEXT,
 	name_sensor TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-    );
+    );
