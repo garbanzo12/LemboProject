@@ -77,6 +77,7 @@ CREATE TABLE sensors(
     description_sensor TEXT,
     image_sensor TEXT,
 	state_sensor ENUM("habilitado", "deshabilitado") default "habilitado",
+    quantity_sensor INT DEFAULT 0;
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     );

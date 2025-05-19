@@ -56,12 +56,37 @@ router.get("/cycle/responsable", (req, res) => {
 });
 
 router.get("/sensors/responsable", (req, res) => {
-    const sql = "SELECT name_sensor FROM sensors WHERE state_sensor = 'habilitado'";
+    const sql = "SELECT name_sensor, quantity_sensor FROM sensors WHERE state_sensor = 'habilitado' AND quantity_sensor > 0";
     conexion.query(sql, (error, results) => {
         if (error) return res.status(500).json({ error: "Error en la base de datos" });
         if (!results.length) return res.status(404).json([]);
         res.json(results);
     });
+});
+router.post("/sensor/actualizar-stock", async (req, res) => {
+    const { sensores } = req.body;
+
+    if (!Array.isArray(sensores) || sensores.length === 0) {
+        return res.status(400).json({ error: "No se recibieron sensores válidos" });
+    }
+
+    const conexionPromesa = conexion.promise();
+
+    try {
+        for (const sensor of sensores) {
+            const { name_sensor, cantidadUsada } = sensor;
+
+            await conexionPromesa.query(
+                "UPDATE sensors SET quantity_sensor = quantity_sensor - ? WHERE name_sensor = ?",
+                [cantidadUsada, name_sensor]
+            );
+        }
+
+        res.json({ mensaje: "Stock de sensores actualizado exitosamente" });
+    } catch (error) {
+        console.error("Error actualizando stock de sensores:", error);
+        res.status(500).json({ error: "Error al actualizar stock de sensores" });
+    }
 });
 
 router.get("/consumable/responsable", (req, res) => {

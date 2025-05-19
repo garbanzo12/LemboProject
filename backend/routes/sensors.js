@@ -44,15 +44,16 @@ function sensors(){
   router.post("/sensors", upload.single("image_sensor"), (req, res) => {
     console.log("Datos recibidos en POST /sensors:", req.body);
   
-    const { type_sensor, name_sensor, unit_sensor, time_sensor, description_sensor, state_sensor } = req.body;
+    const { type_sensor, name_sensor, unit_sensor, time_sensor, description_sensor,quantity_sensor, state_sensor } = req.body;
     const image_sensor = req.file ? req.file.filename : null;
   
-    if (!type_sensor || !name_sensor || !unit_sensor || !time_sensor || !description_sensor || !image_sensor || !state_sensor) {
+    if (!type_sensor || !name_sensor || !unit_sensor || !time_sensor || !description_sensor || !image_sensor || !quantity_sensor ||
+       !state_sensor) {
         return res.status(400).json({ error: "Todos los campos son obligatorios" });
     }
   
-    const sql = "INSERT INTO sensors (type_sensor, name_sensor, unit_sensor, time_sensor, description_sensor, image_sensor, state_sensor) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    conexion.query(sql, [type_sensor, name_sensor, unit_sensor, time_sensor, description_sensor, image_sensor, state_sensor], (error, resultado) => {
+    const sql = "INSERT INTO sensors (type_sensor, name_sensor, unit_sensor, time_sensor, description_sensor, image_sensor,quantity_sensor, state_sensor) VALUES (?, ?, ?, ?, ?, ?, ? , ?)";
+    conexion.query(sql, [type_sensor, name_sensor, unit_sensor, time_sensor, description_sensor, image_sensor,quantity_sensor, state_sensor], (error, resultado) => {
         if (error) {
             console.error("Error al insertar datos:", error);
             return res.status(500).json({ error: "Error al insertar datos" });

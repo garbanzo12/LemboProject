@@ -514,6 +514,8 @@ async function actualizarStock() {
 // ⬆️ Agregar Insumo ⬆️
 
 // ⬇️ Funciones de sensores ⬇️
+let sensoresDisponibles = {};
+
 async function cargarSensorSelect() {
     try {
         const response = await fetch("http://localhost:5501/integrador/sensors/responsable");
@@ -523,8 +525,11 @@ async function cargarSensorSelect() {
         sensores.forEach(sensor => {
             const option = document.createElement("option");
             option.value = sensor.name_sensor;
-            option.textContent = sensor.name_sensor;
+            option.textContent = `${sensor.name_sensor} (Disponible: ${sensor.quantity_sensor})`;
             select.appendChild(option);
+            sensoresDisponibles[sensor.name_sensor] = {
+            cantidad: sensor.quantity_sensor
+            };
         });
 
         document.querySelector(".integrator__add-sensor").addEventListener("click", agregarsensorATabla);
@@ -540,53 +545,118 @@ function agregarsensorATabla() {
         alert("Solo puedes agregar hasta 3 sensores.");
         return;
     }
+
     const select = document.querySelector(".integrator__tablet-select--sensor");
-    const sensoreseleccionado = select.value.trim();
-    
-    if (!sensoreseleccionado) return;
-    
-    if (produccionData.name_sensor.some(sensor => 
-        sensor.toLowerCase() === sensoreseleccionado.toLowerCase()
-    )) {
-        alert(`El sensor "${sensoreseleccionado}" ya está en la lista`);
+    const sensorSeleccionado = select.value.trim();
+
+    if (!sensorSeleccionado) return;
+
+    if (produccionData.name_sensor.some(s => s.toLowerCase() === sensorSeleccionado.toLowerCase())) {
+        alert(`El sensor "${sensorSeleccionado}" ya está en la lista`);
         select.value = "";
         return;
     }
-    
+
+    const sensorInfo = sensoresDisponibles[sensorSeleccionado];
+    if (!sensorInfo) {
+        alert("Sensor no encontrado.");
+        return;
+    }
+
+    const cantidadDeseada = prompt(`¿Cuántas unidades deseas usar de ${sensorSeleccionado}?`);
+    const cantidadUsar = parseInt(cantidadDeseada, 10);
+
+    if (isNaN(cantidadUsar) || cantidadUsar <= 0) {
+        alert("Cantidad inválida.");
+        return;
+    }
+
+    if (cantidadUsar > sensorInfo.cantidad) {
+        alert(`Solo hay ${sensorInfo.cantidad} unidades disponibles.`);
+        return;
+    }
+
+    // Restar stock en memoria
+    sensorInfo.cantidad -= cantidadUsar;
+
     const tbody = document.querySelector(".integrator_sensor-list");
     const nuevaFila = document.createElement("tr");
-    
-    const celda = document.createElement("td");
-    celda.className = "integrator__table-dato";
-    celda.textContent = sensoreseleccionado;
-    
+
+    const celdaNombre = document.createElement("td");
+    celdaNombre.className = "integrator__table-dato";
+    celdaNombre.textContent = sensorSeleccionado;
+
+    const celdaCantidad = document.createElement("td");
+    celdaCantidad.className = "integrator__table-dato";
+    celdaCantidad.textContent = cantidadUsar;
+
     const celdaEliminar = document.createElement("td");
-    const botonEliminar = document.createElement("button");
-    // const botonEnviarFormulario = document.querySelector(".integrator__botton-primary--color");
-    // botonEnviarFormulario.addEventListener("click", () => {
-    //     produccionData.name_sensor = produccionData.name_sensor.filter(
-    //         sensor => sensor !== sensoreseleccionado
-    //     );
-    //     nuevaFila.remove();
-    // });
-    botonEliminar.textContent = "×";
-    botonEliminar.className = "eliminar-cultivo";
-    botonEliminar.addEventListener("click", () => {
-        produccionData.name_sensor = produccionData.name_sensor.filter(
-            sensor => sensor !== sensoreseleccionado
-        );
+    const btnEliminar = document.createElement("button");
+    btnEliminar.textContent = "×";
+    btnEliminar.className = "eliminar-cultivo";
+    btnEliminar.addEventListener("click", () => {
+        sensorInfo.cantidad += cantidadUsar;
+        const idx = produccionData.name_sensor.findIndex(s => s === sensorSeleccionado);
+        if (idx !== -1) {
+            produccionData.name_sensor.splice(idx, 1);
+            produccionData.quantity_sensor.splice(idx, 1);
+        }
         nuevaFila.remove();
     });
-    
-    produccionData.name_sensor.push(sensoreseleccionado);
-    
-    celdaEliminar.appendChild(botonEliminar);
-    nuevaFila.appendChild(celda);
+
+    celdaEliminar.appendChild(btnEliminar);
+
+    nuevaFila.appendChild(celdaNombre);
+    nuevaFila.appendChild(celdaCantidad);
     nuevaFila.appendChild(celdaEliminar);
+
     tbody.appendChild(nuevaFila);
-    
+
+    // Guardar en el objeto
+    produccionData.name_sensor.push(sensorSeleccionado);
+    if (!produccionData.quantity_sensor) produccionData.quantity_sensor = [];
+    produccionData.quantity_sensor.push(cantidadUsar);
+
     select.value = "";
 }
+async function actualizarStockSensores() {
+    try {
+        const sensores = [];
+
+        const filas = document.querySelectorAll(".integrator_sensor-list tr");
+
+        filas.forEach(fila => {
+            const columnas = fila.querySelectorAll("td");
+            if (columnas.length >= 2) {
+                const nombre = columnas[0].textContent.trim();
+                const cantidad = parseInt(columnas[1].textContent.trim(), 10);
+
+                sensores.push({ name_sensor: nombre, cantidadUsada: cantidad });
+            }
+        });
+
+        const response = await fetch("http://localhost:5501/integrador/sensor/actualizar-stock", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ sensores })
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            console.log("✅ Sensores actualizados:", result);
+            return true;
+        } else {
+            console.error("❌ Error en sensores:", result);
+            alert("❌ Error al actualizar stock de sensores");
+            return false;
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("❌ Error al actualizar stock de sensores");
+    }
+}
+
 // ⬆️ Funciones de sensores ⬆️  
 // Función para enviar los datos al servidor
 async function enviarProduccion() {
@@ -702,13 +772,13 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector('.integrator__botton-primary--color').addEventListener("click", async () => {
         const produccionGuardada = await enviarProduccion();  // 👈 Guarda producción
     
-        if (produccionGuardada) {
-            const stockActualizado = await actualizarStock(); // 👈 Luego actualizar stock
-            
-            if (stockActualizado) {
-                limpiarCamposSeleccionados(); // 👈 Solo aquí limpiamos
-            }
+       if (produccionGuardada) {
+        const insumosOK = await actualizarStock();
+        const sensoresOK = await actualizarStockSensores();
+        if (insumosOK && sensoresOK) {
+            limpiarCamposSeleccionados();
         }
+    }
     });
     
     setTimeout(() => {

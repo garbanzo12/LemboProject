@@ -36,6 +36,7 @@ function inicializarValidaciones() {
             const time_sensor = document.querySelector('.cardright__input-form--time');//✅
             const description_sensor = document.querySelector('.cardright__input-form--description');//✅
             const image_sensor = document.querySelector('.cardright__input-form--file'); //✅
+            const quantity_sensor = document.querySelector('.cardright__input-form--quantity'); //✅
             const state_sensor = toggleCheckbox ? (toggleCheckbox.checked ? 'habilitado' : 'deshabilitado') : '';
             
             let validarCampo = true;
@@ -66,6 +67,7 @@ function inicializarValidaciones() {
             datos.append("time_sensor", time_sensor.value);
             datos.append("description_sensor", description_sensor.value);
             datos.append("image_sensor", image_sensor.files[0]); // 👈 importante: image_crop.files[0]
+            datos.append("quantity_sensor", quantity_sensor.value);
             datos.append("state_sensor", state_sensor);
             if (validarCampo) {
                 try {
