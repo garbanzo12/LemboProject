@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Es una pagina con formulario y una ventana de celular" />
+    <meta name="keywords" content="sena, risaralda, lembo, gestion, agricola, campecino, produtos, cultivos," />
+    <meta name="author"
+        content="Aprendiz: Erick Ramirez, Aprendiz Aprendiz:Sanchez Hernandez, Aprendiz:Estefani Acevedo" />
+    <meta http-equiv="Content-Language" content="es" />
+    <link rel="stylesheet" href="/frontend/public/css/styles-bem.css">
+      <!-- ✅ Styles de Choices.js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+      <!-- ✅ JS de Choices.js -->
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
+    <script src="/frontend/js/integrador/update_integrador.js"></script>
+    <title>Actualizar Integrador</title>
+</head>
+
+<body>
+    <!--   
+  /* ****************************************************** */
+  /* ***************    ELEMENTOS TITTLE    *************** */
+  /* ****************************************************** */ -->
+
+    <header class="cardtittle">
+        <p class="cardtittle__text">SENA SEDE LEMBO</p>
+        <a class="cardtittle__enlace" href="./index_main.html">
+            <img class="cardtittle__svg-home" src="/frontend/public/img_/svg/home.svg" alt>
+        </a>
+    </header>
+    <!-- 
+  /* ****************************************************** */
+  /* *************    ELEMENTOS CARD LEFT    ************** */
+  /* ****************************************************** */
+  -->
+    <aside class="cardleft cardleft--pequeño">
+        <section class="cardleft__container">
+            <img class="cardleft__logo-sgal" src="/frontend/public/img_/left_side/LogoSgal.png" alt="Imagen de Logo Sgal" />
+
+
+            <img class="cardleft__img" src="/frontend/public/img_/left_side/movil01.png" alt="Imagen de celular  cuadros" />
+
+            <img class="cardleft__logo-sena" src="/frontend/public/img_/svg_sena/logo-sena-verde-complementario-svg-2022.svg"
+                alt="Imagen de Logo Sena" />
+
+        </section>
+    </aside>
+    <!--     
+/* ****************************************************** */
+/* *************    ELEMENTOS CARD RIGHT    ************** */
+/* ****************************************************** */ -->
+
+    <label class="side-main">
+
+    </label>
+    <!-- 
+  /* ******************************************************* */
+  /* ****************     BLOQUE  SIDERIGHT  *************** */
+  /* ******************************************************* */ 
+  -->
+    <main class="integrator">
+
+        <form class="integrator__form">
+
+            <header class="integrator__form-header">
+
+                <div class="integrator__header-tittles">
+                    <h3 class="integrator__title-h3">NOMBRE:</h3>
+                    <input class="integrator__input-form integrator__input-form--n-prodution" type="text"
+                        placeholder="nombre-produccion">
+                </div>
+
+                <div class="integrator__header-tittles">
+                    <h3 class="integrator__title-h3">RESPONSABLE</h3>
+                    <select class="integrator__input-form integrator__input-form--resp" required>
+                        <option value="">Seleccione un ID de Ciclo</option>
+                        <!-- Opciones se agregarán dinámicamente -->
+                      </select>
+                </div>
+                 
+                 <!-- Para buscar ID en modulo actualizar -->
+                 <div class="integrator__header-tittles">
+                    <h3 class="integrator__title-h3 integrator__title-h3--id">IDENTIFICADOR</h3>
+                    <select id="select-id-production" class="integrator__input-form integrator__input-form-id-prod">
+                      <option value="" disabled selected>Selecciona una producción</option>
+                    </select>
+                  </div>
+                  <p>Estado producción</p>
+                      <!-- BOTON INDICADOR CAMBIO DE COLOR ESTADO  -->
+                      <div class="cardright__subcontainer-input">
+                        <!-- Checkbox sin atributo name -->
+                     <input class="cardright__input-form--checkbox" type="checkbox" id="toggle-color" />
+                     <label for="toggle-color" class="cardright__label-form--color"></label>
+                                         
+                     <!-- Campo oculto para enviar el valor -->
+                     <input type="hidden" name="estado_ciclo" id="estado_ciclo_hidden" />
+                    
+                     </div>
+            </header>
+
+            <!-- Sección usuarios -->
+
+            <fieldset class="integrator__form-body">
+                <div class="integrator__produccion-body">
+
+
+                    <div class="integrator__module">
+
+                        <table class="integrator__module-table">
+                            <caption class="integrator__module-header">USUARIOS</caption>
+                            <thead class="integrator__module-thead">
+                                <tr class="integrator__table-header">
+                                    <th class="integrator__header-cell">NOMBRE</th>
+                                </tr>
+                            </thead>
+                            <tbody class="integrator__table-fila integrator_users-list">
+                                <!-- Las celdas se agregarán dinámicamente aquí -->
+                            </tbody>
+                        </table>
+                        <hr>
+
+                        <button class="integrator__botton-primary integrator__add-user" type="button">AGREGAR</button>
+                        <select class="integrator__tablet-select integrator__tablet-select--users">
+                            <option value="" disabled selected>Elige Usuarios</option>
+
+                        </select>
+                        <hr>
+                       
+                        <button class="integrator__botton-primary integrator__botton-primary--modal" type="button">CREAR ITEM</button>
+
+                    </div>
+                    <!-- fin modulo -->
+                    <!-- Sección Cultivos -->
+
+                    <div class="integrator__module">
+
+                        <table class="integrator__module-table">
+                            <caption class="integrator__module-header">Cultivos</caption>
+                            <thead class="integrator__module-thead">
+                                <tr class="integrator__table-header">
+                                    <th class="integrator__header-cell">NOMBRE</th>
+                                </tr>
+                            </thead>
+                            <tbody class="integrator__table-fila integrator_crops-list">
+                                <!-- Las celdas se agregarán dinámicamente aquí -->
+                            </tbody>
+                        </table>
+                        <hr>
+                        <button class="integrator__botton-primary integrator__add-crop" type="button">AGREGAR</button>
+                        <select class="integrator__tablet-select integrator__tablet-select--crops">
+                            <option value="" disabled selected>Elige Cultivos</option>
+                        <hr>
+                      
+                        <button class="integrator__botton-primary integrator__botton-primary--modal" type="button">CREAR ITEM</button>
+
+                    </div>
+                    <!-- fin modulo -->
+                     
+                    <!-- Sección Cultivos -->
+                     <!-- ⬇️ No tocar este bloque por nada del mundo ⬇️ -->
+                    <div class="integrator__module">
+
+                        <table class="integrator__module-table">
+                            <caption class="integrator__module-header">este bloque no se ve</caption>
+
+                            <thead class="integrator__module-thead">
+                                <tr class="integrator__table-header">
+                                    <th class="integrator__header-cell">este bloque no se ve</th>
+                                </tr>
+                                <tr class="integrator__table-fila">
+                                    <td class="integrator__table-dato">este bloque no se ve</td>
+                                    <td class="integrator__table-dato">este bloque no se ve</td>
+                                    <td class="integrator__table-dato">este bloque no se ve</td>
+                                    <td class="integrator__table-dato">este bloque no se ve</td>
+                                </tr>
+
+                        </table>
+                        <hr>
+                        <button class="integrator__botton-primary" type="">AGREGAR</button>
+                        <select class="integrator__tablet-select">
+                         
+                        </select>
+                        <hr>
+                       
+                        <button class="integrator__botton-primary integrator__botton-primary--modal" type="button">CREAR ITEM</button>
+
+                    </div>
+                       <!-- ⬆️ No tocar este bloque por nada del mundo ⬆️ -->
+                    <div class="integrator__module">
+                        <!-- Modulo de ciclos -->
+                        <table class="integrator__module-table">
+                            <caption class="integrator__module-header">Ciclos</caption>
+                            <thead class="integrator__module-thead">
+                                <tr class="integrator__table-header">
+                                    <th class="integrator__header-cell">NOMBRE</th>
+                                </tr>
+                            </thead>
+                            <tbody class="integrator__table-fila integrator_cycle-list">
+                                <!-- Las celdas se agregarán dinámicamente aquí -->
+                            </tbody>
+                        </table>
+                        <hr>
+                        <button class="integrator__botton-primary integrator__add-cycle" type="button">AGREGAR</button>
+                        <select class="integrator__tablet-select integrator__tablet-select--cycle">
+                            <option value="" disabled selected>Elige Ciclos</option>
+                        </select>
+                        <hr>
+                  
+                        <button class="integrator__botton-primary integrator__botton-primary--modal" type="button">CREAR ITEM</button>
+
+                    </div>
+                    <!-- fin modulo -->
+                   <!-- Sección Insumos -->
+<div class="integrator__module">
+
+    <div class="contenedor-insumos">
+        <div class="contenedor-tabla">
+            <table class="integrator__module-table">
+                <caption class="integrator__module-header">INSUMOS</caption>
+                <thead class="integrator__module-thead">
+                    <tr class="integrator__table-header">
+                        <th class="integrator__header-cell">NOMBRE</th>
+                        
+                    </tr>
+                </thead>
+                <tbody class="integrator__table-fila integrator_consumable-list">
+                    <!-- Las celdas se agregarán dinámicamente aquí -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="resumen-total-dinero">
+            💲 Total insumos: $0.00
+        </div>
+    </div>
+
+    <hr>
+    <button class="integrator__botton-primary integrator__add-consumable" type="button">AGREGAR</button>
+    <select class="integrator__tablet-select integrator__tablet-select--consumable">
+        <option value="" disabled selected>Elige Insumos</option>
+    </select>
+    <hr>
+
+    <button class="integrator__botton-primary integrator__botton-primary--modal" type="button">CREAR ITEM</button>
+
+</div>
+<!-- fin modulo -->
+
+                    <!-- Sección Sensores -->
+
+                    <div class="integrator__module">
+
+                        <table class="integrator__module-table">
+                            <caption class="integrator__module-header">SENSORES</caption>
+                            <thead class="integrator__module-thead">
+                                <tr class="integrator__table-header">
+                                    <th class="integrator__header-cell">NOMBRE</th>
+                                </tr>
+                            </thead>
+                            <tbody class="integrator__table-fila integrator_sensor-list">
+                                <!-- Las celdas se agregarán dinámicamente aquí -->
+                            </tbody>
+                        </table>
+                        <hr>
+                        <button class="integrator__botton-primary integrator__add-sensor" type="button">AGREGAR</button>
+                        <select class="integrator__tablet-select integrator__tablet-select--sensor">
+                            <option value="" disabled selected>Elige Sensores</option>
+                        </select>
+                        <hr>
+                     
+                        <button class="integrator__botton-primary integrator__botton-primary--modal" type="button">CREAR ITEM</button>
+
+                    </div>
+                    <!-- fin modulo -->
+                </div>
+            </fieldset>
+            <button class=" integrator__botton-primary
+                integrator__botton-primary--color" type="submit">ACTUALIZAR PRODUCCIÓN
+                </button>
+
+        </form>
+    </main>
+    <div id="modal-global" class="modal" style="display: none;">
+        <div class="modal__content">
+          <span class="modal__close" title="Cerrar Modal">❌</span>
+          <iframe id="iframe-global" src="" frameborder="0" width="100%" height="830px"></iframe>
+        </div>
+      </div>
+      
+      <script>
+        fetch('sidebar.html')
+          .then(res => res.text())
+          .then(html => {
+            document.querySelector('.side-main').innerHTML = html;
+          });
+      </script>
+      
+</body>
+
+</html>

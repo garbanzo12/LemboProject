@@ -1,0 +1,409 @@
+
+    
+    .main {
+      font-family: var(--font--size);
+      background: linear-gradient(to bottom,
+          var(--secundary-1-950),
+          var(--gray-900));
+      margin-top: 0;
+      display: flex;
+      flex-direction: column;
+      /* align-items: center; */
+      font-size: var(--font--size);
+      font-family: var(--font--main);
+      color: white;
+      height: 150rem;
+    
+    }
+    
+    .Bar {
+      background-color: var(--secundary-1-950);
+      width: auto;
+      height: auto;
+      flex-direction: column;
+      border-radius: 0.6rem;
+      margin: 0 auto;
+      color: var(--black);
+      display: flex;
+      justify-content: center; /* Centra el contenido horizontalmente */
+      transition: background-color 0.5s ease;
+    /* ESTE CONETENEDOR ESTA EN MEDIO DE LA PANTALLA EN LA PARTE SUPERIOR SE ENCESITA QUE SE PEGUE A LA PARTE SUPERIOR CUANDO SE HACE SCROLL */
+      /* position: sticky;  */
+      /* left: 35%; */
+    }
+    
+    .BarTop:hover {
+      background-color: var(--white);
+    }
+    
+    .Bar__List {
+      display: flex;
+      flex-direction: row;
+      padding: 0 10rem 0 10rem;
+      gap: 3rem;
+      transition: gap 1s ease;
+    }
+    
+    .BarTop:hover .Bar__List {
+      gap: 10rem;
+      
+      background-image: url("../img/SEDE-AGRUPECUARIA-SENA-LEMBO.gif"); /* Ruta de la imagen */
+      background-size: cover; /* Ajusta la imagen para cubrir el área del elemento */
+      background-repeat: no-repeat; /* Evita que la imagen se repita */
+      background-position: center; /* Centra la imagen */
+
+    }
+    
+    .Bar__Item {
+      background-color: var(--secundary-1-400);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      height: auto;
+      width: auto;
+      border-radius: 0.4rem;
+    }
+
+    .Bar__Item:hover {
+    opacity: 0.5;
+    }
+    
+    .BarTop__Image {
+      width: 6rem;
+      height: 6rem;
+    }
+    
+    .Bar__linkparag {
+      width: auto;
+      flex-direction: column;
+      text-align: center;
+      margin: 0.4rem 0 0.8rem 0;
+    }
+    
+    
+    /* *******************   BARRA DE NAVEGACION    ***************** */
+    
+    .BarGeneral__side {
+      position: fixed;
+      top: 2rem;
+      left: 2rem;
+      border-radius: 1rem;
+      background-color: var(--secundary-1-400);
+      width: auto;
+      height: auto;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--black);
+      border: 0.2rem solid var(--primary-950);
+      cursor: pointer; /* Indicador visual interactivo */
+      z-index: 10;
+      transition: background-color 3s ease;
+    }
+
+    .BarGeneral__side:hover { 
+      opacity: 1;
+      background-color: var(--secundary-1-950);
+      color: white;
+      transition: background-color 3s ease;
+    }
+    
+    .BarGeneral__nombreUser {
+      width: 16rem;
+      height: 10rem;
+      margin: 0.8rem;
+    }
+    
+    .BarGeneral__Usuario {
+      width: 10rem;
+      height: 10rem;
+      margin: 0.8rem;
+      border-radius: 1.6rem;
+    }
+    
+    /* Menú de módulos oculto */
+    .BarLinksmodulos {
+      display: none;
+      background-color: var(--secundary-1-100);
+      padding: 1rem;
+      border: 0.1rem solid var(--primary-950);
+      border-radius: 0.5rem;
+      position: fixed;
+      top: 11rem;
+      left: 2rem;
+      width: 20rem;
+      transition: background-color 1s ease;
+      /* transform: gap 1s ease; */
+      color: var(--black);
+      font-weight: 400;
+      z-index: 9;
+      opacity: 1;
+      pointer-events:all ;
+    }
+    
+    .BarLinksmodulos a{
+      text-decoration: none; 
+      color: inherit;
+    }
+    
+    .BarGeneral__check {
+      display: none;
+    pointer-events: none;
+    }
+    
+    /* Cuando el checkbox está marcado */
+    #toggle-linksmodulos:checked ~ .BarLinksmodulos {
+      display: block; /* Muestra el menú */
+      
+    }
+    
+/* ******************************************************************** */
+/* EFECTO PARA CONTROLAR LAS CARDS SE ADAPTO Y MEJORO PARA EL PROYECTO */
+
+/* From Uiverse.io by eslam-hany */ 
+.sectionContainers__card {
+  position: relative;
+  width: 100%;
+  height: 100;
+  background: mediumturquoise;
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  /* font-size: 25px; */
+  /* font-weight: bold; */
+  border-radius: 2rem;
+  cursor: pointer;
+  z-index: 0;
+}
+
+.sectionContainers__card::before,
+.sectionContainers__card::after {
+  position: absolute;
+  content: "SENA";
+  width: 20%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50rem;
+  font-weight: bold;
+  background-color: var(--secundary-1-950);
+  transition: all 0.5s;
+  opacity: 0.1;
+  overflow: hidden;
+}
+
+.sectionContainers__card::before {
+  top: 0;
+  right: 0;
+  border-radius: 0 2rem 0 100%;
+}
+
+.sectionContainers__card::after {
+  bottom: 0;
+  left: 0;
+  border-radius: 0 100%  0 2rem;
+}
+
+.sectionContainers__card:hover::before,
+.sectionContainers__card:hover:after {
+  width: 100%;
+  height: 100%;
+  border-radius: 2rem;
+  transition: all 0.5s;
+}
+
+.sectionContainers__card:hover:after {
+  content: "";
+}
+
+
+
+    /* *******************     MENU DE MODULOS     ***************** */
+    
+    .sectionContainers {
+      font-family: Arial, sans-serif;
+      margin: 0 auto;
+      padding: 2rem;
+      width: 90%;
+    }
+    
+    /* Styles for each section and article */
+    .sectionContainers__card, .article {
+      border: 0.2rem solid #000; /* Borde visible */
+      border-radius: 0.8rem;
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background-color: var(--white); /* Color de fondo claro */
+    }
+    
+    .sectionContainers__card h2{
+      color: var(--black);
+    }
+    
+    /* Align content in sections and articles */
+    .sectionContainers__cardContent {
+      display: flex;
+      align-items: center;
+      gap: 2rem; /* Espacio entre párrafo e imagen */
+    }
+    
+    /* Paragraph styles */
+    .sectionContainers__cardContent p {
+      flex: 1; 
+      font-size: 1.6rem;
+      line-height: 1.5;
+      margin: 0;
+      color: var(--black);
+    }
+    
+    /* Image styles */
+    .sectionContainers__cardContent img {
+      width: 30rem; 
+      height: auto;
+      border-radius: 0.8rem;
+    }
+    .BarLinksmodulos__ventorConfig {
+      display: flex; 
+      flex-direction: column; 
+    }
+    .Main__svg {
+      width: 9rem;
+      height: 9rem;
+    }
+    
+    
+    
+    .section p {
+      text-align: justify;
+    }
+      /* *******************     MEDIA QUERY PARA 380px     ***************** */
+    
+      @media (min-width: 380px) {
+        .BarTop {
+          display: flex;
+          width: auto;
+          margin-top: 16rem;
+        }
+        .Bar__List{
+          padding: 0 1rem 0 1rem;
+          gap: 2rem;
+        }
+        .BarTop:hover .Bar__List {
+          gap: 2rem;
+          /* Aumenta el espacio entre los elementos */
+        }
+        .sectionContainers__cardContent {
+          flex-direction: row; /* Cambia el diseño a filas (imagen y texto uno al lado del otro) */
+          gap: 1rem; /* Espacio entre los elementos */
+          align-items: center; /* Centra los elementos dentro del contenedor */
+        }
+      
+        .sectionContainers__cardContent img {
+          width: 85%; /* La imagen ocupa un 20% del contenedor */
+          height: auto; /* Mantiene las proporciones */
+        }
+      
+        .sectionContainers__cardContent p {
+          font-size: 1.8rem; /* Tamaño de texto pequeño */
+          line-height: 1.4;
+          text-align: justify; /* Justifica el texto */
+          margin: 0 2rem 0 2rem;
+        }
+        .sectionContainer__title{
+          display: flex;
+          margin-top: 0px;
+        }
+        .sectionContainers__card {
+          display: flex;
+          flex-direction: column;
+        }
+        .sectionContainers__card .sectionContainers__cardContent{
+          display: flex;
+          flex-direction: column;
+          
+        }
+      }
+    @media (min-width: 768px) {
+      .BarTop {
+        display: flex;
+        margin-top: 16rem;
+      }
+      .Bar__List{
+        padding: 0 10rem 0 10rem;
+        gap: 0.4rem;
+      }
+      .BarTop:hover .Bar__List {
+        gap: 4rem;
+        /* Aumenta el espacio entre los elementos */
+      }
+      .sectionContainers__cardContent {
+        flex-direction: row; /* Cambia el diseño a filas (imagen y texto uno al lado del otro) */
+        gap: 1rem; /* Espacio entre los elementos */
+        align-items: center; /* Centra los elementos dentro del contenedor */
+      }
+    
+      .sectionContainers__cardContent img {
+        width: 60%; /* La imagen ocupa un 20% del contenedor */
+        height: auto; /* Mantiene las proporciones */
+      }
+    
+      .sectionContainers__cardContent p {
+        font-size: 1.8rem; /* Tamaño de texto pequeño */
+        line-height: 1.4;
+        text-align: justify; /* Justifica el texto */
+        margin: 0 2rem 0 2rem;
+      }
+      .sectionContainers__card{
+        display: flex;
+        flex-direction: column;
+      }
+      .sectionContainers__card .sectionContainers__cardContent{
+        display: flex;
+        flex-direction: column;
+        
+      }
+    }
+    
+    @media (min-width: 1280px) {
+      .BarTop {
+        display: flex;
+        margin-top: 1rem;
+      }
+      .Bar__List{
+        gap: 3rem;
+      }
+      .BarTop:hover .Bar__List {
+        gap: 6rem;
+        /* Aumenta el espacio entre los elementos */
+      }
+      .sectionContainers__cardContent {
+        flex-direction: row; /* Cambia el diseño a filas (imagen y texto uno al lado del otro) */
+        gap: 1rem; /* Espacio entre los elementos */
+        align-items: center; /* Centra los elementos dentro del contenedor */
+      }
+    
+      .sectionContainers__cardContent img {
+        width: 30%; /* La imagen ocupa un 20% del contenedor */
+        height: auto; /* Mantiene las proporciones */
+        
+      }
+    
+      .sectionContainers__cardContent p {
+        font-size: 1.8rem; /* Tamaño de texto pequeño */
+        line-height: 1.6;
+        text-align: justify; /* Justifica el texto */
+        margin: 0 4rem 0 4rem;
+      }
+    
+      .sectionContainers__card {
+        display: flex;
+        flex-direction: column;
+      }
+      .sectionContainers__card .sectionContainers__cardContent{
+        display: flex;
+        flex-direction: row;
+        
+      }
+    }

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Es una pagina con formulario y una ventana de celular" />
+  <meta name="keywords" content="sena, risaralda, lembo, gestion, agricola, campecino, produtos, cultivos," />
+  <meta name="author"
+    content="Aprendiz: Erick Ramirez, Aprendiz Aprendiz:Sanchez Hernandez, Aprendiz:Estefani Acevedo" />
+  <meta http-equiv="Content-Language" content="es" />
+
+  <link rel="stylesheet" href="../../public/css/styles-bem.css">
+
+  <title>Visualización de Usuarios</title>
+</head>
+
+<body>
+  <!--   
+    /* ****************************************************** */
+    /* ***************    ELEMENTOS TITTLE    *************** */
+    /* ****************************************************** */ -->
+
+  <header class="cardtittle">
+    <p class="cardtittle__text">SENA SEDE LEMBO</p>
+    <a class="cardtittle__enlace" href="../index_main.html">
+      <img class="cardtittle__svg-home" src="../../public/img_/svg/home.svg" alt="">
+    </a>
+
+  </header>
+  <!-- 
+    /* ****************************************************** */
+    /* *************    ELEMENTOS CARD LEFT    ************** */
+    /* ****************************************************** */
+    -->
+  <aside class="cardleft">
+    <section class="cardleft__container">
+      <img class="cardleft__logo-sena" src="../../public/img_/svg_sena/logo-sena-verde-complementario-svg-2022.svg"
+        alt="Imagen de Logo Sena" />
+
+      <img class="cardleft__img" src="../../public/img_/left_side/movil01.png" alt="Imagen de celular  cuadros" />
+
+      <img class="cardleft__logo-sgal" src="../../public/img_/left_side/LogoSgal.png" alt="Imagen de Logo Sgal" />
+    </section>
+  </aside>
+  <!-- 
+    /* ******************************************************* */
+    /* ****************    CARD RIGHT BLOQUE   *************** */
+    /* ******************************************************* */ 
+    -->
+  <main class="cardright">
+    <form class="cardright__form cardright__form--top3">
+
+      <p class="cardright__header-form">VISUALIZAR USUARIO</p>
+
+      <fieldset class="cardright__body-form">
+        <div class="cardright__container-input">
+          <div class="cardright__subcontainer-input">
+            <label class="cardright__label-form" for="">Tipo de Usuario</label>
+            <select class="cardright__input-form" name="" id="" disabled required>
+              <option class="cardright__input-opt" value="">Ninguna</option>
+              <option class="cardright__input-opt" value="Administrador">Super Administrador</option>
+              <option class="cardright__input-opt" value="Administrador">Administrador</option>
+              <option class="cardright__input-opt" value="Personal de Apoyo">Personal de Apoyo</option>
+              <option class="cardright__input-opt" value="Visitante">Visitante</option>
+            </select>
+          </div>
+
+          <div class="cardright__subcontainer-input">
+            <label class="cardright__label-form" for="">Tipo de Documento</label>
+            <select class="cardright__input-form" name="" id="" disabled required>
+              <option class="cardright__input-opt" value="">Ninguna</option>
+              <option class="cardright__input-opt" value="Tarjeta de Identidad">Tarjeta de Identidad</option>
+              <option class="cardright__input-opt" value="Cedula">Cedula</option>
+              <option class="cardright__input-opt" value="Cedula">Tarjeta de Identidad</option>
+              <option class="cardright__input-opt" value="Cedula">Cedula Extranjería</option>
+              <option class="cardright__input-opt" value="Cedula">PEP</option>
+              <option class="cardright__input-opt" value="Cedula">Permiso Protección Temporal</option>
+            </select>
+          </div>
+
+          <!-- falta no se porque no esta -->
+          <div class="cardright__subcontainer-input">
+            <label class="cardright__label-form" for="">Numero Documento</label>
+            <input class="cardright__input-form" placeholder="Nombre Completo" type="text" />
+          </div>
+          <!-- falta no se porque no esta -->
+
+          <div class="cardright__subcontainer-input">
+            <label class="cardright__label-form" for="">Nombre Del Usuario</label>
+            <input class="cardright__input-form" placeholder="Nombre Completo" type="text" disabled />
+          </div>
+
+          <div class="cardright__subcontainer-input">
+            <label class="cardright__label-form" for="">Correo Electrónico</label>
+            <input class="cardright__input-form" placeholder="Correo Electrónico" type="email" disabled />
+          </div>
+
+          <div class="cardright__subcontainer-input">
+            <label class="cardright__label-form" for="">Número De Contacto</label>
+            <input class="cardright__input-form" placeholder="Número de Celular" type="tel" disabled />
+          </div>
+
+          <p class="cardright__subtitittle-form">Imagen Usuario</p>
+
+
+          <div class="cardright__subcontainer-input">
+            <label class="cardright__label-form">Resolución max 150*150 px</label>
+            <input class="cardright__input-form cardright__input-form--file" placeholder type="file" disabled />
+          </div>
+          <!-- BOTON INDICADOR CAMBIO DE COLOR ESTADO  -->
+          <div class="cardright__subcontainer-input">
+            <label class="cardright__label-form" for="boton">Habilitado/Deshabilitado:</label>
+            <input class="cardright__input-form--checkbox" type="checkbox" id="toggle-color" />
+            <label for="toggle-color" class="cardright__label-form--color"></label>
+          </div>
+          <!-- SANCHEZ ESTE BOTON NO VALIDA NADA SOLO LLEVA LOS DATOS A OTRA VENTA MODIFICAR LOS LEE Y LOS MODIFICA -->
+          <button class="cardright__botton-primary" type="submit">ACTUALIZAR</button>
+      </fieldset>
+
+      <div class>
+        <button class="cardright__botton-secundary" type="submit"><a href>CANCELAR</a></button>
+      </div>
+
+      <div class="cardright__foot-form">
+        <p> CAPTURA DE ERRORES</p>
+      </div>
+
+    </form>
+    <!-- fin de form -->
+
+    <a class="cardright__footer" href="../index_main.html">
+      <img class="cardright__svg-footer" src="../../public/img_/svg/control_back.svg" alt>
+    </a>
+
+  </main>
+
+  <script>
+    fetch("/SGL CODE/Estandarizacion/config.json")
+      .then(result => result.json())
+      .then(data => {
+        // Crea un elemento script
+        const script = document.createElement("script")
+        // Asignamos la ruta del script
+        script.src = data.validar3; // ⬅️ cambiar nombre del json aqui
+        // Indica que el script solo se ejecuta cuando el html se haya cargado
+        script.defer = true;
+        // Ponemos el script en el head para que entienda donde va
+        document.head.appendChild(script);
+      })
+      .catch(error => console.log('Error al cargar script'))
+  </script>
+</body>
+
+</html>

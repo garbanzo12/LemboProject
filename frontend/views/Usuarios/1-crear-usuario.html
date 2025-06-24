@@ -17,8 +17,8 @@
     />
     <meta http-equiv="Content-Language" content="es" />
 
-    <link rel="stylesheet" href="../Css/styles-users.css">
-
+    <link rel="stylesheet" href="/frontend/public/css/styles-users.css">
+    <script src="/frontend/js/validar_users.js"></script>
     <title>Registro de Usuarios</title>
   </head>
   <body>
@@ -65,15 +65,15 @@
       <fieldset class="cardRight__container">
         <h3>REGISTRO USUARIO</h3>
 
-        <form class="cicloRight__form">
+        <form class="cicloRight__form form">
 
           <div class="ciclo__data-general">
             <label class="label" for="">Tipo de Usuario</label>
             <select class="ciclo__user" name="" id="" required>
                 <option value="">Ninguna</option>
-                <option value="">Adminitrador</option>
-                <option value="">Personal de Apoyo</option>
-                <option value="">Visitante</option>
+                <option value="Administrador">Administrador</option>
+                <option value="Personal de Apoyo">Personal de Apoyo</option>
+                <option value="Visitante">Visitante</option>
               </select>
           </div>
 
@@ -81,8 +81,8 @@
             <label class="label" for="">Tipo de Documento</label>
             <select class="ciclo__document" name="" id="" required>
                 <option value="">Ninguna</option>
-                <option value="">Tarjeta de Identidad</option>
-                <option value="">Documento de Identidad</option>
+                <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
+                <option value="Cedula">Cedula</option>
               </select>
             </div>
 
@@ -100,6 +100,12 @@
             <label class="label" for="">Número De Contacto</label>
             <input class="ciclo__cellPhone" placeholder="Número de Celular" type="tel" />
           </div>
+
+          <div class="ciclo__data-general">
+            <label class="label" for="">Contraseña</label>
+            <input class="ciclo__cellPhone password" placeholder="Contraseña" type="password" />
+          </div>
+
 
           <div class="ciclo__data-general">
             <h2 class="text-avatar">Imagen Avatar</h2>
@@ -157,20 +163,6 @@
       </svg>
     </main>
     <link rel="stylesheet" href="">
-    <script>
-      fetch("/SGL CODE/Estandarizacion/config.json")
-          .then(result => result.json())
-          .then(data =>{
-              //Crea un elemento script
-              const script = document.createElement("script")
-              //Asignamos la ruta del srcipt
-              script.src = data.validar1;
-              //Indica que el sript solo se ejecuta cuando el html solo se haya cargado
-              script.defer = true;
-              //Ponemos el script en el head para que entienda donde va
-              document.head.appendChild(script);
-          })
-          .catch(error => console.log('Error al cargar script'))
-  </script>
+    
   </body>
  </html>  

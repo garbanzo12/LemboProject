@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Es una pagina con formulario y una ventana de celular" />
+  <meta name="keywords" content="sena, risaralda, lembo, gestion, agricola, campecino, produtos, cultivos," />
+  <meta name="author"
+    content="Aprendiz: Erick Ramirez, Aprendiz Aprendiz:Sanchez Hernandez, Aprendiz:Estefani Acevedo" />
+  <meta http-equiv="Content-Language" content="es" />
+  <!-- CSS de Choices -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+
+<!-- JS de Choices -->
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+  <script src="/frontend/js/CropCycle/buscarCropcycle.js"></script>
+  <link rel="stylesheet" href="../../public/css/styles-bem.css">
+  
+  <title>Buscar Ciclo de Cultivos</title>
+</head>
+
+<body>
+  <!--   
+  /* ****************************************************** */
+  /* ***************    ELEMENTOS TITTLE    *************** */
+  /* ****************************************************** */ -->
+
+  <header class="cardtittle">
+    <p class="cardtittle__text">SENA SEDE LEMBO</p>
+    <a class="cardtittle__enlace" href="../index_main.html">
+      <img class="cardtittle__svg-home" src="../../public/img_/svg/home.svg" alt>
+    </a>
+
+  </header>
+  <!-- 
+  /* ****************************************************** */
+  /* *************    ELEMENTOS CARD LEFT    ************** */
+  /* ****************************************************** */
+  -->
+  <aside class="cardleft">
+    <section class="cardleft__container">
+      <img class="cardleft__logo-sena" src="../../public/img_/svg_sena/logo-sena-verde-complementario-svg-2022.svg"
+        alt="Imagen de Logo Sena" />
+
+      <img class="cardleft__img" src="../../public/img_/left_side/movil01.png" alt="Imagen de celular  cuadros" />
+
+      <img class="cardleft__logo-sgal" src="../../public/img_/left_side/LogoSgal.png" alt="Imagen de Logo Sgal" />
+    </section>
+  </aside>
+  <!-- 
+  /* ******************************************************* */
+  /* ****************    CARD RIGHT BLOQUE   *************** */
+  /* ******************************************************* */ 
+  -->
+  <main class="cardright">
+    <form class="cardright__form cardright__form--top3">
+      <p class="cardright__header-form">BUSCAR CICLO ID</p>
+
+      <fieldset class="cardright__body-form">
+        <div class="cardright__container-input">
+          <div class="cardright__subcontainer-input">
+            <label class="cardright__label-form cardright__label-form--id-cultivo" for>Id del ciclo cultivo</label>
+             <!-- Esto es de js -->
+             <select class="cardright__selectid"> <!-- Esto es de js -->
+              <option value="">Cargando IDs...</option> <!--Esto es de js  -->
+            </select>
+          </div>
+
+          <div class="cardright__subcontainer-input">
+            <button class="cardright__botton-primary" type="submit">BUSCAR</button>
+            <!-- <button class="button"><a href="">CANCELAR</a></button> -->
+          </div>
+        </div>
+      </fieldset>
+
+      <div class>
+        <button class="cardright__botton-secundary" type="submit"><a href>CANCELAR</a></button>
+      </div>
+
+      <div class="cardright__foot-form">
+        <p> CAPTURA DE ERRORES</p>
+      </div>
+
+    </form>
+    <!-- fin de form -->
+
+    <a class="cardright__footer" href="../index_main.html">
+      <img class="cardright__svg-footer" src="../../public/img_/svg/control_back.svg" alt>
+    </a>
+
+  </main>
+
+</body>
+
+</html>

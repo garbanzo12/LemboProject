@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Es una pagina con formulario y una ventana de celular" />
+    <meta name="keywords" content="sena, risaralda, lembo, gestion, agricola, campecino, produtos, cultivos," />
+    <meta name="author"
+        content="Aprendiz: Erick Ramirez, Aprendiz Aprendiz:Sanchez Hernandez, Aprendiz:Estefani Acevedo" />
+    <meta http-equiv="Content-Language" content="es" />
+    <script src="/frontend/js/integrador/listar_integrador.js"></script>
+    <link rel="stylesheet" href="../../public/css/styles-bem.css">
+
+    <title>Listar Cultivos</title>
+</head>
+
+<body>
+    <!--   
+  /* ****************************************************** */
+  /* ***************    BLOQUE TITTLE    *************** */
+  /* ****************************************************** */ -->
+
+    <header class="cardtittle">
+        <!-- /* *************    ELEMENTOS TITTLE    ************** */ -->
+        <p class="cardtittle__text">SENA SEDE LEMBO</p>
+        <a class="cardtittle__enlace" href="../index_main.html">
+            <img class="cardtittle__svg-home" src="../../public/img_/svg/home.svg" alt>
+        </a>
+    </header>
+    <!-- 
+  /* ****************************************************** */
+  /* *************    BLOQUE CARD LEFT    ************** */
+  /* ****************************************************** */
+  -->
+    <aside class="cardleft cardleft--pequeño">
+
+        <!-- /* *************    ELEMENTOS CARD LEFT    ************** */ -->
+
+        <section class="cardleft__container">
+            <img class="cardleft__logo-sgal" src="../../public/img_/left_side/LogoSgal.png" alt="Imagen de Logo Sgal" />
+
+
+            <img class="cardleft__img" src="../../public/img_/left_side/movil01.png" alt="Imagen de celular  cuadros" />
+
+            <img class="cardleft__logo-sena"
+                src="../../public/img_/svg_sena/logo-sena-verde-complementario-svg-2022.svg"
+                alt="Imagen de Logo Sena" />
+
+        </section>
+    </aside>
+    <!-- 
+  /* ****************************************************** */
+  /* *************    ELEMENTOS CARD RIGHT    ************** */
+  /* ****************************************************** */
+  -->
+    <label class="side-main">
+
+    </label>
+    <!-- 
+  /* ******************************************************* */
+  /* ****************    CARD RIGHT BLOQUE   *************** */
+  /* ******************************************************* */ 
+  -->
+    <main class="cardright cardright--grande">
+
+        <div class="cardright__table-listar">
+            <div class="cardright__tittle-listar">LISTAR PRODUCCIÓN</div>
+
+            <!-- este contenedor CONTIENE EL CONTENEDOR DE TABLA SUBTITULOS Y TABLA DATOS  -->
+
+            <div class="cardright__controls-container">
+
+                <!-- añadir -->
+                <div class="cardright__botton-terciary cardright__container-añadir">
+                    <a class="cardright__botton-a" href="#">Añadir</a>
+                </div>
+                <!-- borrar -->
+                <div class="cardright__botton-terciary cardright__container-borrar">
+                    <a class="cardright__botton-a" href="#">Borrar</a>
+                </div>
+                <!-- actualizar -->
+                <div class="cardright__botton-terciary cardright__container-modificar">
+                    <a class="cardright__botton-a" href="#">Modificar</a>
+                </div>
+                <!-- listar -->
+                <div class="cardright__botton-terciary cardright__container-imprimir">
+                    <a class="cardright__botton-a" href="#">Listar</a>
+                </div>
+                <!-- ordenar -->
+                <div class="cardright__botton-terciary cardright__container-ordenar">
+                    <label>
+                        <a class="cardright__botton-a" href="#">Ordenar</a>
+                        <select>
+                            <option value></option>
+                        </select>
+                    </label>
+                </div>
+                <!-- buscar -->
+                <button class="cardright__botton-terciary cardright__container-buscar">Buscar</button>
+                <!--Esto es de js  -->
+                <input type="text" class="cardright__botton-terciary cardright__container-search"
+                    placeholder="Por id,nombre...">
+                <!--Esto es de js  -->
+
+            </div>
+
+            <div class="cardright__container-datos">
+
+
+                <table class="cardright__table">
+                    <thead>
+                      <tr class="cardright__row cardright__row--header">
+                        <td class="cardright__cell">ID Producción</td>
+                        <td class="cardright__cell">Responsable</td>
+                        <td class="cardright__cell">Usuarios</td>
+                        <td class="cardright__cell">Cultivos</td>
+                        <td class="cardright__cell">Ciclo</td>
+                        <td class="cardright__cell">Insumos</td>
+                        <td class="cardright__cell">Cantidad</td>
+                        <td class="cardright__cell">Sensores</td>
+                        <td class="cardright__cell">Estado</td>
+                      </tr>
+                    </thead>
+                    <tbody class="cardright__dinamic-table">
+                    </tbody>
+                  </table>
+                <!-- sanchez esto tiene clase PAGINACION SUYA, Y LA OTRA BEM -->
+                <div class="cardright__pagination"></div>
+            </div>
+
+        </div>
+
+        <a class="cardright__footer" href="../index_main.html">
+            <img class="cardright__svg-footer" src="../../public/img_/svg/control_back.svg" alt>
+        </a>
+
+    </main>
+    <script>
+        fetch('sidebar.html')
+          .then(res => res.text())
+          .then(html => {
+            document.querySelector('.side-main').innerHTML = html;
+          });
+      </script>
+</body>
+
+</html>

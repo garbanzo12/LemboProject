@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Es una pagina con formulario y una ventana de celular" />
+  <meta name="keywords" content="sena, risaralda, lembo, gestion, agricola, campecino, produtos, cultivos," />
+  <meta name="author"
+    content="Aprendiz: Erick Ramirez, Aprendiz Aprendiz:Sanchez Hernandez, Aprendiz:Estefani Acevedo" />
+  <meta http-equiv="Content-Language" content="es" />
+  <link rel="stylesheet" href="../../public/css/styles-bem.css">
+  <script src="/frontend/js/sensor/visualizarSensor.js"></script>
+  <title>Visualizar Sensores</title>
+</head>
+
+<body>
+  <!--   
+  /* ****************************************************** */
+  /* ***************    ELEMENTOS TITTLE    *************** */
+  /* ****************************************************** */ -->
+
+  <header class="cardtittle">
+    <p class="cardtittle__text">SENA SEDE LEMBO</p>
+    <a class="cardtittle__enlace" href="../index_main.html">
+      <img class="cardtittle__svg-home" src="../../public/img_/svg/home.svg" alt>
+    </a>
+
+  </header>
+  <!-- 
+  /* ****************************************************** */
+  /* *************    ELEMENTOS CARD LEFT    ************** */
+  /* ****************************************************** */
+  -->
+  <aside class="cardleft">
+    <section class="cardleft__container">
+      <img class="cardleft__logo-sena" src="../../public/img_/svg_sena/logo-sena-verde-complementario-svg-2022.svg"
+        alt="Imagen de Logo Sena" />
+
+      <img class="cardleft__img" src="../../public/img_/left_side/movil01.png" alt="Imagen de celular  cuadros" />
+
+      <img class="cardleft__logo-sgal" src="../../public/img_/left_side/LogoSgal.png" alt="Imagen de Logo Sgal" />
+    </section>
+  </aside>
+  <!-- 
+  /* ******************************************************* */
+  /* ****************    CARD RIGHT BLOQUE   *************** */
+  /* ******************************************************* */ 
+  -->
+  <main class="cardright">
+    <form class="cardright__form cardright__form--top3">
+      <p class="cardright__header-form">VISUALIZAR SENSOR</p>
+
+      <fieldset class="cardright__body-form">
+        <div class="cardright__container-input">
+
+          <div class="cardright__subcontainer-input">
+            <label class="cardright__label-form" for>Tipo de sensor</label>
+            <input class="cardright__input-form" placeholder="Tipo de sensor" type="text" disabled/>
+          </div>
+
+          <div class="cardright__subcontainer-input">
+            <label class="cardright__label-form" for>ID sensor</label>
+            <input class="cardright__input-form" placeholder="ID sensor" type="number" disabled/>
+          </div>
+
+          <div class="cardright__subcontainer-input">
+            <label class="cardright__label-form" for>Nombre del sensor</label>
+            <input class="cardright__input-form" placeholder="Nombre del sensor" type="text" disabled/>
+          </div>
+
+          <div class="cardright__subcontainer-input">
+            <label class="cardright__label-form" for>Unidad de medida</label>
+            <input class="cardright__input-form" placeholder="Unidad de medida" type="text" disabled/>
+          </div>
+          
+          <div class="cardright__subcontainer-input">
+            <label class="cardright__label-form" for>Tiempo escaneo</label>
+            <input class="cardright__input-form" placeholder="Tiempo escaneo" type="text" disabled/>
+          </div>
+
+          <div class="cardright__subcontainer-input">
+            <label class="cardright__label-form" for>Descripción</label>
+            <input class="cardright__input-form" placeholder="Descripción del Cultivo" type="text" disabled/>
+          </div>
+
+          <!-- subtitulo si es necesario -->
+          <p class="cardright__subtitittle-form">Imagen Sensor</p>
+
+          <div class="cardright__subcontainer-input">
+            <label class="cardright__label-form">Resolución max 150*150
+              px</label>
+            <div class="cardright__input-form cardright__input-form--file " placeholder type="file" disabled>
+
+            </div>
+          </div>
+          <!-- BOTON INDICADOR CAMBIO DE COLOR ESTADO  -->
+          <div class="cardright__subcontainer-input">
+            <label class="cardright__label-form" for="boton">Habilitado/Deshabilitado:</label>
+            <input class="cardright__input-form--checkbox" type="checkbox" id="toggle-color"/>
+            <label for="toggle-color" class="cardright__label-form--color"></label>              
+          </div>
+
+
+          <a class="cardright__botton-primary" type="submit" href="/frontend/views/sensors/4-update_sensor.html">Actualizar</a>
+        </div>
+      </fieldset>
+
+      <div class>
+        <button class="cardright__botton-secundary" type="submit"><a href>CANCELAR</a></button>
+      </div>
+
+      <div class="cardright__foot-form">
+        <p> CAPTURA DE ERRORES</p>
+      </div>
+
+    </form>
+    <!-- fin de form -->
+
+    <a class="cardright__footer" href="../index_main.html">
+      <img class="cardright__svg-footer" src="../../public/img_/svg/control_back.svg" alt>
+    </a>
+
+  </main>
+
+</body>
+
+</html>

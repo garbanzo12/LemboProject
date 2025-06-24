@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfico con Chart.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div style="width: 80%; margin: 20px auto;">
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <div style="text-align: center; margin: 20px;">
+        <button onclick="changeLegendPosition('top')">Top</button>
+        <button onclick="changeLegendPosition('right')">Right</button>
+        <button onclick="changeLegendPosition('bottom')">Bottom</button>
+        <button onclick="changeLegendPosition('left')">Left</button>
+    </div>
+
+    <script>
+        // Configuración de datos
+        const labels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio'];
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'Dataset 1',
+                data: [10, 20, -30, 40, -50, 60, 70],
+                fill: false,
+                borderColor: 'red',
+                backgroundColor: 'rgba(255, 0, 0, 0.5)',
+            }]
+        };
+
+        // Configuración del gráfico
+        const config = {
+            type: 'line',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top', // Posición inicial de la leyenda
+                    },
+                }
+            },
+        };
+
+        // Variable global para el gráfico
+        let myChart;
+
+        // Inicializar el gráfico cuando el DOM esté cargado
+        window.onload = function() {
+            const ctx = document.getElementById('myChart').getContext('2d');
+            myChart = new Chart(ctx, config);
+        };
+
+        // Función para cambiar la posición de la leyenda
+        function changeLegendPosition(position) {
+            if (myChart) {
+                myChart.options.plugins.legend.position = position;
+                myChart.update();
+            }
+        }
+    </script>
+</body>
+</html>

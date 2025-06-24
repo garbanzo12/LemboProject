@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PRODUCCION GENERAL</title>
+    <!-- CDN de Chart.js versión 2.5.0 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <!-- CDN de Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- CDN de GOOGLE -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="../../public/css/styles-dashboard.css" />
+</head>
+
+<body>
+    <header>
+        <h2 class="produto__user"></h2>
+    </header>
+
+    <main class="producto">
+        <h1 class="producto__subtittle">VISTA GENERAL DE PRODUCCIONES</h1>
+        <!-- contenedor 1 -->
+        <div class="producto__container-row">
+            <!-- modulo 1 -->
+            <div class="producto__subcontainer">
+                <h2 class="producto__subtittle">LISTA DE CULTIVOS SEGUN m²</h2>
+
+                <div id="chart_lista_cultivos" style="width: 100%; height: 100%"></div>
+
+               
+            </div>
+
+
+            <!-- modulo 2 -->
+            <div class="producto__subcontainer2">
+                <h2 class="producto__subtittle">MAPA SENA SEDE LEMBO</h2>
+
+                <div class="producto__img-wrapper">
+                    <img class="producto__imagen-mapa" id="imagen-mapa" src="../../public/img_/main/sedelembo.png"
+                        alt="Mapa" />
+                    <div class="producto__contenedor" id="contenedor"></div>
+                </div>
+                <button class="producto__card-button" id="guardar">Guardar selección</button>
+            </div>
+
+
+            <!-- modulo 3 -->
+            <div class="producto__subcontainer">
+                <h2 class="producto__subtittle">LISTA DE INSUMOS</h2>
+                <div id="chart_lista_insumos" style="width: 100%; height: 100%"></div>
+            </div>
+
+            <!-- modulo 4 -->
+            <div class="producto__subcontainer">
+                <h2 class="producto__subtittle">NOTIFICACIONES</h2>
+                <table class="producto__tabla">
+                    <thead>
+                        <tr class="producto__tabla-header">
+                            <th class="producto__cell">Id_Cultivo</th>
+                            <th class="producto__cell">Id_Usuario</th>
+                            <th class="producto__cell">Novedad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="producto__tabla-data">
+                            <td class="producto__cell">767</td>
+                            <td class="producto__cell">Pablo_A</td>
+                            <td class="producto__cell-lg">Nota</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ************ -->
+        <!-- contenedor 2 -->
+        <h2 class="producto__subtittle">FINANZAS</h2>
+
+        <div class="producto__container-row">
+            <!-- modulo 2.1 -->
+            <div class="producto__subcontainer">
+                <h2 class="producto__subtittle">COSTO X CULTIVOS</h2>
+                <canvas id="Costo_General_Cultivos" style="width:35vw; height:100vh;"></canvas>
+            </div>
+
+            <div class="producto__subcontainer">
+                <h2 class="producto__subtittle">CALCULADORA DE INVERSIÓN</h2>
+                <table class="producto__tabla">
+                    <thead>
+                      <tr class="producto__tabla-header">
+                        <th class="producto__cell">Nombre</th>
+                        <th class="producto__cell">Total Invertido</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tablaInversion"></tbody>
+                  </table>
+                  
+            </div>
+            
+
+            <!-- modulo 2.1  SENSORES-->
+            <div class="producto__subcontainer">
+                <h2 class="producto__subtittle">SENSORES 24/7</h2>
+
+                <div class="producto__card-container-row">
+
+                    <div class="producto__subcontainer">
+                        <canvas id="Sensors_24/7" style="width:12vw; height:30vh;"></canvas>
+
+                        <div style=" width: 50%;">
+                            <button onclick="changeLegendPosition('top')">Top</button>
+                            <button onclick="changeLegendPosition('right')">Right</button>
+                            <button onclick="changeLegendPosition('bottom')">Bottom</button>
+                            <button onclick="changeLegendPosition('left')">Left</button>
+                        </div>
+                    </div>
+
+                    <div class="producto__card-container">
+                        <div class="producto__sensores-container">
+
+                            <h3 class="producto__card-titulo">Temperatura</h3>
+                            <div class="producto__card-sensores">
+                                <span class="producto__card-dato1 producto__card-valor1">30</span><span
+                                    class="producto__card-dato1 producto__unidad1">°C</span>
+                            </div>
+
+                            <h3 class="producto__card-titulo">Maxima</h3>
+
+                            <div class="producto__card-sensores">
+                                <span class="producto__card-dato1 producto__card-valor2">31</span><span
+                                    class="producto__card-dato1 producto__unidad2">°C</span>
+                            </div>
+
+                            <h3 class="producto__card-titulo">Minima</h3>
+                            <div class="producto__card-sensores">
+                                <span class="producto__card-dato1 producto__card-valor3">11</span><span
+                                    class="producto__card-dato1 producto__unidad3">°C</span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="producto__sensores-container">
+                            <h3 class="producto__card-titulo">Humedad</h3>
+                            <div class="producto__card-sensores">
+                                <span class="producto__card-dato1 producto__card-valor4">88</span><span
+                                    class="producto__card-dato1 producto__unidad4">°C</span>
+                            </div>
+                            <h3 class="producto__card-titulo">Maxima</h3>
+                            <div class="producto__card-sensores">
+                                <span class="producto__card-dato1 producto__card-valor5">90</span><span
+                                    class="producto__card-dato1 producto__unidad5">°C</span>
+                            </div>
+                            <h3 class="producto__card-titulo">Minima</h3>
+                            <div class="producto__card-sensores">
+                                <span class="producto__card-dato1 producto__card-valor6">55</span><span
+                                    class="producto__card-dato1 producto__unidad6">°C</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+
+
+
+            </div>
+    </main>
+
+
+    <script>
+        
+        cantidad = 900;
+        
+
+        const columnas = Math.ceil(Math.sqrt(cantidad));
+        const filas = Math.ceil(cantidad / columnas);
+        const contenedor = document.getElementById('contenedor');
+
+        for (let i = 0; i < cantidad; i++) {
+            const fila = Math.floor(i / columnas);
+            const columna = i % columnas;
+
+            const checkboxId = `checkbox-${i}`;
+            const top = (fila / filas) * 100;
+            const left = (columna / columnas) * 100;
+            const ancho = 100 / columnas;
+            const alto = 100 / filas;
+
+            const input = document.createElement('input');
+            input.type = 'checkbox';
+            input.className = 'checkbox';
+            input.id = checkboxId;
+
+            const label = document.createElement('label');
+            label.className = 'celda';
+            label.setAttribute('for', checkboxId);
+            label.style.top = `${top}%`;
+            label.style.left = `${left}%`;
+            label.style.width = `${ancho}%`;
+            label.style.height = `${alto}%`;
+
+            // Bloqueos de prueba
+            if ( i === 221 || i === 222 || i === 240 || i === 241 || i === 242) {
+                input.disabled = true;
+                label.classList.add('bloqueado');
+            }
+            if ( i === 401 || i === 402 || i === 430 || i === 431 || i === 432) {
+                input.disabled = true;
+                label.classList.add('bloqueado-especial');
+            }
+
+            contenedor.appendChild(input);
+            contenedor.appendChild(label);
+        }
+
+        // Guardar
+        document.getElementById('guardar').addEventListener('click', () => {
+            const seleccionados = Array.from(document.querySelectorAll('.checkbox:checked'))
+                .map(checkbox => parseInt(checkbox.id.replace('checkbox-', '')));
+
+            fetch('http://localhost:5501/cuadros_seleccionados', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ seleccionados })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    alert("Cuadros guardados correctamente");
+                    console.log(data);
+                });
+        });
+
+        // Cargar seleccionados
+        fetch('http://localhost:5501/cuadros_seleccionados')
+            .then(res => res.json())
+            .then(ids => {
+
+
+                ids.forEach(id => {
+                    const checkbox = document.getElementById(`checkbox-${id}`);
+                    const label = document.querySelector(`label[for="checkbox-${id}"]`);
+
+                    if (checkbox && label) {
+                        checkbox.checked = true;
+                        checkbox.disabled = true; // Bloquear para que no se pueda desmarcar
+                        label.classList.add('celda'); // Azul + pointer-events: none
+
+                        label.style.display = 'flex';
+                        label.style.backgroundColor = 'blue';
+
+                    }
+                });
+
+            });
+
+    </script>
+
+
+    <script>
+        // Fix 1: Renamed draw functions to avoid conflicts and proper rendering.
+        google.charts.load("current", { packages: ["corechart"] });
+
+        // Chart 1 - Cultivos
+        google.charts.setOnLoadCallback(drawCultivosChart);
+        function drawCultivosChart() {
+    fetch('http://localhost:5501/integrador/api/cultivos')
+    .then(response => response.json())
+    .then(dataFromDb => {
+        const data = new google.visualization.DataTable();
+        data.addColumn('string', 'name_crop');
+        data.addColumn('number', 'Area en m²');
+
+        dataFromDb.forEach(row => {
+            data.addRow([row.name_crop, parseFloat(row.size_m2) || 0]);
+        });
+
+        const options = {
+            title: "LISTADO GENERAL DE CULTIVOS POR ÁREA (m²)",
+            titleTextStyle: { color: "white" },
+            backgroundColor: "transparent",
+            hAxis: {
+              title: "Área (m²)",
+              textStyle: { color: "white" },
+              minValue: 0
+            },
+            vAxis: {
+              textStyle: { color: "white" }
+            },
+            legend: { position: "none" },
+            chartArea: { left: 50, top: 20, width: "100%", height: "100%" },
+        };
+
+        const chart = new google.visualization.BarChart(
+            document.getElementById("chart_lista_cultivos")
+        );
+        chart.draw(data, options);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        const data = google.visualization.arrayToDataTable([
+            ["Cultivo", "Metros cuadrados"],
+            ["Error al cargar datos", 1]
+        ]);
+        const chart = new google.visualization.BarChart(
+            document.getElementById("chart_lista_cultivos")
+        );
+        chart.draw(data, {
+            title: "LISTADO GENERAL DE CULTIVOS POR ÁREA (m²)",
+            backgroundColor: "transparent",
+            titleTextStyle: { color: "white" },
+            legend: { position: "none" },
+            hAxis: { textStyle: { color: "white" } },
+            vAxis: { textStyle: { color: "white" } },
+            chartArea: { left: 50, top: 20, width: "100%", height: "100%" },
+        });
+    });
+}
+
+
+        // Chart 2 - Insumos
+        google.charts.setOnLoadCallback(drawInsumosChart);
+
+function drawInsumosChart() {
+    fetch('http://localhost:5501/integrador/api/insumos')  // Cambiar URL si es necesario
+    .then(response => response.json())
+    .then(dataFromDb => {
+        const data = new google.visualization.DataTable();
+        data.addColumn('string', 'Semilla');
+        data.addColumn('number', 'Cantidad');
+
+        dataFromDb.forEach(row => {
+            data.addRow([row.name_consumables, parseInt(row.quantity_consumables) || 0]);
+        });
+
+        const options = {
+            title: "LISTADO GENERAL DE INSUMOS",
+            titleTextStyle: { color: "white" },
+            backgroundColor: "transparent",
+            hAxis: { textStyle: { color: "white" } },
+            vAxis: { textStyle: { color: "white" } },
+            legend: { position: "none" },
+            chartArea: { left: 50, top: 20, width: "100%", height: "80%" },
+        };
+
+        const chart = new google.visualization.BarChart(
+            document.getElementById("chart_lista_insumos")
+        );
+        chart.draw(data, options);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        const data = google.visualization.arrayToDataTable([
+            ["Semilla", "Cantidad"],
+            ["Error al cargar datos", 1]
+        ]);
+        const chart = new google.visualization.BarChart(
+            document.getElementById("chart_lista_insumos")
+        );
+        chart.draw(data, {
+            title: "LISTADO GENERAL DE INSUMOS",
+            backgroundColor: "transparent",
+            titleTextStyle: { color: "white" },
+            legend: { position: "none" },
+            hAxis: { textStyle: { color: "white" } },
+            vAxis: { textStyle: { color: "white" } },
+            chartArea: { left: 50, top: 20, width: "100%", height: "80%" },
+        });
+    });
+}
+
+
+        // Chart 3 - Finanzas
+
+        new Chart("chart_finanzas_uno", {
+            type: "line",
+            data: {
+                labels: [
+                    "Ene",
+                    "Feb",
+                    "Mar",
+                    "Abr",
+                    "May",
+                    "Jun",
+                    "Jul",
+                    "Ago",
+                    "Sep",
+                    "Oct",
+                    "Nov",
+                    "Dic",
+                ],
+                datasets: [
+                    {
+                        label: "Inventario x inversión",
+                        data: [18, 12, 14, 11, 14, 15, 16, 17, 17, 17, 18, 22],
+                        backgroundColor: ["red"],
+                    },
+                ],
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: "GANANCIAS X PRODUCCIÓN",
+                    },
+                },
+                scales: {
+                    x: { grid: { color: "lightblue", lineWidth: 2 } },
+                    y: { grid: { color: "lightgreen", lineWidth: 2 } },
+                },
+            },
+        });
+    </script>
+
+
+
+<script>
+    fetch("http://localhost:5501/integrador/api/costos-cultivos")
+      .then((res) => res.json())
+      .then((dataFromDb) => {
+        const labels = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+        
+        const cultivosSet = new Set();
+        const dataPorCultivo = {};
+    
+        // Agrupar datos
+        dataFromDb.forEach((item) => {
+          const mes = parseInt(item.mes) - 1;
+          const cultivo = item.cultivo;
+          const valor = item.costo_total;
+    
+          cultivosSet.add(cultivo);
+    
+          if (!dataPorCultivo[cultivo]) {
+            dataPorCultivo[cultivo] = Array(12).fill(0);
+          }
+          dataPorCultivo[cultivo][mes] += valor;
+        });
+    
+        const colores = [
+          "rgba(0, 51, 102, 1)", "rgba(25, 25, 112, 1)",
+          "rgba(0, 100, 0, 1)", "rgba(100, 0, 0, 1)",
+          "rgba(255, 165, 0, 1)", "rgba(128, 0, 128, 1)"
+        ];
+    
+        const datasets = Array.from(cultivosSet).map((cultivo, index) => ({
+          label: cultivo,
+          data: dataPorCultivo[cultivo],
+          borderColor: colores[index % colores.length],
+          backgroundColor: colores[index % colores.length],
+          borderDash: [5, 2],
+          tension: 0.3
+        }));
+    
+        // TOTAL por mes
+        const totalData = Array(12).fill(0);
+        datasets.forEach(ds => {
+          ds.data.forEach((val, idx) => totalData[idx] += val);
+        });
+    
+        datasets.push({
+          label: "TOTAL",
+          data: totalData,
+          borderColor: "rgba(0, 0, 0, 0.7)",
+          backgroundColor: "rgba(0, 0, 0, 0.2)",
+          borderWidth: 3,
+          tension: 0.3,
+        });
+    
+        // PRESUPUESTO (ejemplo)
+        datasets.push({
+          label: "PRESUPUESTO",
+          data: Array(12).fill(600000),
+          borderColor: "rgba(0, 0, 0, 0.7)",
+          backgroundColor: "rgba(0, 0, 0, 1)",
+          borderWidth: 3,
+          borderDash: [5, 2],
+          tension: 0.3,
+        });
+    
+        new Chart(document.getElementById("Costo_General_Cultivos").getContext("2d"), {
+          type: "line",
+          data: {
+            labels: labels,
+            datasets: datasets
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              title: {
+                display: true,
+                text: "Cultivos por Costo Mensual",
+                color: 'white',
+                font: { size: 16 }
+              },
+              legend: {
+                labels: {
+                  color: 'white',
+                  font: { size: 14 }
+                }
+              }
+            },
+            scales: {
+              x: {
+                ticks: { color: 'white' },
+                grid: { color: 'rgba(255, 255, 255, 0.7)' }
+              },
+              y: {
+                ticks: { color: 'white' },
+                grid: { color: 'rgba(255, 255, 255, 0.7)' },
+                suggestedMin: 0
+              }
+            },
+            elements: {
+              line: {
+                borderWidth: 2
+              }
+            }
+          }
+        });
+      })
+      .catch((err) => console.error("Error al cargar gráfico:", err));
+    </script>
+    
+
+    <!-- Chart 5 - TEMPERATURA -->
+
+    <script>
+        // Datos manuales (sin usar Utils)
+        const data_sen = {
+            labels: [
+                "0",
+                "2",
+                "4",
+                "6",
+                "8",
+                "10",
+                "12",
+                "14",
+                "16",
+                "18",
+                "20",
+                "22",
+                "24",
+            ],
+            datasets: [
+                {
+                    label: "TEMPERATURA",
+                    data: [16, 15, 14, 17, 20, 24, 26 ],
+                    fill: false,
+                    borderColor: "rgb(255, 255, 255)",  // Blanco
+                    borderWidth: 2.5,
+                    borderDash: [10, 5, 3, 5], // Línea discontinua (rayitas)
+                    tension: 0.3,
+                },
+                {
+                    label: "HUMEDAD",
+                    data: [70, 75, 80, 85, 85, 70, 75],
+                    fill: false,
+                    borderColor: "rgba(0, 51, 102, 1)", 
+                    borderDash: [10, 5, 3, 5], // Línea discontinua (rayitas)
+                    tension: 0.3,
+                },
+                {
+                    label: "RADIACION",
+                    data: [30, 45, 80, 95, 85, 60, 40],
+                    fill: false,
+                    borderColor: "rgba(0, 100, 0, 1)",
+                    borderDash: [10, 5, 3, 5], // Línea discontinua (rayitas)
+                    tension: 0.3,
+                },
+                {
+                    label: "LLUVIA",
+                    data: [5, 10, 10, 10, 70, 70, 70],
+                    fill: false,
+                    borderColor: "#051367",  // Azul oscuro
+                    borderWidth: 2.5,
+                    borderDash: [10, 5, 3, 5], // Línea discontinua (rayitas)
+                    tension: 0.3,
+                }
+            ],
+        };
+
+        const config_sen = {
+            type: "line",
+            data: data_sen,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: "top",
+                        labels: {
+                            color: 'white',
+                            font: {
+                                size: 12,
+                                weight: 'bold'
+                            },
+                            // Añadir iconos de línea en la leyenda
+                            usePointStyle: true,
+                            pointStyle: 'line'
+                        }
+                    },
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: 'white'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.6)'
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            color: 'white'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.6)'
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 100
+                    }
+                },
+                elements: {
+                    point: {
+                        radius: 0 // Ocultar puntos para mejor visualización de los trazos
+                    }
+                }
+            },
+        };
+
+        let myChart_sen;
+
+        window.onload = function () {
+            const ctx = document.getElementById("Sensors_24/7").getContext("2d");
+            myChart = new Chart(ctx, config_sen);
+        };
+
+        function changeLegendPosition(position) {
+            if (myChart) {
+                myChart.options.plugins.legend.position = position;
+                myChart.update();
+            }
+        }
+    </script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  const tbody = document.getElementById('tablaInversion');
+  let totalGeneral = 0;
+
+  try {
+    const response = await fetch('http://localhost:5501/integrador/api/inversion-anual');
+    const datos = await response.json();
+
+    datos.forEach(fila => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="producto__cell" style="background-color: white; color: black;">${fila.nombre}</td>
+        <td class="producto__cell-lg" style="background-color: white; color: black;">$${fila.total_inversion.toLocaleString()}</td>
+      `;
+      totalGeneral += parseFloat(fila.total_inversion);
+      tbody.appendChild(tr);
+    });
+
+    const trTotal = document.createElement('tr');
+    trTotal.innerHTML = `
+      <td class="producto__cell" style="background-color: white; color: black;"><strong>Total General</strong></td>
+      <td class="producto__cell-lg" style="background-color: white; color: black;"><strong>$${totalGeneral.toLocaleString()}</strong></td>
+    `;
+    tbody.appendChild(trTotal);
+  } catch (error) {
+    console.error('Error al cargar la inversión:', error);
+  }
+});
+
+
+    </script>
+    
+</body>
+
+</html>

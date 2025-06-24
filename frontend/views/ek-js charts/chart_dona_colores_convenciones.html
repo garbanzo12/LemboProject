@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<body>
+
+<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+
+<script>
+var xValuesD = [ "03", "06", "09", "12"];
+var yValuesD = [45, 45, 45, 45];
+var barColors = [
+  "#0000FF", // Azul brillante
+  "#00008B", // Azul oscuro
+  "#0000FF", // Azul brillante
+  "#00008B"  // Azul oscuro
+];
+
+new Chart("myChart", {
+  type: "doughnut",
+  data: {
+    labels: xValuesD,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValuesD
+    }]
+  },
+  options: {
+    title: {
+      display: false,
+      text: "TEMPERATURA TIEMPO REAL",
+      fontColor: "white" // Color del título
+    },
+    legend: {
+      labels: {
+        fontColor: "white" // Color de la leyenda
+      }
+    },
+    tooltips: {
+      titleFontColor: "white", // Color del texto del título del tooltip
+      bodyFontColor: "white"  // Color del texto del contenido del tooltip
+    },
+    plugins: {
+      datalabels: {
+        color: "white" // Color de las etiquetas de datos (si las usas)
+      }
+    }
+  }
+});
+</script>
+
+</body>
+</html>

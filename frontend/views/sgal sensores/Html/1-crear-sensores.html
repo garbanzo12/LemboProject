@@ -1,0 +1,169 @@
+<!--Punto de partida 2025-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="REGISTRO SENSORES"
+      content="PAGINA CON FORMULARIO PARA INGRESAR SENSORES A BASE DATOS"
+    />
+    <meta
+      name="keywords"
+      content="sena, risaralda, lembo, gestion, agricola, campecino, produtos, cultivos, crear, sensores"
+    />
+    <meta
+      name="author"
+      content="Aprendiz: Erick Ramirez, Aprendiz Aprendiz:Sanchez Hernandez, Aprendiz:Estefani Acevedo"
+    />
+    <meta http-equiv="Content-Language" content="es" />
+
+    <link rel="stylesheet" href="../Css/1-crear-sensores.css" />
+    <script src="/frontend/js/validar_sensors.js"></script>
+    <title>REGISTRAR SENSORES</title>
+  </head>
+  <body>
+    <header class="sensores__header sensores__header--primary">
+      <span>SENA SEDE LEMBO</span>
+    </header>
+    <div class="sensores__media">
+      <section class="sensores__gallery">
+        <div class="sensores__gallery-inner">
+          <div class="sensores__logo sensores__logo--sena">
+            <img
+              src="img/logo-sena-verde-complementario-png-2022.png"
+              alt="Imagen de Logo Sena"
+            />
+          </div>
+
+          <div class="sensores__image-mobile">
+            <svg
+              width="350"
+              height="700"
+              viewBox="0 0 236 484"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M203.718 10H32C19.8497 10 10 19.8497 10 32V451.546C10 463.697 19.8497 473.546 32 473.546H203.718C215.868 473.546 225.718 463.697 225.718 451.546V32C225.718 19.8497 215.868 10 203.718 10ZM32 0C14.3269 0 0 14.3269 0 32V451.546C0 469.22 14.3269 483.546 32 483.546H203.718C221.391 483.546 235.718 469.22 235.718 451.546V32C235.718 14.3269 221.391 0 203.718 0H32Z"
+                fill="#5D7B8E"
+              />
+              <path
+                d="M63 9.50586C63 16.1333 68.3726 21.5059 75 21.5059H161C167.627 21.5059 173 16.1333 173 9.50586H63Z"
+                fill="#5D7B8E"
+              />
+            </svg>
+
+            <path
+              d="M90 10C90 16.6274 95.3726 22 102 22H188C194.627 22 200 16.6274 200 10H90Z"
+              fill="#5D7B8E"
+            />
+          </div>
+
+          <div class="sensores__logo sensores__logo--sgal">
+            <img src="img/LogoSgal.png" alt="Imagen de Logo Sgal" />
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- fin de sensores__media -->
+
+    <main class="sensores__content">
+      <header class="sensores__header sensores__header--form">
+        <span>SENA SEDE LEMBO</span>
+      </header>
+      <fieldset class="sensores__fieldset">
+        <h3>CREAR SENSOR</h3>
+        <form class="sensores__form form">
+          <!-- SE DEBE DESCOMENTAR SI SE NECESITA LA IMAGEN HAY CASOS QUE SI  -->
+
+          <!-- <img
+            class="sensores__logo-circular"
+            alt="SENA logo"
+            height="100"
+            src="/SGL CODE/img/LOGOS SENA/LOGOS SENA/logo-sena-verde-svg-2022.svg"
+            width="100"
+          /> -->
+
+          <!-- SE DEBE DESCOMENTAR SI SE NECESITA LA IMAGEN HAY CASOS QUE SI -->
+
+          <div class="sensores__field">
+            <label class="sensores__label" for="">Tipo de sensor</label>
+            <input class="type_sensors input" placeholder="Ingrese tipo de sensor" type="text" />
+          </div>
+
+
+          <!-- ESPACIO PARA MAS INPUTS  -->
+
+          <!-- text, password, email, number, tel, url, search, date, time, datetime-local, month, week, color, file, checkbox, radio, range, submit, reset, button y hidden -->
+
+          <div class="sensores__field">
+            <label class="sensores__label" for="">Nombre del sensor</label>
+            <input class="name_sensors input" placeholder="Ingrese nombre de sensor" type="text" />
+          </div>
+
+          <!-- ****************************según figma debe pasar a segunda columna desde aquí ****************************** -->
+
+          <div class="sensores__field">
+            <label class="sensores__label" for="">Unidad de medida</label>
+            <input class="unit_sensors input" placeholder="Ingrese unidad de medida" type="text" />
+          </div>
+
+          <div class="sensores__field">
+            <label class="sensores__label" for="">Tiempo de muestreo</label>
+            <input class="time_sensors input" placeholder="Ingrese muestreo en segundos" type="number" />
+          </div>
+
+          
+
+          <!-- Esta es la imagen o espacio donde podemos cargar la imagen del sensor, por ahora es un div con estilos -->
+          <div>
+            <h4>CREAR SENSOR</h4>
+            <div class="sensores__upload">Cargar Imagen</div>
+          </div>
+          <button class="sensores__button" type="submit">Crear</button>
+
+
+
+
+          <!-- ESPACIO PARA MÁS INPUTS  -->
+        </form>
+        <div class="sensores__buttons">
+         
+          <button class="sensores__button">
+            <a href="/SGL CODE/sgal main (sanchez)/">CANCELAR</a>
+          </button>
+        </div>
+
+        <div class="sensores__baseform">
+          <a href="#"> </a>
+        </div>
+      </fieldset>
+      <!-- fin de form -->
+
+      <div class="sensores__svg-container">
+        <a href="">
+          <svg
+            width="48"
+            height="48"
+            viewBox="0 0 26 38"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M23 34.7746L11 18.9694L23 3.16406M3 3.16406V34.7746"
+              stroke="#00304D"
+              stroke-width="5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </a>
+      </div>
+    </main>
+
+    <!-- fin de sensores__content -->
+  </body>
+</html>

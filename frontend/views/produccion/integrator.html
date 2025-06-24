@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Es una pagina con formulario y una ventana de celular" />
+    <meta name="keywords" content="sena, risaralda, lembo, gestion, agricola, campecino, produtos, cultivos," />
+    <meta name="author"
+        content="Aprendiz: Erick Ramirez, Aprendiz Aprendiz:Sanchez Hernandez, Aprendiz:Estefani Acevedo" />
+    <meta http-equiv="Content-Language" content="es" />
+    <link rel="stylesheet" href="../public/css/styles-bem.css">
+    <script src="/frontend/js/integrador/validar_integrador.js"></script>
+    <title>Integrador</title>
+</head>
+
+<body>
+    <!--   
+  /* ****************************************************** */
+  /* ***************    ELEMENTOS TITTLE    *************** */
+  /* ****************************************************** */ -->
+
+    <header class="cardtittle">
+        <p class="cardtittle__text">SENA SEDE LEMBO</p>
+        <a class="cardtittle__enlace" href="./index_main.html">
+            <img class="cardtittle__svg-home" src="../public/img_/svg/home.svg" alt>
+        </a>
+    </header>
+    <!-- 
+  /* ****************************************************** */
+  /* *************    ELEMENTOS CARD LEFT    ************** */
+  /* ****************************************************** */
+  -->
+    <aside class="cardleft cardleft--pequeño">
+        <section class="cardleft__container">
+            <img class="cardleft__logo-sgal" src="../public/img_/left_side/LogoSgal.png" alt="Imagen de Logo Sgal" />
+
+
+            <img class="cardleft__img" src="../public/img_/left_side/movil01.png" alt="Imagen de celular  cuadros" />
+
+            <img class="cardleft__logo-sena" src="../public/img_/svg_sena/logo-sena-verde-complementario-svg-2022.svg"
+                alt="Imagen de Logo Sena" />
+
+        </section>
+    </aside>
+    <!--     
+/* ****************************************************** */
+/* *************    ELEMENTOS CARD RIGHT    ************** */
+/* ****************************************************** */ -->
+
+    <label class="side-main">
+
+        <input class="side-main__inp" checked type="checkbox" />
+
+        <div class="side-main__bar">
+            <div class="side-main__bar-info">
+                <!-- JAVA SCRIPT PARA TOMAR LA MITAD DEL NOBRE -->
+                <h3 class="side-main__name">ERICK</h3>
+                <!-- JAVA SCRIPT PARA PONER EL ROLL AQUI  -->
+                <h3 class="side-main__roll">SAD-MND</h3>
+            </div>
+            <div class="side-main__container-avatar">
+                <img class="side-main__bar-avatar" src="../public/img_/main/imagen_foto_perfil_github2.jpg" alt="">
+            </div>
+        </div>
+
+        <!-- AQUI INICIA LA BARRA CON ACCESOS DIRECTOS A LOS MODULOS POR LA BARRA -->
+
+        <section class="side-main__menu-container menu-container">
+            <!-- PRODUCCION -->
+
+            <a class="side-main__container-enlace" href="./index_main.html">
+                <div class="side-main__menu-list">MAIN</div>
+            </a>
+            <a class="side-main__container-enlace" href="./dashboard.html">
+                <div class="side-main__menu-list">PRODUCCION</div>
+            </a>
+
+
+            <!-- cultivos -->
+            <div class="side-main__menu-list">
+                <p>CULTIVO</p>
+                <img class="side-main__menu-svg" src="../public/img_/svg/agriculture-outline.svg" alt>
+            </div>
+            <a class="side-main__container-enlace" href="./crops/1-create_crops.html">
+                <div class="side-main__menu-list">Crear</div>
+            </a>
+            <a class="side-main__container-enlace" href="./crops/2-seach_crops.html">
+                <div class="side-main__menu-list">Buscar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./crops/4-update_crops.html">
+                <div class="side-main__menu-list">Actualizar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./crops/5-listar_crops.html">
+                <div class="side-main__menu-list">Listar</div>
+            </a>
+
+            <!-- ciclos -->
+            <div class="side-main__menu-list">
+                <p>CICLO</p>
+                <img class="side-main__menu-svg" src="../public/img_/svg//agriculture-ciclo.svg" alt>
+            </div>
+            <a class="side-main__container-enlace" href="./cycle_crops/1-create_cycle_crops.html">
+                <div class="side-main__menu-list">Crear</div>
+            </a>
+            <a class="side-main__container-enlace" href="./cycle_crops/2-search_cycle_crops.html">
+                <div class="side-main__menu-list">Buscar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./cycle_crops/4-update_cycle_crops.html">
+                <div class="side-main__menu-list">Actualizar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./cycle_crops/5-listar_cicle_crops.html">
+                <div class="side-main__menu-list">Listar</div>
+            </a>
+
+            <!-- iot -->
+            <div class="side-main__menu-list">
+                <p>SENSORES</p>
+                <img class="side-main__menu-svg" src="../public/img_/svg/agriculture--iot.svg" alt>
+            </div>
+            <a class="side-main__container-enlace" href="./sensors/1-create_sensor.html">
+                <div class="side-main__menu-list">Crear</div>
+            </a>
+            <a class="side-main__container-enlace" href="./sensors/2-seach_sensor.html">
+                <div class="side-main__menu-list">Buscar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./sensors/4-update_sensor.html">
+                <div class="side-main__menu-list">Actualizar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./sensors/5-listar_sensors.html">
+                <div class="side-main__menu-list">Listar</div>
+            </a>
+
+            <!-- insumos -->
+            <div class="side-main__menu-list">
+                <p>INSUMOS</p>
+                <img class="side-main__menu-svg" src="../public/img_/svg/agriculture-analytics.svg" alt>
+            </div>
+            <a class="side-main__container-enlace" href="./insumes/1-create_insumes.html">
+                <div class="side-main__menu-list">Crear</div>
+            </a>
+            <a class="side-main__container-enlace" href="./insumes/2-search_insume.html">
+                <div class="side-main__menu-list">Buscar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./insumes/4-update_insumes.html">
+                <div class="side-main__menu-list">Actualizar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./insumes/5-listar_insumes.html">
+                <div class="side-main__menu-list">Listar</div>
+            </a>
+            <!-- usuarios -->
+            <div class="side-main__menu-list">
+                <p>USUARIOS</p>
+                <img class="side-main__menu-svg" src="../public/img_/svg/agriculture-worker-outline.svg" alt>
+            </div>
+            <a class="side-main__container-enlace" href="./users/1-create_user.html">
+                <div class="side-main__menu-list">Crear</div>
+            </a>
+            <a class="side-main__container-enlace" href="./users/2-search_user.html">
+                <div class="side-main__menu-list">Buscar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./users/4-update_user.html">
+                <div class="side-main__menu-list">Actualizar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./users/5-listar_users.html">
+                <div class="side-main__menu-list">Listar</div>
+            </a>
+            <!-- loging out -->
+            <hr>
+            </div>
+            <a class="side-main__container-enlace" href="./home/home.html">
+                <div class="side-main__menu-list">LOGIN OUT</div>
+            </a>
+
+        </section>
+    </label>
+    <!-- 
+  /* ******************************************************* */
+  /* ****************     BLOQUE  SIDERIGHT  *************** */
+  /* ******************************************************* */ 
+  -->
+    <main class="integrator">
+
+        <form class="integrator__form">
+
+            <header class="integrator__form-header">
+
+                <div class="integrator__header-tittles">
+                    <h3 class="integrator__title-h3">NOMBRE:</h3>
+                    <input class="integrator__input-form integrator__input-form--n-prodution" type="text"
+                        placeholder="nombre-produccion">
+                </div>
+
+                <div class="integrator__header-tittles">
+                    <h3 class="integrator__title-h3">RESPONSABLE</h3>
+                  <select class="integrator__input-form integrator__input-form--resp"  required>
+        <option value="" disabled selected>Seleccione un responsable</option>
+                </div>
+
+                <div class="integrator__header-tittles">
+                    <h3 class="integrator__title-h3 integrator__title-h3--id">IDENTIFICADOR</h3>
+                    <input class="integrator__input-form integrator__input-form-id-prod" type="text">
+                </div>
+
+            </header>
+
+            <!-- Sección usuarios -->
+
+            <fieldset class="integrator__form-body">
+                <div class="integrator__produccion-body">
+
+
+                    <div class="integrator__module">
+
+                        <table class="integrator__module-table">
+                            <caption class="integrator__module-header">USUARIOS</caption>
+                            <thead class="integrator__module-thead">
+                                <tr class="integrator__table-header">
+                                    <th class="integrator__header-cell">NOMBRE</th>
+                                </tr>
+                            </thead>
+                            <tbody class="integrator__table-fila integrator_users-list">
+                                <!-- Las celdas se agregarán dinámicamente aquí -->
+                            </tbody>
+                        </table>
+                        <hr>
+
+                        <button class="integrator__botton-primary integrator__add-user" type="button">AGREGAR</button>
+                        <select class="integrator__tablet-select integrator__tablet-select--users">
+                            <option value="" disabled selected>Seleccione un responsable</option>
+
+                        </select>
+                        <hr>
+                        <button2 class="integrator__botton-primary" type="">DESHABILITAR</button2>
+                       
+                        <button class="integrator__botton-primary" type="">CREAR ITEM</button>
+
+                    </div>
+                    <!-- fin modulo -->
+                    <!-- Sección Cultivos -->
+
+                    <div class="integrator__module">
+
+                        <table class="integrator__module-table">
+                            <caption class="integrator__module-header">Cultivos</caption>
+                            <thead class="integrator__module-thead">
+                                <tr class="integrator__table-header">
+                                    <th class="integrator__header-cell">NOMBRE</th>
+                                </tr>
+                            </thead>
+                            <tbody class="integrator__table-fila integrator_crops-list">
+                                <!-- Las celdas se agregarán dinámicamente aquí -->
+                            </tbody>
+                        </table>
+                        <hr>
+                        <button class="integrator__botton-primary integrator__add-crop" type="button">AGREGAR</button>
+                        <select class="integrator__tablet-select integrator__tablet-select--crops">
+                            <option value="" disabled selected>Seleccione un responsable</option>
+                        <hr>
+                        <button2 class="integrator__botton-primary" type="">DESHABILITAR</button2>
+                      
+                        <button class="integrator__botton-primary" type="">CREAR ITEM</button>
+
+                    </div>
+                    <!-- fin modulo -->
+                     
+                    <!-- Sección Cultivos -->
+                     <!-- ⬇️ No tocar este bloque por nada del mundo ⬇️ -->
+                    <div class="integrator__module">
+
+                        <table class="integrator__module-table">
+                            <caption class="integrator__module-header">este bloque no se ve</caption>
+
+                            <thead class="integrator__module-thead">
+                                <tr class="integrator__table-header">
+                                    <th class="integrator__header-cell">este bloque no se ve</th>
+                                </tr>
+                                <tr class="integrator__table-fila">
+                                    <td class="integrator__table-dato">este bloque no se ve</td>
+                                    <td class="integrator__table-dato">este bloque no se ve</td>
+                                    <td class="integrator__table-dato">este bloque no se ve</td>
+                                    <td class="integrator__table-dato">este bloque no se ve</td>
+                                </tr>
+
+                        </table>
+                        <hr>
+                        <button class="integrator__botton-primary" type="">AGREGAR</button>
+                        <select class="integrator__tablet-select">
+                         
+                        </select>
+                        <hr>
+                        <button2 class="integrator__botton-primary" type="">DESHABILITAR</button2>
+                       
+                        <button class="integrator__botton-primary" type="">CREAR ITEM</button>
+
+                    </div>
+                       <!-- ⬆️ No tocar este bloque por nada del mundo ⬆️ -->
+                    <div class="integrator__module">
+                        <!-- Modulo de ciclos -->
+                        <table class="integrator__module-table">
+                            <caption class="integrator__module-header">Cultivos</caption>
+                            <thead class="integrator__module-thead">
+                                <tr class="integrator__table-header">
+                                    <th class="integrator__header-cell">NOMBRE</th>
+                                </tr>
+                            </thead>
+                            <tbody class="integrator__table-fila integrator_cycle-list">
+                                <!-- Las celdas se agregarán dinámicamente aquí -->
+                            </tbody>
+                        </table>
+                        <hr>
+                        <button class="integrator__botton-primary integrator__add-cycle" type="button">AGREGAR</button>
+                        <select class="integrator__tablet-select integrator__tablet-select--cycle">
+                            <option value="" disabled selected>Seleccione un responsable</option>
+                        </select>
+                        <hr>
+                        <button2 class="integrator__botton-primary" type="">DESHABILITAR</button2>
+                  
+                        <button class="integrator__botton-primary" type="">CREAR ITEM</button>
+
+                    </div>
+                    <!-- fin modulo -->
+                    <!-- Sección Insumos -->
+
+                    <div class="integrator__module">
+
+                        <table class="integrator__module-table">
+                            <caption class="integrator__module-header">INSUMOS</caption>
+                            <thead class="integrator__module-thead">
+                                <tr class="integrator__table-header">
+                                    <th class="integrator__header-cell">NOMBRE</th>
+                                </tr>
+                            </thead>
+                            <tbody class="integrator__table-fila integrator_consumable-list">
+                                <!-- Las celdas se agregarán dinámicamente aquí -->
+                            </tbody>
+                        </table>
+                        <hr>
+                        <button class="integrator__botton-primary integrator__add-consumable" type="button">AGREGAR</button>
+                        <select class="integrator__tablet-select integrator__tablet-select--consumable">
+                            <option value="" disabled selected>Seleccione un responsable</option>
+                        </select>
+                        <hr>
+                        <button2 class="integrator__botton-primary" type="">DESHABILITAR</button2>
+                     
+                        <button class="integrator__botton-primary" type="">CREAR ITEM</button>
+
+                    </div>
+                    <!-- fin modulo -->
+                    <!-- Sección Sensores -->
+
+                    <div class="integrator__module">
+
+                        <table class="integrator__module-table">
+                            <caption class="integrator__module-header">SENSORES</caption>
+                            <thead class="integrator__module-thead">
+                                <tr class="integrator__table-header">
+                                    <th class="integrator__header-cell">NOMBRE</th>
+                                </tr>
+                            </thead>
+                            <tbody class="integrator__table-fila integrator_sensor-list">
+                                <!-- Las celdas se agregarán dinámicamente aquí -->
+                            </tbody>
+                        </table>
+                        <hr>
+                        <button class="integrator__botton-primary integrator__add-sensor" type="button">AGREGAR</button>
+                        <select class="integrator__tablet-select integrator__tablet-select--sensor">
+                            <option value="" disabled selected>Seleccione un responsable</option>
+                        </select>
+                        <hr>
+                        <button2 class="integrator__botton-primary" type="">DESHABILITAR</button2>
+                     
+                        <button class="integrator__botton-primary" type="">CREAR ITEM</button>
+
+                    </div>
+                    <!-- fin modulo -->
+                </div>
+            </fieldset>
+            <button class=" integrator__botton-primary
+                integrator__botton-primary--color" type="submit">CREAR
+                PRODUCCION</button>
+
+        </form>
+    </main>
+</body>
+
+</html>

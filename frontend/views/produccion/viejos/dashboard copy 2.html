@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../public/css/dashboard.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+</head>
+
+<body>
+
+
+    <!--   
+/* ****************************************************** */
+/* ***************    ELEMENTOS TITTLE    *************** */
+/* ****************************************************** */ -->
+
+    <header class="cardtittle cardtittle--center">
+        <p class="cardtittle__text">SENA SEDE LEMBO</p>
+        <a class="cardtittle__enlace" href="../index_main.html">
+            <img class="cardtittle__svg-home" src="../public/img_/svg/home.svg" alt>
+        </a>
+    </header>
+    <!-- 
+
+/* ****************************************************** */
+/* *************    ELEMENTOS CARD RIGHT    ************** */
+/* ****************************************************** */ -->
+
+    <label class="side-main">
+
+        <input class="side-main__inp" checked type="checkbox" />
+
+        <div class="side-main__bar">
+            <div class="side-main__bar-info">
+                <!-- JAVA SCRIPT PARA TOMAR LA MITAD DEL NOBRE -->
+                <h3 class="side-main__name">ERICK</h3>
+                <!-- JAVA SCRIPT PARA PONER EL ROLL AQUI  -->
+                <h3 class="side-main__roll">SAD-MND</h3>
+            </div>
+            <div class="side-main__container-avatar">
+                <img class="side-main__bar-avatar" src="../public/img_/main/imagen_foto_perfil_github2.jpg" alt="">
+            </div>
+        </div>
+
+        <!-- AQUI INICIA LA BARRA CON ACCESOS DIRECTOS A LOS MODULOS POR LA BARRA -->
+
+        <section class="side-main__menu-container menu-container">
+            <!-- PRODUCCION -->
+
+            <a class="side-main__container-enlace" href="./index_main.html">
+                <div class="side-main__menu-list">MAIN</div>
+            </a>
+
+            <!-- cultivos -->
+            <div class="side-main__menu-list">
+                <p>CULTIVO</p>
+                <img class="side-main__menu-svg" src="../public/img_/svg/agriculture-outline.svg" alt>
+            </div>
+            <a class="side-main__container-enlace" href="./crops/1-create_crops.html">
+                <div class="side-main__menu-list">Crear</div>
+            </a>
+            <a class="side-main__container-enlace" href="./crops/2-seach_crops.html">
+                <div class="side-main__menu-list">Buscar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./crops/4-update_crops.html">
+                <div class="side-main__menu-list">Actualizar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./crops/5-listar_crops.html">
+                <div class="side-main__menu-list">Listar</div>
+            </a>
+
+            <!-- ciclos -->
+            <div class="side-main__menu-list">
+                <p>CICLO</p>
+                <img class="side-main__menu-svg" src="../public/img_/svg//agriculture-ciclo.svg" alt>
+            </div>
+            <a class="side-main__container-enlace" href="./cycle_crops/1-create_cycle_crops.html">
+                <div class="side-main__menu-list">Crear</div>
+            </a>
+            <a class="side-main__container-enlace" href="./cycle_crops/2-search_cycle_crops.html">
+                <div class="side-main__menu-list">Buscar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./cycle_crops/4-update_cycle_crops.html">
+                <div class="side-main__menu-list">Actualizar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./cycle_crops/5-listar_cicle_crops.html">
+                <div class="side-main__menu-list">Listar</div>
+            </a>
+
+            <!-- iot -->
+            <div class="side-main__menu-list">
+                <p>SENSORES</p>
+                <img class="side-main__menu-svg" src="../public/img_/svg/agriculture--iot.svg" alt>
+            </div>
+            <a class="side-main__container-enlace" href="./sensors/1-create_sensor.html">
+                <div class="side-main__menu-list">Crear</div>
+            </a>
+            <a class="side-main__container-enlace" href="./sensors/2-seach_sensor.html">
+                <div class="side-main__menu-list">Buscar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./sensors/4-update_sensor.html">
+                <div class="side-main__menu-list">Actualizar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./sensors/5-listar_sensors.html">
+                <div class="side-main__menu-list">Listar</div>
+            </a>
+
+            <!-- insumos -->
+            <div class="side-main__menu-list">
+                <p>INSUMOS</p>
+                <img class="side-main__menu-svg" src="../public/img_/svg/agriculture-analytics.svg" alt>
+            </div>
+            <a class="side-main__container-enlace" href="./insumes/1-create_insumes.html">
+                <div class="side-main__menu-list">Crear</div>
+            </a>
+            <a class="side-main__container-enlace" href="./insumes/2-search_insume.html">
+                <div class="side-main__menu-list">Buscar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./insumes/4-update_insumes.html">
+                <div class="side-main__menu-list">Actualizar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./insumes/5-listar_insumes.html">
+                <div class="side-main__menu-list">Listar</div>
+            </a>
+            <!-- usuarios -->
+            <div class="side-main__menu-list">
+                <p>USUARIOS</p>
+                <img class="side-main__menu-svg" src="../public/img_/svg/agriculture-worker-outline.svg" alt>
+            </div>
+            <a class="side-main__container-enlace" href="./users/1-create_user.html">
+                <div class="side-main__menu-list">Crear</div>
+            </a>
+            <a class="side-main__container-enlace" href="./users/2-search_user.html">
+                <div class="side-main__menu-list">Buscar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./users/4-update_user.html">
+                <div class="side-main__menu-list">Actualizar</div>
+            </a>
+            <a class="side-main__container-enlace" href="./users/5-listar_users.html">
+                <div class="side-main__menu-list">Listar</div>
+            </a>
+            <!-- loging out -->
+            <hr>
+            </div>
+            <a class="side-main__container-enlace" href="./home/home.html">
+                <div class="side-main__menu-list">LOGIN OUT</div>
+            </a>
+
+        </section>
+    </label>
+    <!-- 
+/* ******************************************************* */
+/* ****************     BLOQUE  PRODUCTO  *************** */
+/* ******************************************************* */ 
+-->
+    <main class="producto">
+
+        <head class="producto__form-header">
+            <div class="producto__header-tittles">
+                <div class="producto__title-h3">IDENTIFICARDOR</div> <input type="text" name=""
+                    placeholder="25-05-2025-LECHUGA-0001">
+                <div class="producto__title-h3">RESPONSABLE</div> <input type="text" name=""
+                    placeholder="NICHOLAS TESLA">
+            </div>
+
+        </head>
+
+        <div class="producto__general-container">
+
+
+            <form class="producto__form">
+
+                <div class="producto__card--map">
+                    <div class="producto__container-img">
+                        <img class="producto__mapa" id="imagen-mapa" src="../public/img_/main/sedelembo.png"
+                            alt="Mapa" />
+                        <div class="producto__container" id="contenedor"></div>
+                    </div>
+                    <button id="guardar">Guardar selección</button><button id="guardar">Borrar Selección</button>
+                </div>
+
+
+                <div class="producto__containers-chards">
+
+                    <canvas class="producto__chart-js" id="Chart_total_insumos"
+                        style="width:100%;max-width:600px"></canvas>
+
+                </div>
+
+            </form>
+
+
+        </div>
+    </main>
+
+
+
+    <script>
+        var xValues = ["HUMEDAD", "PH", "TEMPERATURA", "RADIACION", "LLUVIA"];
+        var yValues = [55, 49, 44, 24, 15];
+        var barColors = ["red", "green", "blue", "orange", "brown"];
+
+        new Chart("Chart_total_insumos", {
+            type: "horizontalBar",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: "World Wine Production 2018"
+                },
+                scales: {
+                    xAxes: [{ ticks: { min: 10, max: 60 } }]
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
