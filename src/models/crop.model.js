@@ -6,6 +6,7 @@ const cropSchema = new mongoose.Schema({
   location: { type: String, required: true },
   description_crop: { type: String },
   size_m2: { type: Number, required: true }
+   
 }, {
   timestamps: true
 });

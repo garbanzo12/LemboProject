@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const choices = new Choices(cropSelect); // ⬅️ Estoy llamand a mi dependencia choices para el select
   // Inicializar Choices.js después de llenar las opciones
  
-    fetch('http://localhost:5501/crops/id') // ⬅️ hago un fetch para traer la lista de IDS
+    fetch('http://localhost:5501/crops/_id') // ⬅️ hago un fetch para traer la lista de IDS
       .then(res => res.json()) // ⬅️ Aqui estoy trallendo el paquete json
       .then(ids => {
         const todosLosIds = ids.cultivos; // Array con todos los IDs
@@ -29,13 +29,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       currentID = id;
 
-      fetch(`http://localhost:5501/api/crops/${id}`) // ⬅️ Por medio del ID traigo la columna correspondiente( anteriormente la traje tambien, pero para cargar el select, ahora es para los inputs)
+      fetch(`http://localhost:3000/api/crops/${id}`) // ⬅️ Por medio del ID traigo la columna correspondiente( anteriormente la traje tambien, pero para cargar el select, ahora es para los inputs)
         .then(res => {
           if (!res.ok) throw new Error('No se encontró el cultivo');
           return res.json(); // ⬅️ 
         })
         .then(data => {  // ⬅️ Los muestro por aqui
-          cropForm.id.value = data.id;
+          cropForm._id.value = data._id;
           cropForm.nombre_cultivo.value = data.name_crop;
           cropForm.tipo_cultivo.value = data.type_crop;
           cropForm.ubicacion_cultivo.value = data.location;
