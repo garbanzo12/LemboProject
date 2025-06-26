@@ -1,14 +1,15 @@
 
 document.addEventListener("DOMContentLoaded", () => {
-
+const forms = document.querySelectorAll(".cardright__form--top3");
+    forms.forEach((form) => {
     
-document.querySelector('.cardright__botton-primary').addEventListener('click', async (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const name = document.querySelector('.card__right__input--name').value.trim();
-  const type = document.querySelector('.card__right__input--type').value.trim();
-  const location = document.querySelector('.card__right__input--location').value.trim();
-  const description = document.querySelector('.card__right__input--description').value.trim();
-  const size = document.querySelector('.card__right__input--size').value.trim();1
+  const name = document.querySelector('.card__right__input--name')
+  const type = document.querySelector('.card__right__input--type')
+  const location = document.querySelector('.card__right__input--location')
+  const description = document.querySelector('.card__right__input--description')
+  const size = document.querySelector('.card__right__input--size').value.trim()
   const image = document.querySelector('.cardright__input-form--file').files[0];
 
 
@@ -16,7 +17,7 @@ document.querySelector('.cardright__botton-primary').addEventListener('click', a
   inputs.forEach((input) => {
         let errorSpan = input.nextElementSibling;
 
-        if (!errorSpan || !errorSpan.classList.contai("error-message")) {
+        if (!errorSpan || !errorSpan.classList.contains("error-message")) {
             errorSpan = document.createElement("span");
             errorSpan.classList.add("error-message");
             errorSpan.style.color = "red";
@@ -42,10 +43,10 @@ document.querySelector('.cardright__botton-primary').addEventListener('click', a
 
   // Preparamos el FormData
   const formData = new FormData();
-  formData.append('name_crop', name);
-  formData.append('type_crop', type);
-  formData.append('location', location);
-  formData.append('description_crop', description);
+  formData.append('name_crop', name.value.trim());
+  formData.append('type_crop', type.value.trim());
+  formData.append('location', location.value.trim());
+  formData.append('description_crop', description.value.trim());
   formData.append('size_m2', size);
   formData.append('image_crop', image);
 
@@ -60,7 +61,7 @@ document.querySelector('.cardright__botton-primary').addEventListener('click', a
                     if (respuesta.ok) {
                         form.reset(); // Limpiar formulario tras el envío
 
-                        const mensaje = `✅ Datos guardados correctamente.\nID del registro: ${resultado.crop._id}`;
+                        const mensaje = `✅ Datos guardados correctamente.\nID del registro: ${resultado.cropId}`;
                         console.log("Respuesta completa del servidor:", resultado);
                     
                         // Mostrar el mensaje en el cuadro arriba
@@ -79,7 +80,7 @@ document.querySelector('.cardright__botton-primary').addEventListener('click', a
                             window.location.href = "/frontend/views/crops/2-seach_crops.html"; // 👈 Redireccionamiento 
                           });
                         
-                        texto.textContent = `✅ Datos guardados correctamente.\nID del registro: ${resultado._id}`;
+                        texto.textContent = `✅ Datos guardados correctamente.\nID del registro: ${resultado.cropId}`;
                         cuadro.style.display = "block";
                     
                         botonCopiar.onclick = () => {
@@ -104,7 +105,7 @@ document.querySelector('.cardright__botton-primary').addEventListener('click', a
                 } catch (error) {
                     mostrarMensaje(form, "❌ " + error.message, "red");
                 }
-            
+    });        
 });
         
 // Función para mostrar mensajes debajo del formulario
@@ -124,9 +125,7 @@ function mostrarMensaje(form, mensaje, color) {
     mensajeSpan.style.color = color;
 
 
-    setTimeout(() => {
-        inicializarValidaciones();
-    }, 100);
+    
 
 
 }

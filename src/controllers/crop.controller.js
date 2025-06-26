@@ -1,11 +1,21 @@
 const Crop = require('../models/crop.model');
-
+const Counter = require('../models/counter.model');
 // Crear un cultivo
 exports.createCrop = async (req, res) => {
+  
+  console.log("respuesta del cuerpo = "+ JSON.stringify(req.body, null, 2))
   try {
+    // Incrementa el contador
+    const counter = await Counter.findOneAndUpdate(
+      { _id: 'cropId' },               // el id del contador que manejamos
+      { $inc: { seq: 1 } },            // incrementa en 1
+      { new: true, upsert: true }      // crea si no existe
+    );
+    req.body.cropId = counter.seq;
     const crop = new Crop(req.body);
     await crop.save();
-    res.status(201).json({ message: 'Cultivo creado exitosamente', crop });
+    const readableId = crop.cropId.toString().padStart(3, '0');
+    res.status(201).json({ message: 'Cultivo creado exitosamente',cropId: readableId, data: crop });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error al crear cultivo', error });
