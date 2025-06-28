@@ -30,10 +30,10 @@ function inicializarValidaciones() {
         form.addEventListener("submit", async function (event) {
             event.preventDefault();
             
-            const name_cropCycle = document.querySelector('.cardright__input-form--name');
+            const name_cycle = document.querySelector('.cardright__input-form--name');
             const description_cycle = document.querySelector('.cardright__input-form--description');
-            const period_cycle_start = document.querySelector('.cardright__input-form--date-start');
-            const period_cycle_end = document.querySelector('.cardright__input-form--date-end');
+            const cycle_start = document.querySelector('.cardright__input-form--date-start');
+            const cycle_end = document.querySelector('.cardright__input-form--date-end');
             const news_cycle = document.querySelector('.cardright__input-form--news');
             const state_cycle = toggleCheckbox ? (toggleCheckbox.checked ? 'habilitado' : 'deshabilitado') : '';
             
@@ -59,10 +59,10 @@ function inicializarValidaciones() {
             });
             
             let datos = {
-                name_cropCycle: name_cropCycle ? name_cropCycle.value : '',
+                name_cycle: name_cycle ? name_cycle.value : '',
                 description_cycle: description_cycle ? description_cycle.value : '',
-                period_cycle_start: period_cycle_start ? period_cycle_start.value : '',
-                period_cycle_end: period_cycle_end ? period_cycle_end.value : '',
+                cycle_start: cycle_start ? cycle_start.value : '',
+                cycle_end: cycle_end ? cycle_end.value : '',
                 news_cycle: news_cycle ? news_cycle.value : '',
                 state_cycle: state_cycle
             };
@@ -70,7 +70,7 @@ function inicializarValidaciones() {
             if (validarCampo) {
                 try {
                     console.log("Datos enviados:", datos);
-                    let respuesta = await fetch("http://localhost:5501/cropcycle", {
+                    let respuesta = await fetch("http://localhost:3000/api/cycle", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
