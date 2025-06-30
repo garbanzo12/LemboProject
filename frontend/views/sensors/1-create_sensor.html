@@ -67,13 +67,27 @@
 
           <div class="cardright__subcontainer-input">
             <label class="cardright__label-form" for>Unidad de medida</label>
-            <input class="cardright__input-form cardright__input-form--unit-sensor" placeholder="Ej : °C" type="text" />
+            
+            <select class="cardright__input-form cardright__input-form--unit-sensor"  name="" id="" required>
+              <option class="cardright__input-opt" value="">Unidad de medida:</option>
+              <option class="cardright__input-opt" value="C">°C</option>
+              <option class="cardright__input-opt" value="F">°F</option>
+              <option class="cardright__input-opt" value="K">K</option>
+            </select>
           </div>
           
           <div class="cardright__subcontainer-input">
             <label class="cardright__label-form" for>Tiempo escaneo</label>
-            <input class="cardright__input-form cardright__input-form--time" placeholder="Ej : 10 minuto" type="text" />
+            <input class="cardright__input-form cardright__input-form--time" placeholder="Ej : 10" type="number" />
+            <select class="cardright__input-form cardright__input-form--type-sensor"  name="" id="" required>
+              <option class="cardright__input-opt" value="">Tiempo de escaneo en:</option>
+              <option class="cardright__input-opt" value="Minutos">Minutos</option>
+              <option class="cardright__input-opt" value="Segundos">Segundos</option>
+              <option class="cardright__input-opt" value="Horas">Horas</option>
+            </select>
+            
           </div>
+          
           <div class="cardright__subcontainer-input">
             <label class="cardright__label-form" for>Cantidad</label>
             <input class="cardright__input-form cardright__input-form--quantity" placeholder="Ej : 10 " type="number" />

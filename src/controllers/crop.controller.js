@@ -1,5 +1,5 @@
 const Crop = require('../models/crop.model');
-const Counter = require('../models/counter.model');
+const Counter = require('../models/counters/counter.model');
 // Crear un cultivo
 exports.createCrop = async (req, res) => {
   

@@ -34,6 +34,7 @@ function inicializarValidaciones() {
             const name_sensor = document.querySelector('.cardright__input-form--name');//✅
             const unit_sensor = document.querySelector('.cardright__input-form--unit-sensor'); //✅
             const time_sensor = document.querySelector('.cardright__input-form--time');//✅
+            const unit_time_sensor = document.querySelector('.cardright__input-form--type-sensor');//✅
             const description_sensor = document.querySelector('.cardright__input-form--description');//✅
             const image_sensor = document.querySelector('.cardright__input-form--file'); //✅
             const quantity_sensor = document.querySelector('.cardright__input-form--quantity'); //✅
@@ -65,6 +66,7 @@ function inicializarValidaciones() {
             datos.append("name_sensor", name_sensor.value);
             datos.append("unit_sensor", unit_sensor.value);
             datos.append("time_sensor", time_sensor.value);
+            datos.append("unit_time_sensor", unit_time_sensor.value);
             datos.append("description_sensor", description_sensor.value);
             datos.append("image_sensor", image_sensor.files[0]); // 👈 importante: image_crop.files[0]
             datos.append("quantity_sensor", quantity_sensor.value);
@@ -75,7 +77,7 @@ function inicializarValidaciones() {
                     for (const [key, value] of datos.entries()) {
                         console.log(key + ':', value);
                     }
-                    let respuesta = await fetch("http://localhost:5501/sensors", {
+                    let respuesta = await fetch("http://localhost:3000/api/sensor", {
                         
                         method: "POST",
                         body: (datos),

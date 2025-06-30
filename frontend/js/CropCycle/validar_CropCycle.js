@@ -87,7 +87,7 @@ function inicializarValidaciones() {
                             toggleCheckbox.checked = true;
                             toggleCheckbox.style.backgroundColor = 'var(--checked-color)';
                         }
-                        mostrarMensaje(form, "✅ Datos guardados correctamente.", "green");
+                        mostrarMensaje(form, `✅ Datos guardados correctamente. ID del registro: ${resultado.cycleId}. `, "green");
                         window.parent.postMessage("cerrarModalYActualizar", "*"); // Esto es para cuando el archivo se abre como modal
 
                     } else {

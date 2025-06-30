@@ -3,7 +3,7 @@ const router = express.Router();
 const cropController = require('../controllers/crop.controller');
 const { cropValidator } = require('../validators/crop.validator');
 const multer = require('multer');
-const upload = multer({ dest: 'uploads/' });  //   ../uploads
+const upload = multer({ dest: 'uploads-crop/' });  //   ../uploads
 // CRUD
 router.post('/', cropValidator, upload.array('image_crop'), cropController.createCrop);
 router.get('/', cropController.getCrops);

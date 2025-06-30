@@ -1,5 +1,5 @@
 const Cycle = require('../models/cycle.model');
-const Counter = require('../models/counter1.model');
+const Counter = require('../models/counters/counter1.model');
 // Crear un ciclo
 exports.createCycle = async (req, res) => {
   
