@@ -7,6 +7,7 @@ const userRoutes = require('./routes/user.routes');
 const cropRoutes = require('./routes/crop.routes');
 const cycleRoutes = require('./routes/cycle.routes');
 const sensorRoutes = require('./routes/sensor.routes');
+const consumableRoutes = require('./routes/consumable.routes');
 
 const app = express(); // <- Crea la instancia principal de Express, que se usa para configurar middlewares, rutas, etc.
 app.use(express.json());
@@ -16,6 +17,7 @@ app.use('/api/auth', userRoutes);
 app.use('/api/crops', cropRoutes);
 app.use('/api/cycle', cycleRoutes);
 app.use('/api/sensor', sensorRoutes);
+app.use('/api/consumable', consumableRoutes);
 // app.use(errorHandler);
 
 

@@ -95,7 +95,7 @@ function inicializarValidaciones() {
             if (validarCampo) {
                 try {
                     console.log("Datos enviados:", datos);
-                    let respuesta = await fetch("http://localhost:5501/consumables", {
+                    let respuesta = await fetch("http://localhost:3000/api/consumable", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",

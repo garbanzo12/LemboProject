@@ -1,15 +1,42 @@
 const mongoose = require('mongoose');
 
-const cropSchema = new mongoose.Schema({
-  cycleId: { type: Number, unique: true },  
-  name_cycle: { type: String, required: true },
-  cycle_start: { type: Date, required: true },
-  cycle_end: { type: Date, required: true },
-  description_cycle: { type: String },
-  news_cycle: { type: String, required: true },   
-  state_cycle : { type: String},  
+const cycleSchema = new mongoose.Schema({
+  cycleId: {
+    type: Number,
+    unique: true
+  },
+  name_cycle: {
+    type: String,
+    required: true,
+    trim: true,
+    minlength: 2,
+    maxlength: 100
+  },
+  cycle_start: {
+    type: Date,
+    required: true
+  },
+  cycle_end: {
+    type: Date,
+    required: true
+  },
+  description_cycle: {
+    type: String,
+    trim: true,
+    default: ''
+  },
+  news_cycle: {
+    type: String,
+    required: true,
+    min: 0
+  },
+  state_cycle: {
+    type: String,
+    enum: ['habilitado', 'deshabilitado'],
+    default: 'habilitado'
+  }
 }, {
-  timestamps: true
+  timestamps: { createdAt: 'created_at', updatedAt: 'update_at' }
 });
 
-module.exports = mongoose.model('Cycle', cropSchema);
+module.exports = mongoose.model('Cycle', cycleSchema);
