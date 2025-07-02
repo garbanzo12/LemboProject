@@ -74,7 +74,7 @@ function inicializarValidaciones() {
             if (validarCampo) {
                 try {
                     console.log("Datos enviados:", datos);
-                    let respuesta = await fetch("http://localhost:5501/users", {
+                    let respuesta = await fetch("http://localhost:3000/api/auth/register", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -93,10 +93,16 @@ function inicializarValidaciones() {
                         }
                         mostrarMensaje(form, "✅ Datos guardados correctamente.", "green");
                         window.parent.postMessage("cerrarModalYActualizar", "*"); // Esto es para cuando el archivo se abre como modal
-
-                    } else {
-                        throw new Error(resultado.error || "Error desconocido.");
-                    }
+                            
+                   } else {
+                     
+                     // Verificamos si hay errores de validación del backend
+                     if (resultado.errors && Array.isArray(resultado.errors)) {
+                         const mensajes = resultado.errors.map(e => `⚠️ ${emsg}`).join('\n');
+                         mostrarMensaje(form, mensajes, "red");
+                     } else {
+                         throw new Error(resultado.message || "Errordesconocido.");
+                     }}
                 } catch (error) {
                     mostrarMensaje(form, "❌ " + error.message, "red");
                 }

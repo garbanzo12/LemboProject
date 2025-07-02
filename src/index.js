@@ -3,7 +3,7 @@ const express = require('express'); // <- Importa el módulo express, el framewo
 const cors = require('cors'); // <- Importa el middleware cors que permite solicitudes entre diferentes dominios. Muy útil cuando el frontend y backend no están en el mismo servidor.
 const morgan = require('morgan');
 const connectDB = require('./config/db');
-const userRoutes = require('./routes/user.routes');
+const userRoutes = require('./routes/auth.routes');
 const cropRoutes = require('./routes/crop.routes');
 const cycleRoutes = require('./routes/cycle.routes');
 const sensorRoutes = require('./routes/sensor.routes');
@@ -18,13 +18,13 @@ app.use('/api/crops', cropRoutes);
 app.use('/api/cycle', cycleRoutes);
 app.use('/api/sensor', sensorRoutes);
 app.use('/api/consumable', consumableRoutes);
+
 // app.use(errorHandler);
-
-
-
 connectDB();
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
+
+

@@ -17,8 +17,8 @@ Aplicación RESTful para la creación, edición y consulta de usuarios, cultivos
 
 ## 3️⃣ Tecnologías Utilizadas
 
-- Node.js
-- Express.js
+- Node.js v20.17.0
+- Express.js v20.17.0
 - MongoDB + Mongoose
 - JWT (jsonwebtoken)
 - Bcrypt (para hashear contraseñas)

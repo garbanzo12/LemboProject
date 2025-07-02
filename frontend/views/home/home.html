@@ -89,12 +89,12 @@
 
                     <div class="cardright__subcontainer-input">
                         <label class="cardright__label-form" for="Correo Electronico">Correo Electronico</label>
-                        <input class="cardright__input-form " placeholder="Correo electrónico" type="email" />
+                        <input class="cardright__input-form   cardright__input-form--email" placeholder="Correo electrónico" type="email" />
                     </div>
 
                     <div class="cardright__subcontainer-input">
                         <label class="cardright__label-form" for="Contraseña">Contraseña</label>
-                        <input class="cardright__input-form " placeholder="Ingrese su contraseña" type="password" />
+                        <input class="cardright__input-form cardright__input-form--password" placeholder="Ingrese su contraseña" type="password" />
                     </div>
                     <button class="cardright__botton-primary" type="submit">ACEPTAR</button>
                 </div>
@@ -118,21 +118,7 @@
         </footer>
     </main>
 
-    <script>
-        fetch("/SGL CODE/Estandarizacion/config.json")
-            .then(result => result.json())
-            .then(data => {
-                // Crea un elemento script
-                const script = document.createElement("script")
-                // Asignamos la ruta del script
-                script.src = data.login; // ⬅️ cambiar nombre del json aqui
-                // Indica que el script solo se ejecuta cuando el HTML se haya cargado
-                script.defer = true;
-                // Ponemos el script en el head para que se ejecute
-                document.head.appendChild(script);
-            })
-            .catch(error => console.log('Error al cargar script'))
-    </script>
+<script src="/frontend/js/auth/login.js"></script>
 </body>
 
 </html>
