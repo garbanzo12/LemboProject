@@ -2,9 +2,19 @@ const express = require('express');
 const router = express.Router();
 const sensorController = require('../controllers/sensor.controller');
 const { sensorValidator } = require('../validators/sensor.validator');
+const path = require('path');
 const multer = require('multer');
-const upload = multer({ dest: 'uploads-sensor/' });  //   ../uploads
-// CRUD
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads-sensor/');
+  },
+  filename: function (req, file, cb) {
+    const ext = path.extname(file.originalname);
+    const uniqueName = Date.now() + '-' + Math.round(Math.random() * 1E9) + ext;
+    cb(null, uniqueName);
+  }
+});
+const upload = multer({ storage }); // ← reemplaza el anterior
 
 // console.log("✔ createSensor tipo:", typeof sensorController.createSensor);
 // console.log("✔ sensorValidator es array:", Array.isArray(sensorValidator));

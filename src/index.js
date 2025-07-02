@@ -10,6 +10,8 @@ const sensorRoutes = require('./routes/sensor.routes');
 const consumableRoutes = require('./routes/consumable.routes');
 
 const app = express(); // <- Crea la instancia principal de Express, que se usa para configurar middlewares, rutas, etc.
+const path = require('path');
+
 app.use(express.json());
 app.use(cors());
 app.use(morgan('dev')); // <- para ver las peticiones en consola, pro ejemplo GET /api/users 200 15.234 ms - 324 , POST /api/auth/login 401 8.432 ms - 45
@@ -18,7 +20,8 @@ app.use('/api/crops', cropRoutes);
 app.use('/api/cycle', cycleRoutes);
 app.use('/api/sensor', sensorRoutes);
 app.use('/api/consumable', consumableRoutes);
-
+app.use('/uploads-sensor', express.static(path.join(__dirname, '../uploads-sensor')));
+app.use('/uploads-crop', express.static(path.join(__dirname, '../uploads-crop')));
 // app.use(errorHandler);
 connectDB();
 

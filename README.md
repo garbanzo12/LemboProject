@@ -19,12 +19,14 @@ Aplicación RESTful para la creación, edición y consulta de usuarios, cultivos
 
 - Node.js v20.17.0
 - Express.js v20.17.0
+- Express-validator 
 - MongoDB + Mongoose
 - JWT (jsonwebtoken)
 - Bcrypt (para hashear contraseñas)
 - Multer (para subir archivos)
 - Morgan (Para ver respuestas en consola)
 - CORS (Para solicitudes entre diferentes donminios)
+
 
 ---
 

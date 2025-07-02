@@ -19,7 +19,7 @@ console.log('holis')
             const imgElement = document.createElement('img');
             imgElement.src = `http://localhost:3000/uploads-crop/${data.image_crop}`; // ⬅️ Ruta completa
             imgElement.alt = 'Imagen del cultivo';
-            imgElement.style.maxWidth = '200px'; // ⬅️ Estilo opcional
+            imgElement.style.maxWidth = '75px'; // ⬅️ Estilo opcional
             imageContainer.innerHTML = ''; // Limpiar contenedor
             imageContainer.classList.add('cardright__image-upload')
             imageContainer.appendChild(imgElement);

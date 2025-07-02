@@ -12,7 +12,14 @@ exports.createCrop = async (req, res) => {
       { new: true, upsert: true }      // crea si no existe
     );
     req.body.cropId = counter.seq;
-    const crop = new Crop(req.body);
+        const imageName = req.files?.[0]?.filename || '';
+    
+        // Construir el nuevo sensor
+        const crop = new Crop({
+          ...req.body,
+          cropId: counter.seq,
+          image_crop: imageName, // ✅ Aquí guardas el nombre real del archivo
+        });
     await crop.save();
     const readableId = crop.cropId.toString().padStart(3, '0');
     res.status(201).json({ message: 'Cultivo creado exitosamente',cropId: readableId, data: crop });

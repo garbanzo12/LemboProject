@@ -2,10 +2,14 @@ console.log('Script cargado');
 
 async function obtenerIdsCiclo() {
   try {
-    const res = await fetch('http://localhost:5501/sensors/id'); // ✅ Nuevo endpoint
+  const res = await fetch('http://localhost:3000/api/sensor', {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      }
+    });   
     if (!res.ok) throw new Error('No se pudieron obtener los Ciclos');
     const data = await res.json();
-    return data.sensores; // ✅ Ya viene como un array de IDs
+    return data; // ✅ Ya viene como un array de IDs
   } catch (err) {
     console.error('Error al obtener los IDs:', err.message);
     return [];
@@ -21,7 +25,7 @@ async function inicializarBuscar() {
 
   if (ids.length === 0) {
     const option = document.createElement('option');
-    option.textContent = 'No hay Ciclo disponibles';
+    option.textContent = 'No hay Ciclos disponibles';
     option.disabled = true;
     selectId.appendChild(option);
   } else {
@@ -31,10 +35,10 @@ async function inicializarBuscar() {
     defaultOption.selected = true;
     selectId.appendChild(defaultOption);
 
-    ids.forEach(id => {
+    ids.forEach(c => {
       const option = document.createElement('option');
-      option.value = id;
-      option.textContent = `${id}`;
+      option.value = c._id;
+      option.textContent = `${c.sensorId}`;
       selectId.appendChild(option);
     });
   }
@@ -55,7 +59,7 @@ async function inicializarBuscar() {
     }
 
     try {
-      const res = await fetch(`http://localhost:5501/api/sensors/${id}`);
+      const res = await fetch(`http://localhost:3000/api/sensor/${id}`);
       if (!res.ok) throw new Error('No se encontró el sensor');
       const data = await res.json();
 

@@ -11,8 +11,17 @@ exports.createSensor = async (req, res) => {
       { $inc: { seq: 1 } },            // incrementa en 1
       { new: true, upsert: true }      // crea si no existe
     );
+    
     req.body.sensorId = counter.seq;
-    const sensor = new Sensor(req.body);
+    const imageName = req.files?.[0]?.filename || '';
+
+    // Construir el nuevo sensor
+    const sensor = new Sensor({
+      ...req.body,
+      sensorId: counter.seq,
+      image_sensor: imageName, // ✅ Aquí guardas el nombre real del archivo
+    });
+    
     await sensor.save();
     const readableId = sensor.sensorId.toString().padStart(3, '0');
     res.status(201).json({ message: 'Sensor creado exitosamente',sensorId: readableId, data: sensor });

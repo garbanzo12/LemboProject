@@ -31,7 +31,7 @@ async function inicializarBuscar() {
     selectId.appendChild(option);
   } else {
     const defaultOption = document.createElement('option');
-    defaultOption.textContent = 'Selecciona un cultivo';
+    defaultOption.textContent = 'Selecciona un ID';
     defaultOption.disabled = true;
     defaultOption.selected = true;
     selectId.appendChild(defaultOption);

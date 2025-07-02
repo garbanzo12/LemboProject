@@ -68,7 +68,7 @@ function inicializarValidaciones() {
             datos.append("time_sensor", time_sensor.value);
             datos.append("unit_time_sensor", unit_time_sensor.value);
             datos.append("description_sensor", description_sensor.value);
-            datos.append("image_sensor", image_sensor.files[0]); // 👈 importante: image_crop.files[0]
+            datos.append("image_sensor", image_sensor.files[0]); // 👈 
             datos.append("quantity_sensor", quantity_sensor.value);
             datos.append("state_sensor", state_sensor);
             if (validarCampo) {
@@ -92,7 +92,7 @@ function inicializarValidaciones() {
                             toggleCheckbox.checked = true;
                             toggleCheckbox.style.backgroundColor = 'var(--checked-color)';
                         }
-                        mostrarMensaje(form, "✅ Datos guardados correctamente.", "green");
+                        mostrarMensaje(form, `✅ Datos guardados correctamente.\nID del registro: ${resultado.sensorId}`, "green");
                         window.parent.postMessage("cerrarModalYActualizar", "*"); // Esto es para cuando el archivo se abre como modal
 
                     } else {
