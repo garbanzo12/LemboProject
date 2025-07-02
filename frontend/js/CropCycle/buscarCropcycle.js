@@ -1,13 +1,18 @@
 console.log('Script cargado');
 
-async function obtenerIdsCiclo() {
+async function obtenerCiclos() {
   try {
-    const res = await fetch('http://localhost:5501/cropcycle/id'); // ✅ Nuevo endpoint
-    if (!res.ok) throw new Error('No se pudieron obtener los Ciclos');
+    const res = await fetch('http://localhost:3000/api/cycle', {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      }
+    });
+
+    if (!res.ok) throw new Error('No se pudieron obtener los ciclos');
     const data = await res.json();
-    return data.ciclos; // ✅ Ya viene como un array de IDs
+    return data;
   } catch (err) {
-    console.error('Error al obtener los IDs:', err.message);
+    console.error('Error al obtener los ciclos:', err.message);
     return [];
   }
 }
@@ -16,12 +21,12 @@ async function inicializarBuscar() {
   const formBuscar = document.querySelector('.cardright__form');
   const selectId = document.querySelector('.cardright__selectid');
 
-  const ids = await obtenerIdsCiclo();
+  const ciclos = await obtenerCiclos();
   selectId.innerHTML = '';
 
-  if (ids.length === 0) {
+  if (ciclos.length === 0) {
     const option = document.createElement('option');
-    option.textContent = 'No hay Ciclo disponibles';
+    option.textContent = 'No hay ciclos disponibles';
     option.disabled = true;
     selectId.appendChild(option);
   } else {
@@ -31,15 +36,14 @@ async function inicializarBuscar() {
     defaultOption.selected = true;
     selectId.appendChild(defaultOption);
 
-    ids.forEach(id => {
+    ciclos.forEach(c => {
       const option = document.createElement('option');
-      option.value = id;
-      option.textContent = `${id}`;
+      option.value = c._id; // se usa _id como valor
+      option.textContent = `${c.cycleId}`; // o lo que quieras mostrar
       selectId.appendChild(option);
     });
   }
 
-  // Inicializar Choices.js después de llenar las opciones
   new Choices(selectId, {
     renderChoiceLimit: 5,
   });
@@ -50,17 +54,22 @@ async function inicializarBuscar() {
     const id = selectId.value;
 
     if (!id) {
-      alert('Por favor selecciona un ID');
+      alert('Por favor selecciona un cultivo');
       return;
     }
 
     try {
-      const res = await fetch(`http://localhost:5501/api/cropcycle/${id}`);
+      const res = await fetch(`http://localhost:3000/api/cycle/${id}`, {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token')
+        }
+      });
+
       if (!res.ok) throw new Error('No se encontró el cultivo');
       const data = await res.json();
 
-      localStorage.setItem('Cicloseleccionado', JSON.stringify(data));
-      window.location.href = '3-view_cycle_crops.html';
+      localStorage.setItem('cicloseleccionado', JSON.stringify(data));
+      window.location.href = '3- view_cycle_crops.html';
     } catch (err) {
       alert('Error: ' + err.message);
     }
