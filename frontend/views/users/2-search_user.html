@@ -11,8 +11,12 @@
   <meta http-equiv="Content-Language" content="es" />
 
   <link rel="stylesheet" href="../../public/css/styles-bem.css">
+<!-- CSS de Choices -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
 
-  <script src="/frontend/js/validar_users.js"></script>
+  <!-- JS de Choices -->
+  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+  
   <title>Busqueda De Usuarios</title>
 </head>
 
@@ -58,7 +62,9 @@
         <div class="cardright__container-input">
           <div class="cardright__subcontainer-input">
             <label class="cardright__label-form" for="">Id Usuario</label>
-            <input class="cardright__input-form" placeholder="Id Usuario" type="number" />
+            <select class="cardright__selectid"> <!-- Esto es de js -->
+                            <option value="">Cargando IDs...</option> <!--Esto es de js  -->
+                          </select>  
           </div>
 
           <button class="cardright__botton-primary" type="submit">BUSCAR</button>
@@ -84,7 +90,8 @@
     </a>
 
   </main>
-
+    <script src="/frontend/js/auth/rol_auth.js"></script>
+    <script src="/frontend/js/users/buscarusers.js"></script>
 </body>
 
 </html>

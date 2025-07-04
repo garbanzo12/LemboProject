@@ -14,4 +14,11 @@ router.post('/login', authController.login);
 const auth = require('../middlewares/auth'); // Middleware JWT
 router.get('/me', auth, authController.getProfile);
 
+//Buscar 
+router.get('/search', auth, authController.searchUser);
+
+//View
+router.get('/:id',auth, authController.getuserById);
+module.exports = router;
+
 module.exports = router;

@@ -13,4 +13,3 @@ router.post('/login', loginValidator, userCtrl.login);
 // Perfil
 router.get('/me', auth, userCtrl.getProfile);
 
-module.exports = router;

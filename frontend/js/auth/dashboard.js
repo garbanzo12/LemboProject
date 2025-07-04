@@ -27,6 +27,9 @@ if (!token) {
 
       // Puedes usar el rol para mostrar u ocultar cosas
       if (payload.role !== 'Administrador') {
+
+
+        
         document.querySelector('.side-main__menu-list--crop--create').style.display = 'none';
         document.querySelector('.side-main__menu-list--crop--update').style.display = 'none';
         document.querySelector('.side-main__menu-list--cycle--create').style.display = 'none';
@@ -37,7 +40,29 @@ if (!token) {
         document.querySelector('.side-main__menu-list--consumable--update').style.display = 'none';
         document.querySelector('.side-main__menu-list--user--create').style.display = 'none';
         document.querySelector('.side-main__menu-list--user--update').style.display = 'none';
+        document.querySelector('.side-main__menu-list--user--search').style.display = 'none';
+        document.querySelector('.side-main__menu-list--user--list').style.display = 'none';
+        document.querySelector('.side-main__menu-list--user').style.display = 'none';
       
+      }
+      if(payload.role !== 'Personal de Apoyo' && payload.role !== 'Administrador') {
+        document.querySelector('.Bar').style.display = 'none';
+        document.querySelector('.side-main__menu-list--production').style.display = 'none';
+        document.querySelector('.side-main__menu-list--production--create').style.display = 'none';
+        document.querySelector('.side-main__menu-list--production--view').style.display = 'none';
+        document.querySelector('.side-main__menu-list--crop').style.display = 'none';
+        document.querySelector('.side-main__menu-list--crop--list').style.display = 'none';
+        document.querySelector('.side-main__menu-list--crop--search').style.display = 'none';
+        document.querySelector('.side-main__menu-list--cycle').style.display = 'none';
+        document.querySelector('.side-main__menu-list--cycle--search').style.display = 'none';
+        document.querySelector('.side-main__menu-list--cycle--list').style.display = 'none';
+        document.querySelector('.side-main__menu-sensor').style.display = 'none';
+        document.querySelector('.side-main__menu-list--sensor--search').style.display = 'none';
+        document.querySelector('.side-main__menu-list--sensor--list').style.display = 'none';
+        document.querySelector('.side-main__menu-cosumable').style.display = 'none';
+        document.querySelector('.side-main__menu-list--consumable--search').style.display = 'none';
+        document.querySelector('.side-main__menu-list--consumable--list').style.display = 'none';
+
       }
     }
   } catch (error) {

@@ -16,9 +16,12 @@
       return;
     }
 
+    if (payload.role === 'Visitante') {
+      window.location.href = '/frontend/views/index_main.html';
+      return;
+    }
 
-    // ✅ Usuario autenticado y con rol administrador
-    console.log('👑 Acceso administrador:', payload.name);
+    
 
   } catch (error) {
     console.error('Token corrupto:', error);

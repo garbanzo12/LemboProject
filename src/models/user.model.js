@@ -54,11 +54,7 @@ const userSchema = new mongoose.Schema({
     enum: ['habilitado', 'deshabilitado'],
     default: 'habilitado'
   },
-  state_sensor: {
-    type: String,
-    enum: ['habilitado', 'deshabilitado'],
-    default: 'habilitado'
-  },
+
   password: {
     type: String,
     required: true,

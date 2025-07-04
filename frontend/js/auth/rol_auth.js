@@ -16,6 +16,10 @@
       return;
     }
 
+    if (payload.role !== 'Administrador') {
+      window.location.href = '/frontend/views/index_main.html';
+      return;
+    }
 
     // ✅ Usuario autenticado y con rol administrador
     console.log('👑 Acceso administrador:', payload.name);
