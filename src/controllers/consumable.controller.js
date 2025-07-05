@@ -50,14 +50,32 @@ exports.getConsumableById = async (req, res) => {
 
 // Actualizar un cultivo
 exports.updateConsumable = async (req, res) => {
-  try {
-    const consumable = await Consumable.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!consumable) return res.status(404).json({ message: 'Cultivo no encontrado' });
-    res.status(200).json({ message: 'Cultivo actualizado', consumable });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error al actualizar cultivo', error });
-  }
+   try {
+      console.log("📦 Cuerpo recibido en updateconsumable:", req.body);
+  
+      // Traducir los nombres del frontend a los del modelo
+      const body = {
+        type_consumables: req.body.tipo_insumo,
+        name_consumables: req.body.nombre_insumo,
+        quantity_consumables: req.body.cantidad_insumo,
+        unit_consumables: req.body.unidad_insumo,
+        unitary_value: req.body.unidad_valor,
+        total_value: req.body.total_valor,
+        description_consumables: req.body.descripcion_insumo,
+        state_consumables: req.body.estado_insumo,
+        update_at: new Date()
+      };
+      
+  
+      const consumable = await Consumable.findByIdAndUpdate(req.params.id, body, { new: true });
+  
+      if (!consumable) return res.status(404).json({ message: 'ciclo no encontrado' });
+  
+      res.status(200).json({ message: 'ciclo actualizado', consumable });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error al actualizar ciclo', error });
+    }
 };
 
 // Eliminar un cultivo

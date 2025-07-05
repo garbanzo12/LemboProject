@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const choices = new Choices(cropSelect); // ⬅️ Estoy llamand a mi dependencia choices para el select
     // Inicializar Choices.js después de llenar las opciones
    
-      fetch('http://localhost:3000/api/consumable') // ⬅️ hago un fetch para traer la lista de IDS
+      fetch('http://localhost:3000/api/auth') // ⬅️ hago un fetch para traer la lista de IDS
         .then(res => res.json()) // ⬅️ Aqui estoy trallendo el paquete json
         .then(ids => {
           const todosLosIds = ids; // Array con todos los IDs
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
         currentID = id;
 
-        fetch(`http://localhost:3000/api/consumable/${id}`) // ⬅️ Por medio del ID traigo la columna correspondiente( anteriormente la traje tambien, pero para cargar el select, ahora es para los inputs)
+        fetch(`http://localhost:3000/api/auth/${id}`) // ⬅️ Por medio del ID traigo la columna correspondiente( anteriormente la traje tambien, pero para cargar el select, ahora es para los inputs)
           .then(res => {
             if (!res.ok) throw new Error('No se encontró el ciclo');
             return res.json(); // ⬅️ 
@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "descripcion_insumo" : cropForm.descripcion_insumo.value,
         }
   
-        fetch(`http://localhost:3000/api/consumable/${currentID}`, { // ⬅️ Mandamos con fetch la actualizacion con su id correspondiente
+        fetch(`http://localhost:3000/api/auth/${currentID}`, { // ⬅️ Mandamos con fetch la actualizacion con su id correspondiente
           method: 'PUT',
           headers: {
         'Content-Type': 'application/json',
