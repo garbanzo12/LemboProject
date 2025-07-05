@@ -44,6 +44,7 @@ exports.getCrops = async (req, res) => {
 exports.getCropById = async (req, res) => {
   try {
     const crop = await Crop.findById(req.params.id);
+    console.log("🟡 Buscando cultivo con ID:", req.params.id);
     if (!crop) return res.status(404).json({ message: 'Cultivo no encontrado' });
     res.status(200).json(crop);
   } catch (error) {
@@ -55,14 +56,66 @@ exports.getCropById = async (req, res) => {
 // Actualizar un cultivo
 exports.updateCrop = async (req, res) => {
   try {
-    const crop = await Crop.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    console.log("📦 Cuerpo recibido en updateCrop:", req.body);
+
+    // Traducir los nombres del frontend a los del modelo
+    const body = {
+      name_crop: req.body.nombre_cultivo,
+      type_crop: req.body.tipo_cultivo,
+      location: req.body.ubicacion_cultivo,
+      description_crop: req.body.descripcion_cultivo,
+      size_m2: req.body.tamano_cultivo,
+      update_at: new Date()
+    };
+    // Si se subió una imagen
+    if (req.files && req.files.length > 0) {
+      body.image_crop = req.files.map(file => file.filename);
+    }
+
+    const crop = await Crop.findByIdAndUpdate(req.params.id, body, { new: true });
+
     if (!crop) return res.status(404).json({ message: 'Cultivo no encontrado' });
+
     res.status(200).json({ message: 'Cultivo actualizado', crop });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error al actualizar cultivo', error });
   }
 };
+
+// 🔄 Ruta GET con paginación y búsqueda
+exports.listCrop = async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const buscar = req.query.buscar || '';
+  const limit = 10;
+  const skip = (page - 1) * limit;
+
+  const regex = new RegExp(buscar, 'i'); // 🔍 Búsqueda insensible a mayúsculas/minúsculas
+
+  const filtro = {
+    $or: [
+      ...(isNaN(buscar) ? [] : [{ cropId: Number(buscar) }]),
+      { name_crop: regex },
+      { type_crop: regex },
+      { location: regex },
+      { description_crop: regex },
+      ...(isNaN(buscar) ? [] : [{ size_m2: Number(buscar) }]),
+    ]
+  };
+
+  try {
+    const [cultivos, total] = await Promise.all([
+      Crop.find(filtro).skip(skip).limit(limit),
+      Crop.countDocuments(filtro)
+    ]);
+
+    res.json({ cultivos, total });
+  } catch (error) {
+    console.error('❌ Error al listar cultivos:', error);
+    res.status(500).json({ message: 'Error al listar cultivos', error });
+  }
+};
+
 
 // Eliminar un cultivo
 exports.deleteCrop = async (req, res) => {

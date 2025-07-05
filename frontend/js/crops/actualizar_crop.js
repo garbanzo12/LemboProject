@@ -7,13 +7,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const choices = new Choices(cropSelect); // ⬅️ Estoy llamand a mi dependencia choices para el select
   // Inicializar Choices.js después de llenar las opciones
  
-    fetch('http://localhost:5501/crops/_id') // ⬅️ hago un fetch para traer la lista de IDS
+    fetch('http://localhost:3000/api/crops')// ⬅️ hago un fetch para traer la lista de IDS
       .then(res => res.json()) // ⬅️ Aqui estoy trallendo el paquete json
       .then(ids => {
-        const todosLosIds = ids.cultivos; // Array con todos los IDs
+        console.log('Respuesta del backend:', ids); // ⬅️ 🔍
+        const todosLosIds = ids; // Array con todos los IDs
 
         choices.setChoices( // ⬅️ Los meto en el choice
-          todosLosIds.map(id => ({ value: id, label: `ID: ${id}` })),
+          todosLosIds.map(id => ({ value: id._id, label: `ID: ${id.cropId}` })),
           'value',
           'label',
           true
@@ -25,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Selección de un cultivo
     cropSelect.addEventListener('change', () => {  // ⬅️ Para cuando se selecciona otro ID se cambie el valor de la variable currentID
       const id = cropSelect.value;
+      console.log("ID seleccionado:", id);
       if (!id) return;
 
       currentID = id;
@@ -35,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
           return res.json(); // ⬅️ 
         })
         .then(data => {  // ⬅️ Los muestro por aqui
-          cropForm._id.value = data._id;
+          // cropForm._id.value = data._id;
           cropForm.nombre_cultivo.value = data.name_crop;
           cropForm.tipo_cultivo.value = data.type_crop;
           cropForm.ubicacion_cultivo.value = data.location;
@@ -68,14 +70,14 @@ document.addEventListener('DOMContentLoaded', () => {
         data.append("imagen_cultivo", cropForm.imagen_cultivo.files[0]);
       }
 
-      fetch(`http://localhost:5501/api/crops/${currentID}`, { // ⬅️ Mandamos con fetch la actualizacion con su id correspondiente
+      fetch(`http://localhost:3000/api/crops/${currentID}`, { // ⬅️ Mandamos con fetch la actualizacion con su id correspondiente
         method: 'PUT',
         body: data
       })
       .then(res => res.json())
       .then(data => {
         if (data.error) throw new Error(data.error);
-       
+        console.log(data)
         window.location.href = '5-listar_crops.html';
       })
       .catch(err => {

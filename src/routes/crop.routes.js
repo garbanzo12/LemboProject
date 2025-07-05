@@ -19,8 +19,9 @@ const upload = multer({ storage }); // ← reemplaza el anterior
 
 router.post('/', cropValidator, upload.array('image_crop'), cropController.createCrop);
 router.get('/', cropController.getCrops);
-router.get('/:id', cropController.getCropById);
-router.put('/:id', cropValidator, cropController.updateCrop);
+router.get('/list', cropController.listCrop); 
+router.get('/:id', cropController.getCropById); 
+router.put('/:id', upload.array('imagen_cultivo'), cropValidator, cropController.updateCrop);
 router.delete('/:id', cropController.deleteCrop);
 
 module.exports = router;
