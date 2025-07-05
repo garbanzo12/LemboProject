@@ -65,6 +65,7 @@ exports.updateCrop = async (req, res) => {
       location: req.body.ubicacion_cultivo,
       description_crop: req.body.descripcion_cultivo,
       size_m2: req.body.tamano_cultivo,
+      state_crop: req.body.estado_cultivo,
       update_at: new Date()
     };
     // Si se subió una imagen
@@ -100,7 +101,9 @@ exports.listCrop = async (req, res) => {
       { location: regex },
       { description_crop: regex },
       ...(isNaN(buscar) ? [] : [{ size_m2: Number(buscar) }]),
-    ]
+    ],
+    state_crop: { $ne: 'deshabilitado' }  // ⬅️ Excluir cultivos deshabilitados
+
   };
 
   try {

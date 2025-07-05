@@ -1,4 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const toggleCheckbox = document.getElementById('toggle-color');
+  if (toggleCheckbox) {
+      // Estilos iniciales
+      toggleCheckbox.style.appearance = 'none';
+      toggleCheckbox.style.width = window.innerWidth > 768 ? '20rem' : '20rem';
+      toggleCheckbox.style.marginLeft = window.innerWidth > 768 ? '-7rem' :  '1rem';
+      toggleCheckbox.style.height = '2rem';
+      toggleCheckbox.style.borderRadius = '1rem';
+      toggleCheckbox.style.backgroundColor = '#4CAF50';
+      toggleCheckbox.style.position = 'relative';
+      toggleCheckbox.style.cursor = 'pointer';
+      toggleCheckbox.style.transition = 'background-color 0.3s';
+      toggleCheckbox.style.setProperty('--thumb-color', '#ffffff');
+      toggleCheckbox.style.setProperty('--unchecked-color', '#cccccc');
+      toggleCheckbox.style.setProperty('--checked-color', '#4CAF50');
+   
+      
+      
+      toggleCheckbox.addEventListener('change', function() {
+          this.style.backgroundColor = this.checked ? 'var(--checked-color)' : 'var(--unchecked-color)';
+      });
+  }
   const cropSelect = document.querySelector('.cardright__selectid'); // ⬅️ Tomo del DOM a el select donde van a ir los IDS
   const cropForm = document.querySelector('.cardright__form'); // ⬅️ Tomo del DOM a el form 
   let currentID = null; // ⬅️ Incializo la variable donde voy a guardar el id en null
@@ -43,6 +65,21 @@ document.addEventListener('DOMContentLoaded', () => {
           cropForm.ubicacion_cultivo.value = data.location;
           cropForm.descripcion_cultivo.value = data.description_crop;
           cropForm.tamano_cultivo.value = data.size_m2;
+           // Asignar valor desde la base de datos al campo
+            cropForm.estado_cultivo.value = data.estado_cultivo;
+            if(cropForm.estado_cultivo.value == 'undefined'){
+                cropForm.estado_cultivo.value = 'habilitado'
+            }    
+            // Actualizar el estado del checkbox
+            toggleCheckbox.checked = data.estado_cultivo === 'deshabilitado';
+                    
+            console.log('Estado inicial:', cropForm.estado_cultivo.value);
+                    
+            // Escuchar cambios en el checkbox para actualizar el campo oculto
+            toggleCheckbox.addEventListener('change', () => {
+                cropForm.estado_cultivo.value = toggleCheckbox.checked ? 'deshabilitado' : 'habilitado';
+                console.log('Estado cambiado:', cropForm.estado_cultivo.value);
+            });
   })
   .catch(err => {
     console.error('Error al cargar datos del cultivo:', err);
@@ -66,6 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
       data.append("ubicacion_cultivo", cropForm.ubicacion_cultivo.value);
       data.append("descripcion_cultivo", cropForm.descripcion_cultivo.value);
       data.append("tamano_cultivo", cropForm.tamano_cultivo.value);
+      data.append("estado_cultivo", cropForm.estado_cultivo.value);
+
       if (cropForm.imagen_cultivo.files[0]) {
         data.append("imagen_cultivo", cropForm.imagen_cultivo.files[0]);
       }

@@ -39,6 +39,11 @@ const cropSchema = new mongoose.Schema({
   image_crop: {
     type: [String], // Arreglo de nombres de archivo o URLs
     default: []
+  },
+  state_crop: {
+    type: String,
+    enum: ['habilitado', 'deshabilitado'],
+    default: 'habilitado'
   }
 }, {
   timestamps: { createdAt: 'created_at', updatedAt: 'update_at' }
