@@ -46,6 +46,7 @@ exports.getSensors = async (req, res) => {
 exports.getSensorById = async (req, res) => {
   try {
     const sensor = await Sensor.findById(req.params.id);
+    console.log("🟡 Buscando sensor con ID:", req.params.id);
     if (!sensor) return res.status(404).json({ message: 'Sensor no encontrado' });
     res.status(200).json(sensor);
   } catch (error) {
@@ -57,12 +58,32 @@ exports.getSensorById = async (req, res) => {
 // Actualizar un Sensor
 exports.updateSensor = async (req, res) => {
   try {
-    const sensor = await Sensor.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!sensor) return res.status(404).json({ message: 'Sensor no encontrado' });
-    res.status(200).json({ message: 'Sensor actualizado', sensor });
+    console.log("📦 Cuerpo recibido en updateSensor:", req.body);
+
+    // Traducir los nombres del frontend a los del modelo
+    const body = {
+      type_sensor: req.body.tipo_sensor,
+      name_sensor: req.body.nombre_sensor,
+      unit_sensor: req.body.unidad_sensor,
+      time_sensor: req.body.tiempo_sensor,
+      unit_time_sensor: req.body.unidad_tiempo_sensor,
+      description_sensor: req.body.descripcion_sensor,
+      state_sensor : req.body.estado_sensor,
+      update_at: new Date()
+    };
+    // Si se subió una imagen
+    if (req.files && req.files.length > 0) {
+      body.image_sensor = req.files.map(file => file.filename);
+    }
+
+    const sensor = await Sensor.findByIdAndUpdate(req.params.id, body, { new: true });
+
+    if (!sensor) return res.status(404).json({ message: 'Cultivo no encontrado' });
+
+    res.status(200).json({ message: 'Cultivo actualizado', sensor });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Error al actualizar Sensor', error });
+    res.status(500).json({ message: 'Error al actualizar cultivo', error });
   }
 };
 

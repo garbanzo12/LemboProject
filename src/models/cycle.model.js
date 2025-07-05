@@ -36,7 +36,7 @@ const cycleSchema = new mongoose.Schema({
     default: 'habilitado'
   }
 }, {
-  timestamps: { createdAt: 'created_at', updatedAt: 'update_at' }
+  timestamps: { createdAt: 'created_at' }
 });
 
 module.exports = mongoose.model('Cycle', cycleSchema);

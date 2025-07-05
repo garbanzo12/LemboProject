@@ -48,7 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Selección de un cultivo
     cropSelect.addEventListener('change', () => {  // ⬅️ Para cuando se selecciona otro ID se cambie el valor de la variable currentID
       const id = cropSelect.value;
-      console.log("ID seleccionado:", id);
       if (!id) return;
 
       currentID = id;
@@ -59,7 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
           return res.json(); // ⬅️ 
         })
         .then(data => {  // ⬅️ Los muestro por aqui
-          // cropForm._id.value = data._id;
           cropForm.nombre_cultivo.value = data.name_crop;
           cropForm.tipo_cultivo.value = data.type_crop;
           cropForm.ubicacion_cultivo.value = data.location;

@@ -47,14 +47,30 @@ exports.getCycleById = async (req, res) => {
 
 // Actualizar un ciclo
 exports.updateCycle = async (req, res) => {
-  try {
-    const cycle = await Cycle.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!cycle) return res.status(404).json({ message: 'ciclo no encontrado' });
-    res.status(200).json({ message: 'ciclo actualizado', cycle });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error al actualizar ciclo', error });
-  }
+   try {
+      console.log("📦 Cuerpo recibido en updatecycle:", req.body);
+  
+      // Traducir los nombres del frontend a los del modelo
+      const body = {
+        name_cycle: req.body.nombre_ciclo,
+        cycle_start: req.body.periodo_inicio,
+        cycle_end: req.body.periodo_fin,
+        description_cycle: req.body.descripcion_ciclo,
+        news_cycle: req.body.novedades_ciclo,
+        state_cycle: req.body.estado_ciclo,
+        update_at: new Date()
+      };
+      
+  
+      const cycle = await Cycle.findByIdAndUpdate(req.params.id, body, { new: true });
+  
+      if (!cycle) return res.status(404).json({ message: 'ciclo no encontrado' });
+  
+      res.status(200).json({ message: 'ciclo actualizado', cycle });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error al actualizar ciclo', error });
+    }
 };
 
 // Eliminar un ciclo

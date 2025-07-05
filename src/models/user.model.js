@@ -61,7 +61,7 @@ const userSchema = new mongoose.Schema({
     minlength: 6
   }
 }, {
-  timestamps: { createdAt: 'created_at', updatedAt: 'update_at' }
+  timestamps: { createdAt: 'created_at' }
 });
 
 userSchema.pre('save', async function(next) {
