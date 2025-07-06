@@ -36,19 +36,19 @@ exports.getConsumables = async (req, res) => {
   }
 };
 
-// Obtener un cultivo por ID
+// Obtener un insumo por ID
 exports.getConsumableById = async (req, res) => {
   try {
     const consumable = await Consumable.findById(req.params.id);
-    if (!consumable) return res.status(404).json({ message: 'Cultivo no encontrado' });
+    if (!consumable) return res.status(404).json({ message: 'insumo no encontrado' });
     res.status(200).json(consumable);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Error al obtener cultivo', error });
+    res.status(500).json({ message: 'Error al obtener insumo', error });
   }
 };
 
-// Actualizar un cultivo
+// Actualizar un insumo
 exports.updateConsumable = async (req, res) => {
    try {
       console.log("📦 Cuerpo recibido en updateconsumable:", req.body);
@@ -77,15 +77,51 @@ exports.updateConsumable = async (req, res) => {
       res.status(500).json({ message: 'Error al actualizar ciclo', error });
     }
 };
+// 🔄 Ruta GET con paginación y búsqueda
+exports.listConsumable = async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const buscar = req.query.buscar || '';
+  const limit = 10;
+  const skip = (page - 1) * limit;
 
-// Eliminar un cultivo
+  const regex = new RegExp(buscar, 'i'); // 🔍 Búsqueda insensible a mayúsculas/minúsculas
+
+  const filtro = {
+    $or: [
+      ...(isNaN(buscar) ? [] : [{ consumableId: Number(buscar) }]),
+      { type_consumables: regex },
+      { name_consumables: regex },
+      ...(isNaN(buscar) ? [] : [{ quantity_consumables: Number(buscar) }]),
+      { unit_consumables: regex },
+      ...(isNaN(buscar) ? [] : [{ unitary_value: Number(buscar) }]),
+      ...(isNaN(buscar) ? [] : [{ total_value: Number(buscar) }]),
+      { description_consumables: regex },
+      
+    ],
+    state_consumables: { $ne: 'deshabilitado' }  // ⬅️ Excluir insumos deshabilitados
+
+  };
+
+  try {
+    const [insumos, total] = await Promise.all([
+      Consumable.find(filtro).skip(skip).limit(limit),
+      Consumable.countDocuments(filtro)
+    ]);
+
+    res.json({ insumos, total });
+  } catch (error) {
+    console.error('❌ Error al listar insumos:', error);
+    res.status(500).json({ message: 'Error al listar insumos', error });
+  }
+};
+// Eliminar un insumo
 exports.deleteConsumable = async (req, res) => {
   try {
     const consumable = await Consumable.findByIdAndDelete(req.params.id);
-    if (!consumable) return res.status(404).json({ message: 'Cultivo no encontrado' });
-    res.status(200).json({ message: 'Cultivo eliminado' });
+    if (!consumable) return res.status(404).json({ message: 'insumo no encontrado' });
+    res.status(200).json({ message: 'insumo eliminado' });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Error al eliminar cultivo', error });
+    res.status(500).json({ message: 'Error al eliminar insumo', error });
   }
 };

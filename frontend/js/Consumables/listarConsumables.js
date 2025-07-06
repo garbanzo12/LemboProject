@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => { // ⬅️ Esperamos a que 
 
   async function obtenerinsumos(pagina = 1, buscar = '') {
     try {
-      const res = await fetch(`http://localhost:5501/consumables?page=${pagina}&buscar=${encodeURIComponent(buscar)}`); // ⬅️ hacemos un fetch con la pagina en la que deseamos mostrar y lo que estamos buscando
+      const res = await fetch(`http://localhost:3000/api/consumable/list?page=${pagina}&buscar=${encodeURIComponent(buscar)}`); // ⬅️ hacemos un fetch con la pagina en la que deseamos mostrar y lo que estamos buscando
       const data = await res.json();
   
       mostrarinsumos(data.insumos); // ⬅️ Llenamos, por medio de esta funcion, la tabla
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => { // ⬅️ Esperamos a que 
       };
       row.innerHTML = `
 
-        <td class="cardright__cell ">${ciclo.id}</td> 
+        <td class="cardright__cell ">${ciclo.consumableId}</td> 
         <td class="cardright__cell">${ciclo.type_consumables}</td>
         <td class="cardright__cell">${ciclo.name_consumables}</td>
         <td class="cardright__cell">${(ciclo.quantity_consumables)}</td>
