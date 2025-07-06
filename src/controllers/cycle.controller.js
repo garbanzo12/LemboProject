@@ -72,7 +72,49 @@ exports.updateCycle = async (req, res) => {
       res.status(500).json({ message: 'Error al actualizar ciclo', error });
     }
 };
+// 🔄 Ruta GET con paginación y búsqueda
+exports.listCycle = async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const buscar = req.query.buscar || '';
+  const limit = 10;
+  const skip = (page - 1) * limit;
+  const esNumero = !isNaN(buscar);
+  const esFechaValida = !isNaN(Date.parse(buscar));
+  const regex = new RegExp(buscar, 'i'); // 🔍 Búsqueda insensible a mayúsculas/minúsculas
 
+      let filtro = {
+  $or: [
+    ...(esNumero ? [{ cycleId: Number(buscar) }] : []),
+    { name_cycle: regex },
+    { description_cycle: regex },
+    { news_cycle: regex }
+  ]
+};
+
+// Si es una fecha válida, agregar búsqueda en cycle_start y cycle_end
+  if (esFechaValida) {
+    const fechaBuscar = new Date(buscar);
+    const siguienteDia = new Date(fechaBuscar);
+    siguienteDia.setDate(fechaBuscar.getDate() + 1);
+  
+    filtro.$or.push(
+      { cycle_start: { $gte: fechaBuscar, $lt: siguienteDia } },
+      { cycle_end: { $gte: fechaBuscar, $lt: siguienteDia } }
+    );
+  }
+
+  try {
+    const [ciclos, total] = await Promise.all([
+      Cycle.find(filtro).skip(skip).limit(limit),
+      Cycle.countDocuments(filtro)
+    ]);
+
+    res.json({ ciclos, total });
+  } catch (error) {
+    console.error('❌ Error al listar ciclos:', error);
+    res.status(500).json({ message: 'Error al listar ciclos', error });
+  }
+};
 // Eliminar un ciclo
 exports.deleteCycle = async (req, res) => {
   try {

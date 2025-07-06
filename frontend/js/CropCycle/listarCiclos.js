@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => { // ⬅️ Esperamos a que 
 
   async function obtenerciclos(pagina = 1, buscar = '') {
     try {
-      const res = await fetch(`http://localhost:5501/cropcycle?page=${pagina}&buscar=${encodeURIComponent(buscar)}`); // ⬅️ hacemos un fetch con la pagina en la que deseamos mostrar y lo que estamos buscando
+      const res = await fetch(`http://localhost:3000/api/cycle/list?page=${pagina}&buscar=${encodeURIComponent(buscar)}`); // ⬅️ hacemos un fetch con la pagina en la que deseamos mostrar y lo que estamos buscando
       const data = await res.json();
   
       mostrarciclos(data.ciclos); // ⬅️ Llenamos, por medio de esta funcion, la tabla
@@ -30,11 +30,11 @@ document.addEventListener('DOMContentLoaded', () => { // ⬅️ Esperamos a que 
       };
       row.innerHTML = `
 
-        <td class="cardright__cell ">${ciclo.id}</td> 
-        <td class="cardright__cell">${ciclo.name_cropCycle}</td>
+        <td class="cardright__cell ">${ciclo.cycleId}</td> 
+        <td class="cardright__cell">${ciclo.name_cycle}</td>
         <td class="cardright__cell">${ciclo.description_cycle}</td>
-        <td class="cardright__cell">${formatDate(ciclo.period_cycle_start)}</td>
-        <td class="cardright__cell">${formatDate(ciclo.period_cycle_end)}</td>
+        <td class="cardright__cell">${formatDate(ciclo.cycle_start)}</td>
+        <td class="cardright__cell">${formatDate(ciclo.cycle_end)}</td>
         <td class="cardright__cell">${ciclo.news_cycle}</td>
         
       `;
