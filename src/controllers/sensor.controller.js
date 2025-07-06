@@ -87,6 +87,40 @@ exports.updateSensor = async (req, res) => {
   }
 };
 
+// 🔄 Ruta GET con paginación y búsqueda
+exports.listSensor = async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const buscar = req.query.buscar || '';
+  const limit = 10;
+  const skip = (page - 1) * limit;
+
+  const regex = new RegExp(buscar, 'i'); // 🔍 Búsqueda insensible a mayúsculas/minúsculas
+
+  const filtro = {
+    $or: [
+      ...(isNaN(buscar) ? [] : [{ sensorId: Number(buscar) }]),
+      { type_sensor: regex },
+      { name_sensor: regex },
+      { unit_sensor: regex },
+      { time_sensor: regex },
+      { description_sensor: regex },
+    ],
+    state_crop: { $ne: 'deshabilitado' }  // ⬅️ Excluir sensores deshabilitados
+
+  };
+
+  try {
+    const [sensores, total] = await Promise.all([
+      Sensor.find(filtro).skip(skip).limit(limit),
+      Sensor.countDocuments(filtro)
+    ]);
+
+    res.json({ sensores, total });
+  } catch (error) {
+    console.error('❌ Error al listar sensores:', error);
+    res.status(500).json({ message: 'Error al listar sensores', error });
+  }
+};
 // Eliminar un Sensor
 exports.deleteSensor = async (req, res) => {
   try {
