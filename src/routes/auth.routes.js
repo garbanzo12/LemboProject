@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/user.controller');
-
+const auth = require('../middlewares/auth'); // Middleware JWT
 
 
 // Registro de usuario
@@ -11,7 +11,10 @@ router.post('/register' , authController.register);
 router.post('/login', authController.login);
 
 // Ver perfil
-const auth = require('../middlewares/auth'); // Middleware JWT
+
+
+router.put('/update/:id', authController.updateUser);
+
 router.get('/me', auth, authController.getProfile);
 
 //Buscar 
@@ -21,4 +24,3 @@ router.get('/search', auth, authController.searchUser);
 router.get('/:id',auth, authController.getuserById);
 module.exports = router;
 
-module.exports = router;

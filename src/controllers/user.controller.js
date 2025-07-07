@@ -88,7 +88,33 @@ exports.searchUser = async (req, res) => {
     res.status(500).json({ message: 'Error al obtener usuarios', error });
   }
 };
+// Actualizar un usuario
+exports.updateUser = async (req, res) => {
+   try {
+  
+      // Traducir los nombres del frontend a los del modelo
+      const body = {
+        type_user: req.body.tipo_usuario,
+        type_ID: req.body.tipo_documento,
+        num_document_identity: req.body.numero_documento,
+        name_user: req.body.nombre_usuario,
+        email: req.body.correo,
+        state_user: req.body.estado_usuario,
+        update_at: new Date()
+      };
+      
 
+      const user = await User.findByIdAndUpdate(req.params.id, body, { new: true });
+    console.log("👀 Usuario encontrado:", user);
+
+      if (!user) return res.status(404).json({ message: 'usuario no encontrado' });
+  
+      res.status(200).json({ message: 'usuario actualizado', user });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error al actualizar usuario', error });
+    }
+};
 exports.getuserById = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
