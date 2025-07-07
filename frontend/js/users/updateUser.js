@@ -134,6 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(res => res.json())
         .then(data => {
           if (data.error) throw new Error(data.error);
+          window.location.href = '5-listar_users.html';
          
          })
         .catch(err => {

@@ -12,6 +12,7 @@ router.post('/login', authController.login);
 
 // Ver perfil
 
+router.get('/list', authController.listUser); 
 
 router.put('/update/:id', authController.updateUser);
 

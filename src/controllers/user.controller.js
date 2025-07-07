@@ -115,6 +115,39 @@ exports.updateUser = async (req, res) => {
       res.status(500).json({ message: 'Error al actualizar usuario', error });
     }
 };
+
+
+// 🔄 Ruta GET con paginación y búsqueda
+exports.listUser = async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const buscar = req.query.buscar || '';
+  const limit = 10;
+  const skip = (page - 1) * limit;
+  const regex = new RegExp(buscar, 'i'); // 🔍 Búsqueda insensible a mayúsculas/minúsculas
+
+      let filtro = {
+  $or: [
+    { type_user: regex },
+    { type_ID: regex },
+    { num_document_identity: regex },
+    { name_user: regex },
+    { email: regex },
+    { cellphone: regex }
+  ]
+};
+
+  try {
+    const [usuarios, total] = await Promise.all([
+      User.find(filtro).skip(skip).limit(limit),
+      User.countDocuments(filtro)
+    ]);
+
+    res.json({ usuarios, total });
+  } catch (error) {
+    console.error('❌ Error al listar usuarios:', error);
+    res.status(500).json({ message: 'Error al listar usuarios', error });
+  }
+};
 exports.getuserById = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
