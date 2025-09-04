@@ -26,8 +26,7 @@ Aplicación RESTful para la creación, edición y consulta de usuarios, cultivos
 - Multer (para subir archivos)
 - Morgan (Para ver respuestas en consola)
 - CORS (Para solicitudes entre diferentes donminios)
-
-
+- dotenv
 ---
 
 ## 4️⃣ Requisitos Previos

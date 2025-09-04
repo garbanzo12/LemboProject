@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
           cropForm.tamano_cultivo.value = data.size_m2;
            // Asignar valor desde la base de datos al campo
             cropForm.estado_cultivo.value = data.estado_cultivo;
-            if(cropForm.estado_cultivo.value == 'undefined'){
+            if(cropForm.estado_cultivo.value == 'deshabilitado'){
                 cropForm.estado_cultivo.value = 'habilitado'
             }    
             // Actualizar el estado del checkbox

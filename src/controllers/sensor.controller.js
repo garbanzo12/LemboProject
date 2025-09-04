@@ -3,7 +3,7 @@ const Counter = require('../models/counters/counter2.model');
 // Crear un Sensor
 exports.createSensor = async (req, res) => {
   
-  console.log("respuesta del cuerpo = "+ JSON.stringify(req.body, null, 2))
+  
   try {
     // Incrementa el contador
     const counter = await Counter.findOneAndUpdate(
@@ -12,7 +12,6 @@ exports.createSensor = async (req, res) => {
       { new: true, upsert: true }      // crea si no existe
     );
     
-    req.body.sensorId = counter.seq;
     const imageName = req.files?.[0]?.filename || '';
 
     // Construir el nuevo sensor
@@ -23,7 +22,7 @@ exports.createSensor = async (req, res) => {
     });
     
     await sensor.save();
-    const readableId = sensor.sensorId.toString().padStart(3, '0');
+    const readableId = sensor.sensorId.toString().padStart(3, '0'); 
     res.status(201).json({ message: 'Sensor creado exitosamente',sensorId: readableId, data: sensor });
   } catch (error) {
     console.error(error);

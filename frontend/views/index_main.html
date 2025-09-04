@@ -202,6 +202,24 @@
     /* **************    ELEMENTOS CARD MAIN    ************* */
     /* ****************************************************** */ -->
 
+    <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+<script type="module">
+  import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+  createChat({
+    webhookUrl: 'http://localhost:5678/webhook/05856a21-a3d1-4654-84fd-e58525ca89e1/chat',
+    initialMessages: [
+      {
+        role: 'system',
+        content: 'Eres el Asistente LEMBO SGAL, una aplicación de gestión empresarial. Tu tarea es responder en español a preguntas frecuentes sobre la app, como funcionalidades, precios, soporte y más.'
+      },
+      {
+        role: 'user',
+        content: '¡Hola! ¿Qué es LEMBO SGAL?'
+      }
+    ]
+  });
+</script>
 
     <main class="Containers">
 
@@ -395,6 +413,8 @@
 
         <script src="/frontend/js/auth/dashboard.js"></script>
         <script src="/frontend/js/auth/printUser.js"></script>
+        <script src="/frontend/js/auth/session_auth.js"></script>
+        <script src="/frontend/js/auth/visitantVerification.js"></script>
 
     </body>
 </html>

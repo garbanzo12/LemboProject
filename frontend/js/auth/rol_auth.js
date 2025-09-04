@@ -2,7 +2,7 @@
   const token = localStorage.getItem('token');
 
   if (!token) {
-    window.location.href = '/frontend/views/home/home.html';
+    window.location.href = '/frontend/views/index_main.html';
     return;
   }
 
@@ -12,7 +12,7 @@
 
     if (payload.exp < ahora) {
       localStorage.removeItem('token');
-      window.location.href = '/frontend/views/home/home.html';
+      window.location.href = '/frontend/views/index_main.html';
       return;
     }
 
@@ -27,6 +27,6 @@
   } catch (error) {
     console.error('Token corrupto:', error);
     localStorage.removeItem('token');
-    window.location.href = '/frontend/views/home/home.html';
+    window.location.href = '/frontend/views/index_main.html';
   }
 })();
