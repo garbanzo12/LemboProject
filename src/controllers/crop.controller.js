@@ -21,8 +21,12 @@ exports.createCrop = async (req, res) => {
           image_crop: imageName, // ✅ Aquí guardas el nombre real del archivo
         });
     await crop.save();
+
+
     const readableId = crop.cropId.toString().padStart(3, '0');
     res.status(201).json({ message: 'Cultivo creado exitosamente',cropId: readableId, data: crop });
+
+    
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error al crear cultivo', error });
@@ -129,5 +133,20 @@ exports.deleteCrop = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error al eliminar cultivo', error });
+  }
+};
+
+
+
+exports.searchcrop = async (req, res) => {
+  try {
+    const crops = await Crop.find({}, { name_crop: 1, _id: 0 });
+    
+    if (!crops.length) return res.status(200).json([]); // mejor 200 que 404
+    res.status(200).json(crops);
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error al obtener crops habilitados", error });
   }
 };

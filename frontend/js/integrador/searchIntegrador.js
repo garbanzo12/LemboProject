@@ -2,7 +2,7 @@ console.log('Script cargado');
 
 async function obtenerIdsproducciones() {
   try {
-    const res = await fetch('http://localhost:5501/integrador/buscar-id-integrador/id'); // ✅ Nuevo endpoint
+    const res = await fetch('http://localhost:3000/api/production/searchproduction'); // ✅ Nuevo endpoint
     if (!res.ok) throw new Error('No se pudieron obtener los producciones');
     const data = await res.json();
     return data.producciones; // ✅ Ya viene como un array de IDs
@@ -26,15 +26,15 @@ async function inicializarBuscar() {
     selectId.appendChild(option);
   } else {
     const defaultOption = document.createElement('option');
-    defaultOption.textContent = 'Selecciona un ID. Ej : PROD-lechuga-04052025-001';
+    defaultOption.textContent = 'Selecciona un ID. ';
     defaultOption.disabled = true;
     defaultOption.selected = true;
     selectId.appendChild(defaultOption);
 
-    ids.forEach(id => {
+    ids.forEach(productionId => {
       const option = document.createElement('option');
-      option.value = id;
-      option.textContent = `${id}`;
+      option.value = productionId;
+      option.textContent = `${productionId}`;
       selectId.appendChild(option);
     });
   }
@@ -55,7 +55,7 @@ async function inicializarBuscar() {
     }
 
     try {
-      const res = await fetch(`http://localhost:5501/integrador/api/conseguir-datos-id/${id}`);
+      const res = await fetch(`http://localhost:3000/api/production/getproductionbyId/${id}`);
       if (!res.ok) throw new Error('No se encontró el cultivo');
       const data = await res.json();
 

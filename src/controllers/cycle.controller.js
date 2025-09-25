@@ -126,3 +126,21 @@ exports.deleteCycle = async (req, res) => {
     res.status(500).json({ message: 'Error al eliminar ciclo', error });
   }
 };
+
+
+
+
+
+
+exports.getcycles = async (req, res) => {
+  try {
+    const cycles = await Cycle.find({}, { name_cycle: 1});
+    
+    if (!cycles.length) return res.status(200).json([]); // mejor 200 que 404
+    res.status(200).json(cycles);
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error al obtener cycles habilitados", error });
+  }
+};

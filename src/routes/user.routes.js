@@ -19,3 +19,6 @@ router.post('/login', loginValidator, userCtrl.login);
 
 router.get('/search',auth,  userCtrl.searchUser);
 router.get('/:id',auth, userCtrl.getuserById);
+
+
+router.get('/user/production', authController.searchEnabledUsers);

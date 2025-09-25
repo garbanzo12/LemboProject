@@ -8,6 +8,7 @@ const cropRoutes = require('./routes/crop.routes');
 const cycleRoutes = require('./routes/cycle.routes');
 const sensorRoutes = require('./routes/sensor.routes');
 const consumableRoutes = require('./routes/consumable.routes');
+const ProductionRoutes = require('./routes/productions.routes');
 
 const app = express(); // <- Crea la instancia principal de Express, que se usa para configurar middlewares, rutas, etc.
 const path = require('path');
@@ -20,6 +21,7 @@ app.use('/api/crops', cropRoutes);
 app.use('/api/cycle', cycleRoutes);
 app.use('/api/sensor', sensorRoutes);
 app.use('/api/consumable', consumableRoutes);
+app.use('/api/production', ProductionRoutes);
 app.use('/uploads-sensor', express.static(path.join(__dirname, '../uploads-sensor')));
 app.use('/uploads-crop', express.static(path.join(__dirname, '../uploads-crop')));
 // app.use(errorHandler);

@@ -6,23 +6,26 @@ const produccionData = {
     responsable: '',
     users_selected: [],
     crops_selected: [],
-    name_cropCycle: [],
-    name_consumables: [],
+    cropCycles: [],
+    consumables: [],
     quantity_consumables : [],
     unitary_value_consumables : [],
     total_value_consumables : '',
-    name_sensor: []
+    name_sensor: [],
+    quantity_sensor: [] 
 };
 function limpiarCamposSeleccionados() {
     // Vaciar el objeto global
     produccionData.users_selected = [];
     produccionData.crops_selected = [];
-    produccionData.name_cropCycle = [];
-    produccionData.name_consumables = [];
+    produccionData.cropCycles = [];
+    produccionData.consumables = [];
     produccionData.quantity_consumables = [];
     produccionData.unitary_value_consumables = [];
     produccionData.total_value_consumables = [];
     produccionData.name_sensor = [];
+    produccionData.quantity_sensor = []; 
+
 
     // Limpiar todas las tablas visuales
     const tablas = [
@@ -44,7 +47,7 @@ function limpiarCamposSeleccionados() {
 // Cargar responsables en el select principal
 async function cargarResponsables() {
     try {
-        const response = await fetch("http://localhost:5501/integrador/users/responsable");
+        const response = await fetch("http://localhost:3000/api/auth/getusers");
         const usuarios = await response.json();
         const select = document.querySelector(".integrator__input-form--resp");
 
@@ -64,7 +67,7 @@ async function cargarResponsables() {
 async function cargarUsuariosSelect() {
    
     try {
-        const response = await fetch("http://localhost:5501/integrador/users/responsable");
+        const response = await fetch("http://localhost:3000/api/auth/getusers");
         const usuarios = await response.json();
         const select = document.querySelector(".integrator__tablet-select--users");
 
@@ -141,7 +144,7 @@ function agregarUsuarioATabla() {
 // ⬇️ Funciones de cultivo⬇️
 async function cargarCultivoSelect() {
     try {
-        const response = await fetch("http://localhost:5501/integrador/crops/responsable");
+        const response = await fetch("http://localhost:3000/api/crops/getcrop");
         const cultivos = await response.json();
         const select = document.querySelector(".integrator__tablet-select--crops");
 
@@ -218,14 +221,14 @@ function agregarcultivoATabla() {
 // ⬇️ Funciones de ciclo ⬇️
 async function cargarCicloSelect() {
     try {
-        const response = await fetch("http://localhost:5501/integrador/cycle/responsable");
+        const response = await fetch("http://localhost:3000/api/cycle/getcycles");
         const ciclos = await response.json();
         const select = document.querySelector(".integrator__tablet-select--cycle");
 
         ciclos.forEach(ciclo => {
             const option = document.createElement("option");
-            option.value = ciclo.name_cropCycle;
-            option.textContent = ciclo.name_cropCycle;
+            option.value = ciclo.name_cycle;
+            option.textContent = ciclo.name_cycle;
             select.appendChild(option);
         });
 
@@ -238,7 +241,7 @@ async function cargarCicloSelect() {
 
 // Agregar cultivo a la tabla y al objeto
 function agregarcicloATabla() {
-    if (produccionData.name_cropCycle.length >= 3) {
+    if (produccionData.cropCycles.length >= 3) {
         alert("Solo puedes agregar hasta 3 cultivos.");
         return;
     }
@@ -247,7 +250,7 @@ function agregarcicloATabla() {
     
     if (!cicloseleccionado) return;
     
-    if (produccionData.name_cropCycle.some(ciclo => 
+    if (produccionData.cropCycles.some(ciclo => 
         ciclo.toLowerCase() === cicloseleccionado.toLowerCase()
     )) {
         alert(`El Ciclo "${cicloseleccionado}" ya está en la lista`);
@@ -266,7 +269,7 @@ function agregarcicloATabla() {
     const botonEliminar = document.createElement("button");
     // const botonEnviarFormulario = document.querySelector(".integrator__botton-primary--color");
     // botonEnviarFormulario.addEventListener("click", () => {
-    //     produccionData.name_cropCycle = produccionData.name_cropCycle.filter(
+    //     produccionData.cropCycles = produccionData.cropCycles.filter(
     //         ciclo => ciclo !== cicloseleccionado
     //     );
     //     nuevaFila.remove();
@@ -274,13 +277,13 @@ function agregarcicloATabla() {
     botonEliminar.textContent = "×";
     botonEliminar.className = "eliminar-cultivo";
     botonEliminar.addEventListener("click", () => {
-        produccionData.name_cropCycle = produccionData.name_cropCycle.filter(
+        produccionData.cropCycles = produccionData.cropCycles.filter(
             ciclo => ciclo !== cicloseleccionado
         );
         nuevaFila.remove();
     });
     
-    produccionData.name_cropCycle.push(cicloseleccionado);
+    produccionData.cropCycles.push(cicloseleccionado);
     
     celdaEliminar.appendChild(botonEliminar);
     nuevaFila.appendChild(celda);
@@ -299,7 +302,7 @@ let insumosDisponibles = {}; // Guardamos nombre, cantidad y precio aquí
 
 async function cargarInsumoSelect() {
     try {
-        const response = await fetch("http://localhost:5501/integrador/consumable/responsable");
+        const response = await fetch("http://localhost:3000/api/consumable/getconsumables");
         const insumos = await response.json();
         const select = document.querySelector(".integrator__tablet-select--consumable");
 
@@ -355,11 +358,11 @@ function actualizarTotalDinero() {
 }
 
 function agregarinsumoATabla() {
-    if (produccionData.name_consumables.length >= 3) {
+    if (produccionData.consumables.length >= 3) {
         alert("Solo puedes agregar hasta 3 insumos.");
         return;
     }
-    if (produccionData.name_consumables.length >= 3) {
+    if (produccionData.consumables.length >= 3) {
         alert("Solo puedes agregar hasta 3 cultivos.");
         return;
     }
@@ -389,7 +392,7 @@ function agregarinsumoATabla() {
         return;
     }
 
-    if (produccionData.name_consumables.some(insumo => 
+    if (produccionData.consumables.some(insumo => 
         insumo.toLowerCase() === insumoseleccionado.toLowerCase()
     )) {
         alert(`El insumo "${insumoseleccionado}" ya está en la lista`);
@@ -429,11 +432,11 @@ function agregarinsumoATabla() {
         insumoInfo.cantidad += cantidadConsumir;
 
         // Eliminar del objeto global
-        const index = produccionData.name_consumables.findIndex(
+        const index = produccionData.consumables.findIndex(
             insumo => insumo === insumoseleccionado
         );
         if (index !== -1) {
-            produccionData.name_consumables.splice(index, 1);
+            produccionData.consumables.splice(index, 1);
             produccionData.quantity_consumables.splice(index, 1);
         }
 
@@ -451,7 +454,7 @@ function agregarinsumoATabla() {
     tbody.appendChild(nuevaFila);
 
     // Agregar a producción
-    produccionData.name_consumables.push(insumoseleccionado);
+    produccionData.consumables.push(insumoseleccionado);
     produccionData.quantity_consumables.push(cantidadConsumir);
     produccionData.unitary_value_consumables.push(totalPrecio);
    
@@ -479,7 +482,7 @@ async function actualizarStock() {
                 const cantidad = parseInt(columnas[1].textContent.trim(), 10);
 
                 consumos.push({
-                    name_consumables: nombre,
+                    consumables: nombre,
                     cantidadConsumida: cantidad
                     
                 });
@@ -490,7 +493,7 @@ async function actualizarStock() {
 
         console.log(consumos)
         // Hacemos el POST al servidor
-        const response = await fetch("http://localhost:5501/integrador/consumable/actualizar-stock", {
+        const response = await fetch("http://localhost:3000/api/consumable/stockconsumable-", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ consumos })
@@ -518,7 +521,7 @@ let sensoresDisponibles = {};
 
 async function cargarSensorSelect() {
     try {
-        const response = await fetch("http://localhost:5501/integrador/sensors/responsable");
+        const response = await fetch("http://localhost:3000/api/sensor/getsensor");
         const sensores = await response.json();
         const select = document.querySelector(".integrator__tablet-select--sensor");
 
@@ -635,7 +638,7 @@ async function actualizarStockSensores() {
             }
         });
 
-        const response = await fetch("http://localhost:5501/integrador/sensor/actualizar-stock", {
+        const response = await fetch("http://localhost:3000/api/sensor/stocksensor", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ sensores })
@@ -664,9 +667,8 @@ async function enviarProduccion() {
     produccionData.responsable = document.querySelector('.integrator__input-form--resp').value;
     console.log(produccionData)
     const form = document.querySelector(".integrator__form");
-
     try {
-        const response = await fetch("http://localhost:5501/integrador/productions", {
+        const response = await fetch("http://localhost:3000/api/production", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(produccionData)
@@ -675,7 +677,7 @@ async function enviarProduccion() {
 
         if (response.ok) {
             form.reset();
-            mostrarMensaje(form, `✅Datos enviados correctamente ID : ${id.id}`, "green");
+            mostrarMensaje(form, `✅Datos enviados correctamente ID : ${id.productionId}`, "green");
             produccionData.users_selected = [];
             const resumen = document.querySelector(".resumen-total-dinero");
             if (resumen) {

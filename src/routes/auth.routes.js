@@ -12,7 +12,12 @@ router.post('/login', authController.login);
 
 // Ver perfil
 
+
 router.get('/list', authController.listUser); 
+
+
+
+router.get('/getusers', authController.getusers); 
 
 router.put('/update/:id', authController.updateUser);
 
@@ -23,5 +28,8 @@ router.get('/search', auth, authController.searchUser);
 
 //View
 router.get('/:id',auth, authController.getuserById);
+
+
+
 module.exports = router;
 

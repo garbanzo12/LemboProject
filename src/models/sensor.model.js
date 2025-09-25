@@ -5,6 +5,11 @@ const sensorSchema = new mongoose.Schema({
     type: Number,
     unique: true
   },
+  quantity_sensor:{
+    type: Number,
+    required: true,
+    min: 1  
+  },
   type_sensor: {
     type: String,
     required: true,

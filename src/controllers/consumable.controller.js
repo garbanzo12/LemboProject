@@ -125,3 +125,54 @@ exports.deleteConsumable = async (req, res) => {
     res.status(500).json({ message: 'Error al eliminar insumo', error });
   }
 };
+
+
+
+
+
+exports.getconsumables = async (req, res) => {
+  try {
+    const consumables = await Consumable.find({}, { name_consumables: 1, _id: 0, quantity_consumables :1, unitary_value : 1 });
+    
+    if (!consumables.length) return res.status(200).json([]); // mejor 200 que 404
+    res.status(200).json(consumables);
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error al obtener consumables habilitados", error });
+  }
+};
+
+
+
+
+
+
+
+
+exports.stockconsumable = async (req, res) => {
+  const { consumos } = req.body; // [{ name_consumables, cantidadConsumida }]
+
+  if (!Array.isArray(consumos) || consumos.length === 0) {
+    return res
+      .status(400)
+      .json({ error: "No se recibieron consumos válidos" });
+  }
+
+  try {
+    for (const consumo of consumos) {
+      const { name_consumables, cantidadConsumida } = consumo;
+
+      // Restar stock con $inc (número negativo)
+      await Consumable.updateOne(
+        { name_consumables },
+        { $inc: { quantity_consumables: -cantidadConsumida } }
+      );
+    }
+
+    res.json({ mensaje: "Stock actualizado exitosamente" });
+  } catch (error) {
+    console.error("Error actualizando stock:", error);
+    res.status(500).json({ error: "Error al actualizar stock" });
+  }
+};

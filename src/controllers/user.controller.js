@@ -88,6 +88,9 @@ exports.searchUser = async (req, res) => {
     res.status(500).json({ message: 'Error al obtener usuarios', error });
   }
 };
+
+
+
 // Actualizar un usuario
 exports.updateUser = async (req, res) => {
    try {
@@ -156,5 +159,39 @@ exports.getuserById = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error al obtener usuario', error });
+  }
+};
+
+
+// Usuarios habilitados (solo nombre)
+exports.searchEnabledUsers = async (req, res) => {
+  try {
+    const users = await User.find(
+      { state_user: "habilitado" }, // filtro
+      { name_user: 1, _id: 0 }      // proyección
+    );
+
+    if (!users.length) return res.status(404).json([]);
+    res.status(200).json(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error al obtener usuarios habilitados", error });
+  }
+};
+
+
+
+
+
+exports.getusers = async (req, res) => {
+  try {
+    const users = await User.find({}, { name_user: 1, _id: 0 });
+    
+    if (!users.length) return res.status(200).json([]); // mejor 200 que 404
+    res.status(200).json(users);
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error al obtener users habilitados", error });
   }
 };

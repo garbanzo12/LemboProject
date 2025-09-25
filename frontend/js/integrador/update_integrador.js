@@ -64,15 +64,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     // Cargar opciones de producción
-    const cargarIds = async () => {
-        const res = await fetch("http://localhost:5501/integrador/productions/ids");
-        const data = await res.json();
-        choices.setChoices(data.map(p => ({ value: p.id, label: p.id })), 'value', 'label', true);
-    };
+   const cargarIds = async () => {
+    const res = await fetch("http://localhost:3000/api/production/getIdsproduction");
+    const data = await res.json();
+
+    // Adaptar al formato que espera choices.js
+    choices.setChoices(
+        data.map(p => ({ value: p.id, label: p.id })), 
+        'value', 
+        'label', 
+        true
+    );
+};
 
     // Cargar responsables
     const cargarResponsables = async () => {
-        const res = await fetch("http://localhost:5501/integrador/users/responsable");
+        const res = await fetch("http://localhost:3000/api/production/getIdsresponsable");
         const data = await res.json();
         selectResponsable.innerHTML = "";
         data.forEach(user => {
@@ -85,7 +92,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Cargar usuarios para el select de agregar
     const cargarUsuariosSelect = async () => {
-        const res = await fetch("http://localhost:5501/integrador/users/responsable");
+        const res = await fetch("http://localhost:3000/api/production/getIdsresponsable");
         const data = await res.json();
         selectUsers.innerHTML = "";
         data.forEach(user => {
@@ -98,7 +105,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Cargar cultivos para el select de agregar
     const cargarCultivoSelect = async () => {
-        const res = await fetch("http://localhost:5501/integrador/crops/responsable");
+        const res = await fetch("http://localhost:3000/api/production/getIdcrops");
         const data = await res.json();
         selectCrops.innerHTML = "";
         data.forEach(crop => {
@@ -111,20 +118,20 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Cargar ciclos para el select de agregar
     const cargarCicloSelect = async () => {
-        const res = await fetch("http://localhost:5501/integrador/cycle/responsable");
+        const res = await fetch("http://localhost:3000/api/production/getIdcycle");
         const data = await res.json();
         selectCycle.innerHTML = "";
         data.forEach(cycle => {
             const opt = document.createElement("option");
-            opt.value = cycle.name_cropCycle;
-            opt.textContent = cycle.name_cropCycle;
+            opt.value = cycle.cropCycles;
+            opt.textContent = cycle.cropCycles;
             selectCycle.appendChild(opt);
         });
     };
 
     // Cargar insumos para el select de agregar
     const cargarInsumoSelect = async () => {
-        const res = await fetch("http://localhost:5501/integrador/consumable/responsable");
+        const res = await fetch("http://localhost:3000/api/production/getIdconsumable");
         const data = await res.json();
         selectConsumable.innerHTML = "";
         
@@ -143,7 +150,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Cargar sensores para el select de agregar
     const cargarSensorSelect = async () => {
-        const res = await fetch("http://localhost:5501/integrador/sensors/responsable");
+        const res = await fetch("http://localhost:3000/api/production/getIdsensor");
         const data = await res.json();
         selectSensor.innerHTML = "";
         data.forEach(sensor => {
@@ -154,28 +161,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     };
 
-    // Función para consumir insumo
-    const consumirInsumo = async (nombre, cantidad) => {
-        try {
-            const response = await fetch("http://localhost:5501/integrador/consumable/consumir-stock", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ 
-                    name_consumables: nombre, 
-                    cantidadConsumida: cantidad 
-                })
-            });
-            return response.ok;
-        } catch (error) {
-            console.error("Error al consumir insumo:", error);
-            return false;
-        }
-    };
+  
 
     // Función para devolver insumo
     const devolverInsumo = async (nombre, cantidad) => {
         try {
-            const response = await fetch("http://localhost:5501/integrador/consumable/devolver-stock", {
+            const response = await fetch("http://localhost:3000/api/production/devolverstock", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ 
@@ -540,7 +531,7 @@ const actualizarStock = async () => {
     });
 
     try {
-        const response = await fetch("http://localhost:5501/integrador/consumable/actualizar-stock", {
+        const response = await fetch("http://localhost:3000/api/production/actualizarstock", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ consumos })
@@ -572,7 +563,7 @@ checkbox.addEventListener('change', () => {
 });
     selectId.addEventListener("change", async () => {
         const id = selectId.value;
-        const res = await fetch(`http://localhost:5501/integrador/productions/${id}`);
+        const res = await fetch(`http://localhost:3000/api/production/loadproduction/${id}`);
         const data = await res.json();
 
         produccionCargada = data;
@@ -582,9 +573,9 @@ checkbox.addEventListener('change', () => {
 
         rellenarLista(data.users_selected, tbodyUsers);
         rellenarLista(data.crops_selected, tbodyCrops);
-        rellenarLista(data.name_cropCycle, tbodyCycle);
+        rellenarLista(data.cropCycles, tbodyCycle);
         rellenarLista(data.name_sensor, tbodySensores);
-        rellenarInsumos(data.name_consumables, data.quantity_consumables, data.unitary_value_consumables, tbodyInsumos);
+        rellenarInsumos(data.consumables, data.quantity_consumables, data.unitary_value_consumables, tbodyInsumos);
          // Inicializar checkbox según el valor actual
     const toggleCheckbox = document.getElementById('toggle-color');
     toggleCheckbox.checked = data.state_production === 'deshabilitado';
@@ -602,20 +593,23 @@ checkbox.addEventListener('change', () => {
         e.preventDefault();
 
         if (!produccionCargada) return alert("Selecciona una producción.");
-      
+        let state = (estadoProduccion == 1) ? "deshabilitado" : "habilitado";
+
+            
         
         const payload = {
             name_production: inputNombre.value.trim(),
             responsable: selectResponsable.value.trim(),
             users_selected: Array.from(tbodyUsers.querySelectorAll("td:first-child")).map(td => td.textContent),
             crops_selected: Array.from(tbodyCrops.querySelectorAll("td:first-child")).map(td => td.textContent),
-            name_cropCycle: Array.from(tbodyCycle.querySelectorAll("td:first-child")).map(td => td.textContent),
+            cropCycles: Array.from(tbodyCycle.querySelectorAll("td:first-child")).map(td => td.textContent),
             name_sensor: Array.from(tbodySensores.querySelectorAll("td:first-child")).map(td => td.textContent),
-            name_consumables: [],
+            consumables: [],
             quantity_consumables: [],
             unitary_value_consumables: [],
             total_value_consumables: 0,
-            state_production : estadoProduccion 
+            
+            state_production : state 
             
         };
 
@@ -628,7 +622,7 @@ checkbox.addEventListener('change', () => {
                 const cantidad = tds[1].textContent;
                 const valor = parseFloat(tds[2].textContent.replace('$', '')) || 0;
 
-                payload.name_consumables.push(nombre);
+                payload.consumables.push(nombre);
                 payload.quantity_consumables.push(cantidad);
                 payload.unitary_value_consumables.push(valor);
                 total += valor;
@@ -636,9 +630,10 @@ checkbox.addEventListener('change', () => {
         });
 
         payload.total_value_consumables = total;
-
+        
         try {
-            const res = await fetch(`http://localhost:5501/integrador/productions/${produccionCargada.id}`, {
+            console.log("Payload enviado:", payload);
+            const res = await fetch(`http://localhost:3000/api/production/putproduction/${selectId.value}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)
