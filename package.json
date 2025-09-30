@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
+    "debug": "^2.6.9",
     "multer": "^2.0.1"
   }
 }
