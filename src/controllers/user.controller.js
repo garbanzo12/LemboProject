@@ -21,7 +21,7 @@ exports.register = async (req, res) => {
     const token = jwt.sign(
       { _id: user._id, userId: user.userId, name: user.name_user },
       SECRET,
-      { expiresIn: '5m' }
+  { expiresIn: '2h' }
     );
     res.status(201).json({ message: 'Usuario registrado exitosamente',userId: readableId, data: user, token });
 
@@ -56,7 +56,7 @@ exports.login = async (req, res) => {
         role: user.type_user  // Esto es clave para el frontend
       },
       process.env.JWT_SECRET,
-      { expiresIn: '5m' }
+      { expiresIn: '2h' }
     );
 
     res.json({ message: 'Login exitoso', token });

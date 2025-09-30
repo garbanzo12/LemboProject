@@ -3,7 +3,6 @@ const Counter = require('../models/counters/counter.model');
 // Crear un cultivo
 exports.createCrop = async (req, res) => {
   
-  console.log("respuesta del cuerpo = "+ JSON.stringify(req.body, null, 2))
   try {
     // Incrementa el contador
     const counter = await Counter.findOneAndUpdate(
@@ -14,7 +13,6 @@ exports.createCrop = async (req, res) => {
     req.body.cropId = counter.seq;
         const imageName = req.files?.[0]?.filename || '';
     
-        // Construir el nuevo sensor
         const crop = new Crop({
           ...req.body,
           cropId: counter.seq,

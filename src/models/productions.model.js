@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); 
 
-const productionSchema = new mongoose.Schema({
+const productionSchema = new mongoose.Schema({   // esla conexion de la tabal de mongo
   productionId: { type: Number, unique: true },
   name_production: { type: String, required: true, trim: true },
   responsable: { type: String, required: true },   // antes era objeto
