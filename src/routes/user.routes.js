@@ -1,4 +1,3 @@
-router.get('/search', userController.searchUser);
 const express = require('express');
 const router = express.Router();
 const userCtrl = require('../controllers/user.controller');
@@ -9,6 +8,7 @@ router.put('/:ud', (req, res, next) => {
   next();
 }, userCtrl.updateUser);
 
+// router.get('/search', userCtrl.searchUser);
 
 // Registro
 router.post('/register', registerValidator, userCtrl.register);

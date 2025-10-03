@@ -69,8 +69,19 @@ async function inicializarBuscar() {
       const data = await res.json();
       console.log('Respuesta del backend al buscar usuario:', data); // <-- Depuración
 
-      localStorage.setItem('usuarioSeleccionado', JSON.stringify(data));
-      window.location.href = '3-view_user.html';
+      let usuario = null;
+      if (Array.isArray(data) && data.length > 0) {
+        usuario = data[0];
+      } else if (data.usuarios && data.usuarios.length > 0) {
+        usuario = data.usuarios[0];
+      }
+
+      if (usuario) {
+        localStorage.setItem('usuarioSeleccionado', JSON.stringify(usuario));
+        window.location.href = '3-view_user.html';
+      } else {
+        alert('Usuario no encontrado');
+      }
     } catch (err) {
       alert('Error: ' + err.message);
     }
