@@ -1,5 +1,24 @@
 const Sensor = require('../models/sensor.model');
 const Counter = require('../models/counters/counter2.model');
+
+
+// Buscar sensor por nombre
+exports.searchSensor = async (req, res) => {
+  try {
+    const nombre = req.query.nombre;
+    if (nombre) {
+      const sensor = await Sensor.findOne({ name_sensor: { $regex: `^${nombre}$`, $options: 'i' } });
+      if (!sensor) return res.status(404).json({ message: 'Sensor no encontrado' });
+      return res.status(200).json(sensor);
+    }
+    // Si no, devolver solo los nombres
+    const sensores = await Sensor.find({}, { name_sensor: 1, _id: 0 });
+    res.status(200).json(sensores);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error al buscar sensor", error });
+  }
+};
 // Crear un Sensor
 exports.createSensor = async (req, res) => {
   

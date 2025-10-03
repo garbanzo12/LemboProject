@@ -5,6 +5,7 @@ const { cycleValidator } = require('../validators/cycle.validator');
 
 router.post('/', cycleValidator, cycleController.createCycle);
 router.get('/', cycleController.getCycles);
+router.get('/search', cycleController.searchCycle);
 router.get('/list', cycleController.listCycle); 
 router.get('/getcycles', cycleController.getcycles); 
 router.get('/:id', cycleController.getCycleById);

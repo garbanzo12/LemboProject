@@ -14,49 +14,49 @@ async function obtenerIdsproducciones() {
 
 async function inicializarBuscar() {
   const formBuscar = document.querySelector('.cardright__form');
-  const selectId = document.querySelector('.cardright__selectid');
+  const selectNombre = document.querySelector('.cardright__selectid');
 
-  const ids = await obtenerIdsproducciones();
-  selectId.innerHTML = '';
+  const producciones = await obtenerIdsproducciones();
+  selectNombre.innerHTML = '';
 
-  if (ids.length === 0) {
+  if (producciones.length === 0) {
     const option = document.createElement('option');
     option.textContent = 'No hay producciones disponibles';
     option.disabled = true;
-    selectId.appendChild(option);
+    selectNombre.appendChild(option);
   } else {
     const defaultOption = document.createElement('option');
-    defaultOption.textContent = 'Selecciona un ID. ';
+    defaultOption.textContent = 'Selecciona una producción';
     defaultOption.disabled = true;
     defaultOption.selected = true;
-    selectId.appendChild(defaultOption);
+    selectNombre.appendChild(defaultOption);
 
-    ids.forEach(productionId => {
+    producciones.forEach(p => {
       const option = document.createElement('option');
-      option.value = productionId;
-      option.textContent = `${productionId}`;
-      selectId.appendChild(option);
+      option.value = p.name_production;
+      option.textContent = p.name_production;
+      selectNombre.appendChild(option);
     });
   }
 
   // Inicializar Choices.js después de llenar las opciones
-  new Choices(selectId, {
+  new Choices(selectNombre, {
     renderChoiceLimit: 5,
   });
 
   formBuscar.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const id = selectId.value;
+    const nombre = selectNombre.value;
 
-    if (!id) {
-      alert('Por favor selecciona un ID');
+    if (!nombre) {
+      alert('Por favor selecciona una producción');
       return;
     }
 
     try {
-      const res = await fetch(`http://localhost:3000/api/production/getproductionbyId/${id}`);
-      if (!res.ok) throw new Error('No se encontró el cultivo');
+      const res = await fetch(`http://localhost:3000/api/production/searchproduction?nombre=${encodeURIComponent(nombre)}`);
+      if (!res.ok) throw new Error('No se encontró la producción');
       const data = await res.json();
 
       localStorage.setItem('ProduccionSeleccionada', JSON.stringify(data));

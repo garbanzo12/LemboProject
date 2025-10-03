@@ -29,14 +29,14 @@ function inicializarValidaciones() {
     forms.forEach((form) => {
         form.addEventListener("submit", async function (event) {
             event.preventDefault();
-            
+
             const name_cycle = document.querySelector('.cardright__input-form--name');
             const description_cycle = document.querySelector('.cardright__input-form--description');
             const cycle_start = document.querySelector('.cardright__input-form--date-start');
             const cycle_end = document.querySelector('.cardright__input-form--date-end');
             const news_cycle = document.querySelector('.cardright__input-form--news');
             const state_cycle = toggleCheckbox ? (toggleCheckbox.checked ? 'habilitado' : 'deshabilitado') : '';
-            
+
             let validarCampo = true;
             const inputs = form.querySelectorAll("input");
 
@@ -57,7 +57,26 @@ function inicializarValidaciones() {
                     errorSpan.textContent = "";
                 }
             });
-            
+
+            // Validación de fecha fin
+            if (cycle_end) {
+                const hoy = new Date();
+                hoy.setHours(0, 0, 0, 0); // Ignorar hora
+                const fechaFin = new Date(cycle_end.value);
+
+                if (fechaFin <= hoy) {
+                    validarCampo = false;
+                    let errorSpan = cycle_end.nextElementSibling;
+                    if (!errorSpan || !errorSpan.classList.contains("error-message")) {
+                        errorSpan = document.createElement("span");
+                        errorSpan.classList.add("error-message");
+                        errorSpan.style.color = "red";
+                        cycle_end.insertAdjacentElement("afterend", errorSpan);
+                    }
+                    errorSpan.textContent = "La fecha de fin debe ser futura.";
+                }
+            }
+
             let datos = {
                 name_cycle: name_cycle ? name_cycle.value : '',
                 description_cycle: description_cycle ? description_cycle.value : '',
@@ -94,7 +113,7 @@ function inicializarValidaciones() {
                         throw new Error(resultado.error || "Error desconocido.");
                     }
                 } catch (error) {
-                    mostrarMensaje(form, "❌ " + error.message, "red");
+                    mostrarMensaje(form, "❌ Error al guardar los datos.", "red");
                 }
             }
         });

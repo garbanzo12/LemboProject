@@ -1,3 +1,20 @@
+// Buscar insumo por nombre
+exports.searchConsumable = async (req, res) => {
+  try {
+    const nombre = req.query.nombre;
+    if (nombre) {
+      const insumo = await Consumable.findOne({ name_consumables: { $regex: `^${nombre}$`, $options: 'i' } });
+      if (!insumo) return res.status(404).json({ message: 'Insumo no encontrado' });
+      return res.status(200).json(insumo);
+    }
+    // Si no, devolver solo los nombres
+    const insumos = await Consumable.find({}, { name_consumables: 1, _id: 0 });
+    res.status(200).json(insumos);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error al buscar insumo", error });
+  }
+};
 const Consumable = require('../models/consumable.model');
 const Counter = require('../models/counters/counter3.model'); // Asegúrate de tenerlo
 

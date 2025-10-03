@@ -104,7 +104,7 @@ function inicializarValidaciones() {
                          throw new Error(resultado.message || "Errordesconocido.");
                      }}
                 } catch (error) {
-                    mostrarMensaje(form, "❌ " + error.message, "red");
+                    mostrarMensaje(form, "❌ Error al guardar los datos.", "red");
                 }
             }
         });

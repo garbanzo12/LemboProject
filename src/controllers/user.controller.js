@@ -1,3 +1,20 @@
+// Buscar usuario por nombre
+exports.searchUser = async (req, res) => {
+  try {
+    const nombre = req.query.nombre;
+    if (nombre) {
+      const usuario = await User.findOne({ name_user: { $regex: `^${nombre}$`, $options: 'i' } });
+      if (!usuario) return res.status(404).json({ message: 'Usuario no encontrado' });
+      return res.status(200).json(usuario);
+    }
+    // Si no, devolver solo los nombres
+    const usuarios = await User.find({}, { name_user: 1, _id: 0 });
+    res.status(200).json(usuarios);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error al buscar usuario", error });
+  }
+};
 const User = require('../models/user.model');
 const Counter = require('../models/counters/counter4.model '); // Asegúrate de tenerlo
 const jwt = require('jsonwebtoken');

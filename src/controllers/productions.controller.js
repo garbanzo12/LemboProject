@@ -384,12 +384,16 @@ exports.searchEnabledUsers = async (req, res) => {
 
 exports.searchproduction = async (req, res) => {
   try {
-    const productions = await Production.find({}, { productionId: 1, _id: 0 });
-
-    // Mapear solo los valores
-    const ids = productions.map(p => p.productionId);
-
-    res.status(200).json({ producciones: ids }); // 👈 lo que tu frontend espera
+    // Si viene query ?nombre=xxx, buscar por nombre exacto (case-insensitive)
+    const nombre = req.query.nombre;
+    if (nombre) {
+      const prod = await Production.findOne({ name_production: { $regex: `^${nombre}$`, $options: 'i' } });
+      if (!prod) return res.status(404).json({ message: 'Producción no encontrada' });
+      return res.status(200).json(prod);
+    }
+    // Si no, devolver solo los nombres
+    const productions = await Production.find({}, { name_production: 1, _id: 0 });
+    res.status(200).json({ producciones: productions });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error al obtener productions", error });

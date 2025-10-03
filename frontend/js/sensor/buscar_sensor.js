@@ -18,48 +18,48 @@ async function obtenerIdsCiclo() {
 
 async function inicializarBuscar() {
   const formBuscar = document.querySelector('.cardright__form');
-  const selectId = document.querySelector('.cardright__selectid');
+  const selectNombre = document.querySelector('.cardright__selectid');
 
-  const ids = await obtenerIdsCiclo();
-  selectId.innerHTML = '';
+  const sensores = await obtenerIdsCiclo();
+  selectNombre.innerHTML = '';
 
-  if (ids.length === 0) {
+  if (sensores.length === 0) {
     const option = document.createElement('option');
-    option.textContent = 'No hay Ciclos disponibles';
+    option.textContent = 'No hay sensores disponibles';
     option.disabled = true;
-    selectId.appendChild(option);
+    selectNombre.appendChild(option);
   } else {
     const defaultOption = document.createElement('option');
-    defaultOption.textContent = 'Selecciona un ID';
+    defaultOption.textContent = 'Selecciona un sensor';
     defaultOption.disabled = true;
     defaultOption.selected = true;
-    selectId.appendChild(defaultOption);
+    selectNombre.appendChild(defaultOption);
 
-    ids.forEach(c => {
+    sensores.forEach(s => {
       const option = document.createElement('option');
-      option.value = c._id;
-      option.textContent = `${c.sensorId}`;
-      selectId.appendChild(option);
+      option.value = s.name_sensor;
+      option.textContent = s.name_sensor;
+      selectNombre.appendChild(option);
     });
   }
 
   // Inicializar Choices.js después de llenar las opciones
-  new Choices(selectId, {
+  new Choices(selectNombre, {
     renderChoiceLimit: 5,
   });
 
   formBuscar.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const id = selectId.value;
+    const nombre = selectNombre.value;
 
-    if (!id) {
-      alert('Por favor selecciona un ID');
+    if (!nombre) {
+      alert('Por favor selecciona un sensor');
       return;
     }
 
     try {
-      const res = await fetch(`http://localhost:3000/api/sensor/${id}`);
+      const res = await fetch(`http://localhost:3000/api/sensor/search?nombre=${encodeURIComponent(nombre)}`);
       if (!res.ok) throw new Error('No se encontró el sensor');
       const data = await res.json();
 

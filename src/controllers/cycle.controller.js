@@ -1,3 +1,20 @@
+// Buscar ciclo por nombre
+exports.searchCycle = async (req, res) => {
+  try {
+    const nombre = req.query.nombre;
+    if (nombre) {
+      const ciclo = await Cycle.findOne({ name_cycle: { $regex: `^${nombre}$`, $options: 'i' } });
+      if (!ciclo) return res.status(404).json({ message: 'Ciclo no encontrado' });
+      return res.status(200).json(ciclo);
+    }
+    // Si no, devolver solo los nombres
+    const cycles = await Cycle.find({}, { name_cycle: 1, _id: 0 });
+    res.status(200).json(cycles);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error al buscar ciclo", error });
+  }
+};
 const Cycle = require('../models/cycle.model');
 const Counter = require('../models/counters/counter1.model');
 // Crear un ciclo

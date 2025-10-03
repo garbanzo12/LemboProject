@@ -19,57 +19,57 @@ async function obtenerInsumos() {
 
 async function inicializarBuscar() {
   const formBuscar = document.querySelector('.cardright__form');
-  const selectId = document.querySelector('.cardright__selectid');
+  const selectNombre = document.querySelector('.cardright__selectid');
 
-  const cultivos = await obtenerInsumos();
-  selectId.innerHTML = '';
+  const insumos = await obtenerInsumos();
+  selectNombre.innerHTML = '';
 
-  if (cultivos.length === 0) {
+  if (insumos.length === 0) {
     const option = document.createElement('option');
-    option.textContent = 'No hay cultivos disponibles';
+    option.textContent = 'No hay insumos disponibles';
     option.disabled = true;
-    selectId.appendChild(option);
+    selectNombre.appendChild(option);
   } else {
     const defaultOption = document.createElement('option');
-    defaultOption.textContent = 'Selecciona un ID';
+    defaultOption.textContent = 'Selecciona un insumo';
     defaultOption.disabled = true;
     defaultOption.selected = true;
-    selectId.appendChild(defaultOption);
+    selectNombre.appendChild(defaultOption);
 
-    cultivos.forEach(c => {
+    insumos.forEach(i => {
       const option = document.createElement('option');
-      option.value = c._id; // se usa _id como valor
-      option.textContent = `${c.consumableId}`; // o lo que quieras mostrar
-      selectId.appendChild(option);
+      option.value = i.name_consumables;
+      option.textContent = i.name_consumables;
+      selectNombre.appendChild(option);
     });
   }
 
-  new Choices(selectId, {
+  new Choices(selectNombre, {
     renderChoiceLimit: 5,
   });
 
   formBuscar.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const id = selectId.value;
+    const nombre = selectNombre.value;
 
-    if (!id) {
-      alert('Por favor selecciona un cultivo');
+    if (!nombre) {
+      alert('Por favor selecciona un insumo');
       return;
     }
 
     try {
-      const res = await fetch(`http://localhost:3000/api/consumable/${id}`, {
+      const res = await fetch(`http://localhost:3000/api/consumable/search?nombre=${encodeURIComponent(nombre)}`, {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token')
         }
       });
 
-      if (!res.ok) throw new Error('No se encontró el cultivo');
+      if (!res.ok) throw new Error('No se encontró el insumo');
       const data = await res.json();
 
-      localStorage.setItem('cultivoSeleccionado', JSON.stringify(data));
-      window.location.href = '3-view-insumes.html';
+  localStorage.setItem('Insumoseleccionado', JSON.stringify(data));
+  window.location.href = '3-view-insumes.html';
     } catch (err) {
       alert('Error: ' + err.message);
     }

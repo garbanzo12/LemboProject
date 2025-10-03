@@ -138,11 +138,17 @@ exports.deleteCrop = async (req, res) => {
 
 exports.searchcrop = async (req, res) => {
   try {
+    // Si viene query ?nombre=xxx, buscar por nombre exacto (case-insensitive)
+    const nombre = req.query.nombre;
+    if (nombre) {
+      const crop = await Crop.findOne({ name_crop: { $regex: `^${nombre}$`, $options: 'i' } });
+      if (!crop) return res.status(404).json({ message: 'Cultivo no encontrado' });
+      return res.status(200).json(crop);
+    }
+    // Si no, devolver solo los nombres
     const crops = await Crop.find({}, { name_crop: 1, _id: 0 });
-    
-    if (!crops.length) return res.status(200).json([]); // mejor 200 que 404
+    if (!crops.length) return res.status(200).json([]);
     res.status(200).json(crops);
-
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error al obtener crops habilitados", error });

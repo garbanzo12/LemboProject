@@ -103,7 +103,7 @@ form.addEventListener("submit", async (e) => {
                         throw new Error(resultado.error || "Error desconocido.");
                     }
                 } catch (error) {
-                    mostrarMensaje(form, "❌ " + error.message, "red");
+                    mostrarMensaje(form, "❌ Error al guardar los datos.", "red");
                 }
     });        
 });

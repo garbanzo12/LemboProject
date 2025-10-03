@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const { consumableValidator } = require('../validators/consumable.validator');
 const consumableController = require('../controllers/consumable.controller');
+router.get('/search', consumableController.searchConsumable);
+
 
 // CRUD
 router.post('/', consumableValidator, consumableController.createConsumable);

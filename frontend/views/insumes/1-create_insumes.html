@@ -59,7 +59,20 @@
                 <div class="cardright__container-input">
                     <div class="cardright__subcontainer-input">
                         <label class="cardright__label-form" for="">Tipo de Insumo</label>
-                        <input class="cardright__input-form cardright__input-form--type" placeholder="Ej : pesticida " type="text" />
+                        <select class="cardright__input-form cardright__input-form--type" name="" id="" required>
+                        <option class="cardright__input-opt" value="">Tipo de Insumo</option>
+                        <option class="cardright__input-opt" value="Semillas">Semillas</option>
+                        <option class="cardright__input-opt" value="Vegetales">Vegetales</option>
+                        <option class="cardright__input-opt" value="Fertilizantes">Fertilizantes</option>
+                        <option class="cardright__input-opt" value="Fertilizantes quimicos">Fertilizantes quimicos</option>
+                        <option class="cardright__input-opt" value="Fertilizantes organicos">Fertilizantes organicos</option>
+                        <option class="cardright__input-opt" value="Enmiendas agricolas">Enmiendas agricolas</option>
+                        <option class="cardright__input-opt" value="Herbicidas">Herbicidas</option>
+                        <option class="cardright__input-opt" value="Insecticidas">Insecticidas</option>
+                        <option class="cardright__input-opt" value="Bactericidas">Bactericidas</option>
+                        <option class="cardright__input-opt" value="Insumos de riego">Insumos de riego</option>
+                        <option class="cardright__input-opt" value="Combustibles">Combustibles</option>
+                        </select>
                     </div>
 
                     <div class="cardright__subcontainer-input">
@@ -120,8 +133,9 @@
     
       </main>
 
-<script src="/frontend/js/auth/session_auth.js"></script>
-    
+    <script src="/frontend/js/auth/session_auth.js"></script>
+    <script src="/frontend/js/auth/rol_auth.js"></script>
+   
 </body>
 
 </html>

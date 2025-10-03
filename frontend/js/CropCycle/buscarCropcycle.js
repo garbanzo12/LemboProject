@@ -19,53 +19,53 @@ async function obtenerCiclos() {
 
 async function inicializarBuscar() {
   const formBuscar = document.querySelector('.cardright__form');
-  const selectId = document.querySelector('.cardright__selectid');
+  const selectNombre = document.querySelector('.cardright__selectid');
 
   const ciclos = await obtenerCiclos();
-  selectId.innerHTML = '';
+  selectNombre.innerHTML = '';
 
   if (ciclos.length === 0) {
     const option = document.createElement('option');
     option.textContent = 'No hay ciclos disponibles';
     option.disabled = true;
-    selectId.appendChild(option);
+    selectNombre.appendChild(option);
   } else {
     const defaultOption = document.createElement('option');
-    defaultOption.textContent = 'Selecciona un ID';
+    defaultOption.textContent = 'Selecciona un ciclo';
     defaultOption.disabled = true;
     defaultOption.selected = true;
-    selectId.appendChild(defaultOption);
+    selectNombre.appendChild(defaultOption);
 
     ciclos.forEach(c => {
       const option = document.createElement('option');
-      option.value = c._id; // se usa _id como valor
-      option.textContent = `${c.cycleId}`; // o lo que quieras mostrar
-      selectId.appendChild(option);
+      option.value = c.name_cycle;
+      option.textContent = c.name_cycle;
+      selectNombre.appendChild(option);
     });
   }
 
-  new Choices(selectId, {
+  new Choices(selectNombre, {
     renderChoiceLimit: 5,
   });
 
   formBuscar.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const id = selectId.value;
+    const nombre = selectNombre.value;
 
-    if (!id) {
-      alert('Por favor selecciona un cultivo');
+    if (!nombre) {
+      alert('Por favor selecciona un ciclo');
       return;
     }
 
     try {
-      const res = await fetch(`http://localhost:3000/api/cycle/${id}`, {
+      const res = await fetch(`http://localhost:3000/api/cycle/search?nombre=${encodeURIComponent(nombre)}`, {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token')
         }
       });
 
-      if (!res.ok) throw new Error('No se encontró el cultivo');
+      if (!res.ok) throw new Error('No se encontró el ciclo');
       const data = await res.json();
 
       localStorage.setItem('cicloseleccionado', JSON.stringify(data));
