@@ -14,7 +14,6 @@
 
   <!-- JS de Choices -->
   <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
-  <script src="/frontend/js/crops/actualizar_crop.js"></script>
   <link rel="stylesheet" href="../../public/css/styles-bem.css">
 
   <title>Actualización de Cultivos</title>
@@ -110,10 +109,14 @@
           </div>
           <!-- BOTON INDICADOR CAMBIO DE COLOR ESTADO  -->
           <div class="cardright__subcontainer-input">
-            <label class="cardright__label-form" for="boton">Habilitado/Deshabilitado:</label>
-            <input class="cardright__input-form--checkbox" type="checkbox" id="toggle-color" />
-            <label for="toggle-color" class="cardright__label-form--color"></label>
-          </div>
+                       <!-- Checkbox sin atributo name -->
+                    <input class="cardright__input-form--checkbox" type="checkbox" id="toggle-color" />
+                    <label for="toggle-color" class="cardright__label-form--color"></label>
+                                        
+                    <!-- Campo oculto para enviar el valor -->
+                    <input type="hidden" name="estado_cultivo" id="estado_cultivo_hidden" />
+
+                    </div>
           <button class="cardright__botton-primary" type="submit">GUARDAR</button>
         </div>
       </fieldset>
@@ -134,6 +137,9 @@
     </a>
 
   </main>
+  <script src="/frontend/js/crops/actualizar_crop.js"></script>
+  <script src="/frontend/js/auth/session_auth.js"></script>
+  <script src="/frontend/js/auth/rol_auth.js"></script>
 </body>
 
 </html>

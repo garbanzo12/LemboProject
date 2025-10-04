@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => { // ⬅️ Esperamos a que 
 
   async function obtenerCultivos(pagina = 1, buscar = '') {
     try {
-      const res = await fetch(`http://localhost:5501/sensors?page=${pagina}&buscar=${encodeURIComponent(buscar)}`); // ⬅️ hacemos un fetch con la pagina en la que deseamos mostrar y lo que estamos buscando
+      const res = await fetch(`http://localhost:3000/api/sensor/list?page=${pagina}&buscar=${encodeURIComponent(buscar)}`); // ⬅️ hacemos un fetch con la pagina en la que deseamos mostrar y lo que estamos buscando
       const data = await res.json();
   
       mostrarCultivos(data.sensores); // ⬅️ Llenamos, por medio de esta funcion, la tabla
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => { // ⬅️ Esperamos a que 
 
       row.innerHTML = `
 
-        <td class="cardright__cell ">${cultivo.id}</td> 
+        <td class="cardright__cell ">${cultivo.sensorId}</td> 
         <td class="cardright__cell">${cultivo.type_sensor}</td>
         <td class="cardright__cell">${cultivo.name_sensor}</td>
         <td class="cardright__cell">${cultivo.unit_sensor}</td>

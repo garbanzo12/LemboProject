@@ -333,6 +333,68 @@ body {
     color: var(--black);
 }
 
+/* -------------------------------------------------- */
+/* Bloques detallados para integrador: insumos/sensores */
+/* -------------------------------------------------- */
+.cardright__subcontainer-input--large {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1rem;
+    margin: 0rem;
+    width: 100%;
+    gap: 1.2rem;
+}
+.cardright__consumables-list,
+.cardright__sensors-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+    gap: 1.2rem;
+    margin-top: 0.8rem;
+}
+
+.integrator__consumable-block,
+.integrator__sensor-block {
+    background-color: var(--blanco);
+    border: 0.1rem solid var(--gray-200);
+    border-radius: 0.8rem;
+    padding: 1.2rem;
+    box-shadow: 0 0.4rem 1rem rgba(0,0,0,0.04);
+    display: flex;
+    flex-direction: row;
+    gap: 0.6rem;
+}
+
+.integrator__block-header {
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    color: var(--secundary-1-900);
+}
+
+.integrator__block-body {
+    font-size: var(--fs-xxs);
+    color: var(--gray-700);
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.integrator__block-body div {
+    line-height: 1.4;
+}
+
+.integrator__value {
+    color: var(--primary-950);
+    font-weight: 700;
+}
+
+/* Responsive tweaks */
+@media (max-width: 720px) {
+    .cardright__consumables-list,
+    .cardright__sensors-list {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* ****************************************************** */
 /* *************    ELEMENTOS   BOTONES    ************** */
 /* ****************************************************** */

@@ -9,7 +9,6 @@
     <meta name="author"
         content="Aprendiz: Erick Ramirez, Aprendiz Aprendiz:Sanchez Hernandez, Aprendiz:Estefani Acevedo" />
     <meta http-equiv="Content-Language" content="es" />
-    <script src="/frontend/js/crops/listar_crops.js"></script>
     <link rel="stylesheet" href="../../public/css/styles-bem.css">
 
     <title>Listar Usuarios</title>
@@ -78,7 +77,7 @@
             <a class="side-main__container-enlace" href="../index_main.html">
                 <div class="side-main__menu-list">MAIN</div>
             </a>
-            <a class="side-main__container-enlace" href="../dashboard.html">
+            <a class="side-main__container-enlace" href="../integrator/view_dashboard.html">
                 <div class="side-main__menu-list">INTEGRADOR</div>
             </a>
 
@@ -184,7 +183,7 @@
     <main class="cardright cardright--grande">
 
         <div class="cardright__table-listar">
-            <div class="cardright__tittle-listar">LISTAR CICLOS CULTIVOS</div>
+            <div class="cardright__tittle-listar">LISTAR USURIOS</div>
 
             <!-- este contenedor CONTIENE EL CONTENEDOR DE TABLA SUBTITULOS Y TABLA DATOS  -->
 
@@ -192,29 +191,29 @@
 
                 <!-- añadir -->
                 <div class="cardright__botton-terciary cardright__container-añadir">
-                    <a class="cardright__botton-a" href="#">Añadir</a>
+                    <a class="cardright__botton-a" href="../users/1-create_user.html">Añadir</a>
                 </div>
                 <!-- borrar -->
-                <div class="cardright__botton-terciary cardright__container-borrar">
+                <!-- <div class="cardright__botton-terciary cardright__container-borrar">
                     <a class="cardright__botton-a" href="#">Borrar</a>
-                </div>
+                </div> -->
                 <!-- actualizar -->
                 <div class="cardright__botton-terciary cardright__container-modificar">
-                    <a class="cardright__botton-a" href="#">Modificar</a>
+                    <a class="cardright__botton-a" href="../users/4-update_user.html">Modificar</a>
                 </div>
                 <!-- listar -->
                 <div class="cardright__botton-terciary cardright__container-imprimir">
-                    <a class="cardright__botton-a" href="#">Listar</a>
+                    <a class="cardright__botton-a" href="../users/5-listar_users.html">Listar</a>
                 </div>
                 <!-- ordenar -->
-                <div class="cardright__botton-terciary cardright__container-ordenar">
+                <!-- <div class="cardright__botton-terciary cardright__container-ordenar">
                     <label>
                         <a class="cardright__botton-a" href="#">Ordenar</a>
                         <select>
                             <option value></option>
                         </select>
                     </label>
-                </div>
+                </div> -->
                 <!-- buscar -->
                 <button class="cardright__botton-terciary cardright__container-buscar">Buscar</button>
                 <!--Esto es de js  -->
@@ -230,8 +229,8 @@
                 <table class="cardright__table">
                     <thead>
                         <tr class="cardright__row cardright__row--header">
-                            <td class="cardright__cell">Tipo Usuario</td>
-                            <td class="cardright__cell">Tipo Documento</td>
+                            <td class="cardright__cell">ID</td>
+                            <td class="cardright__cell">Rol</td>
                             <!-- este faltaba -->
                             <td class="cardright__cell">No Documento</td>
                             <!--              -->
@@ -256,6 +255,9 @@
         </a>
 
     </main>
+    <script src="/frontend/js/auth/rol_auth.js"></script>
+    <script src="/frontend/js/users/listarUsers.js"></script>
+
 </body>
 
 </html>

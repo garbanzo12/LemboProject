@@ -91,31 +91,39 @@
               placeholder="Tamaño en m² del cultivo " type="tel" disabled />
           </div>
 
-          <div class="cardright__subcontainer-input">
-            <label class="cardright__label-form" for>Insumo/s Encargado/s</label>
-            <input class="cardright__input-form cardright__input-form--id-cultivo"
-              placeholder="Tamaño en m² del cultivo " type="tel" disabled />
-          </div>
      
-          <div class="cardright__subcontainer-input">
+          <!-- <div class="cardright__subcontainer-input">
             <label class="cardright__label-form" for>Cantidad de Insumos</label>
             <input class="cardright__input-form cardright__input-form--id-cultivo"
               placeholder="Tamaño en m² del cultivo " type="tel" disabled />
-          </div>
+          </div> -->
+
           <div class="cardright__subcontainer-input">
-            <label class="cardright__label-form" for>Valor de Insumo</label>
+            <label class="cardright__label-form" for>Inversión</label>
+            <input id="inversion-input" class="cardright__input-form cardright__input-form--id-cultivo"
+              placeholder="Tamaño en m² del cultivo " type="tel" disabled />
+          </div>
+
+          <div class="cardright__subcontainer-input">
+            <label class="cardright__label-form" for>Estimación de Ganancia</label>
             <input class="cardright__input-form cardright__input-form--id-cultivo"
               placeholder="Tamaño en m² del cultivo " type="tel" disabled />
           </div>
-          <div class="cardright__subcontainer-input">
-            <label class="cardright__label-form" for>Nombre del Sensore/s</label>
-            <input class="cardright__input-form cardright__input-form--id-cultivo"
-              placeholder="Tamaño en m² del cultivo " type="tel" disabled />
+
+          <!-- Lista detallada de insumos (se renderiza dinámicamente) -->
+          <div class="cardright__subcontainer-input--large">
+            <label class="cardright__label-form" for>Insumos (detallado)</label>
+            <div id="consumables-list" class="cardright__consumables-list">
+              <!-- Bloques individuales de insumo se insertan aquí -->
+            </div>
           </div>
-          <div class="cardright__subcontainer-input">
-            <label class="cardright__label-form" for>Valor Total de Insumo/s</label>
-            <input class="cardright__input-form cardright__input-form--id-cultivo"
-              placeholder="Tamaño en m² del cultivo " type="tel" disabled />
+
+          <!-- Lista detallada de sensores (se renderiza dinámicamente) -->
+          <div class="cardright__subcontainer-input--large">
+            <label class="cardright__label-form" for>Sensores (detallado)</label>
+            <div id="sensors-list" class="cardright__sensors-list">
+              <!-- Bloques individuales de sensor se insertan aquí -->
+            </div>
           </div>
           <!-- BOTON INDICADOR CAMBIO DE COLOR ESTADO  -->
           <div class="cardright__subcontainer-input">
@@ -153,6 +161,9 @@
         document.querySelector('.side-main').innerHTML = html;
       });
   </script>
+    <script src="/frontend/js/auth/dashboard.js"></script>
+    <script src="/frontend/js/auth/printUser.js"></script>
+    <script src="/frontend/js/auth/session_auth.js"></script>
 </body>
 
 </html>

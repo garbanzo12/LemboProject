@@ -2,10 +2,14 @@ console.log('Script cargado');
 
 async function obtenerIdsCiclo() {
   try {
-    const res = await fetch('http://localhost:5501/sensors/id'); // ✅ Nuevo endpoint
+  const res = await fetch('http://localhost:3000/api/sensor', {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      }
+    });   
     if (!res.ok) throw new Error('No se pudieron obtener los Ciclos');
     const data = await res.json();
-    return data.sensores; // ✅ Ya viene como un array de IDs
+    return data; // ✅ Ya viene como un array de IDs
   } catch (err) {
     console.error('Error al obtener los IDs:', err.message);
     return [];
@@ -14,48 +18,48 @@ async function obtenerIdsCiclo() {
 
 async function inicializarBuscar() {
   const formBuscar = document.querySelector('.cardright__form');
-  const selectId = document.querySelector('.cardright__selectid');
+  const selectNombre = document.querySelector('.cardright__selectid');
 
-  const ids = await obtenerIdsCiclo();
-  selectId.innerHTML = '';
+  const sensores = await obtenerIdsCiclo();
+  selectNombre.innerHTML = '';
 
-  if (ids.length === 0) {
+  if (sensores.length === 0) {
     const option = document.createElement('option');
-    option.textContent = 'No hay Ciclo disponibles';
+    option.textContent = 'No hay sensores disponibles';
     option.disabled = true;
-    selectId.appendChild(option);
+    selectNombre.appendChild(option);
   } else {
     const defaultOption = document.createElement('option');
-    defaultOption.textContent = 'Selecciona un ID';
+    defaultOption.textContent = 'Selecciona un sensor';
     defaultOption.disabled = true;
     defaultOption.selected = true;
-    selectId.appendChild(defaultOption);
+    selectNombre.appendChild(defaultOption);
 
-    ids.forEach(id => {
+    sensores.forEach(s => {
       const option = document.createElement('option');
-      option.value = id;
-      option.textContent = `${id}`;
-      selectId.appendChild(option);
+      option.value = s.name_sensor;
+      option.textContent = s.name_sensor;
+      selectNombre.appendChild(option);
     });
   }
 
   // Inicializar Choices.js después de llenar las opciones
-  new Choices(selectId, {
+  new Choices(selectNombre, {
     renderChoiceLimit: 5,
   });
 
   formBuscar.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const id = selectId.value;
+    const nombre = selectNombre.value;
 
-    if (!id) {
-      alert('Por favor selecciona un ID');
+    if (!nombre) {
+      alert('Por favor selecciona un sensor');
       return;
     }
 
     try {
-      const res = await fetch(`http://localhost:5501/api/sensors/${id}`);
+      const res = await fetch(`http://localhost:3000/api/sensor/search?nombre=${encodeURIComponent(nombre)}`);
       if (!res.ok) throw new Error('No se encontró el sensor');
       const data = await res.json();
 

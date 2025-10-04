@@ -10,7 +10,7 @@
     content="Aprendiz: Erick Ramirez, Aprendiz Aprendiz:Sanchez Hernandez, Aprendiz:Estefani Acevedo" />
   <meta http-equiv="Content-Language" content="es" />
   <link rel="stylesheet" href="../../public/css/styles-bem.css">
-  <script src="/frontend/js/crops/validar_crops.js"></script>
+  
   <title>Registro de Cultivos</title>
 </head>
 
@@ -76,7 +76,25 @@
 
           <div class="cardright__subcontainer-input">
             <label class="cardright__label-form" for>Tipo de Cultivo</label>
-            <input class="cardright__input-form card__right__input--type" placeholder="Tipo del Cultivo" type="text" />
+            <select class="cardright__input-form cardright__input-form--type" name="" id="" required>
+              <option class="cardright__input-opt" value="">Tipo de Cultivo</option>
+              <option class="cardright__input-opt" value="Cultivos anuales">Cultivos anuales</option>
+              <option class="cardright__input-opt" value="Cultivos perennes">Cultivos perennes</option>
+              <option class="cardright__input-opt" value="Cultivos subtropicales">Cultivos subtropicales</option>
+              <option class="cardright__input-opt" value="Cultivos bianuales">Cultivos bianuales</option>
+              <option class="cardright__input-opt" value="Cultivos tropicales">Cultivos tropicales</option>
+              <option class="cardright__input-opt" value="Cultivos templados">Cultivos templados</option>
+              <option class="cardright__input-opt" value="Cultivos forrajeros">Cultivos forrajeros</option>
+              <option class="cardright__input-opt" value="Cultivos industriales">Cultivos industriales</option>
+              <option class="cardright__input-opt" value="Cultivos alimenticios">Cultivos alimenticios</option>
+              <option class="cardright__input-opt" value="Cultivos alimenticios">Cultivos aromaticos</option>
+              <option class="cardright__input-opt" value="Cultivos ornamentales">Cultivos ornamentales</option>
+              <option class="cardright__input-opt" value="Cultivos cereales">Cultivos cereales</option>
+              <option class="cardright__input-opt" value="Cultivos hostalizas">Cultivos hostalizas</option>
+              <option class="cardright__input-opt" value="Cultivos frutales">Cultivos frutales</option>
+              <option class="cardright__input-opt" value="Cultivos oleaginosos">Cultivos oleaginosos</option>
+            </select>
+
           </div>
 
           <div class="cardright__subcontainer-input">
@@ -87,14 +105,14 @@
 
           <div class="cardright__subcontainer-input">
             <label class="cardright__label-form" for>Descripción</label>
-            <input class="cardright__input-form card__right__input--info" placeholder="Descripción del Cultivo"
+            <input class="cardright__input-form card__right__input--description" placeholder="Descripción del Cultivo"
               type="text" />
           </div>
 
           <div class="cardright__subcontainer-input">
             <label class="cardright__label-form" for>Tamaño en m²</label>
             <input class="cardright__input-form card__right__input--size" placeholder="Tamaño en m² del cultivo "
-              type="text" />
+              type="number" />
           </div>
 
           <!-- subtitulo si es necesario -->
@@ -126,6 +144,11 @@
     </a>
 
   </main>
+  <script src="/frontend/js/crops/validar_crops.js"></script>
+  <script src="/frontend/js/auth/session_auth.js"></script>
+  <script src="/frontend/js/auth/visitantVerification.js"></script>
+  <script src="/frontend/js/auth/rol_auth.js"></script>   
+
 
 </body>
 

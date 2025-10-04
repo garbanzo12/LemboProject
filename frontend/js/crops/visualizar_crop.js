@@ -5,7 +5,7 @@ console.log('holis')
 
     const inputs = document.querySelectorAll('input'); // ⬅️ Selecciono todos los inputs y les asigno su valor correspondiente
     
-    inputs[0].value = data.id || '';           // ⬅️ ID del cultivo
+    inputs[0].value = data.cropId || '';           // ⬅️ ID del cultivo
     inputs[1].value = data.name_crop || '';         // ⬅️ Nombre del cultivo
     inputs[2].value = data.type_crop || '';         // ⬅️ Tipo de cultivo
     inputs[3].value = data.location || '';     // ⬅️ Ubicación
@@ -17,9 +17,9 @@ console.log('holis')
         const imageContainer = document.querySelector('.cardright__input-form--file'); // ⬅️ Asegúrate de tener un contenedor para la imagen
         if (imageContainer) {
             const imgElement = document.createElement('img');
-            imgElement.src = `/backend/routes/uploads/${data.image_crop}`; // ⬅️ Ruta completa
+            imgElement.src = `http://localhost:3000/uploads-crop/${data.image_crop}`; // ⬅️ Ruta completa
             imgElement.alt = 'Imagen del cultivo';
-            imgElement.style.maxWidth = '200px'; // ⬅️ Estilo opcional
+            imgElement.style.maxWidth = '75px'; // ⬅️ Estilo opcional
             imageContainer.innerHTML = ''; // Limpiar contenedor
             imageContainer.classList.add('cardright__image-upload')
             imageContainer.appendChild(imgElement);

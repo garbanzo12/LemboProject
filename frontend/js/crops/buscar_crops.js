@@ -1,61 +1,70 @@
 console.log('Script cargado');
 
-async function obtenerIdsCultivos() {
+async function obtenerCultivos() {
   try {
-    const res = await fetch('http://localhost:5501/crops/id'); // ✅ Nuevo endpoint
+    const res = await fetch('http://localhost:3000/api/crops', {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      }
+    });
+
     if (!res.ok) throw new Error('No se pudieron obtener los cultivos');
     const data = await res.json();
-    return data.cultivos; // ✅ Ya viene como un array de IDs
+    return data;
   } catch (err) {
-    console.error('Error al obtener los IDs:', err.message);
+    console.error('Error al obtener los cultivos:', err.message);
     return [];
   }
 }
 
 async function inicializarBuscar() {
   const formBuscar = document.querySelector('.cardright__form');
-  const selectId = document.querySelector('.cardright__selectid');
+  const selectNombre = document.querySelector('.cardright__selectid');
 
-  const ids = await obtenerIdsCultivos();
-  selectId.innerHTML = '';
+  const cultivos = await obtenerCultivos();
+  selectNombre.innerHTML = '';
 
-  if (ids.length === 0) {
+  if (cultivos.length === 0) {
     const option = document.createElement('option');
     option.textContent = 'No hay cultivos disponibles';
     option.disabled = true;
-    selectId.appendChild(option);
+    selectNombre.appendChild(option);
   } else {
     const defaultOption = document.createElement('option');
-    defaultOption.textContent = 'Selecciona un ID';
+    defaultOption.textContent = 'Selecciona un cultivo';
     defaultOption.disabled = true;
     defaultOption.selected = true;
-    selectId.appendChild(defaultOption);
+    selectNombre.appendChild(defaultOption);
 
-    ids.forEach(id => {
+    cultivos.forEach(c => {
       const option = document.createElement('option');
-      option.value = id;
-      option.textContent = `${id}`;
-      selectId.appendChild(option);
+      option.value = c.name_crop; // se usa el nombre como valor
+      option.textContent = c.name_crop; // mostrar el nombre
+      selectNombre.appendChild(option);
     });
   }
 
-  // Inicializar Choices.js después de llenar las opciones
-  new Choices(selectId, {
+  new Choices(selectNombre, {
     renderChoiceLimit: 5,
   });
 
   formBuscar.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const id = selectId.value;
+    const nombre = selectNombre.value;
 
-    if (!id) {
-      alert('Por favor selecciona un ID');
+    if (!nombre) {
+      alert('Por favor selecciona un cultivo');
       return;
     }
 
     try {
-      const res = await fetch(`http://localhost:5501/api/crops/${id}`);
+      const res = await fetch(`http://localhost:3000/api/crops/getcrop?nombre=${encodeURIComponent(nombre)}`, {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token')
+        }
+      });
+
       if (!res.ok) throw new Error('No se encontró el cultivo');
       const data = await res.json();
 

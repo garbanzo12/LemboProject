@@ -15,7 +15,7 @@
     <!-- JS de Choices -->
     <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 
-    <script src="/frontend/js/sensor/actualizarSensor.js"></script>
+    
 
   <link rel="stylesheet" href="../../public/css/styles-bem.css">
 
@@ -83,12 +83,25 @@
 
           <div class="cardright__subcontainer-input">
             <label class="cardright__label-form" for>Unidad de medida</label>
-            <input class="cardright__input-form" placeholder="Unidad de medida" name="unidad_sensor" type="text"/>
+            
+            <select class="cardright__input-form cardright__input-form--unit-sensor"  name="unidad_sensor" id="" required>
+              <option class="cardright__input-opt" value="Unidad de medida">Unidad de medida:</option>
+              <option class="cardright__input-opt" value="C">°C</option>
+              <option class="cardright__input-opt" value="F">°F</option>
+              <option class="cardright__input-opt" value="K">K</option>
+            </select>
           </div>
           
           <div class="cardright__subcontainer-input">
             <label class="cardright__label-form" for>Tiempo escaneo</label>
-            <input class="cardright__input-form" placeholder="Tiempo escaneo" name="tiempo_sensor" type="text"/>
+            <input class="cardright__input-form cardright__input-form--time" name="tiempo_sensor" placeholder="Ej : 10" type="number" />
+            <select class="cardright__input-form cardright__input-form--type-sensor"  name="unidad_tiempo_sensor" id="" required>
+              <option class="cardright__input-opt" value="">Tiempo de escaneo en:</option>
+              <option class="cardright__input-opt" value="Minutos">Minutos</option>
+              <option class="cardright__input-opt" value="Segundos">Segundos</option>
+              <option class="cardright__input-opt" value="Horas">Horas</option>
+            </select>
+            
           </div>
 
           <div class="cardright__subcontainer-input">
@@ -135,7 +148,10 @@
     </a>
 
   </main>
+    <script src="/frontend/js/sensor/actualizarSensor.js"></script>
 
+    <script src="/frontend/js/auth/session_auth.js"></script>
+    <script src="/frontend/js/auth/rol_auth.js"></script>
 </body>
 
 </html>

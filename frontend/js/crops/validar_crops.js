@@ -1,70 +1,67 @@
-console.log("olahol");
 
-document.addEventListener('DOMContentLoaded', function() {    
-// ⬇️ Aqui empieza el Insertar/Crear ⬇️
-function inicializarValidaciones() { // 
-    
-    const forms = document.querySelectorAll(".cardright__form--top3");
+document.addEventListener("DOMContentLoaded", () => {
+const forms = document.querySelectorAll(".cardright__form--top3");
     forms.forEach((form) => {
-        form.addEventListener("submit", async function (event) {
-            event.preventDefault(); // 👈 Asegúrate de que esto esté aquí
-            console.log('Funcionando prevent defauklt')
-            const name_crop = document.querySelector('.card__right__input--name'); //✅
-            const type_crop = document.querySelector('.card__right__input--type');  //✅
-            const location = document.querySelector('.card__right__input--location'); //✅
-            const description_crop = document.querySelector('.card__right__input--info'); //✅
-            const size_m2 = document.querySelector('.card__right__input--size'); //✅
-            const image_crop = document.querySelector('.cardright__input-form--file'); //✅
-            let validarCampo = true;
-            const inputs = form.querySelectorAll("input");
     
-
-            inputs.forEach((input) => {
-                let errorSpan = input.nextElementSibling;
-
-                if (!errorSpan || !errorSpan.classList.contains("error-message")) {
-                    errorSpan = document.createElement("span");
-                    errorSpan.classList.add("error-message");
-                    errorSpan.style.color = "red";
-                    input.insertAdjacentElement("afterend", errorSpan);
-                }
-
-                if (input.value.trim() === "") {
-                    validarCampo = false;
-                    errorSpan.textContent = "Campo obligatorio.";
-                } else {
-                    errorSpan.textContent = "";
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const name = document.querySelector('.card__right__input--name')
+  const type = document.querySelector('.card__right__input--type')
+  const location = document.querySelector('.card__right__input--location')
+  const description = document.querySelector('.card__right__input--description')
+  const size = document.querySelector('.card__right__input--size').value.trim()
+  const image = document.querySelector('.cardright__input-form--file').files[0];
 
 
-                }
+  const inputs = document.querySelectorAll("input");
+  inputs.forEach((input) => {
+        let errorSpan = input.nextElementSibling;
 
-            });
-            console.log(name_crop.value)
-            const datos = new FormData();
-            datos.append("name_crop", name_crop.value);
-            datos.append("type_crop", type_crop.value);
-            datos.append("location", location.value);
-            datos.append("description_crop", description_crop.value);
-            datos.append("size_m2", size_m2.value);
-            datos.append("image_crop", image_crop.files[0]); // 👈 importante: image_crop.files[0]
-            if (validarCampo) {
-                try {
-                    console.log("Datos en FormData antes de enviar:");
-                    for (const [key, value] of datos.entries()) {
-                        console.log(key + ':', value);
-                    }
-                    let respuesta = await fetch("http://localhost:5501/crops", {
-                        
-                        method: "POST",
-                        body: (datos),
-                    });
+        if (!errorSpan || !errorSpan.classList.contains("error-message")) {
+            errorSpan = document.createElement("span");
+            errorSpan.classList.add("error-message");
+            errorSpan.style.color = "red";
+            input.insertAdjacentElement("afterend", errorSpan);
+        }
+
+        if (input.value.trim() === "" && input.type !="checkbox") {
+            validarCampo = false;
+            errorSpan.textContent = "Campo obligatorio.";
+        } else {
+            errorSpan.textContent = "";
+        }
+    });
+  // Validaciones simples de front (opcionales, express-validator hará el resto)
+  if (!name || !type || !location || !description || !size || !image) {
+    return;
+  }
+
+  if (isNaN(size) || Number(size) <= 0) {
+    alert("⚠ El tamaño debe ser un número positivo");
+    return;
+  }
+
+  // Preparamos el FormData
+  const formData = new FormData();
+  formData.append('name_crop', name.value.trim());
+  formData.append('type_crop', type.value.trim());
+  formData.append('location', location.value.trim());
+  formData.append('description_crop', description.value.trim());
+  formData.append('size_m2', size);
+  formData.append('image_crop', image);
+
+  try {
+    const respuesta = await fetch("http://localhost:3000/api/crops", {
+      method: "POST",
+      body: formData
+    });
 
                     let resultado = await respuesta.json();
 
                     if (respuesta.ok) {
                         form.reset(); // Limpiar formulario tras el envío
 
-                        const mensaje = `✅ Datos guardados correctamente.\nID del registro: ${resultado.id}`;
+                        const mensaje = `✅ Datos guardados correctamente.\nID del registro: ${resultado.cropId}`;
                         console.log("Respuesta completa del servidor:", resultado);
                     
                         // Mostrar el mensaje en el cuadro arriba
@@ -83,11 +80,11 @@ function inicializarValidaciones() { //
                             window.location.href = "/frontend/views/crops/2-seach_crops.html"; // 👈 Redireccionamiento 
                           });
                         
-                        texto.textContent = `✅ Datos guardados correctamente.\nID del registro: ${resultado.id}`;
+                        texto.textContent = `✅ Datos guardados correctamente.\nID del registro: ${resultado.cropId}`;
                         cuadro.style.display = "block";
                     
                         botonCopiar.onclick = () => {
-                            navigator.clipboard.writeText(resultado.id)
+                            navigator.clipboard.writeText(resultado._id)
                                 .then(() => {
                                     botonCopiar.textContent = "✅ Copiado";
                                     setTimeout(() => botonCopiar.textContent = "Copiar ID", 2000);
@@ -106,22 +103,11 @@ function inicializarValidaciones() { //
                         throw new Error(resultado.error || "Error desconocido.");
                     }
                 } catch (error) {
-                    mostrarMensaje(form, "❌ " + error.message, "red");
+                    mostrarMensaje(form, "❌ Error al guardar los datos.", "red");
                 }
-            
-            }
-
-
-
-        });
-
-    });
-
-}
-
-
-         
-
+    });        
+});
+        
 // Función para mostrar mensajes debajo del formulario
 function mostrarMensaje(form, mensaje, color) {
     let mensajeSpan = form.querySelector(".cardright__foot-form");
@@ -137,12 +123,10 @@ function mostrarMensaje(form, mensaje, color) {
 
     mensajeSpan.textContent = mensaje;
     mensajeSpan.style.color = color;
+
+
+    
+
+
 }
-
-setTimeout(() => {
-    inicializarValidaciones();
-}, 100);
-
-});
-
-
+})

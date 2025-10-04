@@ -29,13 +29,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const choices = new Choices(cropSelect); // ⬅️ Estoy llamand a mi dependencia choices para el select
     // Inicializar Choices.js después de llenar las opciones
    
-      fetch('http://localhost:5501/cropcycle/id') // ⬅️ hago un fetch para traer la lista de IDS
+      fetch('http://localhost:3000/api/cycle') // ⬅️ hago un fetch para traer la lista de IDS
         .then(res => res.json()) // ⬅️ Aqui estoy trallendo el paquete json
         .then(ids => {
-          const todosLosIds = ids.ciclos; // Array con todos los IDs
+          const todosLosIds = ids; // Array con todos los IDs
   
           choices.setChoices( // ⬅️ Los meto en el choice
-            todosLosIds.map(id => ({ value: id, label: `ID: ${id}` })),
+            todosLosIds.map(id => ({ value: id._id, label: `ID: ${id.cycleId}` })),
             'value',
             'label',
             true
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
         currentID = id;
 
-        fetch(`http://localhost:5501/api/cropcycle/${id}`) // ⬅️ Por medio del ID traigo la columna correspondiente( anteriormente la traje tambien, pero para cargar el select, ahora es para los inputs)
+        fetch(`http://localhost:3000/api/cycle/${id}`) // ⬅️ Por medio del ID traigo la columna correspondiente( anteriormente la traje tambien, pero para cargar el select, ahora es para los inputs)
           .then(res => {
             if (!res.ok) throw new Error('No se encontró el ciclo');
             return res.json(); // ⬅️ 
@@ -61,10 +61,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 return new Date(isoDate).toISOString().split('T')[0];
               };
 
-            cropForm.id.value = data.id;
-            cropForm.nombre_ciclo.value = data.name_cropCycle;
-            cropForm.periodo_inicio.value = formatDate(data.period_cycle_start);
-            cropForm.periodo_fin.value = formatDate(data.period_cycle_end);
+            cropForm.nombre_ciclo.value = data.name_cycle;
+            cropForm.periodo_inicio.value = formatDate(data.cycle_start);
+            cropForm.periodo_fin.value = formatDate(data.cycle_end);
             cropForm.descripcion_ciclo.value = data.description_cycle;
             cropForm.novedades_ciclo.value = data.news_cycle;
             
@@ -100,18 +99,22 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         }
         // const imagenInput = cropForm.elements['imagen_ciclo']; // Campo file
-        const data = new FormData();
-        data.append("nombre_ciclo", cropForm.nombre_ciclo.value);
-        data.append("periodo_inicio", cropForm.periodo_inicio.value);
-        data.append("periodo_fin", cropForm.periodo_fin.value);
-        data.append("descripcion_ciclo", cropForm.descripcion_ciclo.value);
-        data.append("novedades_ciclo", cropForm.novedades_ciclo.value);
-        data.append("estado_ciclo", cropForm.estado_ciclo.value);
-
+        const data = {
+        "nombre_ciclo" : cropForm.nombre_ciclo.value,
+        "periodo_inicio" : cropForm.periodo_inicio.value,
+        "periodo_fin" : cropForm.periodo_fin.value,
+        "descripcion_ciclo" : cropForm.descripcion_ciclo.value,
+        "novedades_ciclo" : cropForm.novedades_ciclo.value,
+        "estado_ciclo" : cropForm.estado_ciclo.value,
+        }
   
-        fetch(`http://localhost:5501/api/cropcycle/${currentID}`, { // ⬅️ Mandamos con fetch la actualizacion con su id correspondiente
+        fetch(`http://localhost:3000/api/cycle/${currentID}`, { // ⬅️ Mandamos con fetch la actualizacion con su id correspondiente
           method: 'PUT',
-          body: data
+          headers: {
+        'Content-Type': 'application/json',
+         Authorization: 'Bearer ' + localStorage.getItem('token') // si usas JWT
+        },
+          body: JSON.stringify( data )
         })
         .then(res => res.json())
         .then(data => {

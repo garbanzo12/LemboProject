@@ -1,66 +1,75 @@
 console.log('Script cargado');
 
-async function obtenerIdsInsumo() {
+async function obtenerInsumos() {
   try {
-    const res = await fetch('http://localhost:5501/consumables/id'); // ✅ Nuevo endpoint
-    if (!res.ok) throw new Error('No se pudieron obtener los Insumos');
+    const res = await fetch('http://localhost:3000/api/consumable', {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      }
+    });
+
+    if (!res.ok) throw new Error('No se pudieron obtener los cultivos');
     const data = await res.json();
-    return data.insumos; // ✅ Ya viene como un array de IDs
+    return data;
   } catch (err) {
-    console.error('Error al obtener los IDs:', err.message);
+    console.error('Error al obtener los cultivos:', err.message);
     return [];
   }
 }
 
 async function inicializarBuscar() {
   const formBuscar = document.querySelector('.cardright__form');
-  const selectId = document.querySelector('.cardright__selectid');
+  const selectNombre = document.querySelector('.cardright__selectid');
 
-  const ids = await obtenerIdsInsumo();
-  selectId.innerHTML = '';
+  const insumos = await obtenerInsumos();
+  selectNombre.innerHTML = '';
 
-  if (ids.length === 0) {
+  if (insumos.length === 0) {
     const option = document.createElement('option');
-    option.textContent = 'No hay Insumo disponibles';
+    option.textContent = 'No hay insumos disponibles';
     option.disabled = true;
-    selectId.appendChild(option);
+    selectNombre.appendChild(option);
   } else {
     const defaultOption = document.createElement('option');
-    defaultOption.textContent = 'Selecciona un ID';
+    defaultOption.textContent = 'Selecciona un insumo';
     defaultOption.disabled = true;
     defaultOption.selected = true;
-    selectId.appendChild(defaultOption);
+    selectNombre.appendChild(defaultOption);
 
-    ids.forEach(id => {
+    insumos.forEach(i => {
       const option = document.createElement('option');
-      option.value = id;
-      option.textContent = `${id}`;
-      selectId.appendChild(option);
+      option.value = i.name_consumables;
+      option.textContent = i.name_consumables;
+      selectNombre.appendChild(option);
     });
   }
 
-  // Inicializar Choices.js después de llenar las opciones
-  new Choices(selectId, {
+  new Choices(selectNombre, {
     renderChoiceLimit: 5,
   });
 
   formBuscar.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const id = selectId.value;
+    const nombre = selectNombre.value;
 
-    if (!id) {
-      alert('Por favor selecciona un ID');
+    if (!nombre) {
+      alert('Por favor selecciona un insumo');
       return;
     }
 
     try {
-      const res = await fetch(`http://localhost:5501/api/consumables/${id}`);
-      if (!res.ok) throw new Error('No se encontró el cultivo');
+      const res = await fetch(`http://localhost:3000/api/consumable/search?nombre=${encodeURIComponent(nombre)}`, {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token')
+        }
+      });
+
+      if (!res.ok) throw new Error('No se encontró el insumo');
       const data = await res.json();
 
-      localStorage.setItem('Insumoseleccionado', JSON.stringify(data));
-      window.location.href = '3-view-insumes.html';
+  localStorage.setItem('Insumoseleccionado', JSON.stringify(data));
+  window.location.href = '3-view-insumes.html';
     } catch (err) {
       alert('Error: ' + err.message);
     }

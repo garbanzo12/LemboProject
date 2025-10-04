@@ -5,16 +5,20 @@ document.addEventListener('DOMContentLoaded', () => { // ⬅️ Esperamos a que 
   let paginaActual = 1;// ⬅️ Empezamos en la pagina 1
 
   async function obtenerCultivos(pagina = 1, buscar = '') {
-    try {
-      const res = await fetch(`http://localhost:5501/crops?page=${pagina}&buscar=${encodeURIComponent(buscar)}`); // ⬅️ hacemos un fetch con la pagina en la que deseamos mostrar y lo que estamos buscando
-      const data = await res.json();
-  
-      mostrarCultivos(data.cultivos); // ⬅️ Llenamos, por medio de esta funcion, la tabla
-      mostrarPaginacion(data.total, pagina, buscar); // ⬅️ Mostramos la pagina actual(por defecto la 1), los datos correspondientes a esta pagina. Si se esta buscando los datos cambian a los que coincidan con la busqueda
-    } catch (err) {
-      console.error('Error al obtener cultivos:', err.message); // ⬅️ Mensaje de error
-    }
+  try {
+    const res = await fetch(`http://localhost:3000/api/crops/list?page=${pagina}&buscar=${encodeURIComponent(buscar)}`);
+    if (!res.ok) throw new Error('Error al cargar cultivos');
+
+    const data = await res.json();
+    console.log('🟢 Cultivos recibidos:', data.cultivos);
+    console.log('📦 Total:', data.total);
+
+    mostrarCultivos(data.cultivos);
+    mostrarPaginacion(data.total, pagina);
+  } catch (error) {
+    console.error('❌ Error en cargarCultivos:', error.message);
   }
+}
   
 
 
@@ -28,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => { // ⬅️ Esperamos a que 
 
       row.innerHTML = `
 
-        <td class="cardright__cell ">${cultivo.id}</td> 
+        <td class="cardright__cell ">${cultivo.cropId}</td> 
         <td class="cardright__cell">${cultivo.type_crop}</td>
         <td class="cardright__cell">${cultivo.name_crop}</td>
         <td class="cardright__cell">${cultivo.location}</td>
