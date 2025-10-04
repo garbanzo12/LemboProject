@@ -69,13 +69,14 @@ exports.listProduction = async (req, res) => {
 
   const regex = new RegExp(buscar, 'i');
 
+
   const filtro = {
     $or: [
       { name_production: regex },
       { productionId: regex },
-      { 'responsable.name_user': regex },
-      { 'consumables.name_consumables': regex },
-      { 'sensors.name_sensor': regex }
+      { responsable: regex },
+      { consumables: regex },
+      { name_sensor: regex }
     ]
   };
 
