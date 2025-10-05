@@ -1,24 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
   const data = JSON.parse(localStorage.getItem('ProduccionSeleccionada')); // ⬅️ Obtengo los datos que me habia mandado buscar_crops.js con localStorage
   if (!data) return; // ⬅️ Si no hay data hago un return
-  console.log(data)
-  const inputs = document.querySelectorAll('input'); // ⬅️ Selecciono todos los inputs y les asigno su valor correspondiente
-  const formatDate = (isoDate) => {
-    return new Date(isoDate).toISOString().split('T')[0];
+  console.log('Datos de producción:', data);
+
+  // Función para asignar valor a un input por su ID
+  const setInputValue = (id, value) => {
+    const element = document.getElementById(id);
+    if (element) {
+      // Si el valor es un array, lo convierte a string separado por comas
+      element.value = Array.isArray(value) ? value.join(', ') : (value || '');
+    }
   };
-  inputs[0].value = data.productionId || '';           // ⬅️ ID del cultivo
-  inputs[1].value = data.name_production || '';         // ⬅️ Nombre del cultivo
 
-  inputs[2].value = data.responsable || '';         // ⬅️ Tipo de cultivo
-
-  inputs[3].value = (data.users_selected) || '';     // ⬅️ Ubicación
-  inputs[4].value = (data.crops_selected) || '';  //⬅️  Descripción
-  inputs[5].value = data.cropCycles || '';
-  inputs[6].value = data.consumables || '';
-  inputs[7].value = data.quantity_consumables || '';
-  inputs[8].value = data.total_value_consumables || '';
-  inputs[9].value = data.name_sensor || '';
-  // inputs[10].value = data.total_value_consumables || '';
+  // Asignar valores a los campos principales usando IDs
+  setInputValue('production-id', data.productionId);
+  setInputValue('production-name', data.name_production);
+  setInputValue('responsable', data.responsable);
+  setInputValue('users-selected', data.users_selected);
+  setInputValue('crops-selected', data.crops_selected);
+  setInputValue('crop-cycles', data.cropCycles);
 
     // Helper: convertir a número manejando comas, puntos y símbolos
     const parseNumber = (v) => {
@@ -61,8 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Renderizar insumos detallados como bloques individuales
     const consumablesList = document.getElementById('consumables-list');
-    const inversionInput = document.getElementById('inversion-input');
-    if (consumablesList) {
+    const inversionInput = document.getElementById('inversion-total'); // Usar el ID correcto
+    if (consumablesList && data.consumables) {
       consumablesList.innerHTML = '';
 
       // Caso A: consumables es array de objetos [{name_consumables, quantity, total_value}, ...]
@@ -148,60 +148,47 @@ document.addEventListener('DOMContentLoaded', () => {
       // Mostrar inversion total en el input (si existe)
       if (inversionInput) {
         inversionInput.value = formatCurrency(inversionTotal || 0);
+
+        // Calcular y mostrar la ganancia estimada (30% de la inversión)
+        const gananciaInput = document.getElementById('ganancia-estimada');
+        if (gananciaInput) {
+          gananciaInput.value = formatCurrency(inversionTotal * 0.3);
+        }
       }
     }
 
   // Renderizar sensores detallados como bloques individuales
   const sensorsList = document.getElementById('sensors-list');
-  if (sensorsList) {
+  if (sensorsList && (data.name_sensor || data.sensors || data.sensor)) {
     sensorsList.innerHTML = '';
 
     // Preferir claves comunes donde pueden venir los sensores
     let sensorsArr = null;
-    if (Array.isArray(data.name_sensor)) sensorsArr = data.name_sensor;
-    else if (Array.isArray(data.sensors)) sensorsArr = data.sensors;
+    if (Array.isArray(data.sensors)) sensorsArr = data.sensors;
     else if (Array.isArray(data.sensor)) sensorsArr = data.sensor;
-
+    else if (Array.isArray(data.name_sensor)) sensorsArr = data.name_sensor; // Fallback para array de nombres
+    
     // Si sensorsArr es array de objetos, recorrer objetos
     if (Array.isArray(sensorsArr) && sensorsArr.length > 0 && typeof sensorsArr[0] === 'object') {
       sensorsArr.forEach(s => {
-        const name = s.name_sensor || s.name || s.sensor_name || s.nombre || s.nombre_sensor || '';
-        const type = s.type_sensor || s.type || s.sensor_type || s.tipo || '';
-
-        const block = document.createElement('div');
-        block.className = 'integrator__sensor-block';
-        block.innerHTML = `
-            <div class="integrator__block-header">${name || '—'}</div>
-            <div class="integrator__block-body">
-              <div><strong>Tipo:</strong> ${type || '—'}</div>
-            </div>
-          `;
-        sensorsList.appendChild(block);
-      });
-    } else if (Array.isArray(sensorsArr) && sensorsArr.length > 0 && typeof sensorsArr[0] === 'string') {
-      // Caso: names array y tipos en array paralelo (buscar arrays de tipos comunes)
-      const names = sensorsArr;
-      const possibleTypeKeys = ['type_sensor', 'type_sensors', 'types_sensor', 'sensor_type', 'sensor_types', 'type', 'tipos', 'tipo_sensor', 'tipo'];
-      let types = null;
-      for (const k of possibleTypeKeys) {
-        if (Array.isArray(data[k])) { types = data[k]; break; }
-      }
-
-      const maxLen = Math.max(names.length, types ? types.length : 0);
-      for (let i = 0; i < maxLen; i++) {
-        const name = names[i] ?? '—';
-        const type = (types && types[i]) ? types[i] : '—';
-
+        const name = s.name_sensor || s.name || s.sensor_name || s.nombre || s.nombre_sensor || '—';
         const block = document.createElement('div');
         block.className = 'integrator__sensor-block';
         block.innerHTML = `
             <div class="integrator__block-header">${name}</div>
-            <div class="integrator__block-body">
-              <div><strong>Tipo:</strong> ${type}</div>
-            </div>
           `;
         sensorsList.appendChild(block);
-      }
+      });
+    } else if (Array.isArray(sensorsArr) && sensorsArr.length > 0 && typeof sensorsArr[0] === 'string') {
+      // Caso B: Solo tenemos un array de nombres de sensores.
+      const names = sensorsArr;
+      names.forEach(async (name) => {
+        if (!name) return;
+        const block = document.createElement('div');
+        block.className = 'integrator__sensor-block';
+        block.innerHTML = `<div class="integrator__block-header">${name}</div>`;
+        sensorsList.appendChild(block);
+      });
     } else {
       // Fallback: mostrar mensaje si no hay sensores
       const empty = document.createElement('div');
@@ -211,4 +198,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 });
-

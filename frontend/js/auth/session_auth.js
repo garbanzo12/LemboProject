@@ -1,7 +1,3 @@
-if (!sessionStorage.getItem("yaRecargue")) {
-  sessionStorage.setItem("yaRecargue", "true");
-  location.reload(); // solo recarga una vez
-}
 (function () {
   const token = localStorage.getItem('token');
 

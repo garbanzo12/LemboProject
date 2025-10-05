@@ -1,132 +1,107 @@
-
 document.addEventListener("DOMContentLoaded", () => {
-const forms = document.querySelectorAll(".cardright__form--top3");
-    forms.forEach((form) => {
-    
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const name = document.querySelector('.card__right__input--name')
-  const type = document.querySelector('.card__right__input--type')
-  const location = document.querySelector('.card__right__input--location')
-  const description = document.querySelector('.card__right__input--description')
-  const size = document.querySelector('.card__right__input--size').value.trim()
-  const image = document.querySelector('.cardright__input-form--file').files[0];
+  const form = document.querySelector(".cardright__form");
+  const inputs = form.querySelectorAll("input, select");
 
+  // Modal elements
+  const modal = document.getElementById("cuadro-mensaje");
+  const mensajeP = document.getElementById("texto-mensaje");
+  const cerrarModalBtn = document.getElementById("cerrar-modal");
+  const copiarIdBtn = document.getElementById("copiar-id");
+  const continuarBtn = document.getElementById("continuar-btn");
 
-  const inputs = document.querySelectorAll("input");
-  inputs.forEach((input) => {
-        let errorSpan = input.nextElementSibling;
+  // Error message container
+  const errorContainer = form.querySelector(".cardright__foot-form p");
 
-        if (!errorSpan || !errorSpan.classList.contains("error-message")) {
-            errorSpan = document.createElement("span");
-            errorSpan.classList.add("error-message");
-            errorSpan.style.color = "red";
-            input.insertAdjacentElement("afterend", errorSpan);
-        }
+  // Function to show messages in the form footer
+  const mostrarMensaje = (mensaje, color) => {
+    if (errorContainer) {
+      errorContainer.textContent = mensaje;
+      errorContainer.style.color = color;
+    }
+  };
 
-        if (input.value.trim() === "" && input.type !="checkbox") {
-            validarCampo = false;
-            errorSpan.textContent = "Campo obligatorio.";
-        } else {
-            errorSpan.textContent = "";
+  // Function to show the success modal
+  const mostrarModalExito = (id) => {
+    mensajeP.textContent = `✅ Cultivo creado con éxito. ID: ${id}`;
+    modal.style.display = "flex";
+
+    copiarIdBtn.onclick = () => {
+      navigator.clipboard.writeText(id).then(() => {
+        alert("ID copiado al portapapeles");
+      });
+    };
+
+    continuarBtn.onclick = () => {
+      modal.style.display = "none";
+      form.reset();
+      mostrarMensaje(".", "black"); // Limpiar mensaje de error
+    };
+
+    cerrarModalBtn.onclick = () => {
+      modal.style.display = "none";
+      form.reset();
+      mostrarMensaje(".", "black");
+    };
+  };
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    // Validar campos
+    let isValid = true;
+    inputs.forEach(input => {
+        if (!input.value.trim() && input.type !== 'file') {
+            isValid = false;
         }
     });
-  // Validaciones simples de front (opcionales, express-validator hará el resto)
-  if (!name || !type || !location || !description || !size || !image) {
-    return;
-  }
 
-  if (isNaN(size) || Number(size) <= 0) {
-    alert("⚠ El tamaño debe ser un número positivo");
-    return;
-  }
-
-  // Preparamos el FormData
-  const formData = new FormData();
-  formData.append('name_crop', name.value.trim());
-  formData.append('type_crop', type.value.trim());
-  formData.append('location', location.value.trim());
-  formData.append('description_crop', description.value.trim());
-  formData.append('size_m2', size);
-  formData.append('image_crop', image);
-
-  try {
-    const respuesta = await fetch("http://localhost:3000/api/crops", {
-      method: "POST",
-      body: formData
-    });
-
-                    let resultado = await respuesta.json();
-
-                    if (respuesta.ok) {
-                        form.reset(); // Limpiar formulario tras el envío
-
-                        const mensaje = `✅ Datos guardados correctamente.\nID del registro: ${resultado.cropId}`;
-                        console.log("Respuesta completa del servidor:", resultado);
-                    
-                        // Mostrar el mensaje en el cuadro arriba
-                        const cuadro = document.getElementById("cuadro-mensaje");
-                        const texto = document.getElementById("texto-mensaje");
-                        const botonCopiar = document.getElementById("copiar-id");
-                    
-
-                        // Cerrar modal
-                        document.getElementById("cerrar-modal").addEventListener("click", function () {
-
-                            document.getElementById("cuadro-mensaje").style.display = "none";
-                          });
-                        // Ir a siguiente página
-                        document.getElementById("continuar-btn").addEventListener("click", function () {
-                            window.location.href = "/frontend/views/crops/2-seach_crops.html"; // 👈 Redireccionamiento 
-                          });
-                        
-                        texto.textContent = `✅ Datos guardados correctamente.\nID del registro: ${resultado.cropId}`;
-                        cuadro.style.display = "block";
-                    
-                        botonCopiar.onclick = () => {
-                            navigator.clipboard.writeText(resultado._id)
-                                .then(() => {
-                                    botonCopiar.textContent = "✅ Copiado";
-                                    setTimeout(() => botonCopiar.textContent = "Copiar ID", 2000);
-                                    })
-                                .catch(() => alert("Error al copiar el ID"));
-                        };
-                    
-                        // También opcionalmente mostrar debajo del formulario
-                        mostrarMensaje(form, mensaje, "green");
-                        window.parent.postMessage("cerrarModalYActualizar", "*"); // Esto es para cuando el archivo se abre como modal
-
-                    }
-
-                    
-                     else {
-                        throw new Error(resultado.error || "Error desconocido.");
-                    }
-                } catch (error) {
-                    mostrarMensaje(form, "❌ Error al guardar los datos.", "red");
-                }
-    });        
-});
-        
-// Función para mostrar mensajes debajo del formulario
-function mostrarMensaje(form, mensaje, color) {
-    let mensajeSpan = form.querySelector(".cardright__foot-form");
-    
-    if (!mensajeSpan) {
-        mensajeSpan = document.createElement("span");
-        mensajeSpan.classList.add("cardright__foot-form");
-        mensajeSpan.style.display = "block";
-        mensajeSpan.style.marginTop = "10px";
-        mensajeSpan.style.fontWeight = "bold";
-        form.appendChild(mensajeSpan);
+    if (!isValid) {
+        mostrarMensaje("❌ Todos los campos son obligatorios.", "red");
+        return;
     }
 
-    mensajeSpan.textContent = mensaje;
-    mensajeSpan.style.color = color;
-
-
+    const formData = new FormData();
+    formData.append("name_crop", inputs[0].value);
+    formData.append("type_crop", inputs[1].value);
+    formData.append("location", inputs[2].value);
+    formData.append("description_crop", inputs[3].value);
+    formData.append("size_m2", inputs[4].value);
     
+    const imageFile = inputs[5].files[0];
+    if (imageFile) {
+      formData.append("image_crop", imageFile);
+    }
 
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch("http://localhost:3000/api/crops", {
+        method: "POST",
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+        body: formData,
+      });
 
-}
-})
+      const result = await response.json();
+
+      if (response.ok) {
+        mostrarModalExito(result.cropId);
+      } else {
+        // Manejo de errores específicos del backend
+        if (result.error && result.error.includes("Ya existe un cultivo con este nombre")) {
+            mostrarMensaje("❌ Ya existe un cultivo con ese nombre.", "red");
+        } else if (result.errors) {
+            // Errores de validación
+            const errorMessages = result.errors.map(err => err.msg).join(' ');
+            mostrarMensaje(`❌ Error de validación: ${errorMessages}`, "red");
+        }
+        else {
+            mostrarMensaje(result.message || "❌ Error al crear el cultivo.", "red");
+        }
+      }
+    } catch (error) {
+      console.error("Error de red:", error);
+      mostrarMensaje("❌ Error de conexión con el servidor.", "red");
+    }
+  });
+});

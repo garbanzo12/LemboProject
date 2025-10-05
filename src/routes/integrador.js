@@ -63,6 +63,18 @@ router.get("/sensors/responsable", (req, res) => {
         res.json(results);
     });
 });
+
+// Nueva ruta para obtener detalles de un sensor por nombre
+router.get("/sensor/details/:name", (req, res) => {
+    const { name } = req.params;
+    const sql = "SELECT * FROM sensors WHERE name_sensor = ?";
+    conexion.query(sql, [name], (error, results) => {
+        if (error) return res.status(500).json({ error: "Error en la base de datos" });
+        if (!results.length) return res.status(404).json({ error: "Sensor no encontrado" });
+        res.json(results[0]); // Devuelve el objeto completo del sensor
+    });
+});
+
 router.post("/sensor/actualizar-stock", async (req, res) => {
     const { sensores } = req.body;
 
