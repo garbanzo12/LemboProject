@@ -71,7 +71,20 @@
 
                     <div class="cardright__subcontainer-input">
                         <label class="cardright__label-form" for="">Nombre del Ciclo Cultivo</label>
-                        <input class="cardright__input-form" placeholder="Ingrese Dato" name="nombre_ciclo" type="text"/>
+                        <!-- Se añade nueva clase: nuevo-nombreCiclo -->
+                        <select name="fase_cultivo" id="fase_cultivo"
+                            class="cardright__input-form cardright__input-form--type" required>
+                            <option class="cardright__input-opt" value="">Seleccione una fase</option>
+                            <option class="cardright__input-opt" value="Preparación del terreno">Preparación del terreno</option>
+                            <option class="cardright__input-opt" value="Siembra">Siembra</option>
+                            <option class="cardright__input-opt" value="Germinación">Germinación</option>
+                            <option class="cardright__input-opt" value="Desarrollo vegetativo">Desarrollo vegetativo</option>
+                            <option class="cardright__input-opt" value="Floración">Floración</option>
+                            <option class="cardright__input-opt" value="Fructificación">Fructificación</option>
+                            <option class="cardright__input-opt" value="Maduración">Maduración</option>
+                            <option class="cardright__input-opt" value="Cosecha">Cosecha</option>
+                            <option class="cardright__input-opt" value="Postcosecha">Postcosecha</option>
+                        </select>
                     </div>
 
                     <div class="cardright__subcontainer-input">

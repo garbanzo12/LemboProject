@@ -1521,7 +1521,6 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
 }
 
 .integrator__module {
-    background-color: ;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -1612,7 +1611,7 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
 }
 
 
-.integrator__container-header {}
+/* .integrator__container-header {}
 
 .integrator__header-text {}
 
@@ -1630,7 +1629,7 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
 
 .integrator__selector-value {}
 
-.integrator__container-botton {}
+.integrator__container-botton {} */
 
 
 
@@ -1818,7 +1817,7 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
     box-shadow: 0 0.2rem 0.2rem var(--gray-950);
 }
 
-.producto__span {}
+/* .producto__span {} */
 
 .producto__bar .producto__span {
     position: absolute;
@@ -2119,7 +2118,7 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
 /* **************************************************************/
 
 /* USUARIOS */
-.cardright__input-form--roll {}
+/* .cardright__input-form--roll {}
 
 .cardright__input-form--tpdoc {}
 
@@ -2133,11 +2132,11 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
 
 .cardright__input-form--estado {}
 
-.cardright__input-form--contraseña {}
+.cardright__input-form--contraseña {} */
 
 
 /* CULTIVOS */
-.cardright__input-form--tipo-cultivo {}
+/* .cardright__input-form--tipo-cultivo {}
 
 .cardright__input-form--id-cultivo {}
 
@@ -2149,11 +2148,11 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
 
 .cardright__input-form--ubicacion-cultivo {}
 
-.cardright__input-form--descripcion-cultivo {}
+.cardright__input-form--descripcion-cultivo {} */
 
 
 /* CICLOS-CULTIVO */
-.cardright__input-form--id-ciclo {}
+/* .cardright__input-form--id-ciclo {}
 
 .cardright__input-form--nombre-ciclo {}
 
@@ -2161,15 +2160,15 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
 
 .cardright__input-form--periodo-ciclo {
     /* inicio y final parese un array */
-}
 
-.cardright__input-form--novedad-ciclo {}
+/* } */
+/* .cardright__input-form--novedad-ciclo {}
 
-.cardright__input-form--estado-ciclo {}
+.cardright__input-form--estado-ciclo {} */
 
 
 /* INSUMO */
-.cardright__input-form--tipo-insumo {}
+/* .cardright__input-form--tipo-insumo {}
 
 .cardright__input-form--id-insumo {}
 
@@ -2185,11 +2184,11 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
 
 .cardright__input-form--descripcion-insumo {}
 
-.cardright__input-form--estado-insumo {}
+.cardright__input-form--estado-insumo {} */
 
 
 /* SENSOR */
-.cardright__input-form--tipo-sensor {}
+/* .cardright__input-form--tipo-sensor {}
 
 .cardright__input-form--id-sensor {}
 
@@ -2203,7 +2202,7 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
 
 .cardright__input-form--descripcion-sensor {}
 
-.cardright__input-form--estado-sensor {}
+.cardright__input-form--estado-sensor {} */
 
 /* LISTAR */
 /* AQUI NO VA SELECTOR PORQUE EXISTEN EN CADA MODULO Y LISTAR SOLO LOS LLAMA */
@@ -2212,15 +2211,15 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
 
 /* CREAR PRODUCCION */
 /* ESTOS VALORES ESTAN TENTATIVOS  */
-.integrator__id-production {}
+/* .integrator__id-production {}
 
 .integrator__responsable {}
 
-.integrator__name-production {}
+.integrator__name-production {} */
 
 
 /* VISUALIZAR TIEMPO REAL LA PRODUCCION */
-.value__sensor--humedad {}
+/* .value__sensor--humedad {}
 
 .value__sensor--temperatura {}
 
@@ -2236,12 +2235,12 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
 
 .value__sensor--nivelconductividad {}
 
-.value__sensor--niveloxigeno {}
+.value__sensor--niveloxigeno {} */
 
 
 /* esto es un SELECT * tabla MIN ó MAX ó ULITIMO VALOR QUE SERIA EL ACTUAL, O EL VALOR PROMEDIO. */
 /* asi se guardarian los valores en variables segun la necesidad */
-.value__sensor--humedad-min {}
+/* .value__sensor--humedad-min {}
 
 .value__sensor--humedad-max {}
 
@@ -2276,7 +2275,7 @@ SE DEBE REUSAR JUNTO CON EL MODIFICADOR DE TAMAÑO
 .value__sensor--niveloxigeno-min {}
 
 .value__sensor--niveloxigeno-max {}
-
+ */
 
 
 /* ⬇️  Esto de aqui es  un modal invisible para mostrar el ID ⬇️ */
