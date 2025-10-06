@@ -30,7 +30,7 @@ function inicializarValidaciones() {
         form.addEventListener("submit", async function (event) {
             event.preventDefault();
 
-            const name_cycle = document.querySelector('.cardright__input-form--name');
+            const name_cycle = document.querySelector('#fase_cultivo'); // 👈 CORREGIDO: Usar el ID del select
             const description_cycle = document.querySelector('.cardright__input-form--description');
             const cycle_start = document.querySelector('.cardright__input-form--date-start');
             const cycle_end = document.querySelector('.cardright__input-form--date-end');
@@ -38,19 +38,19 @@ function inicializarValidaciones() {
             const state_cycle = toggleCheckbox ? (toggleCheckbox.checked ? 'habilitado' : 'deshabilitado') : '';
 
             let validarCampo = true;
-            const inputs = form.querySelectorAll("input");
+            const camposAValidar = form.querySelectorAll("input, select"); // 👈 CORREGIDO: Incluir selects en la validación
 
-            inputs.forEach((input) => {
-                let errorSpan = input.nextElementSibling;
+            camposAValidar.forEach((campo) => {
+                let errorSpan = campo.nextElementSibling;
 
                 if (!errorSpan || !errorSpan.classList.contains("error-message")) {
                     errorSpan = document.createElement("span");
                     errorSpan.classList.add("error-message");
                     errorSpan.style.color = "red";
-                    input.insertAdjacentElement("afterend", errorSpan);
+                    campo.insertAdjacentElement("afterend", errorSpan);
                 }
 
-                if (input.value.trim() === "" && input.type !== "checkbox") {
+                if (campo.value.trim() === "" && campo.type !== "checkbox") {
                     validarCampo = false;
                     errorSpan.textContent = "Campo obligatorio.";
                 } else {
@@ -77,7 +77,7 @@ function inicializarValidaciones() {
                 }
             }
 
-            let datos = {
+            const datos = {
                 name_cycle: name_cycle ? name_cycle.value : '',
                 description_cycle: description_cycle ? description_cycle.value : '',
                 cycle_start: cycle_start ? cycle_start.value : '',
